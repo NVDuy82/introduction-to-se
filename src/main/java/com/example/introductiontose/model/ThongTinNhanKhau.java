@@ -2,6 +2,9 @@ package com.example.introductiontose.model;
 
 import java.time.LocalDateTime;
 
+/**
+ * Lớp ThongTinNhanKhau đại diện cho thông tin chi tiết của một nhân khẩu.
+ */
 public class ThongTinNhanKhau {
     private int idHoKhau;
     private String hoTen;
@@ -17,10 +20,31 @@ public class ThongTinNhanKhau {
     private LocalDateTime ngayDKTT;
     private String diaChiCu;
     private String quanHe;
-
+    
+    /**
+     * Khởi tạo một đối tượng ThongTinNhanKhau mới không có tham số.
+     */
     public ThongTinNhanKhau() {
     }
-
+    
+    /**
+     * Khởi tạo một đối tượng ThongTinNhanKhau với các thông tin cơ bản.
+     *
+     * @param idHoKhau   ID hoặc số nhà của hộ khẩu mà nhân khẩu thuộc về.
+     * @param hoTen      Họ và tên của nhân khẩu.
+     * @param biDanh      Bí danh của nhân khẩu (nếu có).
+     * @param ngaySinh    Ngày sinh của nhân khẩu.
+     * @param noiSinh     Nơi sinh của nhân khẩu.
+     * @param nguyenQuan  Nguyên quán của nhân khẩu.
+     * @param danToc      Dân tộc của nhân khẩu.
+     * @param tonGiao     Tôn giáo của nhân khẩu.
+     * @param ngheNghiep  Nghề nghiệp của nhân khẩu.
+     * @param noiLamViec  Nơi làm việc của nhân khẩu.
+     * @param cccd        Thông tin về Chứng minh nhân dân của nhân khẩu.
+     * @param ngayDKTT    Ngày đăng ký tạm trú của nhân khẩu.
+     * @param diaChiCu    Địa chỉ cũ của nhân khẩu (nếu có).
+     * @param quanHe      Mối quan hệ với chủ hộ hoặc người nào đó trong hộ khẩu.
+     */
     public ThongTinNhanKhau(int idHoKhau, String hoTen, String biDanh, LocalDateTime ngaySinh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, CCCD cccd, LocalDateTime ngayDKTT, String diaChiCu, String quanHe) {
         this.idHoKhau = idHoKhau;
         this.hoTen = hoTen;
