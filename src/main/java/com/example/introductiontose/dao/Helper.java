@@ -20,26 +20,27 @@ public class Helper {
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
     static ThongTinNhanKhau get(ResultSet resultSet) throws SQLException {
-        int idHoKhau = resultSet.getInt("column-name");
-        String hoTen = resultSet.getString("column-name");
-        String biDanh = resultSet.getString("column-name");
-        LocalDateTime ngaySinh = resultSet.getTimestamp("column-name").toLocalDateTime();
-        String noiSinh = resultSet.getString("column-name");
-        String nguyenQuan = resultSet.getString("column-name");
-        String danToc = resultSet.getString("column-name");
-        String tonGiao = resultSet.getString("column-name");
-        String ngheNghiep = resultSet.getString("column-name");
-        String noiLamViec = resultSet.getString("column-name");
+        int idHoKhau = resultSet.getInt("idHoKhau");
+        String hoTen = resultSet.getString("hoTen");
+        String biDanh = resultSet.getString("biDanh");
+        LocalDateTime ngaySinh = resultSet.getTimestamp("ngaySinh").toLocalDateTime();
+        String noiSinh = resultSet.getString("noiSinh");
+        String nguyenQuan = resultSet.getString("nguyenQuan");
+        String danToc = resultSet.getString("danToc");
+        String tonGiao = resultSet.getString("tonGiao");
+        String ngheNghiep = resultSet.getString("ngheNghiep");
+        String noiLamViec = resultSet.getString("noiLamViec");
         
-        String soCccd = resultSet.getString("column-name");
-        LocalDateTime ngayCap = resultSet.getTimestamp("column-name").toLocalDateTime();
-        String noiCap = resultSet.getString("column-name");
+        String soCccd = resultSet.getString("soCccd");
+        LocalDateTime ngayCap = resultSet.getTimestamp("ngayCap").toLocalDateTime();
+        String noiCap = resultSet.getString("noiCap");
         
-        LocalDateTime ngayDKTT = resultSet.getTimestamp("column-name").toLocalDateTime();
-        String diaChiCu = resultSet.getString("column-name");
-        String quanHe = resultSet.getString("column-name");
+        LocalDateTime ngayDKTT = resultSet.getTimestamp("ngayDKTT").toLocalDateTime();
+        String diaChiCu = resultSet.getString("diaChiCu");
+        String quanHe = resultSet.getString("quanHe");
         
         CCCD cccd = new CCCD(soCccd, ngayCap, noiCap);
+        
         return new ThongTinNhanKhau(idHoKhau, hoTen, biDanh,ngaySinh,
                 noiSinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, cccd, ngayDKTT,
                 diaChiCu, quanHe);

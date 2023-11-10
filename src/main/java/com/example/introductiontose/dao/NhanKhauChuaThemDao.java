@@ -1,6 +1,6 @@
 package com.example.introductiontose.dao;
 
-import com.example.introductiontose.model.NhanKhauThem;
+import com.example.introductiontose.model.NhanKhauChuaThem;
 import com.example.introductiontose.model.ThongTinNhanKhau;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Lớp NhanKhauThemDao triển khai giao diện DataAccessObject để thao tác với đối tượng NhanKhauThem trong cơ sở dữ liệu.
+ * Lớp NhanKhauThemDao triển khai giao diện DataAccessObject để thao tác với đối tượng NhanKhauChuaThem trong cơ sở dữ liệu.
  */
-public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> {
+public class NhanKhauChuaThemDao implements DataAccessObject<NhanKhauChuaThem, Integer> {
     private final Connection connection;
     
     /**
@@ -20,7 +20,7 @@ public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> 
      *
      * @param connection Kết nối đến cơ sở dữ liệu.
      */
-    public NhanKhauThemDao(Connection connection) {
+    public NhanKhauChuaThemDao(Connection connection) {
         this.connection = connection;
     }
     
@@ -28,33 +28,33 @@ public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> 
      * {@inheritDoc}
      */
     @Override
-    public List<NhanKhauThem> getAll() {
-        List<NhanKhauThem> danhSachNhanKhauThem = new ArrayList<>();
+    public List<NhanKhauChuaThem> getAll() {
+        List<NhanKhauChuaThem> danhSachNhanKhauChuaThem = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM table_name");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM themNhanKhau");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                NhanKhauThem nhanKhauThem = _get(resultSet);
-                danhSachNhanKhauThem.add(nhanKhauThem);
+                NhanKhauChuaThem nhanKhauChuaThem = _get(resultSet);
+                danhSachNhanKhauChuaThem.add(nhanKhauChuaThem);
             }
         } catch (SQLException e) {
         
         }
-        return danhSachNhanKhauThem;
+        return danhSachNhanKhauChuaThem;
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<NhanKhauThem> get(Integer id) {
+    public Optional<NhanKhauChuaThem> get(Integer id) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM table_name WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM themNhanKhau WHERE id = ?");
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                NhanKhauThem nhanKhauThem = _get(resultSet);
-                return Optional.of(nhanKhauThem);
+                NhanKhauChuaThem nhanKhauChuaThem = _get(resultSet);
+                return Optional.of(nhanKhauChuaThem);
             }
         } catch (SQLException e) {
         
@@ -66,13 +66,13 @@ public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> 
      * {@inheritDoc}
      */
     @Override
-    public void save(@NotNull NhanKhauThem nhanKhauThem) {
+    public void save(@NotNull NhanKhauChuaThem nhanKhauChuaThem) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO table_name" +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO themNhanKhau" +
                     "(idHoKhau, hoTen, biDanh, ngaySinh, noiSinh, nguyenQuan, danToc, tonGiao" +
                     "ngheNghiep, noiLamViec, soCccd, ngayCap, noiCap, ngayDKTT, diaChiCu, quanHe) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            _setValuesForStatement(nhanKhauThem, statement, 1);
+            _setValuesForStatement(nhanKhauChuaThem, statement, 1);
         } catch (SQLException e) {
         
         }
@@ -82,9 +82,9 @@ public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> 
      * {@inheritDoc}
      */
     @Override
-    public void update(@NotNull NhanKhauThem nhanKhauThem) {
+    public void update(@NotNull NhanKhauChuaThem nhanKhauChuaThem) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE table_name SET" +
+            PreparedStatement statement = connection.prepareStatement("UPDATE themNhanKhau SET" +
                     "idHoKhau = ?, " +
                     "hoTen = ?, " +
                     "biDanh = ?, " +
@@ -102,8 +102,8 @@ public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> 
                     "diaChiCu = ?, " +
                     "quanHe = ?" +
                     "WHERE id = ?");
-            int parameterIndex = _setValuesForStatement(nhanKhauThem, statement, 1);
-            statement.setInt(parameterIndex, nhanKhauThem.getIndex());
+            int parameterIndex = _setValuesForStatement(nhanKhauChuaThem, statement, 1);
+            statement.setInt(parameterIndex, nhanKhauChuaThem.getIndex());
             statement.executeUpdate();
         } catch (SQLException e) {
         
@@ -114,10 +114,10 @@ public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> 
      * {@inheritDoc}
      */
     @Override
-    public void delete(@NotNull NhanKhauThem nhanKhauThem) {
+    public void delete(@NotNull NhanKhauChuaThem nhanKhauChuaThem) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM table_name WHERE id = ?");
-            statement.setInt(1, nhanKhauThem.getIndex());
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM themNhanKhau WHERE id = ?");
+            statement.setInt(1, nhanKhauChuaThem.getIndex());
             statement.executeUpdate();
         } catch (SQLException e) {
         
@@ -125,29 +125,29 @@ public class NhanKhauThemDao implements DataAccessObject<NhanKhauThem, Integer> 
     }
     
     /**
-     * Phương thức private để chuyển đổi dữ liệu từ ResultSet thành đối tượng NhanKhauThem.
+     * Phương thức private để chuyển đổi dữ liệu từ ResultSet thành đối tượng NhanKhauChuaThem.
      *
      * @param resultSet ResultSet chứa dữ liệu từ cơ sở dữ liệu.
-     * @return Đối tượng NhanKhauThem được tạo từ dữ liệu ResultSet.
+     * @return Đối tượng NhanKhauChuaThem được tạo từ dữ liệu ResultSet.
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
-    private NhanKhauThem _get(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("column-name");
+    private NhanKhauChuaThem _get(ResultSet resultSet) throws SQLException {
+        int index = resultSet.getInt("idThem");
         ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
         
-        return new NhanKhauThem(id, thongTinNhanKhau);
+        return new NhanKhauChuaThem(index, thongTinNhanKhau);
     }
     
     /**
-     * Phương thức private để thiết lập giá trị cho PreparedStatement khi thêm hoặc cập nhật NhanKhauThem.
+     * Phương thức private để thiết lập giá trị cho PreparedStatement khi thêm hoặc cập nhật NhanKhauChuaThem.
      *
-     * @param nhanKhauThem Đối tượng NhanKhauThem cần được thêm hoặc cập nhật.
+     * @param nhanKhauChuaThem Đối tượng NhanKhauChuaThem cần được thêm hoặc cập nhật.
      * @param statement   PreparedStatement đang được chuẩn bị.
      * @param index       Index bắt đầu để thiết lập giá trị trong PreparedStatement.
      * @return Index tiếp theo sẽ được sử dụng cho các giá trị khác nếu cần.
      * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
      */
-    private int _setValuesForStatement(NhanKhauThem nhanKhauThem, PreparedStatement statement, int index) throws SQLException {
-        return Helper.setValuesForStatement(nhanKhauThem.getThongTinNhanKhau(), statement, index);
+    private int _setValuesForStatement(NhanKhauChuaThem nhanKhauChuaThem, PreparedStatement statement, int index) throws SQLException {
+        return Helper.setValuesForStatement(nhanKhauChuaThem.getThongTinNhanKhau(), statement, index);
     }
 }

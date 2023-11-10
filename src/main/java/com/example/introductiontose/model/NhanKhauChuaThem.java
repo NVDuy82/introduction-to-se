@@ -1,25 +1,25 @@
 package com.example.introductiontose.model;
 
 /**
- * Lớp NhanKhauThem đại diện cho thông tin của một nhân khẩu mới được thêm vào hệ thống.
+ * Lớp NhanKhauChuaThem đại diện cho thông tin của một nhân khẩu mới chưa được thêm vào hệ thống.
  */
-public class NhanKhauThem {
+public class NhanKhauChuaThem {
     private int index;
     private ThongTinNhanKhau thongTinNhanKhau;
     
     /**
-     * Khởi tạo một đối tượng NhanKhauThem mới.
+     * Khởi tạo một đối tượng NhanKhauChuaThem mới.
      */
-    public NhanKhauThem() {
+    public NhanKhauChuaThem() {
     }
     
     /**
-     * Khởi tạo một đối tượng NhanKhauThem với các thông tin cơ bản.
+     * Khởi tạo một đối tượng NhanKhauChuaThem với các thông tin cơ bản.
      *
      * @param index             Index nhân khẩu trong danh sách cần thêm.
      * @param thongTinNhanKhau Thông tin chi tiết về nhân khẩu.
      */
-    public NhanKhauThem(int index, ThongTinNhanKhau thongTinNhanKhau) {
+    public NhanKhauChuaThem(int index, ThongTinNhanKhau thongTinNhanKhau) {
         this.index = index;
         this.thongTinNhanKhau = thongTinNhanKhau;
     }
