@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  */
 public class NhanKhauDaThem {
     private int id;
-    private
     private LocalDateTime ngayThem;
     
     /**
