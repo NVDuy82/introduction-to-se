@@ -81,4 +81,9 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
         
         }
     }
+    
+    private static NhanKhauDaThem _get(ResultSet resultSet) throws SQLException {
+        
+        return new NhanKhauDaThem();
+    }
 }
