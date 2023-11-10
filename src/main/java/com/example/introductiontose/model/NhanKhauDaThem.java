@@ -14,4 +14,20 @@ public class NhanKhauDaThem {
      */
     public NhanKhauDaThem() {
     }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public LocalDateTime getNgayThem() {
+        return ngayThem;
+    }
+    
+    public void setNgayThem(LocalDateTime ngayThem) {
+        this.ngayThem = ngayThem;
+    }
 }

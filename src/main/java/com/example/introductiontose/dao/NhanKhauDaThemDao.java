@@ -1,6 +1,5 @@
 package com.example.introductiontose.dao;
 
-import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.NhanKhauDaThem;
 import org.jetbrains.annotations.NotNull;
 
