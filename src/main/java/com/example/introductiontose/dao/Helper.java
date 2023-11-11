@@ -58,7 +58,7 @@ public class Helper {
         statement.setInt(index++, thongTinNhanKhau.getIdHoKhau());
         statement.setString(index++, thongTinNhanKhau.getHoTen());
         statement.setString(index++, thongTinNhanKhau.getBiDanh());
-        statement.setObject(index++, Timestamp.valueOf(thongTinNhanKhau.getNgaySinh()));
+        statement.setTimestamp(index++, Timestamp.valueOf(thongTinNhanKhau.getNgaySinh()));
         statement.setString(index++, thongTinNhanKhau.getNoiSinh());
         statement.setString(index++, thongTinNhanKhau.getNguyenQuan());
         statement.setString(index++, thongTinNhanKhau.getDanToc());
@@ -66,9 +66,9 @@ public class Helper {
         statement.setString(index++, thongTinNhanKhau.getNgheNghiep());
         statement.setString(index++, thongTinNhanKhau.getNoiLamViec());
         statement.setString(index++, thongTinNhanKhau.getCccd().getSoCccd());
-        statement.setObject(index++, Timestamp.valueOf(thongTinNhanKhau.getCccd().getNgayCap()));
+        statement.setTimestamp(index++, Timestamp.valueOf(thongTinNhanKhau.getCccd().getNgayCap()));
         statement.setString(index++, thongTinNhanKhau.getCccd().getNoiCap());
-        statement.setObject(index++, Timestamp.valueOf(thongTinNhanKhau.getNgayDKTT()));
+        statement.setTimestamp(index++, Timestamp.valueOf(thongTinNhanKhau.getNgayDKTT()));
         statement.setString(index++, thongTinNhanKhau.getDiaChiCu());
         statement.setString(index++, thongTinNhanKhau.getQuanHe());
         return index;

@@ -4,7 +4,6 @@ package com.example.introductiontose.model;
  * Lớp NhanKhauChuaThem đại diện cho thông tin của một nhân khẩu mới chưa được thêm vào hệ thống.
  */
 public class NhanKhauChuaThem {
-    private int index;
     private ThongTinNhanKhau thongTinNhanKhau;
     
     /**
@@ -16,30 +15,10 @@ public class NhanKhauChuaThem {
     /**
      * Khởi tạo một đối tượng NhanKhauChuaThem với các thông tin cơ bản.
      *
-     * @param index             Index nhân khẩu trong danh sách cần thêm.
      * @param thongTinNhanKhau Thông tin chi tiết về nhân khẩu.
      */
-    public NhanKhauChuaThem(int index, ThongTinNhanKhau thongTinNhanKhau) {
-        this.index = index;
+    public NhanKhauChuaThem(ThongTinNhanKhau thongTinNhanKhau) {
         this.thongTinNhanKhau = thongTinNhanKhau;
-    }
-    
-    /**
-     * Trả về Index nhân khẩu trong danh sách cần thêm.
-     *
-     * @return Index nhân khẩu trong danh sách cần thêm.
-     */
-    public int getIndex() {
-        return index;
-    }
-    
-    /**
-     * Thiết lập Index mới cho nhân khẩu trong danh sách cần thêm.
-     *
-     * @param index Index mới của nhân khẩu trong danh sách cần thêm.
-     */
-    public void setIndex(int index) {
-        this.index = index;
     }
     
     /**

@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
  */
 public class NhanKhauDaThem {
     private int id;
+    private int idNhanKhau;
+    private int idHoKhau;
     private LocalDateTime ngayThem;
     
     /**
@@ -15,18 +17,89 @@ public class NhanKhauDaThem {
     public NhanKhauDaThem() {
     }
     
+    /**
+     * Khởi tạo một đối tượng NhanKhauDaThem với các thông tin cụ thể.
+     *
+     * @param id        ID của bản ghi.
+     * @param idNhanKhau ID của nhân khẩu liên quan.
+     * @param idHoKhau  ID của hộ khẩu liên quan.
+     * @param ngayThem  Thời điểm nhân khẩu được thêm vào hệ thống.
+     */
+    public NhanKhauDaThem(int id, int idNhanKhau, int idHoKhau, LocalDateTime ngayThem) {
+        this.id = id;
+        this.idNhanKhau = idNhanKhau;
+        this.idHoKhau = idHoKhau;
+        this.ngayThem = ngayThem;
+    }
+    
+    /**
+     * Trả về ID của bản ghi.
+     *
+     * @return ID của bản ghi.
+     */
     public int getId() {
         return id;
     }
     
+    /**
+     * Đặt giá trị ID cho bản ghi.
+     *
+     * @param id Giá trị ID mới.
+     */
     public void setId(int id) {
         this.id = id;
     }
     
+    /**
+     * Trả về ID của nhân khẩu liên quan.
+     *
+     * @return ID của nhân khẩu liên quan.
+     */
+    public int getIdNhanKhau() {
+        return idNhanKhau;
+    }
+    
+    /**
+     * Đặt giá trị ID của nhân khẩu liên quan.
+     *
+     * @param idNhanKhau Giá trị ID mới của nhân khẩu liên quan.
+     */
+    public void setIdNhanKhau(int idNhanKhau) {
+        this.idNhanKhau = idNhanKhau;
+    }
+    
+    /**
+     * Trả về ID của hộ khẩu liên quan.
+     *
+     * @return ID của hộ khẩu liên quan.
+     */
+    public int getIdHoKhau() {
+        return idHoKhau;
+    }
+    
+    /**
+     * Đặt giá trị ID của hộ khẩu liên quan.
+     *
+     * @param idHoKhau Giá trị ID mới của hộ khẩu liên quan.
+     */
+    public void setIdHoKhau(int idHoKhau) {
+        this.idHoKhau = idHoKhau;
+    }
+    
+    /**
+     * Trả về thời điểm nhân khẩu được thêm vào hệ thống.
+     *
+     * @return Thời điểm nhân khẩu được thêm vào hệ thống.
+     */
     public LocalDateTime getNgayThem() {
         return ngayThem;
     }
     
+    /**
+     * Đặt giá trị thời điểm nhân khẩu được thêm vào hệ thống.
+     *
+     * @param ngayThem Giá trị thời điểm mới.
+     */
     public void setNgayThem(LocalDateTime ngayThem) {
         this.ngayThem = ngayThem;
     }

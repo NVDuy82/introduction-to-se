@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * Lớp NhanKhauThemDao triển khai giao diện DataAccessObject để thao tác với đối tượng NhanKhauChuaThem trong cơ sở dữ liệu.
  */
-public class NhanKhauChuaThemDao implements DataAccessObject<NhanKhauChuaThem, Integer> {
+public class NhanKhauChuaThemDao implements DataAccessObject<NhanKhauChuaThem, String> {
     private final Connection connection;
     
     /**
@@ -47,10 +47,10 @@ public class NhanKhauChuaThemDao implements DataAccessObject<NhanKhauChuaThem, I
      * {@inheritDoc}
      */
     @Override
-    public Optional<NhanKhauChuaThem> get(Integer id) {
+    public Optional<NhanKhauChuaThem> get(String cccd) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM themNhanKhau WHERE id = ?");
-            statement.setLong(1, id);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM themNhanKhau WHERE soCccd = ?");
+            statement.setString(1, cccd);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 NhanKhauChuaThem nhanKhauChuaThem = _get(resultSet);
@@ -94,16 +94,17 @@ public class NhanKhauChuaThemDao implements DataAccessObject<NhanKhauChuaThem, I
                     "danToc = ?, " +
                     "tonGiao = ?, " +
                     "ngheNghiep = ?, " +
-                    "noiLamViec = ?, " +
-                    "soCccd = ?, " +
+                    "noiLamViec = ?" +
+                    "WHERE soCccd = ?" +
+                    "UPDATE themNhanKhau SET" +
                     "ngayCap = ?, " +
                     "noiCap = ?, " +
                     "ngayDKTT = ?, " +
                     "diaChiCu = ?, " +
                     "quanHe = ?" +
-                    "WHERE id = ?");
+                    "WHERE soCccd = ?");
             int parameterIndex = _setValuesForStatement(nhanKhauChuaThem, statement, 1);
-            statement.setInt(parameterIndex, nhanKhauChuaThem.getIndex());
+            statement.setString(parameterIndex, nhanKhauChuaThem.getThongTinNhanKhau().getCccd().getSoCccd());
             statement.executeUpdate();
         } catch (SQLException e) {
         
@@ -116,8 +117,8 @@ public class NhanKhauChuaThemDao implements DataAccessObject<NhanKhauChuaThem, I
     @Override
     public void delete(@NotNull NhanKhauChuaThem nhanKhauChuaThem) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM themNhanKhau WHERE id = ?");
-            statement.setInt(1, nhanKhauChuaThem.getIndex());
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM themNhanKhau WHERE soCccd = ?");
+            statement.setString(1, nhanKhauChuaThem.getThongTinNhanKhau().getCccd().getSoCccd());
             statement.executeUpdate();
         } catch (SQLException e) {
         
@@ -132,10 +133,9 @@ public class NhanKhauChuaThemDao implements DataAccessObject<NhanKhauChuaThem, I
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
     private NhanKhauChuaThem _get(ResultSet resultSet) throws SQLException {
-        int index = resultSet.getInt("idThem");
         ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
         
-        return new NhanKhauChuaThem(index, thongTinNhanKhau);
+        return new NhanKhauChuaThem(thongTinNhanKhau);
     }
     
     /**

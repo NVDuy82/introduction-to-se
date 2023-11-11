@@ -3,10 +3,9 @@ package com.example.introductiontose.dao;
 import com.example.introductiontose.model.NhanKhauDaThem;
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +29,18 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
      */
     @Override
     public List<NhanKhauDaThem> getAll() {
-        return null;
+        List<NhanKhauDaThem> danhSachNhanKhauDaThem = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhanKhauDaThem");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                NhanKhauDaThem nhanKhauDaThem = _get(resultSet);
+                danhSachNhanKhauDaThem.add(nhanKhauDaThem);
+            }
+        } catch (SQLException e) {
+        
+        }
+        return danhSachNhanKhauDaThem;
     }
     
     /**
@@ -57,7 +67,15 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
      */
     @Override
     public void save(@NotNull NhanKhauDaThem nhanKhauDaThem) {
-    
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO nhanKhauDaThem" +
+                    "(idNhanKhau, idHoKhau, ngayThem) " +
+                    "VALUES (?, ?, ?)");
+            _setValuesForStatement(nhanKhauDaThem, statement, 1);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+        
+        }
     }
     
     /**
@@ -65,7 +83,18 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
      */
     @Override
     public void update(@NotNull NhanKhauDaThem nhanKhauDaThem) {
-    
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE nhanKhauDaThem SET" +
+                    "idNhanKhau = ?, " +
+                    "idHoKhau = ?, " +
+                    "ngayThem = ?, " +
+                    "WHERE id = ?");
+            int parameterIndex = _setValuesForStatement(nhanKhauDaThem, statement, 1);
+            statement.setInt(parameterIndex, nhanKhauDaThem.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+        
+        }
     }
     
     /**
@@ -82,8 +111,36 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
         }
     }
     
+    /**
+     * Phương thức private để chuyển đổi dữ liệu từ ResultSet thành đối tượng NhanKhau.
+     *
+     * @param resultSet ResultSet chứa dữ liệu từ cơ sở dữ liệu.
+     * @return Đối tượng NhanKhau được tạo từ dữ liệu ResultSet.
+     * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
+     */
     private static NhanKhauDaThem _get(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        int idNhanKhau = resultSet.getInt("idNhanKhau");
+        int idHoKhau = resultSet.getInt("idHoKhau");
+        LocalDateTime ngayThem = resultSet.getTimestamp("ngayThem").toLocalDateTime();
         
-        return new NhanKhauDaThem();
+        return new NhanKhauDaThem(id, idNhanKhau, idHoKhau, ngayThem);
+    }
+    
+    /**
+     * Phương thức private để thiết lập giá trị cho PreparedStatement khi thêm hoặc cập nhật NhanKhau.
+     *
+     * @param nhanKhauDaThem   Đối tượng NhanKhau cần được thêm hoặc cập nhật.
+     * @param statement        PreparedStatement đang được chuẩn bị.
+     * @param index            Index bắt đầu để thiết lập giá trị trong PreparedStatement.
+     * @return Index tiếp theo sẽ được sử dụng cho các giá trị khác nếu cần.
+     * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
+     */
+    private int _setValuesForStatement(NhanKhauDaThem nhanKhauDaThem, PreparedStatement statement, int index) throws SQLException {
+        statement.setInt(index++, nhanKhauDaThem.getIdNhanKhau());
+        statement.setInt(index++, nhanKhauDaThem.getIdHoKhau());
+        statement.setTimestamp(index++, Timestamp.valueOf(nhanKhauDaThem.getNgayThem()));
+        
+        return index;
     }
 }
