@@ -1,12 +1,10 @@
 package com.example.introductiontose.dao;
 
-import com.example.introductiontose.model.CCCD;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.ThongTinNhanKhau;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,16 +12,27 @@ import java.util.Optional;
 /**
  * Class NhanKhauDao triển khai interface DataAccessObject để thao tác với đối tượng NhanKhau trong cơ sở dữ liệu.
  */
-public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
+public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
     private final Connection connection;
+    private final String table_name;
+    
+    public enum TableType {
+        NHANKHAU,
+        NHANKHAUCHUATHEM
+    }
     
     /**
      * Khởi tạo một đối tượng NhanKhauDao với kết nối cơ sở dữ liệu được cung cấp.
      *
      * @param connection Kết nối đến cơ sở dữ liệu.
      */
-    public NhanKhauDao(Connection connection) {
+    public NhanKhauDao(Connection connection, TableType tableType) {
         this.connection = connection;
+        if (tableType == TableType.NHANKHAU) {
+            table_name = "nhanKhau";
+        } else {
+            table_name = "themNhanKhau";
+        }
     }
     
     /**
@@ -33,7 +42,8 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
     public List<NhanKhau> getAll() {
         List<NhanKhau> danhSachNhanKhau = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhanKhau");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ?");
+            statement.setString(1, table_name);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 NhanKhau nhanKhau = _get(resultSet);
@@ -49,10 +59,11 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
      * {@inheritDoc}
      */
     @Override
-    public Optional<NhanKhau> get(Integer id) {
+    public Optional<NhanKhau> get(String soCccd) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhanKhau WHERE id = ?");
-            statement.setLong(1, id);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ? WHERE soCccd = ?");
+            statement.setString(1, table_name);
+            statement.setString(2, soCccd);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 NhanKhau nhanKhau = _get(resultSet);
@@ -70,11 +81,13 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
     @Override
     public void save(@NotNull NhanKhau nhanKhau) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO nhanKhau" +
-                    "(idHoKhau, hoTen, biDanh, ngaySinh, noiSinh, nguyenQuan, danToc, tonGiao" +
-                    "ngheNghiep, noiLamViec, soCccd, ngayCap, noiCap, ngayDKTT, diaChiCu, quanHe) " +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO ?" +
+                    "(soCccd, ngayCap, noiCap, idHoKhau, hoTen, biDanh, ngaySinh, noiSinh, nguyenQuan, " +
+                    "danToc, tonGiao, ngheNghiep, noiLamViec, ngayDKTT, diaChiCu, quanHe) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            _setValuesForStatement(nhanKhau, statement, 1);
+            statement.setString(1, table_name);
+            statement.setString(2, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
+            _setValuesForStatement(nhanKhau, statement, 3);
             statement.executeUpdate();
         } catch (SQLException e) {
         
@@ -87,7 +100,9 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
     @Override
     public void update(@NotNull NhanKhau nhanKhau) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE nhanKhau SET" +
+            PreparedStatement statement = connection.prepareStatement("UPDATE ? SET" +
+                    "ngayCap = ?, " +
+                    "noiCap = ?, " +
                     "idHoKhau = ?, " +
                     "hoTen = ?, " +
                     "biDanh = ?, " +
@@ -98,15 +113,13 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
                     "tonGiao = ?, " +
                     "ngheNghiep = ?, " +
                     "noiLamViec = ?, " +
-                    "soCccd = ?, " +
-                    "ngayCap = ?, " +
-                    "noiCap = ?, " +
                     "ngayDKTT = ?, " +
                     "diaChiCu = ?, " +
                     "quanHe = ?" +
-                    "WHERE id = ?");
-            int parameterIndex = _setValuesForStatement(nhanKhau, statement, 1);
-            statement.setInt(parameterIndex, nhanKhau.getId());
+                    "WHERE soCccd = ?");
+            statement.setString(1, table_name);
+            int parameterIndex = _setValuesForStatement(nhanKhau, statement, 2);
+            statement.setString(parameterIndex, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
             statement.executeUpdate();
         } catch (SQLException e) {
         
@@ -119,8 +132,9 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
     @Override
     public void delete(@NotNull NhanKhau nhanKhau) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM nhanKhau WHERE id = ?");
-            statement.setInt(1, nhanKhau.getId());
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM ? WHERE soCccd = ?");
+            statement.setString(1, table_name);
+            statement.setString(2, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
             statement.executeUpdate();
         } catch (SQLException e) {
         
@@ -135,18 +149,17 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
     private static NhanKhau _get(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("idNhanKhau");
         ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
         
-        return new NhanKhau(id, thongTinNhanKhau);
+        return new NhanKhau(thongTinNhanKhau);
     }
     
     /**
      * Phương thức private để thiết lập giá trị cho PreparedStatement khi thêm hoặc cập nhật NhanKhau.
      *
-     * @param nhanKhau   Đối tượng NhanKhau cần được thêm hoặc cập nhật.
-     * @param statement  PreparedStatement đang được chuẩn bị.
-     * @param index       Index bắt đầu để thiết lập giá trị trong PreparedStatement.
+     * @param nhanKhau  Đối tượng NhanKhau cần được thêm hoặc cập nhật.
+     * @param statement PreparedStatement đang được chuẩn bị.
+     * @param index     Index bắt đầu để thiết lập giá trị trong PreparedStatement.
      * @return Index tiếp theo sẽ được sử dụng cho các giá trị khác nếu cần.
      * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
      */

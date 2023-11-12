@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 public class NhanKhauDaThem {
     private int id;
-    private int idNhanKhau;
+    private String soCccd;
     private int idHoKhau;
     private LocalDateTime ngayThem;
     
@@ -21,13 +21,13 @@ public class NhanKhauDaThem {
      * Khởi tạo một đối tượng NhanKhauDaThem với các thông tin cụ thể.
      *
      * @param id        ID của bản ghi.
-     * @param idNhanKhau ID của nhân khẩu liên quan.
+     * @param soCccd    Số căn cước công dân của nhân khẩu liên quan.
      * @param idHoKhau  ID của hộ khẩu liên quan.
      * @param ngayThem  Thời điểm nhân khẩu được thêm vào hệ thống.
      */
-    public NhanKhauDaThem(int id, int idNhanKhau, int idHoKhau, LocalDateTime ngayThem) {
+    public NhanKhauDaThem(int id, String soCccd, int idHoKhau, LocalDateTime ngayThem) {
         this.id = id;
-        this.idNhanKhau = idNhanKhau;
+        this.soCccd = soCccd;
         this.idHoKhau = idHoKhau;
         this.ngayThem = ngayThem;
     }
@@ -51,21 +51,21 @@ public class NhanKhauDaThem {
     }
     
     /**
-     * Trả về ID của nhân khẩu liên quan.
+     * Trả về số căn cước công dân của nhân khẩu liên quan.
      *
-     * @return ID của nhân khẩu liên quan.
+     * @return Số căn cước công dân của nhân khẩu liên quan.
      */
-    public int getIdNhanKhau() {
-        return idNhanKhau;
+    public String getSoCccd() {
+        return soCccd;
     }
     
     /**
-     * Đặt giá trị ID của nhân khẩu liên quan.
+     * Đặt Số căn cước công dân của nhân khẩu liên quan.
      *
-     * @param idNhanKhau Giá trị ID mới của nhân khẩu liên quan.
+     * @param soCccd Số căn cước công dân mới của nhân khẩu liên quan.
      */
-    public void setIdNhanKhau(int idNhanKhau) {
-        this.idNhanKhau = idNhanKhau;
+    public void setSoCccd(String soCccd) {
+        this.soCccd = soCccd;
     }
     
     /**

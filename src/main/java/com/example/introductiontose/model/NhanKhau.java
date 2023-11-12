@@ -4,7 +4,6 @@ package com.example.introductiontose.model;
  * Lớp NhanKhau đại diện cho thông tin của một nhân khẩu trong hệ thống.
  */
 public class NhanKhau {
-    private int id;
     private ThongTinNhanKhau thongTinNhanKhau;
     
     /**
@@ -16,30 +15,10 @@ public class NhanKhau {
     /**
      * Khởi tạo một đối tượng NhanKhau với các thông tin cơ bản.
      *
-     * @param id                ID của nhân khẩu.
      * @param thongTinNhanKhau Thông tin chi tiết về nhân khẩu.
      */
-    public NhanKhau(int id, ThongTinNhanKhau thongTinNhanKhau) {
-        this.id = id;
+    public NhanKhau(ThongTinNhanKhau thongTinNhanKhau) {
         this.thongTinNhanKhau = thongTinNhanKhau;
-    }
-    
-    /**
-     * Trả về ID của nhân khẩu.
-     *
-     * @return ID của nhân khẩu.
-     */
-    public int getId() {
-        return id;
-    }
-    
-    /**
-     * Thiết lập ID của nhân khẩu.
-     *
-     * @param id ID mới của nhân khẩu.
-     */
-    public void setId(int id) {
-        this.id = id;
     }
     
     /**

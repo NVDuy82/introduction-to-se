@@ -49,8 +49,8 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
     @Override
     public Optional<NhanKhauDaThem> get(Integer id) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhanKhauDaThem WHERE id = ?");
-            statement.setLong(1, id);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhanKhauDaThem WHERE idDaThem = ?");
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 NhanKhauDaThem nhanKhauDaThem = _get(resultSet);
@@ -69,7 +69,7 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
     public void save(@NotNull NhanKhauDaThem nhanKhauDaThem) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO nhanKhauDaThem" +
-                    "(idNhanKhau, idHoKhau, ngayThem) " +
+                    "(soCccd, idHoKhau, ngayThem) " +
                     "VALUES (?, ?, ?)");
             _setValuesForStatement(nhanKhauDaThem, statement, 1);
             statement.executeUpdate();
@@ -86,9 +86,9 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE nhanKhauDaThem SET" +
                     "idNhanKhau = ?, " +
-                    "idHoKhau = ?, " +
+                    "soCccd = ?, " +
                     "ngayThem = ?, " +
-                    "WHERE id = ?");
+                    "WHERE idDaThem = ?");
             int parameterIndex = _setValuesForStatement(nhanKhauDaThem, statement, 1);
             statement.setInt(parameterIndex, nhanKhauDaThem.getId());
             statement.executeUpdate();
@@ -103,7 +103,7 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
     @Override
     public void delete(@NotNull NhanKhauDaThem nhanKhauDaThem) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM nhanKhauDaThem WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM nhanKhauDaThem WHERE idDaThem = ?");
             statement.setInt(1, nhanKhauDaThem.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -120,11 +120,11 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
      */
     private static NhanKhauDaThem _get(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
-        int idNhanKhau = resultSet.getInt("idNhanKhau");
+        String soCccd = resultSet.getString("soCcccd");
         int idHoKhau = resultSet.getInt("idHoKhau");
         LocalDateTime ngayThem = resultSet.getTimestamp("ngayThem").toLocalDateTime();
         
-        return new NhanKhauDaThem(id, idNhanKhau, idHoKhau, ngayThem);
+        return new NhanKhauDaThem(id, soCccd, idHoKhau, ngayThem);
     }
     
     /**
@@ -137,7 +137,7 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
      * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
      */
     private int _setValuesForStatement(NhanKhauDaThem nhanKhauDaThem, PreparedStatement statement, int index) throws SQLException {
-        statement.setInt(index++, nhanKhauDaThem.getIdNhanKhau());
+        statement.setString(index++, nhanKhauDaThem.getSoCccd());
         statement.setInt(index++, nhanKhauDaThem.getIdHoKhau());
         statement.setTimestamp(index++, Timestamp.valueOf(nhanKhauDaThem.getNgayThem()));
         

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-
 /**
  * Class Helper cung cấp các phương thức hỗ trợ cho các class khác trong package dao
  */
@@ -20,6 +19,10 @@ public class Helper {
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
     static ThongTinNhanKhau get(ResultSet resultSet) throws SQLException {
+        String soCccd = resultSet.getString("soCccd");
+        LocalDateTime ngayCap = resultSet.getTimestamp("ngayCap").toLocalDateTime();
+        String noiCap = resultSet.getString("noiCap");
+        
         int idHoKhau = resultSet.getInt("idHoKhau");
         String hoTen = resultSet.getString("hoTen");
         String biDanh = resultSet.getString("biDanh");
@@ -30,31 +33,28 @@ public class Helper {
         String tonGiao = resultSet.getString("tonGiao");
         String ngheNghiep = resultSet.getString("ngheNghiep");
         String noiLamViec = resultSet.getString("noiLamViec");
-        
-        String soCccd = resultSet.getString("soCccd");
-        LocalDateTime ngayCap = resultSet.getTimestamp("ngayCap").toLocalDateTime();
-        String noiCap = resultSet.getString("noiCap");
-        
         LocalDateTime ngayDKTT = resultSet.getTimestamp("ngayDKTT").toLocalDateTime();
         String diaChiCu = resultSet.getString("diaChiCu");
         String quanHe = resultSet.getString("quanHe");
         
         CCCD cccd = new CCCD(soCccd, ngayCap, noiCap);
         
-        return new ThongTinNhanKhau(idHoKhau, hoTen, biDanh,ngaySinh,
-                noiSinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, cccd, ngayDKTT,
+        return new ThongTinNhanKhau(cccd, idHoKhau, hoTen, biDanh, ngaySinh,
+                noiSinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, ngayDKTT,
                 diaChiCu, quanHe);
     }
     
     /**
-     *
      * @param thongTinNhanKhau Thông tin nhân khẩu để đưa vào truy vấn.
-     * @param statement PreparedStatement đang được chuẩn bị.
-     * @param index Index bắt đầu để thiết lập giá trị trong PreparedStatement.
+     * @param statement        PreparedStatement đang được chuẩn bị.
+     * @param index            Index bắt đầu để thiết lập giá trị trong PreparedStatement.
      * @return Index tiếp theo sẽ được sử dụng cho các giá trị khác nếu cần.
      * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
      */
     static int setValuesForStatement(ThongTinNhanKhau thongTinNhanKhau, PreparedStatement statement, int index) throws SQLException {
+        statement.setTimestamp(index++, Timestamp.valueOf(thongTinNhanKhau.getCccd().getNgayCap()));
+        statement.setString(index++, thongTinNhanKhau.getCccd().getNoiCap());
+        
         statement.setInt(index++, thongTinNhanKhau.getIdHoKhau());
         statement.setString(index++, thongTinNhanKhau.getHoTen());
         statement.setString(index++, thongTinNhanKhau.getBiDanh());
@@ -65,12 +65,10 @@ public class Helper {
         statement.setString(index++, thongTinNhanKhau.getTonGiao());
         statement.setString(index++, thongTinNhanKhau.getNgheNghiep());
         statement.setString(index++, thongTinNhanKhau.getNoiLamViec());
-        statement.setString(index++, thongTinNhanKhau.getCccd().getSoCccd());
-        statement.setTimestamp(index++, Timestamp.valueOf(thongTinNhanKhau.getCccd().getNgayCap()));
-        statement.setString(index++, thongTinNhanKhau.getCccd().getNoiCap());
         statement.setTimestamp(index++, Timestamp.valueOf(thongTinNhanKhau.getNgayDKTT()));
         statement.setString(index++, thongTinNhanKhau.getDiaChiCu());
         statement.setString(index++, thongTinNhanKhau.getQuanHe());
+        
         return index;
     }
 }
