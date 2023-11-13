@@ -1,8 +1,9 @@
 package com.example.introductiontose.model;
 
+import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-public class KHOANPHI {
+public class CACKHOANPHI  {
     private int idPhi;
     private String kieuphi;
     private String noidungphi;
@@ -11,7 +12,7 @@ public class KHOANPHI {
     private LocalDateTime ngayketthuc;
     private String tieudephi;
 
-    public KHOANPHI(int idPhi, String kieuphi, String noidungohi, int mucphi, LocalDateTime ngayketthuc, LocalDateTime ngaytao, String tieudephi){
+    public CACKHOANPHI(int idPhi, String kieuphi,String noidungohi, int mucphi, LocalDateTime ngayketthuc,LocalDateTime ngaytao, String tieudephi){
         this.idPhi=idPhi;
         this.kieuphi=kieuphi;
         this.noidungphi=noidungohi;
@@ -24,43 +25,43 @@ public class KHOANPHI {
     public int getIdPhi(){
         return idPhi;
     }
-    public static void setIdPhi(int idPhi){
+    public void setIdPhi(int idPhi){
         this.idPhi=idPhi;
     }
     public String getKieuphi(){
         return kieuphi;
     }
-    public static void setKieuphi(String kieuphi){
+    public void setKieuphi(String kieuphi){
         this.kieuphi=kieuphi;
     }
     public String getNoidungphi(){
         return noidungphi;
     }
-    public static void setNoidungphi(String noidungphi){
+    public void setNoidungphi(String noidungphi){
         this.noidungphi=noidungphi;
     }
     public int getMucphi(){
         return mucphi;
     }
-    public static void setMucphi(int mucphi){
+    public void setMucphi(int mucphi){
         this.mucphi=mucphi;
     }
     public LocalDateTime getNgaytao(){
         return ngaytao;
     }
-    public static void setNgaytao(LocalDateTime ngaytao){
+    public void setNgaytao(LocalDateTime ngaytao){
         this.ngaytao=ngaytao;
     }
     public LocalDateTime getNgayketthuc(){
         return ngayketthuc;
     }
-    public static void setNgayketthuc(String ngayketthuc){
+    public void setNgayketthuc(LocalDateTime ngayketthuc){
         this.ngayketthuc=ngayketthuc;
     }
     public String getTieudephi(){
         return tieudephi;
     }
-    public static void setTieudephi(String tieudephi){
+    public void setTieudephi(String tieudephi){
         this.tieudephi=tieudephi;
     }
 

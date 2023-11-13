@@ -7,15 +7,15 @@ public class TAIKHOANNHANKHAU  {
 
     private  String tentaikhoan;
     private  String pass;
-    private  int idNHANKHAU;
+    private  String soCCCD;
 
-    public TAIKHOANNHANKHAU(int idNHANKHAU,String tentaikhoan,String pass){
-        this.idNHANKHAU=idNHANKHAU;
+    public TAIKHOANNHANKHAU(String soCCCD,String tentaikhoan,String pass){
+        this.soCCCD=soCCCD;
         this.tentaikhoan=tentaikhoan;
         this.pass=pass;
     }
-    public int getIdNHANKHAU(){
-        return idNHANKHAU;
+    public String  getSoCCCD(){
+        return soCCCD;
     }
     public String getTentaikhoan(){
         return tentaikhoan;
@@ -26,8 +26,8 @@ public class TAIKHOANNHANKHAU  {
     public void setPass(String pass){
         this.pass=pass;
     }
-    public void setIdNHANKHAU(int idNHANKHAU){
-        this.idNHANKHAU=idNHANKHAU;
+    public void setSoCCCD(String soCCCD){
+        this.soCCCD=soCCCD;
     }
     public void setTentaikhoan(String tentaikhoan){
         this.tentaikhoan=tentaikhoan;
