@@ -162,8 +162,5 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
      * @param index     Index bắt đầu để thiết lập giá trị trong PreparedStatement.
      * @return Index tiếp theo sẽ được sử dụng cho các giá trị khác nếu cần.
      * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
-     */
-    private int _setValuesForStatement(NhanKhau nhanKhau, PreparedStatement statement, int index) throws SQLException {
-        return Helper.setValuesForStatement(nhanKhau.getThongTinNhanKhau(), statement, index);
-    }
+
 }
