@@ -10,7 +10,10 @@ public class KHOANPHI {
     private LocalDateTime ngaytao;
     private LocalDateTime ngayketthuc;
     private String tieudephi;
-
+    
+    public KHOANPHI() {
+    }
+    
     public KHOANPHI(int idPhi, String kieuphi, String noidungohi, int mucphi, LocalDateTime ngayketthuc, LocalDateTime ngaytao, String tieudephi){
         this.idPhi=idPhi;
         this.kieuphi=kieuphi;
@@ -19,49 +22,61 @@ public class KHOANPHI {
         this.ngayketthuc=ngayketthuc;
         this.ngaytao=ngaytao;
         this.tieudephi=tieudephi;
-
     }
-    public int getIdPhi(){
+    
+    public int getIdPhi() {
         return idPhi;
     }
-    public static void setIdPhi(int idPhi){
-        this.idPhi=idPhi;
+    
+    public void setIdPhi(int idPhi) {
+        this.idPhi = idPhi;
     }
-    public String getKieuphi(){
+    
+    public String getKieuphi() {
         return kieuphi;
     }
-    public static void setKieuphi(String kieuphi){
-        this.kieuphi=kieuphi;
+    
+    public void setKieuphi(String kieuphi) {
+        this.kieuphi = kieuphi;
     }
-    public String getNoidungphi(){
+    
+    public String getNoidungphi() {
         return noidungphi;
     }
-    public static void setNoidungphi(String noidungphi){
-        this.noidungphi=noidungphi;
+    
+    public void setNoidungphi(String noidungphi) {
+        this.noidungphi = noidungphi;
     }
-    public int getMucphi(){
+    
+    public int getMucphi() {
         return mucphi;
     }
-    public static void setMucphi(int mucphi){
-        this.mucphi=mucphi;
+    
+    public void setMucphi(int mucphi) {
+        this.mucphi = mucphi;
     }
-    public LocalDateTime getNgaytao(){
+    
+    public LocalDateTime getNgaytao() {
         return ngaytao;
     }
-    public static void setNgaytao(LocalDateTime ngaytao){
-        this.ngaytao=ngaytao;
+    
+    public void setNgaytao(LocalDateTime ngaytao) {
+        this.ngaytao = ngaytao;
     }
-    public LocalDateTime getNgayketthuc(){
+    
+    public LocalDateTime getNgayketthuc() {
         return ngayketthuc;
     }
-    public static void setNgayketthuc(String ngayketthuc){
-        this.ngayketthuc=ngayketthuc;
+    
+    public void setNgayketthuc(LocalDateTime ngayketthuc) {
+        this.ngayketthuc = ngayketthuc;
     }
-    public String getTieudephi(){
+    
+    public String getTieudephi() {
         return tieudephi;
     }
-    public static void setTieudephi(String tieudephi){
-        this.tieudephi=tieudephi;
+    
+    public void setTieudephi(String tieudephi) {
+        this.tieudephi = tieudephi;
     }
-
 }

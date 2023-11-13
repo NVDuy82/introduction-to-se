@@ -36,8 +36,6 @@ public interface DataAccessObject<T, K> {
      */
     void save(@NotNull T t);
 
-    Optional<KHOANPHI> get(int idPhi);
-
     /**
      * Cập nhật thông tin của một đối tượng trong cơ sở dữ liệu.
      *

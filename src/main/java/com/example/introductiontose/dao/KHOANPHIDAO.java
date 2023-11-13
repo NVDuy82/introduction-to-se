@@ -43,11 +43,11 @@ public abstract class KHOANPHIDAO implements DataAccessObject<KHOANPHI, Integer>
         return danhSachKhoanPhi;
     }
     @Override
-    public Optional<KHOANPHI> get(int idPhi) {
+    public Optional<KHOANPHI> get(Integer idPhi) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM ? WHERE idPhi = ?");
             statement.setString(1, table_name);
-            statement.setString(2, idPhi);
+            statement.setInt(2, idPhi);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 KHOANPHI khoanphi = _get(resultSet);
@@ -66,7 +66,7 @@ public abstract class KHOANPHIDAO implements DataAccessObject<KHOANPHI, Integer>
                     "(idPhi, kieuPhi, noiDungThuPhi, mucPhi, ngayTao, ngayKetThuc, tieuDeKhoanPhi " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, table_name);
-            _setValuesForStatement(KHOANPHI, statement, 3);
+            _setValuesForStatement(khoanphi, statement, 3);
             statement.executeUpdate();
         } catch (SQLException e) {
 
@@ -85,7 +85,7 @@ public abstract class KHOANPHIDAO implements DataAccessObject<KHOANPHI, Integer>
                     "WHERE idPhi = ?");
             statement.setString(1, table_name);
             int parameterIndex = _setValuesForStatement(khoanphi, statement, 2);
-            statement.setString(parameterIndex, khoanphi.getIdPhi();
+            statement.setInt(parameterIndex, khoanphi.getIdPhi());
             statement.executeUpdate();
         } catch (SQLException e) {
 
@@ -96,7 +96,7 @@ public abstract class KHOANPHIDAO implements DataAccessObject<KHOANPHI, Integer>
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM ? WHERE idPhi = ?");
             statement.setString(1, table_name);
-            statement.setString(2, khoanphi.getIdPhi());
+            statement.setInt(2, khoanphi.getIdPhi());
             statement.executeUpdate();
         } catch (SQLException e) {
 
@@ -104,22 +104,22 @@ public abstract class KHOANPHIDAO implements DataAccessObject<KHOANPHI, Integer>
     }
     private static KHOANPHI _get(ResultSet resultSet) throws SQLException {
         KHOANPHI khoanphi = new KHOANPHI();
-        KHOANPHI.setIdPhi(resultSet.getString("idPhi"));
-        KHOANPHI.setKieuphi(resultSet.getString("kieuPhi"));
-        KHOANPHI.setNoidungphi(resultSet.getString("noiDungPhi"));
-        KHOANPHI.setMucphi(resultSet.getInt("mucPhi"));
-        KHOANPHI.setNgaytao(resultSet.getString("ngayTao"));
-        KHOANPHI.setNgayketthuc(resultSet.getString("ngayKetThuc"));
-        KHOANPHI.setTieudephi(resultSet.getString("tieuDeKhoanPhi"));
-        return new KHOANPHI();
+        khoanphi.setIdPhi(resultSet.getInt("idPhi"));
+        khoanphi.setKieuphi(resultSet.getString("kieuPhi"));
+        khoanphi.setNoidungphi(resultSet.getString("noiDungPhi"));
+        khoanphi.setMucphi(resultSet.getInt("mucPhi"));
+        khoanphi.setNgaytao(resultSet.getTimestamp("ngayTao").toLocalDateTime());
+        khoanphi.setNgayketthuc(resultSet.getTimestamp("ngayKetThuc").toLocalDateTime());
+        khoanphi.setTieudephi(resultSet.getString("tieuDeKhoanPhi"));
+        return khoanphi;
     }
     private int _setValuesForStatement(KHOANPHI khoanphi, PreparedStatement statement, int index) throws SQLException {
-        statement.setString(index, khoanphi.getIdPhi());
+        statement.setInt(index, khoanphi.getIdPhi());
         statement.setString(index + 1, khoanphi.getKieuphi());
         statement.setString(index + 2, khoanphi.getNoidungphi());
         statement.setInt(index + 3, khoanphi.getMucphi());
-        statement.setString(index + 4, khoanphi.getNgaytao());
-        statement.setString(index + 5, khoanphi.getNgayketthuc());
+        statement.setTimestamp(index + 4, Timestamp.valueOf(khoanphi.getNgaytao()));
+        statement.setTimestamp(index + 5, Timestamp.valueOf(khoanphi.getNgayketthuc()));
         statement.setString(index + 6, khoanphi.getTieudephi());
         return index + 7;
 
