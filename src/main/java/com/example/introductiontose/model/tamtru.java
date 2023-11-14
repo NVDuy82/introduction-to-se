@@ -3,30 +3,30 @@ package com.example.introductiontose.model;
 import java.time.LocalDateTime;
 
 
-public class tamtru {
-    int idtamtru;
+public class TamTru {
+    int idTamTru;
     String soCccd;
     LocalDateTime ngayBatDau, ngayKetThuc;
     String liDo;
     
     // Constructor không tham số
-    public tamtru() {}
+    public TamTru() {}
     
     // Constructor full tham số
-    public tamtru(int idtamtru, String soCccd, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc, String liDo) {
-        this.idtamtru = idtamtru;
+    public TamTru(int idTamTru, String soCccd, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc, String liDo) {
+        this.idTamTru = idTamTru;
         this.soCccd = soCccd;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
         this.liDo = liDo;
     }
 
-    public int getIdtamtru() {
-        return idtamtru;
+    public int getIdTamTru() {
+        return idTamTru;
     }
 
-    public void setIdtamtru(int idtamtru) {
-        this.idtamtru = idtamtru;
+    public void setIdTamTru(int idTamTru) {
+        this.idTamTru = idTamTru;
     }
 
     public String getSoCccd() {
