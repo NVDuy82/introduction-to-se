@@ -32,7 +32,7 @@ public abstract class KHOANPHIDAO implements DataAccessObject<KHOANPHI, Integer>
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM ?");
             statement.setString(1, table_name);
-            ResultSet resultSet = statement.executeQuery();
+              ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 KHOANPHI khoanphi = _get(resultSet);
                 danhSachKhoanPhi.add(khoanphi);

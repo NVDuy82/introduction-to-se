@@ -1,20 +1,18 @@
 package com.example.introductiontose.model;
 
 
-import java.util.ArrayList;
-
 public class TAIKHOANNHANKHAU  {
 
     private  String tentaikhoan;
     private  String pass;
-    private  String soCCCD;
+    private  int soCCCD;
 
-    public TAIKHOANNHANKHAU(String soCCCD,String tentaikhoan,String pass){
+    public TAIKHOANNHANKHAU(int soCCCD,String tentaikhoan,String pass){
         this.soCCCD=soCCCD;
         this.tentaikhoan=tentaikhoan;
         this.pass=pass;
     }
-    public String  getSoCCCD(){
+    public int getSoCCCD(){
         return soCCCD;
     }
     public String getTentaikhoan(){
@@ -26,7 +24,7 @@ public class TAIKHOANNHANKHAU  {
     public void setPass(String pass){
         this.pass=pass;
     }
-    public void setSoCCCD(String soCCCD){
+    public void setSoCCCD(int soCCCD){
         this.soCCCD=soCCCD;
     }
     public void setTentaikhoan(String tentaikhoan){

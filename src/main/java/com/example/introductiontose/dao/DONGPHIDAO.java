@@ -5,12 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.time.LocalDateTime;
 import com.example.introductiontose.model.DONGPHI;
-
-import com.example.introductiontose.model.KHOANPHI;
-import com.example.introductiontose.model.NhanKhauDaThem;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class DONGPHIDAO implements DataAccessObject<DONGPHI, Integer>
+public abstract class DONGPHIDAO implements DataAccessObject<DONGPHI, Integer>{
     private final Connection connection;
     public DONGPHIDAO(Connection connection) {
         this.connection = connection;
