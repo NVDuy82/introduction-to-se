@@ -2,7 +2,11 @@ package com.example.introductiontose.model;
 
 import java.time.LocalDateTime;
 
+/**
+ * Lớp ThongTinNhanKhau đại diện cho thông tin chi tiết của một nhân khẩu.
+ */
 public class ThongTinNhanKhau {
+    private CCCD cccd;
     private int idHoKhau;
     private String hoTen;
     private String biDanh;
@@ -13,15 +17,36 @@ public class ThongTinNhanKhau {
     private String tonGiao;
     private String ngheNghiep;
     private String noiLamViec;
-    private CCCD cccd;
     private LocalDateTime ngayDKTT;
     private String diaChiCu;
     private String quanHe;
-
+    
+    /**
+     * Khởi tạo một đối tượng ThongTinNhanKhau mới không có tham số.
+     */
     public ThongTinNhanKhau() {
     }
-
-    public ThongTinNhanKhau(int idHoKhau, String hoTen, String biDanh, LocalDateTime ngaySinh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, CCCD cccd, LocalDateTime ngayDKTT, String diaChiCu, String quanHe) {
+    
+    /**
+     * Khởi tạo một đối tượng ThongTinNhanKhau với các thông tin cơ bản.
+     *
+     * @param cccd        Thông tin về Chứng minh nhân dân của nhân khẩu.
+     * @param idHoKhau   ID hoặc số nhà của hộ khẩu mà nhân khẩu thuộc về.
+     * @param hoTen      Họ và tên của nhân khẩu.
+     * @param biDanh      Bí danh của nhân khẩu (nếu có).
+     * @param ngaySinh    Ngày sinh của nhân khẩu.
+     * @param noiSinh     Nơi sinh của nhân khẩu.
+     * @param nguyenQuan  Nguyên quán của nhân khẩu.
+     * @param danToc      Dân tộc của nhân khẩu.
+     * @param tonGiao     Tôn giáo của nhân khẩu.
+     * @param ngheNghiep  Nghề nghiệp của nhân khẩu.
+     * @param noiLamViec  Nơi làm việc của nhân khẩu.
+     * @param ngayDKTT    Ngày đăng ký tạm trú của nhân khẩu.
+     * @param diaChiCu    Địa chỉ cũ của nhân khẩu (nếu có).
+     * @param quanHe      Mối quan hệ với chủ hộ hoặc người nào đó trong hộ khẩu.
+     */
+    public ThongTinNhanKhau(CCCD cccd, int idHoKhau, String hoTen, String biDanh, LocalDateTime ngaySinh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, LocalDateTime ngayDKTT, String diaChiCu, String quanHe) {
+        this.cccd = cccd;
         this.idHoKhau = idHoKhau;
         this.hoTen = hoTen;
         this.biDanh = biDanh;
@@ -32,12 +57,19 @@ public class ThongTinNhanKhau {
         this.tonGiao = tonGiao;
         this.ngheNghiep = ngheNghiep;
         this.noiLamViec = noiLamViec;
-        this.cccd = cccd;
         this.ngayDKTT = ngayDKTT;
         this.diaChiCu = diaChiCu;
         this.quanHe = quanHe;
     }
-
+    
+    public CCCD getCccd() {
+        return cccd;
+    }
+    
+    public void setCccd(CCCD cccd) {
+        this.cccd = cccd;
+    }
+    
     public int getIdHoKhau() {
         return idHoKhau;
     }
@@ -116,14 +148,6 @@ public class ThongTinNhanKhau {
 
     public void setNoiLamViec(String noiLamViec) {
         this.noiLamViec = noiLamViec;
-    }
-
-    public CCCD getCccd() {
-        return cccd;
-    }
-
-    public void setCccd(CCCD cccd) {
-        this.cccd = cccd;
     }
 
     public LocalDateTime getNgayDKTT() {

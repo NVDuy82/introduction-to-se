@@ -1,28 +1,49 @@
 package com.example.introductiontose.dao;
 
-import com.example.introductiontose.model.CCCD;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.ThongTinNhanKhau;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
+/**
+ * Class NhanKhauDao triển khai interface DataAccessObject để thao tác với đối tượng NhanKhau trong cơ sở dữ liệu.
+ */
+public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
     private final Connection connection;
+    private final String table_name;
     
-    public NhanKhauDao(Connection connection) {
-        this.connection = connection;
+    public enum TableType {
+        NHANKHAU,
+        NHANKHAUCHUATHEM
     }
     
+    /**
+     * Khởi tạo một đối tượng NhanKhauDao với kết nối cơ sở dữ liệu được cung cấp.
+     *
+     * @param connection Kết nối đến cơ sở dữ liệu.
+     */
+    public NhanKhauDao(Connection connection, TableType tableType) {
+        this.connection = connection;
+        if (tableType == TableType.NHANKHAU) {
+            table_name = "nhanKhau";
+        } else {
+            table_name = "themNhanKhau";
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<NhanKhau> getAll() {
         List<NhanKhau> danhSachNhanKhau = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM table_name");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ?");
+            statement.setString(1, table_name);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 NhanKhau nhanKhau = _get(resultSet);
@@ -34,11 +55,15 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
         return danhSachNhanKhau;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Optional<NhanKhau> get(Integer id) {
+    public Optional<NhanKhau> get(String soCccd) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM table_name WHERE id = ?");
-            statement.setLong(1, id);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ? WHERE soCccd = ?");
+            statement.setString(1, table_name);
+            statement.setString(2, soCccd);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 NhanKhau nhanKhau = _get(resultSet);
@@ -50,23 +75,34 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
         return Optional.empty();
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(@NotNull NhanKhau nhanKhau) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO table_name" +
-                    "(idHoKhau, hoTen, biDanh, ngaySinh, noiSinh, nguyenQuan, danToc, tonGiao" +
-                    "ngheNghiep, noiLamViec, soCccd, ngayCap, noiCap, ngayDKTT, diaChiCu, quanHe) " +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO ?" +
+                    "(soCccd, ngayCap, noiCap, idHoKhau, hoTen, biDanh, ngaySinh, noiSinh, nguyenQuan, " +
+                    "danToc, tonGiao, ngheNghiep, noiLamViec, ngayDKTT, diaChiCu, quanHe) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            _setValuesForStatement(nhanKhau, statement);
+            statement.setString(1, table_name);
+            statement.setString(2, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
+            _setValuesForStatement(nhanKhau, statement, 3);
+            statement.executeUpdate();
         } catch (SQLException e) {
         
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(@NotNull NhanKhau nhanKhau) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE table_name SET" +
+            PreparedStatement statement = connection.prepareStatement("UPDATE ? SET" +
+                    "ngayCap = ?, " +
+                    "noiCap = ?, " +
                     "idHoKhau = ?, " +
                     "hoTen = ?, " +
                     "biDanh = ?, " +
@@ -77,75 +113,57 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, Integer>{
                     "tonGiao = ?, " +
                     "ngheNghiep = ?, " +
                     "noiLamViec = ?, " +
-                    "soCccd = ?, " +
-                    "ngayCap = ?, " +
-                    "noiCap = ?, " +
                     "ngayDKTT = ?, " +
                     "diaChiCu = ?, " +
                     "quanHe = ?" +
-                    "WHERE id = ?");
-            _setValuesForStatement(nhanKhau, statement);
-        } catch (SQLException e) {
-        
-        }
-    }
-    
-    @Override
-    public void delete(@NotNull NhanKhau nhanKhau) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM table_name WHERE id = ?");
-            statement.setLong(1, nhanKhau.getId());
+                    "WHERE soCccd = ?");
+            statement.setString(1, table_name);
+            int parameterIndex = _setValuesForStatement(nhanKhau, statement, 2);
+            statement.setString(parameterIndex, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
             statement.executeUpdate();
         } catch (SQLException e) {
         
         }
     }
     
-    private NhanKhau _get(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("column-name");
-        int idHoKhau = resultSet.getInt("column-name");
-        String hoTen = resultSet.getString("column-name");
-        String biDanh = resultSet.getString("column-name");
-        LocalDateTime ngaySinh = resultSet.getTimestamp("column-name").toLocalDateTime();
-        String noiSinh = resultSet.getString("column-name");
-        String nguyenQuan = resultSet.getString("column-name");
-        String danToc = resultSet.getString("column-name");
-        String tonGiao = resultSet.getString("column-name");
-        String ngheNghiep = resultSet.getString("column-name");
-        String noiLamViec = resultSet.getString("column-name");
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void delete(@NotNull NhanKhau nhanKhau) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM ? WHERE soCccd = ?");
+            statement.setString(1, table_name);
+            statement.setString(2, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
+            statement.executeUpdate();
+        } catch (SQLException e) {
         
-        String soCccd = resultSet.getString("column-name");
-        LocalDateTime ngayCap = resultSet.getTimestamp("column-name").toLocalDateTime();
-        String noiCap = resultSet.getString("column-name");
-        
-        LocalDateTime ngayDKTT = resultSet.getTimestamp("column-name").toLocalDateTime();
-        String diaChiCu = resultSet.getString("column-name");
-        String quanHe = resultSet.getString("column-name");
-        
-        CCCD cccd = new CCCD(soCccd, ngayCap, noiCap);
-        ThongTinNhanKhau thongTinNhanKhau = new ThongTinNhanKhau(idHoKhau, hoTen, biDanh,ngaySinh,
-                noiSinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, cccd, ngayDKTT,
-                diaChiCu, quanHe);
-        return new NhanKhau(id, thongTinNhanKhau);
+        }
     }
     
-    private void _setValuesForStatement(NhanKhau nhanKhau, PreparedStatement statement) throws SQLException {
-        statement.setInt(1, nhanKhau.getThongTinNhanKhau().getIdHoKhau());
-        statement.setString(2, nhanKhau.getThongTinNhanKhau().getHoTen());
-        statement.setString(3, nhanKhau.getThongTinNhanKhau().getBiDanh());
-        statement.setObject(4, Timestamp.valueOf(nhanKhau.getThongTinNhanKhau().getNgaySinh()));
-        statement.setString(5, nhanKhau.getThongTinNhanKhau().getNoiSinh());
-        statement.setString(6, nhanKhau.getThongTinNhanKhau().getNguyenQuan());
-        statement.setString(7, nhanKhau.getThongTinNhanKhau().getDanToc());
-        statement.setString(8, nhanKhau.getThongTinNhanKhau().getTonGiao());
-        statement.setString(9, nhanKhau.getThongTinNhanKhau().getNgheNghiep());
-        statement.setString(10, nhanKhau.getThongTinNhanKhau().getNoiLamViec());
-        statement.setString(11, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
-        statement.setObject(12, Timestamp.valueOf(nhanKhau.getThongTinNhanKhau().getCccd().getNgayCap()));
-        statement.setString(13, nhanKhau.getThongTinNhanKhau().getCccd().getNoiCap());
-        statement.setObject(14, Timestamp.valueOf(nhanKhau.getThongTinNhanKhau().getNgayDKTT()));
-        statement.setString(15, nhanKhau.getThongTinNhanKhau().getDiaChiCu());
-        statement.setString(16, nhanKhau.getThongTinNhanKhau().getQuanHe());
-        statement.executeUpdate();
+    /**
+     * Phương thức private để chuyển đổi dữ liệu từ ResultSet thành đối tượng NhanKhau.
+     *
+     * @param resultSet ResultSet chứa dữ liệu từ cơ sở dữ liệu.
+     * @return Đối tượng NhanKhau được tạo từ dữ liệu ResultSet.
+     * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
+     */
+    private static NhanKhau _get(ResultSet resultSet) throws SQLException {
+        ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
+        
+        return new NhanKhau(thongTinNhanKhau);
+    }
+    
+    /**
+     * Phương thức private để thiết lập giá trị cho PreparedStatement khi thêm hoặc cập nhật NhanKhau.
+     *
+     * @param nhanKhau  Đối tượng NhanKhau cần được thêm hoặc cập nhật.
+     * @param statement PreparedStatement đang được chuẩn bị.
+     * @param index     Index bắt đầu để thiết lập giá trị trong PreparedStatement.
+     * @return Index tiếp theo sẽ được sử dụng cho các giá trị khác nếu cần.
+     * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
+     */
+    private int _setValuesForStatement(NhanKhau nhanKhau, PreparedStatement statement, int index) throws SQLException {
+        return Helper.setValuesForStatement(nhanKhau.getThongTinNhanKhau(), statement, index);
     }
 }
