@@ -2,7 +2,6 @@ package com.example.introductiontose.dao;
 
 import com.example.introductiontose.model.KHOANPHI;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,7 @@ public interface DataAccessObject<T, K> {
      */
     void save(@NotNull T t);
 
-    Optional<KHOANPHI> get(int idPhi);
+    Optional<T> get(int id);
 
     /**
      * Cập nhật thông tin của một đối tượng trong cơ sở dữ liệu.
