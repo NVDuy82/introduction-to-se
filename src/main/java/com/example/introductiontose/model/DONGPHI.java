@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
          this.soTien=soTien;
          this.ngayDong=ngayDong;
      }
-     public static int getIdPhi() {
+     public  int getIdPhi() {
          return idPhi;
      }
      public void setIdPhi(int idPhi) {
