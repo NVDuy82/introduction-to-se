@@ -148,7 +148,7 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
      * @return Đối tượng NhanKhau được tạo từ dữ liệu ResultSet.
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
-    private static NhanKhau _get(ResultSet resultSet) throws SQLException {
+    private NhanKhau _get(ResultSet resultSet) throws SQLException {
         ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
         
         return new NhanKhau(thongTinNhanKhau);
