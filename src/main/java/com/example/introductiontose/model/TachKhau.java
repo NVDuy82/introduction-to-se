@@ -1,6 +1,6 @@
 package com.example.introductiontose.model;
 
-import java.util.List;
+import java.util.*;
 
 public class TachKhau {
     private String soCccdChuHoMoi;
