@@ -9,14 +9,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class TachKhauDAO triển khai interface DataAccessObject để thao tác với đối tượng TachKhau trong cơ sở dữ liệu.
+ */
 public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
-
     private final Connection connection;
-
+    
+    /**
+     * Khởi tạo một đối tượng TachKhauDAO với kết nối cơ sở dữ liệu được cung cấp.
+     *
+     * @param connection Kết nối đến cơ sở dữ liệu.
+     */
     public TachKhauDAO(Connection connection) {
         this.connection = connection;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<TachKhau> getAll() {
         List<TachKhau> danhSachTachKhau = new ArrayList<>();
@@ -25,7 +35,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
              ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
                 List<String> danhSachNhanKhau = parseDanhSachNhanKhau(resultSet.getString("danhSachNhanKhau"));
-
+                
                 TachKhau tachKhau = new TachKhau(
                         resultSet.getString("soCccdChuHoMoi"),
                         resultSet.getInt("idHoKhau"),
@@ -38,7 +48,10 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
         }
         return danhSachTachKhau;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<TachKhau> get(Integer id) {
         String sql = "SELECT * FROM tachkhau WHERE idHoKhau = ?";
@@ -47,7 +60,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 List<String> danhSachNhanKhau = parseDanhSachNhanKhau(resultSet.getString("danhSachNhanKhau"));
-
+                
                 TachKhau tachKhau = new TachKhau(
                         resultSet.getString("soCccdChuHoMoi"),
                         resultSet.getInt("idHoKhau"),
@@ -60,7 +73,10 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
         }
         return Optional.empty();
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(@NotNull TachKhau tachKhau) {
         String sql = "INSERT INTO tachkhau (soCccdChuHoMoi, idHoKhau, danhSachNhanKhau, trangThai) VALUES (?, ?, ?, ?)";
@@ -74,7 +90,10 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(@NotNull TachKhau tachKhau) {
         String sql = "UPDATE tachkhau SET soCccdChuHoMoi = ?, idHoKhau = ?, danhSachNhanKhau = ?, trangThai = ? WHERE idHoKhau = ?";
@@ -89,7 +108,10 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(@NotNull TachKhau tachKhau) {
         String sql = "DELETE FROM tachkhau WHERE idHoKhau = ?";
@@ -100,7 +122,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, Integer> {
             e.printStackTrace();
         }
     }
-
+    
     private List<String> parseDanhSachNhanKhau(String data) {
         return new ArrayList<>(Arrays.asList(data.split(",")));
     }

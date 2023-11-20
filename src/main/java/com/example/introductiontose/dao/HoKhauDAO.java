@@ -8,14 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class HoKhauDAO triển khai interface DataAccessObject để thao tác với đối tượng HoKhau trong cơ sở dữ liệu.
+ */
 public class HoKhauDAO implements DataAccessObject<HoKhau, Integer> {
-
     private final Connection connection;
-
+    
+    /**
+     * Khởi tạo một đối tượng HoKhauDAO với kết nối cơ sở dữ liệu được cung cấp.
+     *
+     * @param connection Kết nối đến cơ sở dữ liệu.
+     */
     public HoKhauDAO(Connection connection) {
         this.connection = connection;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<HoKhau> getAll() {
         List<HoKhau> hoKhaus = new ArrayList<>();
@@ -36,7 +46,10 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, Integer> {
         }
         return hoKhaus;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<HoKhau> get(Integer id) {
         String sql = "SELECT * FROM hokhau WHERE idHoKhau = ?";
@@ -57,7 +70,10 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, Integer> {
         }
         return Optional.empty();
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(@NotNull HoKhau hoKhau) {
         String sql = "INSERT INTO hokhau (idHoKhau, tenChuHo, soCccdChuHo, diaChiNha, ngayTaoHK) VALUES (?, ?, ?)";
@@ -72,7 +88,10 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, Integer> {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(@NotNull HoKhau hoKhau) {
         String sql = "UPDATE hokhau SET idHoKhau = ?, tenChuHo = ?, soCccdChuHo = ?, diaChiNha = ?, ngayTaoHK = ? WHERE idHoKhau = ?";
@@ -87,7 +106,10 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, Integer> {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(@NotNull HoKhau hoKhau) {
         String sql = "DELETE FROM hokhau WHERE idHoKhau = ?";
