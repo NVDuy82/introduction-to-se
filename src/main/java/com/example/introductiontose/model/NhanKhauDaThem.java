@@ -14,7 +14,7 @@ public class NhanKhauDaThem {
     /**
      * Khởi tạo một đối tượng NhanKhauDaThem mới.
      */
-    public NhanKhauDaThem(int idPhi, int soTien, int idHoKhau, LocalDateTime ngayDong) {
+    public NhanKhauDaThem() {
     }
     
     /**

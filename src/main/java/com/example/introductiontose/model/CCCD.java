@@ -76,5 +76,4 @@ public class CCCD {
     public void setNoiCap(String noiCap) {
         this.noiCap = noiCap;
     }
-
 }

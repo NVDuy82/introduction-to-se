@@ -1,6 +1,5 @@
 package com.example.introductiontose.dao;
 
-import com.example.introductiontose.model.KHOANPHI;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public interface DataAccessObject<T, K> {
      * @throws IllegalArgumentException Nếu đối tượng đã tồn tại trong cơ sở dữ liệu.
      */
     void save(@NotNull T t);
-
+    
     /**
      * Cập nhật thông tin của một đối tượng trong cơ sở dữ liệu.
      *
