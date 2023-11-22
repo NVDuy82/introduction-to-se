@@ -131,7 +131,9 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
     /**
      * Phương thức private để chuyển đổi dữ liệu từ String thành danh sách chứa số CCCD của các thành viên trong hộ khẩu.
      *
-     * @param  data chứa dữ liệu từ cơ sở dữ liệu là một xâu chứa các số CCCD liên tiếp, ngăn cách nhau bởi dấu ','.
+     * @param  data chứa dữ liệu từ cơ sở dữ liệu là một xâu chứa các số CCCD liên tiếp, ngăn cách nhau bởi dấu ','
+     * (Không dùng dấu cách).
+     *
      * @return Danh sách số CCCD của nhân khẩu từ data dưới dạng List
      */
     private List<String> parseDanhSachNhanKhau(String data) {
