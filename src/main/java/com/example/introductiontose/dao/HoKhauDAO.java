@@ -1,25 +1,37 @@
 package com.example.introductiontose.dao;
 
 import com.example.introductiontose.model.HoKhau;
+import com.example.introductiontose.model.key.HoKhauKey;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class HoKhauDao triển khai interface DataAccessObject để thao tác với đối tượng HoKhau trong cơ sở dữ liệu.
+ */
+
 public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
 
     private final Connection connection;
 
+    /**
+     * Khởi tạo một đối tượng HoKhauDao với kết nối cơ sở dữ liệu được cung cấp.
+     *
+     * @param connection Kết nối đến cơ sở dữ liệu.
+     */
     public HoKhauDAO(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public List<HoKhau> getAll() {
-        List<HoKhau> hoKhaus = new ArrayList<>();
+        List<HoKhau> danhSachHoKhau = new ArrayList<>();
         String sql = "SELECT * FROM hokhau";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
@@ -30,14 +42,17 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
                         resultSet.getString("soCccdChuHo"),
                         resultSet.getString("diaChiNha"),
                         resultSet.getTimestamp("ngayTaoHK").toLocalDateTime());
-                hoKhaus.add(hoKhau);
+                danhSachHoKhau.add(hoKhau);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return hoKhaus;
+        return danhSachHoKhau;
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public Optional<HoKhau> get(HoKhauKey key) {
         String sql = "SELECT * FROM hokhau WHERE soCccdChuHo = ? AND idHoKhau = ?";
@@ -60,6 +75,9 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
         return Optional.empty();
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public void save(@NotNull HoKhau hoKhau) {
         String sql = "INSERT INTO hokhau (idHoKhau, tenChuHo, soCccdChuHo, diaChiNha, ngayTaoHK) VALUES (?, ?, ?)";
@@ -75,6 +93,9 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
         }
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public void update(@NotNull HoKhau hoKhau) {
         String sql = "UPDATE hokhau SET idHoKhau = ?, tenChuHo = ?, diaChiNha = ?, ngayTaoHK = ? WHERE idHoKhau = ? AND soCccdChuHo = ?";
@@ -90,6 +111,9 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
         }
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public void delete(@NotNull HoKhau hoKhau) {
         String sql = "DELETE FROM hokhau WHERE idHoKhau = ? AND soCccdChuHo = ?";
@@ -103,29 +127,3 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
     }
 }
 
-// Class khóa chính
-class HoKhauKey implements Serializable {
-    private String soCccdChuHo;
-    private int idHoKhau;
-
-    public HoKhauKey(String soCccdChuHo, int idHoKhau) {
-        this.soCccdChuHo = soCccdChuHo;
-        this.idHoKhau = idHoKhau;
-    }
-
-    public String getSoCccdChuHo() {
-        return soCccdChuHo;
-    }
-
-    public void setSoCccdChuHo(String soCccdChuHo) {
-        this.soCccdChuHo = soCccdChuHo;
-    }
-
-    public int getIdHoKhau() {
-        return idHoKhau;
-    }
-
-    public void setIdHoKhau(int idHoKhau) {
-        this.idHoKhau = idHoKhau;
-    }
-}

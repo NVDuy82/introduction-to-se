@@ -1,23 +1,36 @@
 package com.example.introductiontose.dao;
 
 import com.example.introductiontose.model.TachKhau;
+import com.example.introductiontose.model.key.TachKhauKey;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class TachKhauDao triển khai interface DataAccessObject để thao tác với đối tượng TachKhau trong cơ sở dữ liệu.
+ */
+
 public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
 
     private final Connection connection;
+
+    /**
+     * Khởi tạo một đối tượng TachKhauDao với kết nối cơ sở dữ liệu được cung cấp.
+     *
+     * @param connection Kết nối đến cơ sở dữ liệu.
+     */
 
     public TachKhauDAO(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public List<TachKhau> getAll() {
         List<TachKhau> danhSachTachKhau = new ArrayList<>();
@@ -40,6 +53,9 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
         return danhSachTachKhau;
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public Optional<TachKhau> get(TachKhauKey key) {
         String sql = "SELECT * FROM tachkhau WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
@@ -63,6 +79,9 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
         return Optional.empty();
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public void save(@NotNull TachKhau tachKhau) {
         String sql = "INSERT INTO tachkhau (soCccdChuHoMoi, idHoKhau, danhSachNhanKhau, trangThai) VALUES (?, ?, ?, ?)";
@@ -77,6 +96,9 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
         }
     }
 
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public void update(@NotNull TachKhau tachKhau) {
         String sql = "UPDATE tachkhau SET danhSachNhanKhau = ?, trangThai = ? WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
@@ -91,7 +113,9 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
         }
     }
 
-
+    /**
+     * * {@inheritDoc}
+     */
     @Override
     public void delete(@NotNull TachKhau tachKhau) {
         String sql = "DELETE FROM tachkhau WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
@@ -104,35 +128,14 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
         }
     }
 
-
+    /**
+     * Phương thức private để chuyển đổi dữ liệu từ String thành danh sách chứa số CCCD của các thành viên trong hộ khẩu.
+     *
+     * @param  data chứa dữ liệu từ cơ sở dữ liệu là một xâu chứa các số CCCD liên tiếp, ngăn cách nhau bởi dấu ','.
+     * @return Danh sách số CCCD của nhân khẩu từ data dưới dạng List
+     */
     private List<String> parseDanhSachNhanKhau(String data) {
         return new ArrayList<>(Arrays.asList(data.split(",")));
     }
 }
 
-// Class khóa chính
-class TachKhauKey implements Serializable {
-    private String soCccdChuHoMoi;
-    private int idHoKhau;
-
-    public TachKhauKey(String soCccdChuHoMoi, int idHoKhau) {
-        this.soCccdChuHoMoi = soCccdChuHoMoi;
-        this.idHoKhau = idHoKhau;
-    }
-
-    public String getSoCccdChuHoMoi() {
-        return soCccdChuHoMoi;
-    }
-
-    public void setSoCccdChuHoMoi(String soCccdChuHoMoi) {
-        this.soCccdChuHoMoi = soCccdChuHoMoi;
-    }
-
-    public int getIdHoKhau() {
-        return idHoKhau;
-    }
-
-    public void setIdHoKhau(int idHoKhau) {
-        this.idHoKhau = idHoKhau;
-    }
-}
