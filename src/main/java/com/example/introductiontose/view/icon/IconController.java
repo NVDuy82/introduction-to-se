@@ -1,5 +1,6 @@
 package com.example.introductiontose.view.icon;
 
+import com.example.introductiontose.Application;
 import com.example.introductiontose.model.NhanKhau;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,14 +15,14 @@ import java.util.ResourceBundle;
 
 public class IconController implements Initializable {
     private enum ImageType {
-        NHANKHAU_IN_SELECTED("/com/example/demo/view/iconImg/icons8-customer-100.png"),
-        NHANKHAU_OUT_SELECTED("/com/example/demo/view/iconImg/icons8-customer-gray-100.png"),
-        NHANKHAU_IN_UNSELECTED("/com/example/demo/view/iconImg/icons8-customer-white-100.png"),
-        NHANKHAU_OUT_UNSELECTED("/com/example/demo/view/iconImg/icons8-user-100.png"),
-        CHUHO_IN_SELECTED("/com/example/demo/view/iconImg/icons8-customer-9FAAE5-100.png"),
-        CHUHO_OUT_SELECTED("/com/example/demo/view/iconImg/icons8-customer-color-100.png"),
-        CHUHO_IN_UNSELECTED("/com/example/demo/view/iconImg/icons8-customer-white-100.png"),
-        CHUHO_OUT_UNSELECTED("/com/example/demo/view/iconImg/icons8-user-color-100.png");
+        NHANKHAU_IN_SELECTED("/com/example/introductiontose/view/iconImg/icons8-customer-100.png"),
+        NHANKHAU_OUT_SELECTED("/com/example/introductiontose/view/iconImg/icons8-customer-gray-100.png"),
+        NHANKHAU_IN_UNSELECTED("/com/example/introductiontose/view/iconImg/icons8-customer-white-100.png"),
+        NHANKHAU_OUT_UNSELECTED("/com/example/introductiontose/view/iconImg/icons8-user-100.png"),
+        CHUHO_IN_SELECTED("/com/example/introductiontose/view/iconImg/icons8-customer-9FAAE5-100.png"),
+        CHUHO_OUT_SELECTED("/com/example/introductiontose/view/iconImg/icons8-customer-color-100.png"),
+        CHUHO_IN_UNSELECTED("/com/example/introductiontose/view/iconImg/icons8-customer-white-100.png"),
+        CHUHO_OUT_UNSELECTED("/com/example/introductiontose/view/iconImg/icons8-user-color-100.png");
         
         private final String iconPath;
         
@@ -119,6 +120,6 @@ public class IconController implements Initializable {
     }
     
     private Image imageFromResourceAsStream(String name) {
-        return new Image(Objects.requireNonNull(getClass().getResourceAsStream(name)));
+        return new Image(Objects.requireNonNull(Application.class.getResourceAsStream(name)));
     }
 }

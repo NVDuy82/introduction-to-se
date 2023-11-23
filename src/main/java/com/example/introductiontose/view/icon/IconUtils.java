@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 public class IconUtils {
     public static Button createButtonIcon(IconType iconType, NhanKhau nhanKhau, List<IconController> iconControllerList, Consumer<IconController> eventClickIcon) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(IconUtils.class.getResource("/com/example/demo/view/icon/ho-khau-icon.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(IconUtils.class.getResource("/com/example/introductiontose/view/icon/ho-khau-icon.fxml"));
         Button button = fxmlLoader.load();
         HBox.setMargin(button, new Insets(10));
         
