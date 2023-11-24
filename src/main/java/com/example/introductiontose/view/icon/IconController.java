@@ -109,14 +109,11 @@ public class IconController implements Initializable {
     }
     
     private void setCssButton(IconType iconType) {
-        // Lấy đường dẫn tới tệp CSS từ thư mục resources
-        String fullPath = Objects.requireNonNull(getClass().getResource(iconType.getCssPath())).toExternalForm();
-        
-        // Xóa tất cả các stylesheet hiện tại
-        buttonIcon.getStylesheets().clear();
-        
+        // Xóa tất cả các style class hiện tại
+        buttonIcon.getStyleClass().removeLast();
+
         // Set Css
-        buttonIcon.getStylesheets().add(fullPath);
+        buttonIcon.getStyleClass().add(iconType.getClassName());
     }
     
     private Image imageFromResourceAsStream(String name) {

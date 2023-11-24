@@ -7,6 +7,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 
+import java.util.Optional;
+
 public class AlertUtils {
     public static void showAlert(String title, String content) {
         // Tạo thông báo
@@ -16,18 +18,39 @@ public class AlertUtils {
         alert.showAndWait();
     }
     
-    public static void showAlert(String title, String content, ImageView imageView) {
+    public static void showAlert(String title, String content, Runnable action) {
         // Tạo thông báo
         Alert alert = createAlert(title, content);
         
-        // Thêm icon cho Alert
-        alert.getDialogPane().setGraphic(imageView);
+        // Xử lý sự kiện khi nút "OK" được nhấn
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Gọi hàm (Runnable) được truyền vào khi nút "OK" được nhấn
+            action.run();
+        }
+    }
+    
+    public static void showAlert(String title, String content, ImageView imageView) {
+        // Tạo thông báo có icon
+        Alert alert = createAlert(title, content, imageView);
         
         // Hiển thị
         alert.showAndWait();
     }
     
-    private static Alert createAlert(String title, String content) {
+    public static void showAlert(String title, String content, ImageView imageView, Runnable action) {
+        // Tạo thông báo có icon
+        Alert alert = createAlert(title, content, imageView);
+        
+        // Xử lý sự kiện khi nút "OK" được nhấn
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Gọi hàm (Runnable) được truyền vào khi nút "OK" được nhấn
+            action.run();
+        }
+    }
+    
+    public static Alert createAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -46,6 +69,16 @@ public class AlertUtils {
             ((Region) graphic).setMaxHeight(Double.MAX_VALUE);
             ((Region) graphic).setMaxWidth(Double.MAX_VALUE);
         }
+        
+        return alert;
+    }
+    
+    public static Alert createAlert(String title, String content, ImageView imageView) {
+        // Tạo thông báo
+        Alert alert = createAlert(title, content);
+        
+        // Thêm icon cho Alert
+        alert.getDialogPane().setGraphic(imageView);
         
         return alert;
     }

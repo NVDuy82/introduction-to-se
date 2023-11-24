@@ -9,9 +9,9 @@ import java.util.Properties;
  * Lớp SqlConnection cung cấp phương thức để kết nối đến cơ sở dữ liệu MySQL.
  */
 public class SqlConnection {
-    private final static String URL = "jdbc:mysql://localhost:3306/ten_cua_database";
-    private final static String USERNAME = "ten_nguoi_dung";
-    private final static String PASSWORD = "mat_khau";
+    private final static String URL = "jdbc:sqlserver://sqldatabasestudent.database.windows.net:1433;databaseName=QLThuPhiDB;";
+    private final static String USERNAME = "sqladmin";
+    private final static String PASSWORD = "Mk123456";
     
     /**
      * Phương thức này tạo và trả về một đối tượng Connection để kết nối đến cơ sở dữ liệu MySQL.
@@ -23,9 +23,7 @@ public class SqlConnection {
         Properties properties = new Properties();
         properties.setProperty("user", USERNAME);
         properties.setProperty("password", PASSWORD);
-        properties.setProperty("useSSL", "true"); // Enable SSL
-        properties.setProperty("requireSSL", "true"); // Require SSL
-        properties.setProperty("verifyServerCertificate", "true");  // Verify server's certificate
+        properties.setProperty("encrypt", "true"); // Enable SSL
         
         Connection connection = null;
         
