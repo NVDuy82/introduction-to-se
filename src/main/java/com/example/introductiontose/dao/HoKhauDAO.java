@@ -55,10 +55,9 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
      */
     @Override
     public Optional<HoKhau> get(HoKhauKey key) {
-        String sql = "SELECT * FROM hokhau WHERE soCccdChuHo = ? AND idHoKhau = ?";
+        String sql = "SELECT * FROM hokhau WHERE idHoKhau = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, key.getSoCccdChuHo());
-            statement.setInt(2, key.getIdHoKhau());
+            statement.setInt(1, key.getIdHoKhau());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 HoKhau hoKhau = new HoKhau(
