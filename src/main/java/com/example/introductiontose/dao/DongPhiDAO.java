@@ -31,7 +31,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
     public List<DongPhi> getAll() {
         List<DongPhi> danhSachDongPhi = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongPhi");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongphi");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 DongPhi dongphi = _get(resultSet);
@@ -49,7 +49,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
     @Override
     public Optional<DongPhi> get(Integer idPhi) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongPhi WHERE idPhi = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongphi WHERE idPhi = ?");
             statement.setInt(1, idPhi);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -69,7 +69,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
     @Override
     public void save(@NotNull DongPhi dongphi) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO dongPhi" +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO dongphi" +
                     "(idPhi, idHoKhau,soTien, ngayDong) " +
                     "VALUES (?, ?, ?,?)");
             _setValuesForStatement(dongphi, statement, 1);
@@ -85,7 +85,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
     @Override
     public void update(@NotNull DongPhi dongphi) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE dongPhi SET" +
+            PreparedStatement statement = connection.prepareStatement("UPDATE dongphi SET" +
                     "idNhanKhau = ?, " +
                     "soTien = ?, " +
                     "ngayDong = ?, " +
@@ -104,7 +104,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
     @Override
     public void delete(@NotNull DongPhi dongphi) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM dongPhi WHERE idPhi = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM dongphi WHERE idPhi = ?");
             statement.setInt(1, dongphi.getIdPhi());
             statement.executeUpdate();
         } catch (SQLException e) {
