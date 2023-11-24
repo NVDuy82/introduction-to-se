@@ -1,6 +1,5 @@
 package com.example.introductiontose.dao;
 
-import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.TamVang;
 import org.jetbrains.annotations.NotNull;
 

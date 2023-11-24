@@ -1,0 +1,13 @@
+.button {
+    -fx-background-color: inherit;
+    -fx-background-radius: 50%;
+    -fx-border-color: #acacac;
+    -fx-border-radius: 50%;
+}
+
+.button:hover {
+    -fx-background-color: #acacac;
+    -fx-background-radius: 50%;
+    -fx-border-color: #acacac;
+    -fx-border-radius: 50%;
+}
