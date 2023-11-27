@@ -117,6 +117,6 @@ public class IconController implements Initializable {
     }
     
     private Image imageFromResourceAsStream(String name) {
-        return new Image(Objects.requireNonNull(Application.class.getResourceAsStream(name)));
+        return new Image(Objects.requireNonNull(getClass().getResourceAsStream(name)));
     }
 }

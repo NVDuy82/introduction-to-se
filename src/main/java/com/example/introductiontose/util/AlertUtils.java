@@ -4,8 +4,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
@@ -13,6 +15,9 @@ public class AlertUtils {
     public static void showAlert(String title, String content) {
         // Tạo thông báo
         Alert alert = createAlert(title, content);
+        
+        // addOK and run
+        addOK(alert);
         
         // Hiển thị
         alert.showAndWait();
@@ -22,32 +27,27 @@ public class AlertUtils {
         // Tạo thông báo
         Alert alert = createAlert(title, content);
         
-        // Xử lý sự kiện khi nút "OK" được nhấn
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Gọi hàm (Runnable) được truyền vào khi nút "OK" được nhấn
-            action.run();
-        }
+        // addOK and run
+        addOK(alert, action);
     }
     
-    public static void showAlert(String title, String content, ImageView imageView) {
+    public static void showAlert(String title, String content, Image image) {
         // Tạo thông báo có icon
-        Alert alert = createAlert(title, content, imageView);
+        Alert alert = createAlert(title, content, image);
+        
+        // addOK and run
+        addOK(alert);
         
         // Hiển thị
         alert.showAndWait();
     }
     
-    public static void showAlert(String title, String content, ImageView imageView, Runnable action) {
+    public static void showAlert(String title, String content, Image image, Runnable action) {
         // Tạo thông báo có icon
-        Alert alert = createAlert(title, content, imageView);
+        Alert alert = createAlert(title, content, image);
         
-        // Xử lý sự kiện khi nút "OK" được nhấn
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Gọi hàm (Runnable) được truyền vào khi nút "OK" được nhấn
-            action.run();
-        }
+        // addOK and run
+        addOK(alert, action);
     }
     
     public static Alert createAlert(String title, String content) {
@@ -59,10 +59,6 @@ public class AlertUtils {
         // Xóa mọi phần tử không cần thiết
         alert.getDialogPane().getButtonTypes().clear();
         
-        // Thêm nút "OK"
-        ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        alert.getButtonTypes().setAll(okButton);
-        
         // Tăng kích thước của cửa sổ để vừa với nội dung
         Node graphic = alert.getDialogPane().getGraphic();
         if (graphic instanceof Region) {
@@ -73,13 +69,33 @@ public class AlertUtils {
         return alert;
     }
     
-    public static Alert createAlert(String title, String content, ImageView imageView) {
+    public static Alert createAlert(String title, String content, Image image) {
         // Tạo thông báo
         Alert alert = createAlert(title, content);
         
         // Thêm icon cho Alert
-        alert.getDialogPane().setGraphic(imageView);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(image);
         
         return alert;
+    }
+    
+    private static void addOK(Alert alert) {
+        // Thêm nút "OK"
+        ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+    }
+    
+    private static void addOK(Alert alert, Runnable action) {
+        // Thêm nút "OK"
+        ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
+        
+        // Xử lý sự kiện khi nút "OK" được nhấn
+        alert.showAndWait().ifPresent(response -> {
+            if (response == okButton) {
+                action.run();
+            }
+        });
     }
 }
