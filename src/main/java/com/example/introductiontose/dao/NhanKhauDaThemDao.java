@@ -118,7 +118,7 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
      * @return Đối tượng NhanKhau được tạo từ dữ liệu ResultSet.
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
-    private static NhanKhauDaThem _get(ResultSet resultSet) throws SQLException {
+    private NhanKhauDaThem _get(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String soCccd = resultSet.getString("soCcccd");
         int idHoKhau = resultSet.getInt("idHoKhau");
