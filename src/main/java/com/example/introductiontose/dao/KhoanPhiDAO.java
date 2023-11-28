@@ -1,13 +1,12 @@
 package com.example.introductiontose.dao;
 
+import com.example.introductiontose.model.KhoanPhi;
+import org.jetbrains.annotations.NotNull;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import com.example.introductiontose.model.KhoanPhi;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Class KhoanPhiDAO triển khai interface DataAccessObject để thao tác với đối tượng KhoanPhi trong cơ sở dữ liệu.
@@ -43,7 +42,7 @@ public class KhoanPhiDAO implements DataAccessObject<KhoanPhi, Integer> {
     public List<KhoanPhi> getAll() {
         List<KhoanPhi> danhSachKhoanPhi = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM khoanphi");
             statement.setString(1, table_name);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -62,7 +61,7 @@ public class KhoanPhiDAO implements DataAccessObject<KhoanPhi, Integer> {
     @Override
     public Optional<KhoanPhi> get(Integer idPhi) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ? WHERE idPhi = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM khoanphi WHERE idPhi = ?");
             statement.setString(1, table_name);
             statement.setInt(2, idPhi);
             ResultSet resultSet = statement.executeQuery();
@@ -83,7 +82,7 @@ public class KhoanPhiDAO implements DataAccessObject<KhoanPhi, Integer> {
     @Override
     public void save(@NotNull KhoanPhi khoanphi) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO ?" +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO khoanphi" +
                     "(idPhi, kieuPhi, noiDungThuPhi, mucPhi, ngayTao, ngayKetThuc, tieuDeKhoanPhi " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, table_name);
@@ -100,7 +99,7 @@ public class KhoanPhiDAO implements DataAccessObject<KhoanPhi, Integer> {
     @Override
     public void update(@NotNull KhoanPhi khoanphi) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE ? SET" +
+            PreparedStatement statement = connection.prepareStatement("UPDATE khoanphi SET" +
                     "kieuPhi = ?, " +
                     "noiDungPhi = ?, " +
                     "mucPhi= ?, " +

@@ -1,6 +1,6 @@
 package com.example.introductiontose.model;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Lớp TachKhau đại diện cho quá trình tách khẩu từ một hộ khẩu hiện tại.
