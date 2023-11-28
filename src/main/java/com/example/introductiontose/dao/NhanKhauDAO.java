@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * Class NhanKhauDao triển khai interface DataAccessObject để thao tác với đối tượng NhanKhau trong cơ sở dữ liệu.
  */
-public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
+public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
     private final Connection connection;
     private final String table_name;
     
@@ -29,7 +29,7 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
      *
      * @param connection Kết nối đến cơ sở dữ liệu.
      */
-    public NhanKhauDao(Connection connection, TableType tableType) {
+    public NhanKhauDAO(Connection connection, TableType tableType) {
         this.connection = connection;
         if (tableType == TableType.NHANKHAU) {
             table_name = "nhanKhau";
