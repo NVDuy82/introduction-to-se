@@ -17,6 +17,15 @@ public class TamTru {
     private String lyDo;
     private LocalDate ngaysinh;
     private LocalDate ngayCap, ngayKetThuc;
+    private String trangThai;
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
 
     public TamTru(){};
     
@@ -38,6 +47,7 @@ public class TamTru {
         this.ngaysinh = ngaysinh;
         this.ngayCap = ngayCap;
         this.ngayKetThuc = ngayKetThuc;
+        
     }
 
     public String getSoCCCD() {
