@@ -27,23 +27,20 @@ public class ThayDoiHoKhauDAO implements DataAccessObject<ThayDoiHoKhau, Integer
      * {@inheritDoc}
      */
     @Override
-    public List<ThayDoiHoKhau> getAll() {
+    public List<ThayDoiHoKhau> getAll() throws SQLException {
         List<ThayDoiHoKhau> danhSachThayDoi = new ArrayList<>();
         String sql = "SELECT * FROM thaydoihokhau";
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
-            while (resultSet.next()) {
-                ThayDoiHoKhau thayDoi = new ThayDoiHoKhau(
-                        resultSet.getInt("idThayDoiHoKhau"),
-                        resultSet.getInt("idHoKhau"),
-                        resultSet.getString("trangThai"),
-                        resultSet.getString("soCCCDChuHoMoi"),
-                        resultSet.getString("noiDung"),
-                        resultSet.getTimestamp("ngayThayDoi").toLocalDateTime());
-                danhSachThayDoi.add(thayDoi);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            ThayDoiHoKhau thayDoi = new ThayDoiHoKhau(
+                    resultSet.getInt("idThayDoiHoKhau"),
+                    resultSet.getInt("idHoKhau"),
+                    resultSet.getString("trangThai"),
+                    resultSet.getString("soCCCDChuHoMoi"),
+                    resultSet.getString("noiDung"),
+                    resultSet.getTimestamp("ngayThayDoi").toLocalDateTime());
+            danhSachThayDoi.add(thayDoi);
         }
         return danhSachThayDoi;
     }
@@ -52,23 +49,20 @@ public class ThayDoiHoKhauDAO implements DataAccessObject<ThayDoiHoKhau, Integer
      * {@inheritDoc}
      */
     @Override
-    public Optional<ThayDoiHoKhau> get(Integer id) {
+    public Optional<ThayDoiHoKhau> get(Integer id) throws SQLException {
         String sql = "SELECT * FROM thaydoihokhau WHERE idThayDoiHoKhau = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                ThayDoiHoKhau thayDoi = new ThayDoiHoKhau(
-                        resultSet.getInt("idThayDoiHoKhau"),
-                        resultSet.getInt("idHoKhau"),
-                        resultSet.getString("trangThai"),
-                        resultSet.getString("soCCCDChuHoMoi"),
-                        resultSet.getString("noiDung"),
-                        resultSet.getTimestamp("ngayThayDoi").toLocalDateTime());
-                return Optional.of(thayDoi);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            ThayDoiHoKhau thayDoi = new ThayDoiHoKhau(
+                    resultSet.getInt("idThayDoiHoKhau"),
+                    resultSet.getInt("idHoKhau"),
+                    resultSet.getString("trangThai"),
+                    resultSet.getString("soCCCDChuHoMoi"),
+                    resultSet.getString("noiDung"),
+                    resultSet.getTimestamp("ngayThayDoi").toLocalDateTime());
+            return Optional.of(thayDoi);
         }
         return Optional.empty();
     }
@@ -77,18 +71,15 @@ public class ThayDoiHoKhauDAO implements DataAccessObject<ThayDoiHoKhau, Integer
      * {@inheritDoc}
      */
     @Override
-    public void save(@NotNull ThayDoiHoKhau thayDoi) {
+    public void save(@NotNull ThayDoiHoKhau thayDoi) throws SQLException {
         String sql = "INSERT INTO thaydoihokhau (idHoKhau, trangThai, soCCCDChuHoMoi, noiDung, ngayThayDoi) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, thayDoi.getIdHoKhau());
-            statement.setString(2, thayDoi.getTrangThai());
-            statement.setString(3, thayDoi.getSoCccdChuHoMoi());
-            statement.setString(4, thayDoi.getNoiDung());
-            statement.setObject(5, Timestamp.valueOf(thayDoi.getNgayThayDoi()));
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, thayDoi.getIdHoKhau());
+        statement.setString(2, thayDoi.getTrangThai());
+        statement.setString(3, thayDoi.getSoCccdChuHoMoi());
+        statement.setString(4, thayDoi.getNoiDung());
+        statement.setObject(5, Timestamp.valueOf(thayDoi.getNgayThayDoi()));
+        statement.executeUpdate();
     }
     
     /**
@@ -114,13 +105,10 @@ public class ThayDoiHoKhauDAO implements DataAccessObject<ThayDoiHoKhau, Integer
      * {@inheritDoc}
      */
     @Override
-    public void delete(@NotNull ThayDoiHoKhau thayDoi) {
+    public void delete(@NotNull ThayDoiHoKhau thayDoi) throws SQLException {
         String sql = "DELETE FROM thaydoihokhau WHERE idThayDoiHoKhau = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, thayDoi.getIdThayDoiHoKhau());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, thayDoi.getIdThayDoiHoKhau());
+        statement.executeUpdate();
     }
 }
