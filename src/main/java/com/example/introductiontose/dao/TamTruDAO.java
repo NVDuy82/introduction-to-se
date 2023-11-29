@@ -5,6 +5,7 @@ import com.example.introductiontose.model.TamTru;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,27 +32,33 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public List<TamTru> getAll() {
         List<TamTru> list = new ArrayList<>();
-        try {
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM tamvang");
-            
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
+            try {
+                PreparedStatement st = connection.prepareStatement("SELECT * FROM tamtrutructiep");
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
                 int idTamTru = rs.getInt("idTamTru");
-                String soCccd = rs.getString("soCccd");
+                String soCCCD = rs.getString("soCccd");
                 LocalDateTime ngayBatDau = rs.getTimestamp("ngayBatDau").toLocalDateTime();
                 LocalDateTime ngayKetThuc = rs.getTimestamp("ngayKetThuc").toLocalDateTime();
-                String liDo = rs.getString("liDo");
-                
-                TamTru tamvang = new TamTru(idTamTru, soCccd, ngayBatDau, ngayKetThuc, liDo);
-                list.add(tamvang);
+                String lyDo = rs.getString("liDo");
+
+                TamTru tamTru = new TamTru(soCCCD, CccdChuHo, hoTen, biDanh, noiSinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, diaChiCu, quanHe, lyDo, ngaysinh, ngayCap, ngayKetThuc);
+                tamTru.setNgayBatDau(ngayBatDau);
+                tamTru.setNgayKetThuc(ngayKetThuc);
+                tamTru.setLyDo(lyDo);
+
+                // Set other properties if necessary
+
+                list.add(tamTru);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new UnsupportedOperationException("Error while retrieving data from the database.");
         }
-        
-        return list;
-    }
+
+    return list;
+}
+
     
     /**
      * {@inheritDoc}
