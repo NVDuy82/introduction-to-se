@@ -1,126 +1,180 @@
 package com.example.introductiontose.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-/**
- * Lớp TamTru đại diện cho thông tin về tạm trú của một nhân khẩu trong hệ thống.
- */
 public class TamTru {
-    private int idTamTru;
-    private String soCccd;
-    private LocalDateTime ngayBatDau, ngayKetThuc;
-    private String liDo;
+    private String soCCCD;
+    private String CccdChuHo;
+    private String hoTen, biDanh;
+    private String noiSinh;
+    private String nguyenQuan;
+    private String danToc;
+    private String tonGiao;
+    private String ngheNghiep;
+    private String noiLamViec;
+    private String noiCap;
+    private String diaChiCu, quanHe;
+    private String lyDo;
+    private LocalDate ngaysinh;
+    private LocalDate ngayCap, ngayKetThuc;
+
+    public TamTru(){};
     
-    /**
-     * Khởi tạo một đối tượng TamTru mới với thông tin mặc định.
-     */
-    public TamTru() {
-    }
-    
-    /**
-     * Khởi tạo một đối tượng TamTru mới với thông tin cung cấp.
-     *
-     * @param idTamTru    ID của thông tin tạm trú.
-     * @param soCccd      Số CCCD của nhân khẩu.
-     * @param ngayBatDau  Ngày bắt đầu tạm trú.
-     * @param ngayKetThuc Ngày kết thúc tạm trú.
-     * @param liDo        Lý do tạm trú.
-     */
-    public TamTru(int idTamTru, String soCccd, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc, String liDo) {
-        this.idTamTru = idTamTru;
-        this.soCccd = soCccd;
-        this.ngayBatDau = ngayBatDau;
+    public TamTru(String soCCCD, String CccdChuHo, String hoTen, String biDanh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String diaChiCu, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc) {
+        this.soCCCD = soCCCD;
+        this.CccdChuHo = CccdChuHo;
+        this.hoTen = hoTen;
+        this.biDanh = biDanh;
+        this.noiSinh = noiSinh;
+        this.nguyenQuan = nguyenQuan;
+        this.danToc = danToc;
+        this.tonGiao = tonGiao;
+        this.ngheNghiep = ngheNghiep;
+        this.noiLamViec = noiLamViec;
+        this.noiCap = noiCap;
+        this.diaChiCu = diaChiCu;
+        this.quanHe = quanHe;
+        this.lyDo = lyDo;
+        this.ngaysinh = ngaysinh;
+        this.ngayCap = ngayCap;
         this.ngayKetThuc = ngayKetThuc;
-        this.liDo = liDo;
     }
-    
-    /**
-     * Lấy ID của thông tin tạm trú.
-     *
-     * @return ID của thông tin tạm trú.
-     */
-    public int getIdTamTru() {
-        return idTamTru;
+
+    public String getSoCCCD() {
+        return soCCCD;
     }
-    
-    /**
-     * Thiết lập ID mới cho thông tin tạm trú.
-     *
-     * @param idTamTru ID mới cho thông tin tạm trú.
-     */
-    public void setIdTamTru(int idTamTru) {
-        this.idTamTru = idTamTru;
+
+    public void setSoCCCD(String soCCCD) {
+        this.soCCCD = soCCCD;
     }
-    
-    /**
-     * Lấy số CCCD của nhân khẩu.
-     *
-     * @return Số CCCD của nhân khẩu.
-     */
-    public String getSoCccd() {
-        return soCccd;
+
+    public String getCccdChuHo() {
+        return CccdChuHo;
     }
-    
-    /**
-     * Thiết lập số CCCD mới cho thông tin tạm trú.
-     *
-     * @param soCccd Số CCCD mới cho thông tin tạm trú.
-     */
-    public void setSoCccd(String soCccd) {
-        this.soCccd = soCccd;
+
+    public void setCccdChuHo(String CccdChuHo) {
+        this.CccdChuHo = CccdChuHo;
     }
-    
-    /**
-     * Lấy ngày bắt đầu tạm trú.
-     *
-     * @return Ngày bắt đầu tạm trú.
-     */
-    public LocalDateTime getNgayBatDau() {
-        return ngayBatDau;
+
+    public String getHoTen() {
+        return hoTen;
     }
-    
-    /**
-     * Thiết lập ngày bắt đầu mới cho thông tin tạm trú.
-     *
-     * @param ngayBatDau Ngày bắt đầu mới cho thông tin tạm trú.
-     */
-    public void setNgayBatDau(LocalDateTime ngayBatDau) {
-        this.ngayBatDau = ngayBatDau;
+
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
     }
-    
-    /**
-     * Lấy ngày kết thúc tạm trú.
-     *
-     * @return Ngày kết thúc tạm trú.
-     */
-    public LocalDateTime getNgayKetThuc() {
+
+    public String getBiDanh() {
+        return biDanh;
+    }
+
+    public void setBiDanh(String biDanh) {
+        this.biDanh = biDanh;
+    }
+
+    public String getNoiSinh() {
+        return noiSinh;
+    }
+
+    public void setNoiSinh(String noiSinh) {
+        this.noiSinh = noiSinh;
+    }
+
+    public String getNguyenQuan() {
+        return nguyenQuan;
+    }
+
+    public void setNguyenQuan(String nguyenQuan) {
+        this.nguyenQuan = nguyenQuan;
+    }
+
+    public String getDanToc() {
+        return danToc;
+    }
+
+    public void setDanToc(String danToc) {
+        this.danToc = danToc;
+    }
+
+    public String getTonGiao() {
+        return tonGiao;
+    }
+
+    public void setTonGiao(String tonGiao) {
+        this.tonGiao = tonGiao;
+    }
+
+    public String getNgheNghiep() {
+        return ngheNghiep;
+    }
+
+    public void setNgheNghiep(String ngheNghiep) {
+        this.ngheNghiep = ngheNghiep;
+    }
+
+    public String getNoiLamViec() {
+        return noiLamViec;
+    }
+
+    public void setNoiLamViec(String noiLamViec) {
+        this.noiLamViec = noiLamViec;
+    }
+
+    public String getNoiCap() {
+        return noiCap;
+    }
+
+    public void setNoiCap(String noiCap) {
+        this.noiCap = noiCap;
+    }
+
+    public String getDiaChiCu() {
+        return diaChiCu;
+    }
+
+    public void setDiaChiCu(String diaChiCu) {
+        this.diaChiCu = diaChiCu;
+    }
+
+    public String getQuanHe() {
+        return quanHe;
+    }
+
+    public void setQuanHe(String quanHe) {
+        this.quanHe = quanHe;
+    }
+
+    public String getLyDo() {
+        return lyDo;
+    }
+
+    public void setLyDo(String lyDo) {
+        this.lyDo = lyDo;
+    }
+
+    public LocalDate getNgaysinh() {
+        return ngaysinh;
+    }
+
+    public void setNgaysinh(LocalDate ngaysinh) {
+        this.ngaysinh = ngaysinh;
+    }
+
+    public LocalDate getNgayCap() {
+        return ngayCap;
+    }
+
+    public void setNgayCap(LocalDate ngayCap) {
+        this.ngayCap = ngayCap;
+    }
+
+    public LocalDate getNgayKetThuc() {
         return ngayKetThuc;
     }
-    
-    /**
-     * Thiết lập ngày kết thúc mới cho thông tin tạm trú.
-     *
-     * @param ngayKetThuc Ngày kết thúc mới cho thông tin tạm trú.
-     */
-    public void setNgayKetThuc(LocalDateTime ngayKetThuc) {
+
+    public void setNgayKetThuc(LocalDate ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }
     
-    /**
-     * Lấy lý do tạm trú.
-     *
-     * @return Lý do tạm trú.
-     */
-    public String getLiDo() {
-        return liDo;
-    }
     
-    /**
-     * Thiết lập lý do mới cho thông tin tạm trú.
-     *
-     * @param liDo Lý do mới cho thông tin tạm trú.
-     */
-    public void setLiDo(String liDo) {
-        this.liDo = liDo;
-    }
 }
