@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class TamTru {
     private String soCCCD;
-    private String CccdChuHo;
+    private String cccdChuHo;
     private String hoTen, biDanh;
     private String noiSinh;
     private String nguyenQuan;
@@ -20,9 +20,9 @@ public class TamTru {
 
     public TamTru(){};
     
-    public TamTru(String soCCCD, String CccdChuHo, String hoTen, String biDanh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String diaChiCu, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc) {
+    public TamTru(String soCCCD, String cccdChuHo, String hoTen, String biDanh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String diaChiCu, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc) {
         this.soCCCD = soCCCD;
-        this.CccdChuHo = CccdChuHo;
+        this.cccdChuHo = cccdChuHo;
         this.hoTen = hoTen;
         this.biDanh = biDanh;
         this.noiSinh = noiSinh;
@@ -49,11 +49,11 @@ public class TamTru {
     }
 
     public String getCccdChuHo() {
-        return CccdChuHo;
+        return cccdChuHo;
     }
 
     public void setCccdChuHo(String CccdChuHo) {
-        this.CccdChuHo = CccdChuHo;
+        this.cccdChuHo = CccdChuHo;
     }
 
     public String getHoTen() {
