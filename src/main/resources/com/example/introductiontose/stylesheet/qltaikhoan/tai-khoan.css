@@ -1,0 +1,31 @@
+.hbox-title {
+    -fx-background-color: #5b9bd5;
+}
+
+.hbox-odd {
+    -fx-background-color: #BDD7EE;
+}
+
+.hbox-even {
+    -fx-background-color: #DDEBF7;
+}
+
+.button-delete-account {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-border-color: #ff4343;
+    -fx-border-radius: 50%;
+    -fx-text-fill: #ff4343;
+}
+
+.button-delete-account:hover {
+    -fx-background-color: #ff4343;
+    -fx-background-radius: 50px;
+    -fx-border-color: #ff4343;
+    -fx-border-radius: 50%;
+    -fx-text-fill: white;
+}
+
+.button-delete-account:pressed {
+    -fx-background-color: #ff5555;
+}

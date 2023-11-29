@@ -116,7 +116,7 @@
                               <Insets />
                            </HBox.margin>
                         </TextField>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #596ed7;">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#fill" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #596ed7;">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

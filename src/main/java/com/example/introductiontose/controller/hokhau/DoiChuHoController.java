@@ -8,13 +8,7 @@ import com.example.introductiontose.util.ActionButton;
 import com.example.introductiontose.util.AlertUtils;
 import com.example.introductiontose.view.icon.IconController;
 import com.example.introductiontose.view.icon.IconType;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Region;
 
 import java.sql.Connection;
 import java.time.LocalDateTime;
@@ -75,7 +69,7 @@ public class DoiChuHoController extends DanhSachHoController {
         ThayDoiHoKhau change = new ThayDoiHoKhau(0,
                 idHoKhau,
                 null,
-                null,
+                selectedController.getNhanKhau().getThongTinNhanKhau().getCccd().getSoCccd(),
                 null,
                 LocalDateTime.now());
         try {

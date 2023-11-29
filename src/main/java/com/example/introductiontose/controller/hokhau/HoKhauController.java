@@ -1,7 +1,9 @@
 package com.example.introductiontose.controller.hokhau;
 
+import com.example.introductiontose.dao.DataAccessObject;
+import com.example.introductiontose.dao.NhanKhauDAO;
+import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.NhanKhau;
-import com.example.introductiontose.model.ThongTinNhanKhau;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +13,12 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class HoKhauController implements Initializable {
     @FXML
@@ -27,30 +33,13 @@ public class HoKhauController implements Initializable {
     private Pane paneContent;
     private int idHoKhau;
     private Button selectedButton;
-    private List<NhanKhau> nhanKhauList = new ArrayList<>();
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nhanKhauList.add(taoNhanKhau("Nguyễn Văn A", LocalDateTime.of(1990, 5, 15, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Trần Thị B", LocalDateTime.of(1985, 8, 22, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Lê Minh C", LocalDateTime.of(2000, 3, 10, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Phạm Hồng D", LocalDateTime.of(1978, 11, 5, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Hoàng Thu E", LocalDateTime.of(1995, 2, 28, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Ngô Văn F", LocalDateTime.of(1982, 7, 7, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Đinh Thị G", LocalDateTime.of(2005, 9, 18, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Vũ Minh H", LocalDateTime.of(1993, 12, 12, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Bùi Thị I", LocalDateTime.of(1989, 4, 3, 0, 0)));
-        nhanKhauList.add(taoNhanKhau("Lý Quốc J", LocalDateTime.of(2002, 6, 25, 0, 0)));
-        
+        idHoKhau = 1;
         initButton();
     }
     
-    private NhanKhau taoNhanKhau(String name, LocalDateTime ngaySinh) {
-        ThongTinNhanKhau thongTinNhanKhau = new ThongTinNhanKhau();
-        thongTinNhanKhau.setHoTen(name);
-        thongTinNhanKhau.setNgaySinh(ngaySinh);
-        return new NhanKhau(thongTinNhanKhau);
-    }
     
     public void setIdHoKhau(int idHoKhau) {
         this.idHoKhau = idHoKhau;
@@ -105,9 +94,10 @@ public class HoKhauController implements Initializable {
         
         try {
             paneContent.getChildren().add(fxmlLoader.load());
-            controller.lauch(idHoKhau, nhanKhauList);
+            controller.lauch(idHoKhau, getNhanKhauList());
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println(e.getMessage() + "ssss");
         }
     }
     
@@ -119,6 +109,20 @@ public class HoKhauController implements Initializable {
             paneContent.getChildren().add(fxmlLoader.load());
         } catch (Exception e) {
         
+        }
+    }
+    
+    private List<NhanKhau> getNhanKhauList() {
+        try {
+            Connection connection = SqlConnection.connect();
+            DataAccessObject<NhanKhau, String> accessObject = new NhanKhauDAO(connection, NhanKhauDAO.TableType.NHANKHAU);
+            List<NhanKhau> result = accessObject.getAll();
+            result.removeIf(nhanKhau -> nhanKhau.getThongTinNhanKhau().getIdHoKhau() != idHoKhau);
+            
+            connection.close();
+            return result;
+        } catch (SQLException e) {
+            return new ArrayList<>();
         }
     }
 }

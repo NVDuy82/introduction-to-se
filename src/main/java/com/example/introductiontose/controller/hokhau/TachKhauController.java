@@ -2,10 +2,8 @@ package com.example.introductiontose.controller.hokhau;
 
 import com.example.introductiontose.dao.DataAccessObject;
 import com.example.introductiontose.dao.TachKhauDAO;
-import com.example.introductiontose.dao.ThayDoiHoKhauDAO;
 import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.TachKhau;
-import com.example.introductiontose.model.ThayDoiHoKhau;
 import com.example.introductiontose.model.key.TachKhauKey;
 import com.example.introductiontose.util.ActionButton;
 import com.example.introductiontose.util.AlertUtils;
@@ -14,7 +12,6 @@ import com.example.introductiontose.view.icon.IconType;
 import javafx.scene.image.Image;
 
 import java.sql.Connection;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="670.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.hokhau.HoKhauController">
    <children>
-      <BorderPane prefHeight="670.0" prefWidth="925.0" stylesheets="@../../stylesheet/ho-khau.css">
+      <BorderPane prefHeight="670.0" prefWidth="925.0" stylesheets="@../../stylesheet/hokhau/ho-khau.css">
          <left>
             <VBox alignment="CENTER" prefHeight="670.0" prefWidth="200.0" styleClass="vbox" BorderPane.alignment="CENTER">
                <children>

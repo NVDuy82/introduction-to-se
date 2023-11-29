@@ -2,13 +2,11 @@ package com.example.introductiontose.controller.hokhau;
 
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.util.ActionButton;
-import com.example.introductiontose.util.AlertUtils;
 import com.example.introductiontose.view.icon.IconController;
 import com.example.introductiontose.view.icon.IconType;
 import com.example.introductiontose.view.icon.IconUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -59,6 +57,8 @@ public abstract class DanhSachHoController {
         this.idHoKhau = idHoKhau;
         this.nhanKhauList = nhanKhauList;
         this.showInVBox(this.originalIconType);
+        ActionButton.hideButtonSubmit(submitButton);
+        ActionButton.hideButtonClear(clearButton);
     }
     
     void showInVBox(IconType iconType) throws IOException {
