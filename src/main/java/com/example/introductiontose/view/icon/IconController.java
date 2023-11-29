@@ -110,7 +110,7 @@ public class IconController implements Initializable {
     
     private void setCssButton(IconType iconType) {
         // Xóa tất cả các style class hiện tại
-        buttonIcon.getStyleClass().removeLast();
+        buttonIcon.getStyleClass().clear();
 
         // Set Css
         buttonIcon.getStyleClass().add(iconType.getClassName());

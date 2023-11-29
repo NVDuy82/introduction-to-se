@@ -19,7 +19,12 @@ public class SqlConnection {
      * @return Đối tượng Connection cho kết nối đến cơ sở dữ liệu.
      */
     public static Connection connect() {
-        // Tạo đối tượng Properties để cấu hình kết nối.
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Lỗi: Không tìm thấy JDBC Driver");
+        }
+        
         Properties properties = new Properties();
         properties.setProperty("user", USERNAME);
         properties.setProperty("password", PASSWORD);

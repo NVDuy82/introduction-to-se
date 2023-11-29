@@ -28,17 +28,13 @@ public class ThongBaoDAO implements DataAccessObject<ThongBao, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public List<ThongBao> getAll() {
+    public List<ThongBao> getAll() throws SQLException {
         List<ThongBao> danhSachThongBao = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM thongbao");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                ThongBao thongbao = _get(resultSet);
-                danhSachThongBao.add(thongbao);
-            }
-        } catch (SQLException e) {
-        
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM thongbao");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            ThongBao thongbao = _get(resultSet);
+            danhSachThongBao.add(thongbao);
         }
         return danhSachThongBao;
     }
@@ -47,17 +43,13 @@ public class ThongBaoDAO implements DataAccessObject<ThongBao, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<ThongBao> get(Integer idThongBao) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM thongbao WHERE idThongBao = ?");
-            statement.setInt(1, idThongBao);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                ThongBao thongbao = _get(resultSet);
-                return Optional.of(thongbao);
-            }
-        } catch (SQLException e) {
-        
+    public Optional<ThongBao> get(Integer idThongBao) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM thongbao WHERE idThongBao = ?");
+        statement.setInt(1, idThongBao);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            ThongBao thongbao = _get(resultSet);
+            return Optional.of(thongbao);
         }
         return Optional.empty();
         
@@ -67,50 +59,38 @@ public class ThongBaoDAO implements DataAccessObject<ThongBao, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public void save(@NotNull ThongBao thongbao) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO thongbao" +
-                    "(idThongBao, soCCCD,tieuDe,noiDung, ngayTao) " +
-                    "VALUES (?, ?, ?,?,?)");
-            _setValuesForStatement(thongbao, statement, 1);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void save(@NotNull ThongBao thongbao) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO thongbao" +
+                "(idThongBao, soCCCD,tieuDe,noiDung, ngayTao) " +
+                "VALUES (?, ?, ?,?,?)");
+        _setValuesForStatement(thongbao, statement, 1);
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void update(@NotNull ThongBao thongbao) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE thongbao SET" +
-                    "soCCCD = ?, " +
-                    "tienDe = ?, " +
-                    "noiDung = ?, " +
-                    "ngayTao =?, " +
-                    "WHERE idThongBao =?");
-            int parameterIndex = _setValuesForStatement(thongbao, statement, 1);
-            statement.setInt(parameterIndex, thongbao.getIdTHONGBAO());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void update(@NotNull ThongBao thongbao) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE thongbao SET" +
+                "soCCCD = ?, " +
+                "tienDe = ?, " +
+                "noiDung = ?, " +
+                "ngayTao =?, " +
+                "WHERE idThongBao =?");
+        int parameterIndex = _setValuesForStatement(thongbao, statement, 1);
+        statement.setInt(parameterIndex, thongbao.getIdTHONGBAO());
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void delete(@NotNull ThongBao thongbao) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM thongbao WHERE idThongBao = ?");
-            statement.setInt(1, thongbao.getIdTHONGBAO());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void delete(@NotNull ThongBao thongbao) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM thongbao WHERE idThongBao = ?");
+        statement.setInt(1, thongbao.getIdTHONGBAO());
+        statement.executeUpdate();
     }
     
     /**
