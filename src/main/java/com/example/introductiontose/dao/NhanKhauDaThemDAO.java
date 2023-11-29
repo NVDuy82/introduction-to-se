@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * Class NhanKhauDaThemDao triển khai interface DataAccessObject để thao tác với đối tượng NhanKhauDaThem trong cơ sở dữ liệu.
  */
-public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integer> {
+public class NhanKhauDaThemDAO implements DataAccessObject<NhanKhauDaThem, Integer> {
     private final Connection connection;
     
     /**
@@ -20,7 +20,7 @@ public class NhanKhauDaThemDao implements DataAccessObject<NhanKhauDaThem, Integ
      *
      * @param connection Kết nối đến cơ sở dữ liệu.
      */
-    public NhanKhauDaThemDao(Connection connection) {
+    public NhanKhauDaThemDAO(Connection connection) {
         this.connection = connection;
     }
     

@@ -55,10 +55,9 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
      */
     @Override
     public Optional<HoKhau> get(HoKhauKey key) {
-        String sql = "SELECT * FROM hokhau WHERE soCccdChuHo = ? AND idHoKhau = ?";
+        String sql = "SELECT * FROM hokhau WHERE idHoKhau = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, key.getSoCccdChuHo());
-            statement.setInt(2, key.getIdHoKhau());
+            statement.setInt(1, key.getIdHoKhau());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 HoKhau hoKhau = new HoKhau(
@@ -80,7 +79,7 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
      */
     @Override
     public void save(@NotNull HoKhau hoKhau) {
-        String sql = "INSERT INTO hokhau (idHoKhau, tenChuHo, soCccdChuHo, diaChiNha, ngayTaoHK) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO hokhau (idHoKhau, tenChuHo, soCccdChuHo, diaChiNha, ngayTaoHK) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, hoKhau.getIdHoKhau());
             statement.setString(2, hoKhau.getTenChuHo());
@@ -98,13 +97,13 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
      */
     @Override
     public void update(@NotNull HoKhau hoKhau) {
-        String sql = "UPDATE hokhau SET idHoKhau = ?, tenChuHo = ?, diaChiNha = ?, ngayTaoHK = ? WHERE idHoKhau = ? AND soCccdChuHo = ?";
+        String sql = "UPDATE hokhau SET tenChuHo = ?, diaChiNha = ?, ngayTaoHK = ?, soCccdChuHo = ? WHERE idHoKhau = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, hoKhau.getIdHoKhau());
-            statement.setString(2, hoKhau.getTenChuHo());
-            statement.setString(5, hoKhau.getSoCccdChuHo());
-            statement.setString(3, hoKhau.getDiaChiNha());
-            statement.setObject(4, Timestamp.valueOf(hoKhau.getNgayTaoHK()));
+            statement.setInt(5, hoKhau.getIdHoKhau());
+            statement.setString(1, hoKhau.getTenChuHo());
+            statement.setString(4, hoKhau.getSoCccdChuHo());
+            statement.setString(2, hoKhau.getDiaChiNha());
+            statement.setObject(3, Timestamp.valueOf(hoKhau.getNgayTaoHK()));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,10 +115,9 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
      */
     @Override
     public void delete(@NotNull HoKhau hoKhau) {
-        String sql = "DELETE FROM hokhau WHERE idHoKhau = ? AND soCccdChuHo = ?";
+        String sql = "DELETE FROM hokhau WHERE idHoKhau = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, hoKhau.getIdHoKhau());
-            statement.setString(2, hoKhau.getSoCccdChuHo());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
