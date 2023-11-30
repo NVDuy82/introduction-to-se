@@ -3,6 +3,7 @@ package com.example.introductiontose.model;
 import java.time.LocalDate;
 
 public class TamTru {
+    private int idTamTru;
     private String soCCCD;
     private String cccdChuHo;
     private String hoTen, biDanh;
@@ -13,14 +14,22 @@ public class TamTru {
     private String ngheNghiep;
     private String noiLamViec;
     private String noiCap;
-    private String diaChiCu, quanHe;
+    private String quanHe;
     private String lyDo;
     private LocalDate ngaysinh;
-    private LocalDate ngayCap, ngayKetThuc;
+    private LocalDate ngayCap, ngayKetThuc, ngayBatDau;
     private String trangThai;
 
     public String getTrangThai() {
         return trangThai;
+    }
+
+    public LocalDate getNgayBatDau() {
+        return ngayBatDau;
+    }
+
+    public void setNgayBatDau(LocalDate ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
     }
 
     public void setTrangThai(String trangThai) {
@@ -29,7 +38,7 @@ public class TamTru {
 
     public TamTru(){};
     
-    public TamTru(String soCCCD, String cccdChuHo, String hoTen, String biDanh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String diaChiCu, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc) {
+    public TamTru(String soCCCD, String cccdChuHo, String hoTen, String biDanh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap,LocalDate ngaybatdau, LocalDate ngayKetThuc) {
         this.soCCCD = soCCCD;
         this.cccdChuHo = cccdChuHo;
         this.hoTen = hoTen;
@@ -41,13 +50,20 @@ public class TamTru {
         this.ngheNghiep = ngheNghiep;
         this.noiLamViec = noiLamViec;
         this.noiCap = noiCap;
-        this.diaChiCu = diaChiCu;
         this.quanHe = quanHe;
         this.lyDo = lyDo;
         this.ngaysinh = ngaysinh;
         this.ngayCap = ngayCap;
         this.ngayKetThuc = ngayKetThuc;
-        
+        this.ngayBatDau = ngaybatdau;
+}
+
+    public int getIdTamTru() {
+        return idTamTru;
+    }
+
+    public void setIdTamTru(int idTamTru) {
+        this.idTamTru = idTamTru;
     }
 
     public String getSoCCCD() {
@@ -136,14 +152,6 @@ public class TamTru {
 
     public void setNoiCap(String noiCap) {
         this.noiCap = noiCap;
-    }
-
-    public String getDiaChiCu() {
-        return diaChiCu;
-    }
-
-    public void setDiaChiCu(String diaChiCu) {
-        this.diaChiCu = diaChiCu;
     }
 
     public String getQuanHe() {
