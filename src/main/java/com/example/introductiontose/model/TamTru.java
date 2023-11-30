@@ -21,6 +21,8 @@ public class TamTru {
     private String trangThai;
     private String soDienThoai;
 
+    public TamTru() {};
+
     public TamTru(int idTamTru, String soCCCD, String cccdChuHo, String hoTen, String biDanh, String gioiTinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc, LocalDate ngayBatDau, String trangThai, String soDienThoai) {
         this.idTamTru = idTamTru;
         this.soCCCD = soCCCD;
