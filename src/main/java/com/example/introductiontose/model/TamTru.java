@@ -7,7 +7,7 @@ public class TamTru {
     private String soCCCD;
     private String cccdChuHo;
     private String hoTen, biDanh;
-    private String noiSinh;
+    private String gioiTinh;
     private String nguyenQuan;
     private String danToc;
     private String tonGiao;
@@ -19,31 +19,15 @@ public class TamTru {
     private LocalDate ngaysinh;
     private LocalDate ngayCap, ngayKetThuc, ngayBatDau;
     private String trangThai;
+    private String soDienThoai;
 
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    public LocalDate getNgayBatDau() {
-        return ngayBatDau;
-    }
-
-    public void setNgayBatDau(LocalDate ngayBatDau) {
-        this.ngayBatDau = ngayBatDau;
-    }
-
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public TamTru(){};
-    
-    public TamTru(String soCCCD, String cccdChuHo, String hoTen, String biDanh, String noiSinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap,LocalDate ngaybatdau, LocalDate ngayKetThuc) {
+    public TamTru(int idTamTru, String soCCCD, String cccdChuHo, String hoTen, String biDanh, String gioiTinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc, LocalDate ngayBatDau, String trangThai, String soDienThoai) {
+        this.idTamTru = idTamTru;
         this.soCCCD = soCCCD;
         this.cccdChuHo = cccdChuHo;
         this.hoTen = hoTen;
         this.biDanh = biDanh;
-        this.noiSinh = noiSinh;
+        this.gioiTinh = gioiTinh;
         this.nguyenQuan = nguyenQuan;
         this.danToc = danToc;
         this.tonGiao = tonGiao;
@@ -55,8 +39,10 @@ public class TamTru {
         this.ngaysinh = ngaysinh;
         this.ngayCap = ngayCap;
         this.ngayKetThuc = ngayKetThuc;
-        this.ngayBatDau = ngaybatdau;
-}
+        this.ngayBatDau = ngayBatDau;
+        this.trangThai = trangThai;
+        this.soDienThoai = soDienThoai;
+    }
 
     public int getIdTamTru() {
         return idTamTru;
@@ -78,8 +64,8 @@ public class TamTru {
         return cccdChuHo;
     }
 
-    public void setCccdChuHo(String CccdChuHo) {
-        this.cccdChuHo = CccdChuHo;
+    public void setCccdChuHo(String cccdChuHo) {
+        this.cccdChuHo = cccdChuHo;
     }
 
     public String getHoTen() {
@@ -98,12 +84,12 @@ public class TamTru {
         this.biDanh = biDanh;
     }
 
-    public String getNoiSinh() {
-        return noiSinh;
+    public String getGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setNoiSinh(String noiSinh) {
-        this.noiSinh = noiSinh;
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public String getNguyenQuan() {
@@ -193,6 +179,30 @@ public class TamTru {
     public void setNgayKetThuc(LocalDate ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }
+
+    public LocalDate getNgayBatDau() {
+        return ngayBatDau;
+    }
+
+    public void setNgayBatDau(LocalDate ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public String getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
     
-    
+
 }
