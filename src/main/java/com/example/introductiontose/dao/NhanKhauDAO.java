@@ -32,9 +32,9 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
     public NhanKhauDAO(Connection connection, TableType tableType) {
         this.connection = connection;
         if (tableType == TableType.NHANKHAU) {
-            table_name = "nhanKhau";
+            table_name = "nhankhau";
         } else {
-            table_name = "themNhanKhau";
+            table_name = "themnhankhau";
         }
     }
     
@@ -42,17 +42,13 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
      * {@inheritDoc}
      */
     @Override
-    public List<NhanKhau> getAll() {
+    public List<NhanKhau> getAll() throws SQLException {
         List<NhanKhau> danhSachNhanKhau = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table_name);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                NhanKhau nhanKhau = _get(resultSet);
-                danhSachNhanKhau.add(nhanKhau);
-            }
-        } catch (SQLException e) {
-        
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table_name);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            NhanKhau nhanKhau = _get(resultSet);
+            danhSachNhanKhau.add(nhanKhau);
         }
         return danhSachNhanKhau;
     }
@@ -61,17 +57,13 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<NhanKhau> get(String soCccd) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table_name + " WHERE soCccd = ?;");
-            statement.setString(1, soCccd);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                NhanKhau nhanKhau = _get(resultSet);
-                return Optional.of(nhanKhau);
-            }
-        } catch (SQLException e) {
-        
+    public Optional<NhanKhau> get(String soCccd) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table_name + " WHERE soCccd = ?;");
+        statement.setString(1, soCccd);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            NhanKhau nhanKhau = _get(resultSet);
+            return Optional.of(nhanKhau);
         }
         return Optional.empty();
     }
@@ -80,63 +72,51 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
      * {@inheritDoc}
      */
     @Override
-    public void save(@NotNull NhanKhau nhanKhau) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO " + table_name +
-                    "+ (soCccd, ngayCap, noiCap, idHoKhau, hoTen, biDanh, ngaySinh, noiSinh, nguyenQuan, " +
-                    "danToc, tonGiao, ngheNghiep, noiLamViec, ngayDKTT, diaChiCu, quanHe) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            statement.setString(1, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
-            _setValuesForStatement(nhanKhau, statement, 2);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void save(@NotNull NhanKhau nhanKhau) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO " + table_name +
+                "+ (soCccd, ngayCap, noiCap, idHoKhau, hoTen, biDanh, ngaySinh, noiSinh, nguyenQuan, " +
+                "danToc, tonGiao, ngheNghiep, noiLamViec, ngayDKTT, diaChiCu, quanHe) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        statement.setString(1, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
+        _setValuesForStatement(nhanKhau, statement, 2);
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void update(@NotNull NhanKhau nhanKhau) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE " + table_name + " SET " +
-                    "ngayCap = ?, " +
-                    "noiCap = ?, " +
-                    "idHoKhau = ?, " +
-                    "hoTen = ?, " +
-                    "biDanh = ?, " +
-                    "ngaySinh = ?, " +
-                    "noiSinh = ?, " +
-                    "nguyenQuan = ?, " +
-                    "danToc = ?, " +
-                    "tonGiao = ?, " +
-                    "ngheNghiep = ?, " +
-                    "noiLamViec = ?, " +
-                    "ngayDKTT = ?, " +
-                    "diaChiCu = ?, " +
-                    "quanHe = ?" +
-                    "WHERE soCccd = ?");
-            int parameterIndex = _setValuesForStatement(nhanKhau, statement, 1);
-            statement.setString(parameterIndex, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void update(@NotNull NhanKhau nhanKhau) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE " + table_name + " SET " +
+                "ngayCap = ?, " +
+                "noiCap = ?, " +
+                "idHoKhau = ?, " +
+                "hoTen = ?, " +
+                "biDanh = ?, " +
+                "ngaySinh = ?, " +
+                "noiSinh = ?, " +
+                "nguyenQuan = ?, " +
+                "danToc = ?, " +
+                "tonGiao = ?, " +
+                "ngheNghiep = ?, " +
+                "noiLamViec = ?, " +
+                "ngayDKTT = ?, " +
+                "diaChiCu = ?, " +
+                "quanHe = ?" +
+                "WHERE soCccd = ?");
+        int parameterIndex = _setValuesForStatement(nhanKhau, statement, 1);
+        statement.setString(parameterIndex, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void delete(@NotNull NhanKhau nhanKhau) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM " + table_name + " WHERE soCccd = ?");
-            statement.setString(1, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void delete(@NotNull NhanKhau nhanKhau) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM " + table_name + " WHERE soCccd = ?");
+        statement.setString(1, nhanKhau.getThongTinNhanKhau().getCccd().getSoCccd());
+        statement.executeUpdate();
     }
     
     /**

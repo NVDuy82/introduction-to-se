@@ -28,17 +28,13 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public List<DongPhi> getAll() {
+    public List<DongPhi> getAll() throws SQLException {
         List<DongPhi> danhSachDongPhi = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongphi");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                DongPhi dongphi = _get(resultSet);
-                danhSachDongPhi.add(dongphi);
-            }
-        } catch (SQLException e) {
-        
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongphi");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            DongPhi dongphi = _get(resultSet);
+            danhSachDongPhi.add(dongphi);
         }
         return danhSachDongPhi;
     }
@@ -47,17 +43,13 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<DongPhi> get(Integer idPhi) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongphi WHERE idPhi = ?");
-            statement.setInt(1, idPhi);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                DongPhi dongphi = _get(resultSet);
-                return Optional.of(dongphi);
-            }
-        } catch (SQLException e) {
-        
+    public Optional<DongPhi> get(Integer idPhi) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongphi WHERE idPhi = ?");
+        statement.setInt(1, idPhi);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            DongPhi dongphi = _get(resultSet);
+            return Optional.of(dongphi);
         }
         return Optional.empty();
         
@@ -67,49 +59,37 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public void save(@NotNull DongPhi dongphi) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO dongphi" +
-                    "(idPhi, idHoKhau,soTien, ngayDong) " +
-                    "VALUES (?, ?, ?,?)");
-            _setValuesForStatement(dongphi, statement, 1);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void save(@NotNull DongPhi dongphi) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO dongphi" +
+                "(idPhi, idHoKhau,soTien, ngayDong) " +
+                "VALUES (?, ?, ?,?)");
+        _setValuesForStatement(dongphi, statement, 1);
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void update(@NotNull DongPhi dongphi) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE dongphi SET" +
-                    "idNhanKhau = ?, " +
-                    "soTien = ?, " +
-                    "ngayDong = ?, " +
-                    "WHERE idPhi = ?");
-            int parameterIndex = _setValuesForStatement(dongphi, statement, 1);
-            statement.setInt(parameterIndex, dongphi.getIdPhi());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void update(@NotNull DongPhi dongphi) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE dongphi SET" +
+                "idNhanKhau = ?, " +
+                "soTien = ?, " +
+                "ngayDong = ?, " +
+                "WHERE idPhi = ?");
+        int parameterIndex = _setValuesForStatement(dongphi, statement, 1);
+        statement.setInt(parameterIndex, dongphi.getIdPhi());
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void delete(@NotNull DongPhi dongphi) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM dongphi WHERE idPhi = ?");
-            statement.setInt(1, dongphi.getIdPhi());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void delete(@NotNull DongPhi dongphi) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM dongphi WHERE idPhi = ?");
+        statement.setInt(1, dongphi.getIdPhi());
+        statement.executeUpdate();
     }
     
     /**

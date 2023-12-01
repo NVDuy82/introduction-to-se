@@ -28,17 +28,13 @@ public class NhanKhauDaThemDAO implements DataAccessObject<NhanKhauDaThem, Integ
      * {@inheritDoc}
      */
     @Override
-    public List<NhanKhauDaThem> getAll() {
+    public List<NhanKhauDaThem> getAll() throws SQLException {
         List<NhanKhauDaThem> danhSachNhanKhauDaThem = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhanKhauDaThem");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                NhanKhauDaThem nhanKhauDaThem = _get(resultSet);
-                danhSachNhanKhauDaThem.add(nhanKhauDaThem);
-            }
-        } catch (SQLException e) {
-        
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhankhaudathem");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            NhanKhauDaThem nhanKhauDaThem = _get(resultSet);
+            danhSachNhanKhauDaThem.add(nhanKhauDaThem);
         }
         return danhSachNhanKhauDaThem;
     }
@@ -47,17 +43,13 @@ public class NhanKhauDaThemDAO implements DataAccessObject<NhanKhauDaThem, Integ
      * {@inheritDoc}
      */
     @Override
-    public Optional<NhanKhauDaThem> get(Integer id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhanKhauDaThem WHERE idDaThem = ?");
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                NhanKhauDaThem nhanKhauDaThem = _get(resultSet);
-                return Optional.of(nhanKhauDaThem);
-            }
-        } catch (SQLException e) {
-        
+    public Optional<NhanKhauDaThem> get(Integer id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhankhaudathem WHERE idDaThem = ?");
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            NhanKhauDaThem nhanKhauDaThem = _get(resultSet);
+            return Optional.of(nhanKhauDaThem);
         }
         return Optional.empty();
     }
@@ -66,49 +58,37 @@ public class NhanKhauDaThemDAO implements DataAccessObject<NhanKhauDaThem, Integ
      * {@inheritDoc}
      */
     @Override
-    public void save(@NotNull NhanKhauDaThem nhanKhauDaThem) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO nhanKhauDaThem" +
-                    "(soCccd, idHoKhau, ngayThem) " +
-                    "VALUES (?, ?, ?)");
-            _setValuesForStatement(nhanKhauDaThem, statement, 1);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void save(@NotNull NhanKhauDaThem nhanKhauDaThem) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO nhankhaudathem" +
+                "(soCccd, idHoKhau, ngayThem) " +
+                "VALUES (?, ?, ?)");
+        _setValuesForStatement(nhanKhauDaThem, statement, 1);
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void update(@NotNull NhanKhauDaThem nhanKhauDaThem) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE nhanKhauDaThem SET" +
-                    "idNhanKhau = ?, " +
-                    "soCccd = ?, " +
-                    "ngayThem = ?, " +
-                    "WHERE idDaThem = ?");
-            int parameterIndex = _setValuesForStatement(nhanKhauDaThem, statement, 1);
-            statement.setInt(parameterIndex, nhanKhauDaThem.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void update(@NotNull NhanKhauDaThem nhanKhauDaThem) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE nhankhaudathem SET" +
+                "idNhanKhau = ?, " +
+                "soCccd = ?, " +
+                "ngayThem = ?, " +
+                "WHERE idDaThem = ?");
+        int parameterIndex = _setValuesForStatement(nhanKhauDaThem, statement, 1);
+        statement.setInt(parameterIndex, nhanKhauDaThem.getId());
+        statement.executeUpdate();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void delete(@NotNull NhanKhauDaThem nhanKhauDaThem) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM nhanKhauDaThem WHERE idDaThem = ?");
-            statement.setInt(1, nhanKhauDaThem.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-        
-        }
+    public void delete(@NotNull NhanKhauDaThem nhanKhauDaThem) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM nhankhaudathem WHERE idDaThem = ?");
+        statement.setInt(1, nhanKhauDaThem.getId());
+        statement.executeUpdate();
     }
     
     /**
