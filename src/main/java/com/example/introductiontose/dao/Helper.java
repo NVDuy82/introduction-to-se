@@ -18,7 +18,7 @@ public class Helper {
      * @return Thông tin của nhân khẩu
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
-    static ThongTinNhanKhau get(ResultSet resultSet) throws SQLException {
+    public static ThongTinNhanKhau get(ResultSet resultSet) throws SQLException {
         String soCccd = resultSet.getString("soCccd");
         LocalDateTime ngayCap = resultSet.getTimestamp("ngayCap").toLocalDateTime();
         String noiCap = resultSet.getString("noiCap");
