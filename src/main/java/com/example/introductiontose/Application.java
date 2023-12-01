@@ -21,7 +21,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Load file FXML để cấu hình giao diện
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("view/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("view/ThuPhi,Thongtin/Scence1.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         
         // Cấu hình Stage với Scene và hiển thị nó
