@@ -159,7 +159,7 @@ public class DangKyController implements Initializable {
         }
 
         LocalDateTime currentDateTime = LocalDateTime.now();
-        if((currentDateTime.getYear() - ngaySinh.getValue().getYear()) <= 16 ) {
+        if((currentDateTime.getYear() - ngaySinh.getValue().getYear()) < 16 ) {
             loiThongTin.setText("Chưa đủ tuổi để đăng ký tài khoản!");
             return;
         }
