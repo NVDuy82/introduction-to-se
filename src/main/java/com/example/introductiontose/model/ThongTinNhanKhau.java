@@ -3,7 +3,7 @@ package com.example.introductiontose.model;
 import java.time.LocalDateTime;
 
 /**
- * Lớp ThongTinNhanKhau đại diện cho thông tin chi tiết của một nhân khẩu.
+ * Lớp ThongTinNhanKhauController đại diện cho thông tin chi tiết của một nhân khẩu.
  */
 public class ThongTinNhanKhau {
     private CCCD cccd;
@@ -22,13 +22,13 @@ public class ThongTinNhanKhau {
     private String quanHe;
     
     /**
-     * Khởi tạo một đối tượng ThongTinNhanKhau mới không có tham số.
+     * Khởi tạo một đối tượng ThongTinNhanKhauController mới không có tham số.
      */
     public ThongTinNhanKhau() {
     }
     
     /**
-     * Khởi tạo một đối tượng ThongTinNhanKhau với các thông tin cơ bản.
+     * Khởi tạo một đối tượng ThongTinNhanKhauController với các thông tin cơ bản.
      *
      * @param cccd        Thông tin về Chứng minh nhân dân của nhân khẩu.
      * @param idHoKhau   ID hoặc số nhà của hộ khẩu mà nhân khẩu thuộc về.
