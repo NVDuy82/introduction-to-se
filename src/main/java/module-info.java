@@ -4,7 +4,8 @@ module com.example.introductiontose {
     requires java.sql;
     requires annotations;
     requires com.microsoft.sqlserver.jdbc;
-    
+    requires com.zaxxer.hikari;
+
     opens com.example.introductiontose to javafx.fxml;
     exports com.example.introductiontose;
     exports com.example.introductiontose.controller;

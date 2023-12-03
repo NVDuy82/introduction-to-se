@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -154,6 +155,12 @@ public class DangKyController implements Initializable {
         if(hoTen.getText().isEmpty() || ngaySinh.getValue() == null
                 || soCccd.getText().isEmpty()) {
             loiThongTin.setText("Nhập đầy đủ thông tin cá nhân để được xác nhận!");
+            return;
+        }
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        if((currentDateTime.getYear() - ngaySinh.getValue().getYear()) <= 16 ) {
+            loiThongTin.setText("Chưa đủ tuổi để đăng ký tài khoản!");
             return;
         }
 
