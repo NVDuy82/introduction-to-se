@@ -1,6 +1,7 @@
 package com.example.introductiontose.view.icon;
 
 public enum IconType {
+    HOKHAU("btn-ho-khau"),
     NHANKHAU("btn-nhan-khau"),
     CHUHO("btn-chu-ho");
     

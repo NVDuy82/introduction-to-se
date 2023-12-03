@@ -6,7 +6,7 @@ import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.ThayDoiHoKhau;
 import com.example.introductiontose.util.ActionButton;
 import com.example.introductiontose.util.AlertUtils;
-import com.example.introductiontose.view.icon.IconController;
+import com.example.introductiontose.view.icon.IconNhanKhauController;
 import com.example.introductiontose.view.icon.IconType;
 import javafx.scene.image.Image;
 
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class DoiChuHoController extends DanhSachHoController {
-    private IconController selectedController;
+    private IconNhanKhauController selectedController;
     
     public DoiChuHoController() {
         this.originalIconType = IconType.CHUHO;
@@ -23,24 +23,21 @@ public class DoiChuHoController extends DanhSachHoController {
     
     @Override
     void submit() {
-        // create icon
-        String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-96.png";
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
         
         if (selectedController == null) {
             // create alert
-            AlertUtils.showAlert("Chưa chọn đối tượng", "Hãy chọn ít nhất 1 nhân khẩu.", image);
+            AlertUtils.showAlertError("Chưa chọn đối tượng", "Hãy chọn ít nhất 1 nhân khẩu.");
         } else {
             // create alert
             AlertUtils.showAlert("Xác nhận", "Bạn có chắc chắn thay đổi " +
-                            selectedController.getNhanKhau().getThongTinNhanKhau().getHoTen() +
-                            " làm chủ hộ không?", image, this::sendRequire);
+                            selectedController.getData().getThongTinNhanKhau().getHoTen() +
+                            " làm chủ hộ không?", this::sendRequire);
         }
     }
     
     @Override
-    void eventClickIcon(IconController iconController) {
-        if (iconController.isSelected()) {
+    void eventClickIcon(IconNhanKhauController iconNhanKhauController) {
+        if (iconNhanKhauController.isSelected()) {
             if (selectedController != null) {
                 selectedController.setSelected(false);
             } else {
@@ -48,7 +45,7 @@ public class DoiChuHoController extends DanhSachHoController {
                 ActionButton.showButtonClear(clearButton);
                 isAnyObjectSelected = true;
             }
-            selectedController = iconController;
+            selectedController = iconNhanKhauController;
         } else {
             selectedController = null;
             ActionButton.hideButtonSubmit(submitButton);
@@ -69,12 +66,12 @@ public class DoiChuHoController extends DanhSachHoController {
         ThayDoiHoKhau change = new ThayDoiHoKhau(0,
                 idHoKhau,
                 null,
-                selectedController.getNhanKhau().getThongTinNhanKhau().getCccd().getSoCccd(),
+                selectedController.getData().getThongTinNhanKhau().getCccd().getSoCccd(),
                 null,
                 LocalDateTime.now());
         try {
             accessObject.save(change);
-            connection.close();
+            SqlConnection.close(connection);
         } catch (Exception e) {
             AlertUtils.showAlert("Lỗi", "Đã có lỗi khi gửi yêu cầu này.");
         }

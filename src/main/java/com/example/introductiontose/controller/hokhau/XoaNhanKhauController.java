@@ -4,7 +4,7 @@ import com.example.introductiontose.dao.DataAccessObject;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.util.ActionButton;
 import com.example.introductiontose.util.AlertUtils;
-import com.example.introductiontose.view.icon.IconController;
+import com.example.introductiontose.view.icon.IconNhanKhauController;
 import com.example.introductiontose.view.icon.IconType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class XoaNhanKhauController extends DanhSachHoController {
-    private final List<IconController> selectedList = new ArrayList<>();
+    private final List<IconNhanKhauController> selectedList = new ArrayList<>();
 
     public XoaNhanKhauController() {
         this.originalIconType = IconType.NHANKHAU;
@@ -25,32 +25,28 @@ public class XoaNhanKhauController extends DanhSachHoController {
 
     @Override
     void submit() {
-        // create icon
-        String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-96.png";
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-
         if (selectedList.isEmpty()) {
             // create alert
-            AlertUtils.showAlert("Chưa chọn đối tượng", "Hãy chọn ít nhất 1 nhân khẩu.", image);
+            AlertUtils.showAlert("Chưa chọn đối tượng", "Hãy chọn ít nhất 1 nhân khẩu.");
         } else {
             // create alert
             AlertUtils.showAlert("Xác nhận", "Bạn có chắc chắn xóa " +
                     selectedList.size() +
-                    " người khỏi hộ khẩu không?", image, this::sendRequire);
+                    " người khỏi hộ khẩu không?", this::sendRequire);
         }
     }
 
     @Override
-    void eventClickIcon(IconController iconController) {
-        if (iconController.isSelected()) {
+    void eventClickIcon(IconNhanKhauController iconNhanKhauController) {
+        if (iconNhanKhauController.isSelected()) {
             if (selectedList.isEmpty()) {
                 ActionButton.showButtonSubmit(submitButton);
                 ActionButton.showButtonClear(clearButton);
                 isAnyObjectSelected = true;
             }
-            selectedList.add(iconController);
+            selectedList.add(iconNhanKhauController);
         } else {
-            selectedList.remove(iconController);
+            selectedList.remove(iconNhanKhauController);
             if (selectedList.isEmpty()) {
                 ActionButton.hideButtonSubmit(submitButton);
                 ActionButton.hideButtonClear(clearButton);
@@ -95,12 +91,7 @@ public class XoaNhanKhauController extends DanhSachHoController {
 
             return dialogStage;
         } catch (IOException e) {
-            // create icon
-            String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-96.png";
-            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-
-            // create alert
-            AlertUtils.showAlert("Lỗi", "Xảy ra lỗi trong phần mềm.", image);
+            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
         }
 
         return null;

@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="675.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.hokhau.ThemNhanKhauController">
+<AnchorPane prefHeight="600.0" prefWidth="675.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.hokhau.ThemNhanKhauController">
    <children>
       <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thêm nhân khẩu">
          <font>
@@ -116,7 +116,7 @@
                               <Insets />
                            </HBox.margin>
                         </TextField>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#fill" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #596ed7;">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#fill" prefHeight="36.0" prefWidth="36.0" styleClass="btn-blue">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -169,7 +169,7 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#addClick" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #596ed7;" text="ADD" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#addClick" prefHeight="30.0" prefWidth="60.0" styleClass="btn-blue" text="ADD" textFill="WHITE">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

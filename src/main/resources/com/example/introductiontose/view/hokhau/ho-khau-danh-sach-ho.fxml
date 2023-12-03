@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="675.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="675.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fx:id="title" layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
          <font>
@@ -38,7 +38,7 @@
       </Button>
       <Pane layoutY="70.0" prefHeight="530.0" prefWidth="675.0" style="-fx-background-color: transparent; -fx-background-radius: 20;">
          <children>
-            <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="530.0" prefWidth="675.0" style="-fx-background-color: transparent; -fx-background-radius: 20;">
+            <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="530.0" prefWidth="675.0" style="-fx-background-color: transparent;">
                <content>
                   <VBox fx:id="mainVBox" prefWidth="675.0" style="-fx-background-color: #fff;">
                      <children>

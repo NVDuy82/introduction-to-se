@@ -2,7 +2,8 @@ package com.example.introductiontose.controller.hokhau;
 
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.util.ActionButton;
-import com.example.introductiontose.view.icon.IconController;
+import com.example.introductiontose.util.AlertUtils;
+import com.example.introductiontose.view.icon.IconNhanKhauController;
 import com.example.introductiontose.view.icon.IconType;
 import com.example.introductiontose.view.icon.IconUtils;
 import javafx.event.ActionEvent;
@@ -28,11 +29,11 @@ public abstract class DanhSachHoController {
     int idHoKhau;
     IconType originalIconType;
     List<NhanKhau> nhanKhauList;
-    List<IconController> iconControllerList;
+    List<IconNhanKhauController> iconNhanKhauControllerList;
     boolean isAnyObjectSelected = false;
     
     abstract void submit();
-    abstract void eventClickIcon(IconController iconController);
+    abstract void eventClickIcon(IconNhanKhauController iconNhanKhauController);
     abstract void clearSelected();
     
     @FXML
@@ -49,11 +50,11 @@ public abstract class DanhSachHoController {
             ActionButton.hideButtonSubmit(submitButton);
             ActionButton.hideButtonClear(clearButton);
         } catch (Exception e) {
-        
+            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
         }
     }
     
-    public void lauch(int idHoKhau, List<NhanKhau> nhanKhauList) throws IOException {
+    public void launch(int idHoKhau, List<NhanKhau> nhanKhauList) throws IOException {
         this.idHoKhau = idHoKhau;
         this.nhanKhauList = nhanKhauList;
         this.showInVBox(this.originalIconType);
@@ -64,7 +65,7 @@ public abstract class DanhSachHoController {
     void showInVBox(IconType iconType) throws IOException {
         mainVBox.getChildren().clear();
         clearSelected();
-        iconControllerList = new ArrayList<>();
+        iconNhanKhauControllerList = new ArrayList<>();
         
         HBox currentHBox = new HBox();
         for (NhanKhau nhanKhau : nhanKhauList) {
@@ -73,7 +74,7 @@ public abstract class DanhSachHoController {
                 currentHBox = new HBox();
             }
             
-            Button button = IconUtils.createButtonIcon(iconType, nhanKhau, iconControllerList, this::eventClickIcon);
+            Button button = IconUtils.createButtonIcon(iconType, nhanKhau, iconNhanKhauControllerList, this::eventClickIcon);
             currentHBox.getChildren().add(button);
         }
         if (!currentHBox.getChildren().isEmpty()) {

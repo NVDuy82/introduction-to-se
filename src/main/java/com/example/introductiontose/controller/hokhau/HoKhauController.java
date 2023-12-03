@@ -4,6 +4,8 @@ import com.example.introductiontose.dao.DataAccessObject;
 import com.example.introductiontose.dao.NhanKhauDAO;
 import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.NhanKhau;
+import com.example.introductiontose.util.AlertUtils;
+import com.example.introductiontose.util.SQLUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HoKhauController implements Initializable {
     @FXML
@@ -94,10 +93,12 @@ public class HoKhauController implements Initializable {
         
         try {
             paneContent.getChildren().add(fxmlLoader.load());
-            controller.lauch(idHoKhau, getNhanKhauList());
+            List<NhanKhau> nhanKhauList = getNhanKhauList();
+            if (nhanKhauList == null) return;
+            
+            controller.launch(idHoKhau, nhanKhauList);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage() + "ssss");
+            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
         }
     }
     
@@ -107,22 +108,18 @@ public class HoKhauController implements Initializable {
         try {
             paneContent.getChildren().clear();
             paneContent.getChildren().add(fxmlLoader.load());
-        } catch (Exception e) {
-        
+        } catch (IOException e) {
+            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
         }
     }
     
     private List<NhanKhau> getNhanKhauList() {
         try {
-            Connection connection = SqlConnection.connect();
-            DataAccessObject<NhanKhau, String> accessObject = new NhanKhauDAO(connection, NhanKhauDAO.TableType.NHANKHAU);
-            List<NhanKhau> result = accessObject.getAll();
-            result.removeIf(nhanKhau -> nhanKhau.getThongTinNhanKhau().getIdHoKhau() != idHoKhau);
-            
-            connection.close();
-            return result;
+            return SQLUtils.getNhanKhauFromHoKhau(idHoKhau);
         } catch (SQLException e) {
-            return new ArrayList<>();
+            // lỗi kết nối
+            
+            return null;
         }
     }
 }

@@ -66,7 +66,11 @@ public class ThemNhanKhauController implements Initializable {
         Connection connection = SqlConnection.connect();
         DataAccessObject<NhanKhau, String> accessObject = new NhanKhauDAO(connection, NhanKhauDAO.TableType.NHANKHAU);
         Optional<NhanKhau> result = accessObject.get(soCccdText.getText());
-        result.ifPresent(this::_fill);
+        if (result.isEmpty()) {
+            AlertUtils.showAlertError("Lỗi", "Căn cước không tồn tại hoặc không có dữ liệu.");
+        } else {
+            _fill(result.get());
+        }
     }
     
     @Override
@@ -95,18 +99,14 @@ public class ThemNhanKhauController implements Initializable {
     }
     
     private void submit() {
-        // create icon
-        String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-96.png";
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
-        
         if (areRequiredFieldsFilled()) {
             // create alert
             AlertUtils.showAlert("Xác nhận", "Bạn có chắc chắn muốn thêm nhân khẩu " +
                     hoTenText.getText() +
-                    " không?", image, this::sendRequire);
+                    " không?", this::sendRequire);
         } else {
             // create alert
-            AlertUtils.showAlert("Thiếu thông tin", "Các thông tin có đánh dấu (*) là bắt buộc.", image);
+            AlertUtils.showAlertError("Thiếu thông tin", "Các thông tin có đánh dấu (*) là bắt buộc.");
         }
     }
     
@@ -139,9 +139,9 @@ public class ThemNhanKhauController implements Initializable {
         NhanKhau change = getNhanKhau();
         try {
             accessObject.save(change);
-            connection.close();
+            SqlConnection.close(connection);
         } catch (Exception e) {
-            AlertUtils.showAlert("Lỗi", "Đã có lỗi khi gửi yêu cầu này.");
+            AlertUtils.showAlertError("Lỗi", "Đã có lỗi khi gửi yêu cầu này.");
         }
     }
     

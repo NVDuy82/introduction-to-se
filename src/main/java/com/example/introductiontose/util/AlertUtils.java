@@ -9,14 +9,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class AlertUtils {
     public static void showAlert(String title, String content) {
-        // Tạo thông báo
-        Alert alert = createAlert(title, content);
+        // create icon
+        String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-96.png";
+        Image image = new Image(Objects.requireNonNull(AlertUtils.class.getResourceAsStream(imagePath)));
         
-        // addOK and run
+        // Tạo thông báo
+        Alert alert = createAlert(title, content, image);
+        
+        // addOK
         addOK(alert);
         
         // Hiển thị
@@ -24,18 +29,43 @@ public class AlertUtils {
     }
     
     public static void showAlert(String title, String content, Runnable action) {
-        // Tạo thông báo
-        Alert alert = createAlert(title, content);
+        // create icon
+        String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-96.png";
+        Image image = new Image(Objects.requireNonNull(AlertUtils.class.getResourceAsStream(imagePath)));
         
-        // addOK and run
-        addOK(alert, action);
+        // Tạo thông báo và hiển thị
+        showAlert(title, content, image, action);
+    }
+    
+    public static void showAlertError(String title, String content) {
+        // create icon
+        String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-red-100.png";
+        Image image = new Image(Objects.requireNonNull(AlertUtils.class.getResourceAsStream(imagePath)));
+        
+        // Tạo thông báo
+        Alert alert = createAlert(title, content, image);
+        
+        // addOK
+        addOK(alert);
+        
+        // Hiển thị
+        alert.showAndWait();
+    }
+    
+    public static void showAlertError(String title, String content, Runnable action) {
+        // create icon
+        String imagePath = "/com/example/introductiontose/view/iconImg/icons8-alert-red-100.png";
+        Image image = new Image(Objects.requireNonNull(AlertUtils.class.getResourceAsStream(imagePath)));
+        
+        // Tạo thông báo và hiển thị
+        showAlert(title, content, image, action);
     }
     
     public static void showAlert(String title, String content, Image image) {
         // Tạo thông báo có icon
         Alert alert = createAlert(title, content, image);
         
-        // addOK and run
+        // addOK
         addOK(alert);
         
         // Hiển thị
