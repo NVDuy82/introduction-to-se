@@ -24,6 +24,9 @@ import java.util.ResourceBundle;
 import static com.example.introductiontose.controller.dangkydangnhap.functionHelp.connection;
 
 public class dangNhapController implements Initializable {
+    public static String tenTK;
+    public static String CCCD;
+
     @FXML
     private TextField soCccdDangNhap;
     @FXML
@@ -90,10 +93,11 @@ public class dangNhapController implements Initializable {
 
         String tenTaiKhoan = selectNK.get().getThongTinNhanKhau().getHoTen();
 
+        CCCD = soCccdDangNhap.getText();
+        tenTK = tenTaiKhoan;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/dangkydangnhap/trangChu.fxml"));
         Parent home = loader.load();
-        trangChuController trangchucontroller = loader.getController();
-        trangchucontroller.display("Xin chào, " + tenTaiKhoan + "!");
 
         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(home);
