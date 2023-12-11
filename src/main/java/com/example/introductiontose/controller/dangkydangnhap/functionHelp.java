@@ -1,9 +1,9 @@
 package com.example.introductiontose.controller.dangkydangnhap;
 
-import com.example.introductiontose.dao.Helper;
 import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.ThongTinNhanKhau;
+import com.example.introductiontose.util.SQLUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -31,7 +31,7 @@ public class functionHelp {
         statement.setString(1, soCccd);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
+            ThongTinNhanKhau thongTinNhanKhau = SQLUtils.get(resultSet);
             NhanKhau nhanKhau = new NhanKhau(thongTinNhanKhau);
             return Optional.of(nhanKhau);
         }
