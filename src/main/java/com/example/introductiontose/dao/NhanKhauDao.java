@@ -1,6 +1,5 @@
 package com.example.introductiontose.dao;
 
-import com.example.introductiontose.model.KHOANPHI;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.ThongTinNhanKhau;
 import org.jetbrains.annotations.NotNull;
@@ -16,11 +15,6 @@ import java.util.Optional;
 public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
     private final Connection connection;
     private final String table_name;
-
-    @Override
-    public Optional<KHOANPHI> get(int idPhi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
     public enum TableType {
         NHANKHAU,
@@ -154,7 +148,7 @@ public class NhanKhauDao implements DataAccessObject<NhanKhau, String> {
      * @return Đối tượng NhanKhau được tạo từ dữ liệu ResultSet.
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
-    private static NhanKhau _get(ResultSet resultSet) throws SQLException {
+    private NhanKhau _get(ResultSet resultSet) throws SQLException {
         ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
         
         return new NhanKhau(thongTinNhanKhau);
