@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="690.0" prefWidth="800.0">
+         <children>
+            <ScrollPane fitToHeight="true" hbarPolicy="NEVER" minViewportHeight="647.5" minViewportWidth="745.0" prefHeight="647.5" prefViewportHeight="647.5" prefViewportWidth="745.0" prefWidth="745.0" style="-fx-background-radius: 10; -fx-background-color: f6f6f6;" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="647.5" prefWidth="745.0" style="-fx-background-color: transparent; -fx-background-radius: 10;">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="250.0" text="Danh sách nạp tiền" />
+                              <TextField promptText="Tìm kiếm">
+                                 <HBox.margin>
+                                    <Insets left="250.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button mnemonicParsing="false" text="tìm" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="725.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                           <children>
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
+                                 <children>
+                                    <Label text="ông a">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="tiền">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #BBF7D0;" text="Đồng ý">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #FFF2C6;" text="Hủy bỏ">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="76.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="725.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                           <children>
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
+                                 <children>
+                                    <Label text="ông a">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="tiền">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #BBF7D0;" text="Đồng ý">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #FFF2C6;" text="Hủy bỏ">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="176.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="725.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                           <children>
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
+                                 <children>
+                                    <Label text="ông a">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="tiền">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #BBF7D0;" text="Đồng ý">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #FFF2C6;" text="Hủy bỏ">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="276.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="725.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                           <children>
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
+                                 <children>
+                                    <Label text="ông a">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="tiền">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #BBF7D0;" text="Đồng ý">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #FFF2C6;" text="Hủy bỏ">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="409.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="725.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                           <children>
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
+                                 <children>
+                                    <Label text="ông a">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="tiền">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #BBF7D0;" text="Đồng ý">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #FFF2C6;" text="Hủy bỏ">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="519.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                           <children>
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
+                                 <children>
+                                    <Label text="ông a">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="tiền">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #BBF7D0;" text="Đồng ý">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #FFF2C6;" text="Hủy bỏ">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="624.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                           <children>
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
+                                 <children>
+                                    <Label text="ông a">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="tiền">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button mnemonicParsing="false" style="-fx-background-color: #BBF7D0;" text="Đồng ý">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #FFF2C6;" text="Hủy bỏ">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+               <HBox.margin>
+                  <Insets bottom="27.5" left="27.5" right="27.5" top="15.0" />
+               </HBox.margin>
+            </ScrollPane>
+         </children>
+      </HBox>
+   </children>
+</Pane>

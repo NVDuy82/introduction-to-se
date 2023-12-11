@@ -1,18 +1,19 @@
-package com.example.introductiontose.dao;
+package com.example.introductiontose.util;
 
+import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.CCCD;
+import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.ThongTinNhanKhau;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class Helper cung cấp các phương thức hỗ trợ cho các class khác trong package dao
  */
-public class Helper {
+public class SQLUtils {
     /**
      * @param resultSet ResultSet chứa dữ liệu cần trích xuất.
      * @return Thông tin của nhân khẩu
@@ -51,7 +52,7 @@ public class Helper {
      * @return Index tiếp theo sẽ được sử dụng cho các giá trị khác nếu cần.
      * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
      */
-    static int setValuesForStatement(ThongTinNhanKhau thongTinNhanKhau, PreparedStatement statement, int index) throws SQLException {
+    public static int setValuesForStatement(ThongTinNhanKhau thongTinNhanKhau, PreparedStatement statement, int index) throws SQLException {
         statement.setTimestamp(index++, Timestamp.valueOf(thongTinNhanKhau.getCccd().getNgayCap()));
         statement.setString(index++, thongTinNhanKhau.getCccd().getNoiCap());
         
@@ -70,5 +71,20 @@ public class Helper {
         statement.setString(index++, thongTinNhanKhau.getQuanHe());
         
         return index;
+    }
+    
+    public static List<NhanKhau> getNhanKhauFromHoKhau(int idHoKhau) throws SQLException {
+        Connection connection = SqlConnection.connect();
+        List<NhanKhau> danhSachNhanKhau = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhankhau WHERE idHoKhau = ?");
+        statement.setInt(1, idHoKhau);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            NhanKhau nhanKhau = new NhanKhau(get(resultSet));
+            danhSachNhanKhau.add(nhanKhau);
+        }
+        
+        SqlConnection.close(connection);
+        return danhSachNhanKhau;
     }
 }

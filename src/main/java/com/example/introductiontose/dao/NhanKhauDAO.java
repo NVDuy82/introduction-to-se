@@ -2,6 +2,7 @@ package com.example.introductiontose.dao;
 
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.ThongTinNhanKhau;
+import com.example.introductiontose.util.SQLUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
@@ -127,7 +128,7 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
     private NhanKhau _get(ResultSet resultSet) throws SQLException {
-        ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
+        ThongTinNhanKhau thongTinNhanKhau = SQLUtils.get(resultSet);
         
         return new NhanKhau(thongTinNhanKhau);
     }
@@ -142,6 +143,6 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
      * @throws SQLException Nếu có lỗi khi thiết lập giá trị trong PreparedStatement.
      */
     private int _setValuesForStatement(NhanKhau nhanKhau, PreparedStatement statement, int index) throws SQLException {
-        return Helper.setValuesForStatement(nhanKhau.getThongTinNhanKhau(), statement, index);
+        return SQLUtils.setValuesForStatement(nhanKhau.getThongTinNhanKhau(), statement, index);
     }
 }
