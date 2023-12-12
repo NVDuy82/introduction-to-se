@@ -28,6 +28,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
+import static com.example.introductiontose.util.AlertDuyetYeuCau.showAlertDongY;
+import static com.example.introductiontose.util.AlertDuyetYeuCau.showAlertHuyBo;
+
 public class YeuCauNhanKhauController implements Initializable {
     @FXML
     private VBox VBoxList;
@@ -46,16 +49,18 @@ public class YeuCauNhanKhauController implements Initializable {
         }
 
         for(ThayDoiNhanKhau tdnk : danhsachThayDoiNK) {
-            List<String> thongtinhankhauthaydoi = LayThongTinNhanKhauThayDoi(tdnk);
-            String idHBox = thongtinhankhauthaydoi.get(0);
-            String kieuYeuCau = thongtinhankhauthaydoi.get(1);
-            String nguoiGuiYeuCau = thongtinhankhauthaydoi.get(2);
-            String ghiChu = thongtinhankhauthaydoi.get(3);
+            if(tdnk.getTrangthaithaidoi().equals("chờ xác nhận")) {
+                List<String> thongtinhankhauthaydoi = LayThongTinNhanKhauThayDoi(tdnk);
+                String idHBox = thongtinhankhauthaydoi.get(0);
+                String kieuYeuCau = thongtinhankhauthaydoi.get(1);
+                String nguoiGuiYeuCau = thongtinhankhauthaydoi.get(2);
+                String ghiChu = thongtinhankhauthaydoi.get(3);
 
-            HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
-            Insets hboxMargin = new Insets(10, 10, 0, 10);
-            VBoxList.getChildren().add(hbox);
-            VBoxList.setMargin(hbox, hboxMargin);
+                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
+                Insets hboxMargin = new Insets(10, 10, 0, 10);
+                VBoxList.getChildren().add(hbox);
+                VBoxList.setMargin(hbox, hboxMargin);
+            }
         }
 
         ///////////////////////////////////////////////////
@@ -69,16 +74,18 @@ public class YeuCauNhanKhauController implements Initializable {
         }
 
         for(ThayDoiHoKhau tdhk : danhsachThayDoiHK) {
-            List<String> thongtinhokhauthaydoi = LayThongTinHoKhauThayDoi(tdhk);
-            String idHBox = thongtinhokhauthaydoi.get(0);
-            String kieuYeuCau = thongtinhokhauthaydoi.get(1);
-            String nguoiGuiYeuCau = thongtinhokhauthaydoi.get(2);
-            String ghiChu = thongtinhokhauthaydoi.get(3);
+            if(tdhk.getTrangThai().equals("chờ xác nhận")) {
+                List<String> thongtinhokhauthaydoi = LayThongTinHoKhauThayDoi(tdhk);
+                String idHBox = thongtinhokhauthaydoi.get(0);
+                String kieuYeuCau = thongtinhokhauthaydoi.get(1);
+                String nguoiGuiYeuCau = thongtinhokhauthaydoi.get(2);
+                String ghiChu = thongtinhokhauthaydoi.get(3);
 
-            HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
-            Insets hboxMargin = new Insets(10, 10, 0, 10);
-            VBoxList.getChildren().add(hbox);
-            VBoxList.setMargin(hbox, hboxMargin);
+                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
+                Insets hboxMargin = new Insets(10, 10, 0, 10);
+                VBoxList.getChildren().add(hbox);
+                VBoxList.setMargin(hbox, hboxMargin);
+            }
         }
     }
     public Button initButtonDongY() {
@@ -129,6 +136,19 @@ public class YeuCauNhanKhauController implements Initializable {
             public void handle(MouseEvent event) {
                 // Gọi hàm ChiTietThongTin khi click vào VBox
                 ChiTietThongTin(vbox);
+            }
+        });
+
+        buttonNo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                huyBoYeuCau(buttonNo);
+            }
+        });
+        buttonYes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                dongYYeuCau(buttonYes);
             }
         });
         return hbox;
@@ -322,5 +342,89 @@ public class YeuCauNhanKhauController implements Initializable {
         thongtinhokhau.add(soCccdChuHoCu);
         thongtinhokhau.add(soCccdChuHoMoi);
         return thongtinhokhau;
+    }
+
+    public void huyBoYeuCau(Button buttonHuyBo) {
+        HBox parentHBox = (HBox) buttonHuyBo.getParent();
+        String idHBox = parentHBox.getId();
+
+        if(idHBox.substring(0,2).equals("NK")) {
+            String idThayDoiString = idHBox.substring(2);
+            Integer idThayDoi = Integer.parseInt(idThayDoiString);
+            ThayDoiNhanKhauDao tdnkDao = new ThayDoiNhanKhauDao(connection);
+            Optional<ThayDoiNhanKhau> resultTDNK;
+            try {
+                resultTDNK = tdnkDao.get(idThayDoi);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if(resultTDNK.isPresent()) {
+                ThayDoiNhanKhau tdnk = resultTDNK.get();
+                String soCccd = tdnk.getSoCccd();
+                showAlertHuyBo(idHBox, soCccd, null, buttonHuyBo);
+            }
+        }
+
+        if(idHBox.substring(0,2).equals("HK")) {
+            String idThayDoiString = idHBox.substring(2);
+            Integer idThayDoi = Integer.parseInt(idThayDoiString);
+            ThayDoiHoKhauDAO tdhkDao = new ThayDoiHoKhauDAO(connection);
+            Optional<ThayDoiHoKhau> resultTDHK;
+            try {
+                resultTDHK = tdhkDao.get(idThayDoi);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if(resultTDHK.isPresent()) {
+                ThayDoiHoKhau tdhk = resultTDHK.get();
+                List<String> thongtinhokhauthaydoi = LayThongTinHoKhauThayDoi(tdhk);
+                String soCccd1 = thongtinhokhauthaydoi.get(6);
+                String soCccd2 = thongtinhokhauthaydoi.get(7);
+                showAlertHuyBo(idHBox, soCccd1, soCccd2, buttonHuyBo);
+            }
+        }
+
+    }
+
+    public void dongYYeuCau(Button buttonDongY) {
+        HBox parentHBox = (HBox) buttonDongY.getParent();
+        String idHBox = parentHBox.getId();
+
+        if(idHBox.substring(0,2).equals("NK")) {
+            String idThayDoiString = idHBox.substring(2);
+            Integer idThayDoi = Integer.parseInt(idThayDoiString);
+            ThayDoiNhanKhauDao tdnkDao = new ThayDoiNhanKhauDao(connection);
+            Optional<ThayDoiNhanKhau> resultTDNK;
+            try {
+                resultTDNK = tdnkDao.get(idThayDoi);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if(resultTDNK.isPresent()) {
+                ThayDoiNhanKhau tdnk = resultTDNK.get();
+                String soCccd = tdnk.getSoCccd();
+                showAlertDongY(idHBox, soCccd, null, buttonDongY);
+            }
+        }
+
+        if(idHBox.substring(0,2).equals("HK")) {
+            String idThayDoiString = idHBox.substring(2);
+            Integer idThayDoi = Integer.parseInt(idThayDoiString);
+            ThayDoiHoKhauDAO tdhkDao = new ThayDoiHoKhauDAO(connection);
+            Optional<ThayDoiHoKhau> resultTDHK;
+            try {
+                resultTDHK = tdhkDao.get(idThayDoi);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if(resultTDHK.isPresent()) {
+                ThayDoiHoKhau tdhk = resultTDHK.get();
+                List<String> thongtinhokhauthaydoi = LayThongTinHoKhauThayDoi(tdhk);
+                String soCccd1 = thongtinhokhauthaydoi.get(6);
+                String soCccd2 = thongtinhokhauthaydoi.get(7);
+                showAlertDongY(idHBox, soCccd1, soCccd2, buttonDongY);
+            }
+        }
+
     }
 }

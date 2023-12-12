@@ -118,7 +118,7 @@ public class DangKyController implements Initializable {
      */
     public void signUpSuccess (ActionEvent e) throws Exception {
         // Lưu thông tin tài khoản vào bảng taikhoan
-        TaiKhoanNhanKhau tknk = new TaiKhoanNhanKhau(soCccd.getText(), tenTaiKhoan.getText(), matKhau.getText());
+        TaiKhoanNhanKhau tknk = new TaiKhoanNhanKhau(soCccd.getText(), tenTaiKhoan.getText(), matKhau.getText(), 0);
         TaiKhoanNhanKhauDAO tknkDao = new TaiKhoanNhanKhauDAO(connection);
         tknkDao.save(tknk);
 

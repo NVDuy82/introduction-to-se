@@ -62,8 +62,8 @@ public class TaiKhoanNhanKhauDAO implements DataAccessObject<TaiKhoanNhanKhau, S
     @Override
     public void save(@NotNull TaiKhoanNhanKhau taikhoannhankhau) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO taikhoan" +
-                "(soCCCD, tenTaiKhoan, matKhau) " +
-                "VALUES (?, ?, ?)");
+                "(soCCCD, tenTaiKhoan, matKhau, soDuTaiKhoan) " +
+                "VALUES (?, ?, ?, ?)");
         _setValuesForStatement(taikhoannhankhau, statement, 1);
         statement.executeUpdate();
     }
@@ -73,12 +73,15 @@ public class TaiKhoanNhanKhauDAO implements DataAccessObject<TaiKhoanNhanKhau, S
      */
     @Override
     public void update(@NotNull TaiKhoanNhanKhau taikhoannhankhau) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("UPDATE taikhoan SET" +
+        PreparedStatement statement = connection.prepareStatement("UPDATE taikhoan SET " +
                 "tenTaiKhoan = ?, " +
                 "matKhau = ?, " +
-                "WHERE soCccd = ?");
-        int parameterIndex = _setValuesForStatement(taikhoannhankhau, statement, 1);
-        statement.setString(parameterIndex, taikhoannhankhau.getSoCCCD());
+                "soDuTaiKhoan = ? " +
+                " WHERE soCccd = ?");
+        statement.setString(1,taikhoannhankhau.getTentaikhoan());
+        statement.setString(2, taikhoannhankhau.getPass());
+        statement.setInt(3, taikhoannhankhau.getSoDuTaiKhoan());
+        statement.setString(4, taikhoannhankhau.getSoCCCD());
         statement.executeUpdate();
     }
 
@@ -89,6 +92,12 @@ public class TaiKhoanNhanKhauDAO implements DataAccessObject<TaiKhoanNhanKhau, S
     public void delete(@NotNull TaiKhoanNhanKhau taikhoannhankhau) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM taikhoan WHERE soCCCD = ?");
         statement.setString(1, taikhoannhankhau.getSoCCCD());
+        statement.executeUpdate();
+    }
+
+    public void delete(String soCccd) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM taikhoan WHERE soCCCD = ?");
+        statement.setString(1, soCccd);
         statement.executeUpdate();
     }
 
@@ -103,8 +112,9 @@ public class TaiKhoanNhanKhauDAO implements DataAccessObject<TaiKhoanNhanKhau, S
         String soCCCD = resultSet.getString("soCCCD");
         String tenTaiKhoan = resultSet.getString("tenTaiKhoan");
         String matKhau = resultSet.getString("matKhau");
+        Integer soDuTaiKhoan = resultSet.getInt("soDuTaiKhoan");
 
-        return new TaiKhoanNhanKhau(soCCCD, tenTaiKhoan, matKhau);
+        return new TaiKhoanNhanKhau(soCCCD, tenTaiKhoan, matKhau, soDuTaiKhoan);
     }
 
     /**
@@ -120,6 +130,7 @@ public class TaiKhoanNhanKhauDAO implements DataAccessObject<TaiKhoanNhanKhau, S
         statement.setString(index++, taikhoannhankhau.getSoCCCD());
         statement.setString(index++, taikhoannhankhau.getTentaikhoan());
         statement.setString(index++, taikhoannhankhau.getPass());
+        statement.setInt(index++, taikhoannhankhau.getSoDuTaiKhoan());
 
         return index;
     }
