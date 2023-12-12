@@ -1,6 +1,5 @@
 package com.example.introductiontose.controller.guithongbao;
 
-import com.example.introductiontose.dao.Helper;
 import com.example.introductiontose.dao.HoKhauDAO;
 import com.example.introductiontose.dao.TaiKhoanNhanKhauDAO;
 import com.example.introductiontose.database.SqlConnection;
@@ -8,6 +7,7 @@ import com.example.introductiontose.model.HoKhau;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.TaiKhoanNhanKhau;
 import com.example.introductiontose.model.ThongTinNhanKhau;
+import com.example.introductiontose.util.SQLUtils;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -28,7 +28,7 @@ public class functionHelpGuiThongBao {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM nhankhau");
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
+            ThongTinNhanKhau thongTinNhanKhau = SQLUtils.get(resultSet);
             NhanKhau nhanKhau = new NhanKhau(thongTinNhanKhau);
             danhsachnhankhau.add(nhanKhau);
         }
@@ -112,7 +112,7 @@ public class functionHelpGuiThongBao {
         statement.setInt(1,idHoKhau);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            ThongTinNhanKhau thongTinNhanKhau = Helper.get(resultSet);
+            ThongTinNhanKhau thongTinNhanKhau = SQLUtils.get(resultSet);
             NhanKhau nhanKhau = new NhanKhau(thongTinNhanKhau);
             danhsachnhankhau.add(nhanKhau);
         }
