@@ -18,6 +18,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -36,6 +37,11 @@ public class YeuCauNhanKhauController implements Initializable {
     private VBox VBoxList;
     @FXML
     private Text hienThiChiTiet;
+    @FXML
+    private TextField noidungtimkiem;
+    @FXML
+    private HBox hBoxTimKiem;
+    public static List<HBox> danhsachHBox = new ArrayList<>();
 
     Connection connection = SqlConnection.connect();
     @Override
@@ -60,6 +66,7 @@ public class YeuCauNhanKhauController implements Initializable {
                 Insets hboxMargin = new Insets(10, 10, 0, 10);
                 VBoxList.getChildren().add(hbox);
                 VBoxList.setMargin(hbox, hboxMargin);
+                danhsachHBox.add(hbox);
             }
         }
 
@@ -85,6 +92,7 @@ public class YeuCauNhanKhauController implements Initializable {
                 Insets hboxMargin = new Insets(10, 10, 0, 10);
                 VBoxList.getChildren().add(hbox);
                 VBoxList.setMargin(hbox, hboxMargin);
+                danhsachHBox.add(hbox);
             }
         }
     }
@@ -142,13 +150,13 @@ public class YeuCauNhanKhauController implements Initializable {
         buttonNo.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                huyBoYeuCau(buttonNo);
+                clickButton(buttonNo);
             }
         });
         buttonYes.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                dongYYeuCau(buttonYes);
+                clickButton(buttonYes);
             }
         });
         return hbox;
@@ -265,7 +273,8 @@ public class YeuCauNhanKhauController implements Initializable {
                 String nguoiQuaDoi = nhankhauQuaDoi.getThongTinNhanKhau().getHoTen();
                 System.out.println(nguoiQuaDoi);
                 ghiChu = "Ghi chú: Khai tử cho nhân khẩu " + nguoiQuaDoi;
-                thongTinCaNhan = " + Số CCCD: " + nhankhauQuaDoi.getThongTinNhanKhau().getCccd().getSoCccd() + "\n"
+                thongTinCaNhan = " + Họ và tên: " + nhankhauQuaDoi.getThongTinNhanKhau().getHoTen() + "\n" +
+                        " + Số CCCD: " + nhankhauQuaDoi.getThongTinNhanKhau().getCccd().getSoCccd() + "\n"
                         + " + Ngày sinh: " + nhankhauQuaDoi.getThongTinNhanKhau().getNgaySinh().toLocalDate() + "\n"
                         + " + Địa chỉ nhà: " + hoKhau.getDiaChiNha();
             }
@@ -314,6 +323,8 @@ public class YeuCauNhanKhauController implements Initializable {
                     " + Số CCCD: " + chuHoMoi.getThongTinNhanKhau().getCccd().getSoCccd() + "\n" +
                     " + Nghề nghiệp: " + chuHoMoi.getThongTinNhanKhau().getNgheNghiep()  + "\n" +
                     " + Quan hệ với chủ hộ cũ: " + chuHoMoi.getThongTinNhanKhau().getQuanHe() + "\n";
+        } else {
+            thongTinChuHoMoi = "Địa chỉ nhà mới: " + tdhk.getSoCccdChuHoMoi();
         }
 
         int idHoKhau = tdhk.getIdHoKhau();
@@ -344,8 +355,8 @@ public class YeuCauNhanKhauController implements Initializable {
         return thongtinhokhau;
     }
 
-    public void huyBoYeuCau(Button buttonHuyBo) {
-        HBox parentHBox = (HBox) buttonHuyBo.getParent();
+    public void clickButton(Button button) {
+        HBox parentHBox = (HBox) button.getParent();
         String idHBox = parentHBox.getId();
 
         if(idHBox.substring(0,2).equals("NK")) {
@@ -361,7 +372,12 @@ public class YeuCauNhanKhauController implements Initializable {
             if(resultTDNK.isPresent()) {
                 ThayDoiNhanKhau tdnk = resultTDNK.get();
                 String soCccd = tdnk.getSoCccd();
-                showAlertHuyBo(idHBox, soCccd, null, buttonHuyBo);
+                if(button.getText().equals("Hủy bỏ")) {
+                    showAlertHuyBo(idHBox, soCccd, null, button);
+                }
+                if(button.getText().equals("Đồng ý")) {
+                    showAlertDongY(idHBox, soCccd, null, button);
+                }
             }
         }
 
@@ -380,49 +396,45 @@ public class YeuCauNhanKhauController implements Initializable {
                 List<String> thongtinhokhauthaydoi = LayThongTinHoKhauThayDoi(tdhk);
                 String soCccd1 = thongtinhokhauthaydoi.get(6);
                 String soCccd2 = thongtinhokhauthaydoi.get(7);
-                showAlertHuyBo(idHBox, soCccd1, soCccd2, buttonHuyBo);
+                if(button.getText().equals("Hủy bỏ")) {
+                    showAlertHuyBo(idHBox, soCccd1, soCccd2, button);
+                }
+                if(button.getText().equals("Đồng ý")) {
+                    showAlertDongY(idHBox, soCccd1, soCccd2, button);
+                }
             }
         }
 
     }
 
-    public void dongYYeuCau(Button buttonDongY) {
-        HBox parentHBox = (HBox) buttonDongY.getParent();
-        String idHBox = parentHBox.getId();
+    public void timkiem(ActionEvent event) {
+        String yeucautimkiem = noidungtimkiem.getText();
+        if(!yeucautimkiem.isEmpty()) {
+            VBoxList.getChildren().clear();
+            VBoxList.getChildren().add(hBoxTimKiem);
+            for(HBox hbox : danhsachHBox) {
+                for (var nodeHbox : hbox.getChildren()) {
+                    if(nodeHbox instanceof VBox) {
+                        VBox vbox = (VBox) nodeHbox;
+                        for(var nodeVbox : vbox.getChildren()) {
+                            if (nodeVbox instanceof Label) {
+                                Label label = (Label) nodeVbox;
+                                if(label.getText().toLowerCase().contains(yeucautimkiem.toLowerCase())) {
+                                    VBoxList.getChildren().add(hbox);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
 
-        if(idHBox.substring(0,2).equals("NK")) {
-            String idThayDoiString = idHBox.substring(2);
-            Integer idThayDoi = Integer.parseInt(idThayDoiString);
-            ThayDoiNhanKhauDao tdnkDao = new ThayDoiNhanKhauDao(connection);
-            Optional<ThayDoiNhanKhau> resultTDNK;
-            try {
-                resultTDNK = tdnkDao.get(idThayDoi);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                }
             }
-            if(resultTDNK.isPresent()) {
-                ThayDoiNhanKhau tdnk = resultTDNK.get();
-                String soCccd = tdnk.getSoCccd();
-                showAlertDongY(idHBox, soCccd, null, buttonDongY);
-            }
-        }
-
-        if(idHBox.substring(0,2).equals("HK")) {
-            String idThayDoiString = idHBox.substring(2);
-            Integer idThayDoi = Integer.parseInt(idThayDoiString);
-            ThayDoiHoKhauDAO tdhkDao = new ThayDoiHoKhauDAO(connection);
-            Optional<ThayDoiHoKhau> resultTDHK;
-            try {
-                resultTDHK = tdhkDao.get(idThayDoi);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            if(resultTDHK.isPresent()) {
-                ThayDoiHoKhau tdhk = resultTDHK.get();
-                List<String> thongtinhokhauthaydoi = LayThongTinHoKhauThayDoi(tdhk);
-                String soCccd1 = thongtinhokhauthaydoi.get(6);
-                String soCccd2 = thongtinhokhauthaydoi.get(7);
-                showAlertDongY(idHBox, soCccd1, soCccd2, buttonDongY);
+        } else {
+            VBoxList.getChildren().clear();
+            VBoxList.getChildren().add(hBoxTimKiem);
+            for(HBox hbox : danhsachHBox) {
+                VBoxList.getChildren().add(hbox);
             }
         }
 

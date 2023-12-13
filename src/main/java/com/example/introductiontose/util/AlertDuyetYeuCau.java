@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import static com.example.introductiontose.controller.admin.YeuCauNhanKhauController.danhsachHBox;
+
 public class AlertDuyetYeuCau {
     public static Connection connection = SqlConnection.connect();
     public enum TableTypeThayDoi {
@@ -260,6 +262,9 @@ public class AlertDuyetYeuCau {
         HBox parentHBox = (HBox) button.getParent();
         parentHBox.setVisible(false);
         parentHBox.setManaged(false);
+        if(danhsachHBox.contains(parentHBox)) {
+            danhsachHBox.remove(parentHBox);
+        }
     }
 
 

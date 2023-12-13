@@ -20,18 +20,18 @@
                <content>
                   <VBox fx:id="VBoxList" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="410.5" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox fx:id="hBoxTimKiem" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="182.0" text="Danh sách yêu cầu thay đổi nhân khẩu và thủ tục hành chính" wrapText="true">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin></Label>
-                              <TextField prefHeight="26.0" prefWidth="134.0" promptText="Tìm kiếm">
+                              <TextField fx:id="noidungtimkiem" prefHeight="26.0" prefWidth="134.0" promptText="Tìm kiếm">
                                  <HBox.margin>
                                     <Insets left="25.0" />
                                  </HBox.margin>
                               </TextField>
-                              <Button mnemonicParsing="false" text="tìm" />
+                              <Button mnemonicParsing="false" onAction="#timkiem" text="Tìm" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="375.5" style="-fx-background-color: f6f6f6; -fx-background-radius: 10;">
