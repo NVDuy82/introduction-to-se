@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="670.0" prefWidth="925.0" stylesheets="@../../../stylesheet/danhsach-honhankhau.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.DanhSachNhanKhauController">
+<AnchorPane prefHeight="670.0" prefWidth="925.0" stylesheets="@../../../stylesheet/danhsach-honhankhau.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.user.hokhau.DSNhanKhauController">
    <children>
       <BorderPane prefHeight="670.0" prefWidth="925.0">
          <center>
