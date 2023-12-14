@@ -64,7 +64,6 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>12.4.2.jre11</version>
         </dependency>
-        <!-- MySQL Connector/J -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -75,16 +74,10 @@
             <artifactId>HikariCP</artifactId>
             <version>5.0.1</version> <!-- Kiểm tra phiên bản mới nhất -->
         </dependency>
-        <!-- SLF4J with Logback -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.32</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>21-ea+24</version>
         </dependency>
     </dependencies>
 

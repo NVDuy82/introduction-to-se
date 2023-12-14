@@ -13,9 +13,9 @@ public class SqlConnection {
     private final static String URL = "jdbc:mysql://db4free.net:3306/qlthuphidb";
     private final static String USERNAME = "sqladminsql";
     private final static String PASSWORD = "Mk123456";
-    
+
     private static final HikariDataSource dataSource;
-    
+
     // Khởi tạo HikariCP DataSource
     static {
         HikariConfig config = new HikariConfig();
@@ -23,10 +23,10 @@ public class SqlConnection {
         config.setUsername(USERNAME);
         config.setPassword(PASSWORD);
         config.setMaximumPoolSize(10); // Số lượng kết nối tối đa trong pool
-        
+
         dataSource = new HikariDataSource(config);
     }
-    
+
     /**
      * Phương thức này trả về một đối tượng Connection từ pool để kết nối đến cơ sở dữ liệu MySQL.
      *
@@ -34,17 +34,17 @@ public class SqlConnection {
      */
     public static Connection connect() {
         Connection connection = null;
-        
+
         try {
             connection = dataSource.getConnection();
             System.out.println("\u001B[32mKết nối thành công đến cơ sở dữ liệu!\u001B[0m");
         } catch (SQLException e) {
             System.err.println("Lỗi kết nối đến cơ sở dữ liệu: " + e.getMessage());
         }
-        
+
         return connection;
     }
-    
+
     /**
      * Phương thức này đóng đối tượng Connection và trả về nó vào pool.
      *
