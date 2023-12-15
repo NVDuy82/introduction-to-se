@@ -26,7 +26,7 @@ public class Application extends javafx.application.Application {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/taokhoanphi/taoKhoanPhi.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 925, 670);
         // Cấu hình Stage với Scene và hiển thị nó
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/danh-sach-ho-khau.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/YeuCauNapTien.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         
         stage.setTitle("Hello!");
