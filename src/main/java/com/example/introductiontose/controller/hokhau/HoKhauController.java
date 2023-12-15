@@ -98,6 +98,7 @@ public class HoKhauController implements Initializable {
             
             controller.launch(idHoKhau, nhanKhauList);
         } catch (IOException e) {
+            e.printStackTrace();
             AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
         }
     }

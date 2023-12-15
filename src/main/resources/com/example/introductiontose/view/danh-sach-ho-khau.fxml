@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="670.0" prefWidth="925.0" stylesheets="@../stylesheet/danhsach-honhankhau.css" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.DanhSachHoKhauController">
+<AnchorPane prefHeight="670.0" prefWidth="925.0" stylesheets="@../stylesheet/danhsach-honhankhau.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.DanhSachHoKhauController">
    <children>
       <BorderPane prefHeight="670.0" prefWidth="925.0">
          <center>
-            <AnchorPane prefHeight="670.0" prefWidth="890.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="centerAnchorPane" prefHeight="670.0" prefWidth="890.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane fx:id="paneContent" layoutX="25.0" layoutY="15.0" prefHeight="550.0" prefWidth="890.0" styleClass="pane-list">
+                  <Pane fx:id="paneContent" layoutX="17.5" layoutY="15.0" prefHeight="550.0" prefWidth="890.0" styleClass="pane-list">
                      <children>
                         <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="550.0" prefWidth="890.0" styleClass="transparent-scroll">
                            <content>

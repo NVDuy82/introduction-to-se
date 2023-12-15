@@ -1,4 +1,4 @@
-package com.example.introductiontose.controller;
+package com.example.introductiontose.controller.user.hokhau;
 
 import com.example.introductiontose.model.NhanKhau;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.time.format.DateTimeFormatter;
 
-public class ThongTinNhanKhauController {
+public class TTNhanKhauController {
     @FXML
     private Button title;
     @FXML
