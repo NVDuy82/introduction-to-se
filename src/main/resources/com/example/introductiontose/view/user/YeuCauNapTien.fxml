@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="690.0" prefWidth="800.0">
+         <children>
+            <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="28.0" text="Ngân hàng" />
+                  <Label text="Số tài khoản:" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Người thụ hưởng" />
+                  <Label layoutX="364.0" layoutY="269.0" text="Cái ở đây để t làm nhé :v, làm mỗi cái button dưới thôi" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="690.0" prefWidth="800.0">
+               <children>
+                  <TextField prefHeight="26.0" prefWidth="425.0" />
+                  <Button mnemonicParsing="false" text="Nạp tiền" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
