@@ -204,7 +204,8 @@ public class quenMatKhau implements Initializable {
         }
 
         String tenTaiKhoan = selectTK.get().getTentaikhoan();
-        TaiKhoanNhanKhau tknk = new TaiKhoanNhanKhau(soCccd,tenTaiKhoan, matkhau);
+        int soDuTaiKhoan = selectTK.get().getSoDuTaiKhoan();
+        TaiKhoanNhanKhau tknk = new TaiKhoanNhanKhau(soCccd,tenTaiKhoan, matkhau, soDuTaiKhoan);
         tknkDao.delete(selectTK.get());
         tknkDao.save(tknk);
 
