@@ -20,18 +20,18 @@
                <content>
                   <VBox fx:id="VBoxList" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="410.5" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox fx:id="hBoxTimKiem" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="182.0" text="Danh sách yêu cầu thay đổi nhân khẩu và thủ tục hành chính" wrapText="true">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin></Label>
-                              <TextField prefHeight="26.0" prefWidth="134.0" promptText="Tìm kiếm">
+                              <TextField fx:id="noidungtimkiem" prefHeight="26.0" prefWidth="134.0" promptText="Tìm kiếm">
                                  <HBox.margin>
                                     <Insets left="25.0" />
                                  </HBox.margin>
                               </TextField>
-                              <Button mnemonicParsing="false" text="tìm" />
+                              <Button mnemonicParsing="false" onAction="#timkiem" text="Tìm" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="375.5" style="-fx-background-color: f6f6f6; -fx-background-radius: 10;">
@@ -89,20 +89,19 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="296.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="208.0" text="Thông tin yêu cầu" textOverrun="CLIP" wrapText="true">
+                        <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="220.0" text="Thông tin yêu cầu" textOverrun="CLIP" wrapText="true">
                            <font>
                               <Font size="16.0" />
                            </font></Label>
                      </children>
                   </HBox>
-                  <Text fx:id="hienThiChiTiet" strokeType="OUTSIDE" strokeWidth="0.0" text="Chi tiết thông tin yêu cầu" textAlignment="JUSTIFY" wrappingWidth="273.1110830307007">
+                  <Text fx:id="hienThiChiTiet" strokeType="OUTSIDE" strokeWidth="0.0" text="Các trường thông tin của yêu cầu" textAlignment="JUSTIFY" wrappingWidth="278.60108947753906">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Text>
+                     </VBox.margin></Text>
                </children>
                <HBox.margin>
                   <Insets bottom="27.5" left="10.0" right="27.5" top="15.0" />
