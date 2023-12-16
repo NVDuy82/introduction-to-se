@@ -1,18 +1,19 @@
-package com.example.introductiontose.controller.user.hokhau;
+package com.example.introductiontose.controller.admin.hokhau;
 
 import com.example.introductiontose.controller.node.DanhSach;
-import com.example.introductiontose.model.NhanKhau;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.util.List;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class DSNhanKhauController {
+public class DanhSachHoKhauController implements Initializable {
     @FXML
-    private Button title;
+    private AnchorPane centerAnchorPane;
     @FXML
     private Pane paneContent;
     @FXML
@@ -20,14 +21,16 @@ public class DSNhanKhauController {
     @FXML
     private VBox mainVBox;
     
-    public void setTitle(String title) {
-        this.title.setText(title);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        launch();
     }
     
-    public void launch(List<NhanKhau> nhanKhauList) {
+    public void launch() {
         DanhSach danhSach = new DanhSach();
-        danhSach.launch(nhanKhauList);
+        danhSach.launch();
         this.paneContent.getChildren().clear();
         this.paneContent.getChildren().add(danhSach);
     }
+    
 }

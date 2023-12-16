@@ -1,6 +1,8 @@
-package com.example.introductiontose.controller;
+package com.example.introductiontose.controller.node;
 
 import com.example.introductiontose.Application;
+import com.example.introductiontose.controller.admin.hokhau.DanhSachNhanKhauController;
+import com.example.introductiontose.controller.admin.hokhau.ThongTinNhanKhauController;
 import com.example.introductiontose.dao.DataAccessObject;
 import com.example.introductiontose.dao.HoKhauDAO;
 import com.example.introductiontose.database.SqlConnection;

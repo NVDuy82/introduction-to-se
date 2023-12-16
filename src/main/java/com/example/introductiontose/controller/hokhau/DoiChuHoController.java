@@ -64,10 +64,11 @@ public class DoiChuHoController extends DanhSachHoController {
         Connection connection = SqlConnection.connect();
         DataAccessObject<ThayDoiHoKhau, Integer> accessObject = new ThayDoiHoKhauDAO(connection);
         ThayDoiHoKhau change = new ThayDoiHoKhau(0,
-                idHoKhau,
-                null,
+                hoKhau.getIdHoKhau(),
+                "chờ xác nhận",
                 selectedController.getData().getThongTinNhanKhau().getCccd().getSoCccd(),
-                null,
+                "thay đổi chủ hộ (idHoKhau = " + hoKhau.getIdHoKhau() + ") từ ông " + hoKhau.getTenChuHo() + " sang ông " +
+                selectedController.getData().getThongTinNhanKhau().getHoTen(),
                 LocalDateTime.now());
         try {
             accessObject.save(change);

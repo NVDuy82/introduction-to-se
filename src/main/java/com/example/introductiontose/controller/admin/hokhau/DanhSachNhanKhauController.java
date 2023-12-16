@@ -1,20 +1,16 @@
-package com.example.introductiontose.controller;
+package com.example.introductiontose.controller.admin.hokhau;
 
-import com.example.introductiontose.Application;
+import com.example.introductiontose.controller.node.DanhSach;
 import com.example.introductiontose.model.NhanKhau;
-import com.example.introductiontose.view.icon.IconUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.List;
 
 public class DanhSachNhanKhauController {

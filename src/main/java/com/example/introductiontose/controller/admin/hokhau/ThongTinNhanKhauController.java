@@ -1,4 +1,4 @@
-package com.example.introductiontose.controller;
+package com.example.introductiontose.controller.admin.hokhau;
 
 import com.example.introductiontose.model.NhanKhau;
 import javafx.fxml.FXML;

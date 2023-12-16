@@ -28,7 +28,7 @@ public class Application extends javafx.application.Application {
 //        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/YeuCauNhanKhau.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 925, 670);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/YeuCauNapTien.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/hokhau/ho-khau.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         stage.setTitle("Hello!");

@@ -110,10 +110,6 @@ public class ThemNhanKhauController implements Initializable {
         }
     }
     
-    private NhanKhau getNhanKhau() {
-        return new NhanKhau(this.getInfo());
-    }
-    
     private ThongTinNhanKhau getInfo() {
         return new ThongTinNhanKhau(new CCCD(soCccdText.getText(),
                 (ngayCapDatePicker.getValue() == null) ? LocalDateTime.now() : ngayCapDatePicker.getValue().atStartOfDay(),
@@ -136,7 +132,7 @@ public class ThemNhanKhauController implements Initializable {
     private void sendRequire() {
         Connection connection = SqlConnection.connect();
         DataAccessObject<NhanKhau, String> accessObject = new NhanKhauDAO(connection, NhanKhauDAO.TableType.NHANKHAUCHUATHEM);
-        NhanKhau change = getNhanKhau();
+        NhanKhau change = new NhanKhau(this.getInfo());
         try {
             accessObject.save(change);
             SqlConnection.close(connection);

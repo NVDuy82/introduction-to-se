@@ -1,5 +1,6 @@
 package com.example.introductiontose.controller.hokhau;
 
+import com.example.introductiontose.model.HoKhau;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.util.ActionButton;
 import com.example.introductiontose.util.AlertUtils;
@@ -26,7 +27,7 @@ public abstract class DanhSachHoController {
     Button clearButton;
     @FXML
     VBox mainVBox;
-    int idHoKhau;
+    HoKhau hoKhau;
     IconType originalIconType;
     List<NhanKhau> nhanKhauList;
     List<IconNhanKhauController> iconNhanKhauControllerList;
@@ -54,8 +55,8 @@ public abstract class DanhSachHoController {
         }
     }
     
-    public void launch(int idHoKhau, List<NhanKhau> nhanKhauList) throws IOException {
-        this.idHoKhau = idHoKhau;
+    public void launch(HoKhau hoKhau, List<NhanKhau> nhanKhauList) throws IOException {
+        this.hoKhau = hoKhau;
         this.nhanKhauList = nhanKhauList;
         this.showInVBox(this.originalIconType);
         ActionButton.hideButtonSubmit(submitButton);

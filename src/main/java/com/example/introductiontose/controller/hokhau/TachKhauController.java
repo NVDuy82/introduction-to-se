@@ -97,7 +97,7 @@ public class TachKhauController extends DanhSachHoController {
             danhSachNhanKhau.add(selectedList.get(i).getData().getThongTinNhanKhau().getCccd().getSoCccd());
         }
         TachKhau change = new TachKhau(selectedList.get(0).getData().getThongTinNhanKhau().getCccd().getSoCccd(),
-                idHoKhau,
+                hoKhau.getIdHoKhau(),
                 danhSachNhanKhau,
                 null);
         try {

@@ -1,9 +1,13 @@
 package com.example.introductiontose.controller.hokhau;
 
 import com.example.introductiontose.dao.DataAccessObject;
+import com.example.introductiontose.dao.ThayDoiNhanKhauDao;
+import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.NhanKhau;
+import com.example.introductiontose.model.ThayDoiNhanKhau;
 import com.example.introductiontose.util.ActionButton;
 import com.example.introductiontose.util.AlertUtils;
+import com.example.introductiontose.view.icon.IconController;
 import com.example.introductiontose.view.icon.IconNhanKhauController;
 import com.example.introductiontose.view.icon.IconType;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -62,21 +67,20 @@ public class XoaNhanKhauController extends DanhSachHoController {
     }
 
     private void sendRequire() {
-//        Connection connection = SqlConnection.connect();
-//        DataAccessObject accessObject;
-//        for (IconController iconController : selectedList) {
-//            NhanKhau nhanKhau = iconController.getNhanKhau();
-//
-//            Stage dialogStage = createInputDialog(nhanKhau, accessObject);
-//            if (dialogStage != null) {
-//                dialogStage.showAndWait();
-//            }
-//        }
+        Connection connection = SqlConnection.connect();
+        DataAccessObject<ThayDoiNhanKhau, Integer> accessObject = new ThayDoiNhanKhauDao(connection);
+        for (IconController<NhanKhau> iconController : selectedList) {
+            NhanKhau nhanKhau = iconController.getData();
+            Stage dialogStage = createInputDialog(nhanKhau, accessObject);
+            if (dialogStage != null) {
+                dialogStage.showAndWait();
+            }
+        }
     }
 
-    private Stage createInputDialog(NhanKhau nhanKhau, DataAccessObject accessObject) {
+    private Stage createInputDialog(NhanKhau nhanKhau, DataAccessObject<ThayDoiNhanKhau, Integer> accessObject) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("InputDialog.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/hokhau/InputDialog.fxml"));
             Stage dialogStage = new Stage();
             dialogStage.initOwner(submitButton.getScene().getWindow());
 

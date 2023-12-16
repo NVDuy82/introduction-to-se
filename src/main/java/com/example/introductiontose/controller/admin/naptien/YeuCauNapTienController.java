@@ -1,4 +1,4 @@
-package com.example.introductiontose.controller.admin;
+package com.example.introductiontose.controller.admin.naptien;
 
 import com.example.introductiontose.dao.DataAccessObject;
 import com.example.introductiontose.dao.NapTienDao;

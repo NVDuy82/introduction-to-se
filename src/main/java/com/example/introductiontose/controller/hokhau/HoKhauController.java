@@ -3,6 +3,7 @@ package com.example.introductiontose.controller.hokhau;
 import com.example.introductiontose.dao.DataAccessObject;
 import com.example.introductiontose.dao.NhanKhauDAO;
 import com.example.introductiontose.database.SqlConnection;
+import com.example.introductiontose.model.HoKhau;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.util.AlertUtils;
 import com.example.introductiontose.util.SQLUtils;
@@ -30,6 +31,7 @@ public class HoKhauController implements Initializable {
     private Button buttonMenuTachKhau;
     @FXML
     private Pane paneContent;
+    private HoKhau hoKhau;
     private int idHoKhau;
     private Button selectedButton;
     
@@ -40,8 +42,9 @@ public class HoKhauController implements Initializable {
     }
     
     
-    public void setIdHoKhau(int idHoKhau) {
-        this.idHoKhau = idHoKhau;
+    public void setHoKhau(HoKhau hoKhau) {
+        this.hoKhau = hoKhau;
+        this.idHoKhau = hoKhau.getIdHoKhau();
     }
     
     @FXML
@@ -96,7 +99,7 @@ public class HoKhauController implements Initializable {
             List<NhanKhau> nhanKhauList = getNhanKhauList();
             if (nhanKhauList == null) return;
             
-            controller.launch(idHoKhau, nhanKhauList);
+            controller.launch(this.hoKhau, nhanKhauList);
         } catch (IOException e) {
             e.printStackTrace();
             AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");

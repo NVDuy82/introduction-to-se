@@ -1,4 +1,4 @@
-package com.example.introductiontose.controller.admin;
+package com.example.introductiontose.controller.admin.naptien;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
