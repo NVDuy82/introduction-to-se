@@ -17,7 +17,7 @@ public class YeuCauNapTienController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         yeuCauList.getChildren().clear();
         for (int i = 0; i < 5; i++) {
-            NapTienNode node = new NapTienNode();
+            NapTienNode node = new NapTienNode("01230000" + i, "Nguyễn Văn " + i, 1000 * i);
             yeuCauList.getChildren().add(node);
         }
     }

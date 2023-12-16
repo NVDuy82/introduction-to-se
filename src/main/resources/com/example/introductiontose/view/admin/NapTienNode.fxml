@@ -10,17 +10,17 @@
    <children>
       <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="550.0">
          <children>
-            <Label text="ông a">
+            <Label fx:id="cccd" text="0123456789">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label text="tiền">
+            <Label fx:id="name" text="Họ tên">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <Label layoutX="10.0" layoutY="28.0" text="Ghi chú">
+            <Label fx:id="money" layoutX="10.0" layoutY="28.0" text="\$$$">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" top="5.0" />
                </VBox.margin>
