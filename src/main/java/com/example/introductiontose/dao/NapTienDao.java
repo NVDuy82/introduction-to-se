@@ -24,32 +24,24 @@ public class NapTienDao implements DataAccessObject<NapTien,Integer> {
     @Override
     public List<NapTien> getAll() throws SQLException {
         List<NapTien> danhsachNapTien = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM naptien");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                NapTien napTien = _get(resultSet);
-                danhsachNapTien.add(napTien);
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM naptien");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            NapTien napTien = _get(resultSet);
+            danhsachNapTien.add(napTien);
+            
         }
         return danhsachNapTien;
     }
 
     @Override
     public Optional<NapTien> get(Integer idNapTien) throws SQLException {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM naptien WHERE idNapTien = ?");
-            statement.setInt(1, idNapTien);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                NapTien napTien = _get(resultSet);
-                return Optional.of(napTien);
-            }
-        } catch (SQLException e) {
-
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM naptien WHERE idNapTien = ?");
+        statement.setInt(1, idNapTien);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            NapTien napTien = _get(resultSet);
+            return Optional.of(napTien);
         }
         return Optional.empty();
 
@@ -57,43 +49,30 @@ public class NapTienDao implements DataAccessObject<NapTien,Integer> {
 
     @Override
     public void save(@NotNull NapTien napTien) throws SQLException {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO naptien" +
-                    "(soCccd,soTienNap,ghiChu) " +
-                    "VALUES (?, ?, ?)");
-            _setValuesForStatement(napTien, statement, 1);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-
-        }
-
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO naptien" +
+                "(soCccd,soTienNap,ghiChu) " +
+                "VALUES (?, ?, ?)");
+        _setValuesForStatement(napTien, statement, 1);
+        statement.executeUpdate();
     }
 
     @Override
     public void update(@NotNull NapTien napTien) throws SQLException {
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE naptien SET" +
-                    "soCccd = ?, " +
-                    "soTienNap = ?, " +
-                    "ghiChu = ?, " +
-                    "WHERE idNapTien = ?");
-            int parameterIndex = _setValuesForStatement(napTien, statement, 1);
-            statement.setInt(parameterIndex, napTien.getIdNapTien());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-
-        }
+        PreparedStatement statement = connection.prepareStatement("UPDATE naptien SET" +
+                "soCccd = ?, " +
+                "soTienNap = ?, " +
+                "ghiChu = ?, " +
+                "WHERE idNapTien = ?");
+        int parameterIndex = _setValuesForStatement(napTien, statement, 1);
+        statement.setInt(parameterIndex, napTien.getIdNapTien());
+        statement.executeUpdate();
     }
 
     @Override
     public void delete(@NotNull NapTien napTien) throws SQLException {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM naptien WHERE idNapTien = ?");
-            statement.setInt(1, napTien.getIdNapTien());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-
-        }
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM naptien WHERE idNapTien = ?");
+        statement.setInt(1, napTien.getIdNapTien());
+        statement.executeUpdate();
     }
 
     private NapTien _get(ResultSet resultSet) throws SQLException {

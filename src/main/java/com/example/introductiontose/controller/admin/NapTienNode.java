@@ -9,9 +9,11 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 
 public class NapTienNode extends HBox {
-    
     @FXML
     private Label cccd;
+    
+    @FXML
+    private Label ghiChu;
     
     @FXML
     private Label money;
@@ -19,7 +21,8 @@ public class NapTienNode extends HBox {
     @FXML
     private Label name;
     
-    public NapTienNode(String soCccd, String name, int money) {
+    
+    public NapTienNode(String soCccd, String name, int money, String ghiChu) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/NapTienNode.fxml"));
             fxmlLoader.setRoot(this);
@@ -32,6 +35,7 @@ public class NapTienNode extends HBox {
         this.cccd.setText(soCccd);
         this.name.setText(name);
         this.money.setText(String.valueOf(money));
+        this.ghiChu.setText(ghiChu);
     }
     
     
