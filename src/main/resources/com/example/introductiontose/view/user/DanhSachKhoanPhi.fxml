@@ -283,12 +283,17 @@
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
+                        <Button mnemonicParsing="false" text="Nạp tiền">
+                           <VBox.margin>
+                              <Insets left="240.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </VBox>
-                  <ScrollPane fitToHeight="true" hbarPolicy="NEVER" minViewportHeight="420.0" minViewportWidth="300.0" prefHeight="200.0" prefViewportHeight="420.0" prefViewportWidth="300.0" prefWidth="200.0" style="-fx-background-radius: 10;">
+                  <ScrollPane fitToHeight="true" hbarPolicy="NEVER" minViewportHeight="370.0" minViewportWidth="300.0" prefHeight="200.0" prefViewportHeight="370.0" prefViewportWidth="300.0" prefWidth="200.0" style="-fx-background-radius: 10;">
                      <content>
                         <VBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="296.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                            <children>
