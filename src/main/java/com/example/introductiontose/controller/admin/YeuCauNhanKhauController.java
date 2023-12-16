@@ -37,6 +37,7 @@ public class YeuCauNhanKhauController implements Initializable {
     private HBox hBoxTimKiem;
 
     List<TamVang> tamvangList;
+    List<TamTru> tamtruList;
     public static List<HBox> danhsachHBox = new ArrayList<>();
 
     Connection connection = SqlConnection.connect();
@@ -102,11 +103,11 @@ public class YeuCauNhanKhauController implements Initializable {
         }
 
         for(TamVang tv : tamvangList) {
-            if(tv.getTrangThai().equals("choxacnhan")) {
+            if(tv.getTrangThai().equals("chờ xác nhận")) {
                 String idHBox = "TV" + tv.getIdTamVang();
-                String kieuYeuCau = "Yêu cầu tạm vắng";
-                String nguoiGuiYeuCau = tv.getSoCccd();
-                String ghiChu = tv.getLiDo();
+                String kieuYeuCau = "Yêu cầu: tạm vắng";
+                String nguoiGuiYeuCau = "Số CCCD yêu cầu: " + tv.getSoCccd();
+                String ghiChu ="Lý do: " + tv.getLyDo();
 
                 HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
                 Insets hboxMargin = new Insets(10, 10, 0, 10);
@@ -116,6 +117,26 @@ public class YeuCauNhanKhauController implements Initializable {
             }
         }
 
+        ///////////////////////////////////////////////////
+
+
+//        TamTruDAO tamtruDAO = new TamTruDAO(connection);
+//        this.tamtruList = tamtruDAO.getAll();
+//
+//        for(TamTru tt : tamtruList) {
+//            if(tt.getTrangThai().equals("chờ xác nhận")) {
+//                String idHBox = "TT" + tt.getIdTamTru();
+//                String kieuYeuCau = "Yêu cầu tạm vắng";
+//                String nguoiGuiYeuCau = tt.getCccdChuHo();
+//                String ghiChu = tt.getLyDo();
+//
+//                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
+//                Insets hboxMargin = new Insets(10, 10, 0, 10);
+//                VBoxList.getChildren().add(hbox);
+//                VBoxList.setMargin(hbox, hboxMargin);
+//                danhsachHBox.add(hbox);
+//            }
+//        }
 
     }
     public Button initButtonDongY() {
@@ -241,6 +262,25 @@ public class YeuCauNhanKhauController implements Initializable {
                         + thongtinhokhauthaydoi.get(4) + "\n\n";
                 hienThiChiTiet.setText(chitiet);
             }
+        }
+
+        if(idHBox.substring(0,2).equals("TV")){
+            TamVang tmp = null;
+            int idTamVang = Integer.parseInt(idHBox.substring(2));
+            for(TamVang tv : tamvangList){
+                if(tv.getIdTamVang() == idTamVang){
+                    tmp = tv;
+                    break;
+                }
+            }
+            String chitiet = "Yêu cầu: xin tạm vắng" + "\n\n"
+                    + "Số CCCD: " + tmp.getSoCccd() + "\n\n"
+                    + "Ngày bắt đầu: " + tmp.getNgayBatDau() +"\n"
+                    + "Ngày kết thúc: " + tmp.getNgayKetThuc() + "\n\n"
+                    + "Nơi đăng ký tạm trú: " + tmp.getNoiDangKyTamTru() + "\n"
+                    + "Lý do: " + tmp.getLyDo() +"\n";
+
+            hienThiChiTiet.setText(chitiet);
         }
     }
 
@@ -395,7 +435,7 @@ public class YeuCauNhanKhauController implements Initializable {
                 ThayDoiNhanKhau tdnk = resultTDNK.get();
                 String soCccd = tdnk.getSoCccd();
                 if(button.getText().equals("Hủy bỏ")) {
-                    showAlertHuyBo(idHBox, soCccd, null, button);
+//                    showAlertHuyBo(idHBox, soCccd, null, button);
                 }
                 if(button.getText().equals("Đồng ý")) {
                     showAlertDongY(idHBox, soCccd, null, button);
@@ -424,6 +464,13 @@ public class YeuCauNhanKhauController implements Initializable {
                 if(button.getText().equals("Đồng ý")) {
                     showAlertDongY(idHBox, soCccd1, soCccd2, button);
                 }
+            }
+        }
+
+        if(idHBox.substring(0,2).equals("TV")){
+            if(button.getText().equals("Hủy bỏ")){
+                TamVangDAO tamvangDAO = new TamVangDAO(connection);
+
             }
         }
 

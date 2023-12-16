@@ -1,13 +1,18 @@
 package com.example.introductiontose.util;
 
-import com.example.introductiontose.dao.*;
+import com.example.introductiontose.dao.NhanKhauDAO;
+import com.example.introductiontose.dao.TaiKhoanNhanKhauDAO;
+import com.example.introductiontose.dao.ThayDoiHoKhauDAO;
+import com.example.introductiontose.dao.ThayDoiNhanKhauDao;
 import com.example.introductiontose.database.SqlConnection;
-import com.example.introductiontose.model.*;
+import com.example.introductiontose.model.NhanKhau;
+import com.example.introductiontose.model.TaiKhoanNhanKhau;
+import com.example.introductiontose.model.ThayDoiHoKhau;
+import com.example.introductiontose.model.ThayDoiNhanKhau;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -266,6 +271,5 @@ public class AlertDuyetYeuCau {
             danhsachHBox.remove(parentHBox);
         }
     }
-
 
 }

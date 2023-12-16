@@ -38,11 +38,11 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
             String soCccd = rs.getString("soCccd");
             LocalDate ngayBatDau = rs.getTimestamp("ngayBatDau").toLocalDateTime().toLocalDate();
             LocalDate ngayKetThuc = rs.getTimestamp("ngayKetThuc").toLocalDateTime().toLocalDate();
-            String liDo = rs.getString("liDo");
+            String lyDo = rs.getString("lyDo");
             String trangthai = rs.getString("trangThai");
             String noiDangKy = rs.getString("noiDangKyTamTru");
 
-            TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, liDo,noiDangKy, trangthai);
+            TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, lyDo,noiDangKy, trangthai);
             list.add(tamvang);
         }
 
@@ -54,13 +54,13 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
      */
     @Override
     public void save(@NotNull TamVang t) throws SQLException {
-        String sql = "INSERT INTO tamvang (soCccd, ngayBatDau, ngayKetThuc, liDo, noiDangLyTamTru, TrangThai) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tamvang (soCccd, ngayBatDau, ngayKetThuc, lyDo, noiDangLyTamTru, TrangThai) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement st = connection.prepareStatement(sql);
 
         st.setString(1, t.getSoCccd());
         st.setTimestamp(2, Timestamp.valueOf(t.getNgayBatDau().atStartOfDay()));
         st.setTimestamp(3, Timestamp.valueOf(t.getNgayKetThuc().atStartOfDay()));
-        st.setString(4, t.getLiDo());
+        st.setString(4, t.getLyDo());
         st.setString(5, t.getNoiDangKyTamTru());
         st.setString(6, "ChoXacNhan");
 
@@ -72,13 +72,13 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
      */
     @Override
     public void update(@NotNull TamVang t) throws SQLException {
-        String sql = "UPDATE tamvang SET soCccd = ?, ngayBatDau = ?, ngayKetThuc = ?, liDo = ?, trangThai = ?, noiDangKyTamTru = ? WHERE idTamVang = ?";
+        String sql = "UPDATE tamvang SET soCccd = ?, ngayBatDau = ?, ngayKetThuc = ?, lyDo = ?, trangThai = ?, noiDangKyTamTru = ? WHERE idTamVang = ?";
         PreparedStatement st = connection.prepareStatement(sql);
 
         st.setString(1, t.getSoCccd());
         st.setTimestamp(2, Timestamp.valueOf(t.getNgayBatDau().atStartOfDay()));
         st.setTimestamp(3, Timestamp.valueOf(t.getNgayKetThuc().atStartOfDay()));
-        st.setString(4, t.getLiDo());
+        st.setString(4, t.getLyDo());
         st.setString(5, t.getTrangThai());
         st.setString(6, t.getNoiDangKyTamTru());
         st.setInt(7, t.getIdTamVang());
@@ -115,10 +115,10 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
             String soCccd = rs.getString("soCccd");
             LocalDate ngayBatDau = rs.getTimestamp("ngayBatDau").toLocalDateTime().toLocalDate();
             LocalDate ngayKetThuc = rs.getTimestamp("ngayKetThuc").toLocalDateTime().toLocalDate();
-            String liDo = rs.getString("liDo");
+            String lyDo = rs.getString("lyDo");
             String trangthai = rs.getString("trangThai");
             String noiDangKy = rs.getString("noiDangKyTamTru");
-            TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, liDo,noiDangKy, trangthai);
+            TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, lyDo,noiDangKy, trangthai);
 
             return Optional.of(tamvang);
         }

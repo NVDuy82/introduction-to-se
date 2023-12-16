@@ -9,7 +9,7 @@ public class TamVang {
     private int idTamVang;
     private String soCccd;
     private LocalDate ngayBatDau, ngayKetThuc;
-    private String liDo;
+    private String lyDo;
     private String noiDangKyTamTru;
     private String trangThai;
 
@@ -23,12 +23,12 @@ public class TamVang {
         return trangThai;
     }
 
-    public TamVang(int idTamVang, String soCccd, LocalDate ngayBatDau, LocalDate ngayKetThuc, String liDo, String noiDangKyTamTru, String trangThai) {
+    public TamVang(int idTamVang, String soCccd, LocalDate ngayBatDau, LocalDate ngayKetThuc, String lyDo, String noiDangKyTamTru, String trangThai) {
         this.idTamVang = idTamVang;
         this.soCccd = soCccd;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
-        this.liDo = liDo;
+        this.lyDo = lyDo;
         this.noiDangKyTamTru = noiDangKyTamTru;
         this.trangThai = trangThai;
     }
@@ -122,16 +122,16 @@ public class TamVang {
      *
      * @return Lý do của việc tạm vắng.
      */
-    public String getLiDo() {
-        return liDo;
+    public String getLyDo() {
+        return lyDo;
     }
 
     /**
      * Đặt lý do mới cho thông tin tạm vắng.
      *
-     * @param liDo Lý do mới cho thông tin tạm vắng.
+     * @param lyDo Lý do mới cho thông tin tạm vắng.
      */
-    public void setLiDo(String liDo) {
-        this.liDo = liDo;
+    public void setLyDo(String lyDo) {
+        this.lyDo = lyDo;
     }
 }
