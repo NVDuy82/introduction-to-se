@@ -3,7 +3,6 @@ package com.example.introductiontose.model;
 import java.time.LocalDate;
 
 public class TamTru {
-    private int idTamTru;
     private String soCCCD;
     private String cccdChuHo;
     private String hoTen, biDanh;
@@ -20,11 +19,28 @@ public class TamTru {
     private LocalDate ngayCap, ngayKetThuc, ngayBatDau;
     private String trangThai;
     private String soDienThoai;
+    private String hoTenChuHo;
+    private String noiDangKyTamTru;
+
+    public String getNoiDangKyTamTru(){
+        return noiDangKyTamTru;
+    }
+
+    public void setNoiDangKyTamTru(String name){
+        this.noiDangKyTamTru = name;
+    }
+    public String getHoTenChuHo(){
+        return hoTenChuHo;
+    }
+
+    public void setHoTenChuHo(String name){
+        this.hoTenChuHo = name;
+    }
 
     public TamTru() {};
 
-    public TamTru(int idTamTru, String soCCCD, String cccdChuHo, String hoTen, String biDanh, String gioiTinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc, LocalDate ngayBatDau, String trangThai, String soDienThoai) {
-        this.idTamTru = idTamTru;
+    public TamTru(String soCCCD, String cccdChuHo, String hoTen, String biDanh, String gioiTinh, String nguyenQuan, String danToc, String tonGiao, String ngheNghiep, String noiLamViec, String noiCap, String quanHe, String lyDo, LocalDate ngaysinh, LocalDate ngayCap, LocalDate ngayKetThuc, LocalDate ngayBatDau, String trangThai, String soDienThoai) {
+
         this.soCCCD = soCCCD;
         this.cccdChuHo = cccdChuHo;
         this.hoTen = hoTen;
@@ -44,14 +60,6 @@ public class TamTru {
         this.ngayBatDau = ngayBatDau;
         this.trangThai = trangThai;
         this.soDienThoai = soDienThoai;
-    }
-
-    public int getIdTamTru() {
-        return idTamTru;
-    }
-
-    public void setIdTamTru(int idTamTru) {
-        this.idTamTru = idTamTru;
     }
 
     public String getSoCCCD() {

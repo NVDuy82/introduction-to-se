@@ -12,12 +12,19 @@ public class TamVang {
     private String lyDo;
     private String noiDangKyTamTru;
     private String trangThai;
+    private String ten;
 
     /**
      * Khởi tạo một đối tượng TamVang mới với thông tin mặc định.
      */
-    public TamVang() {
+    public String getTen() {
+        return this.ten;
     }
+
+    public void setTen(String name){
+        this.ten = name;
+    }
+
 
     public String getTrangThai() {
         return trangThai;

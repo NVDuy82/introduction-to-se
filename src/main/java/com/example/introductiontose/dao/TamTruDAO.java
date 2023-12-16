@@ -31,17 +31,15 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     public List<TamTru> getAll() {
         List<TamTru> list = new ArrayList<>();
         try {
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM tamtru");
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM dangkytamtru");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                int idTamTru = rs.getInt("idTamTru");
                 String soCCCD = rs.getString("soCccd");
-                String cccdChuHo = rs.getString("cccdChuHo");
+                String cccdChuHo = rs.getString("soCccdChuHo");
                 String hoTen = rs.getString("hoTen");
-                String biDanh = rs.getString("bidanh");
+                String biDanh = rs.getString("biDanh");
                 String gioiTinh = rs.getString("gioiTinh");
                 String soDienthoai = rs.getString("soDienThoai");
-                String noiSinh = rs.getString("noiSinh");
                 String trangThai = rs.getString("trangThai");
                 String nguyenQuan = rs.getString("nguyenQuan");
                 String noiLamViec = rs.getString("noiLamViec");
@@ -54,10 +52,12 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
                 LocalDate ngayKetThuc = rs.getTimestamp("ngayKetThuc").toLocalDateTime().toLocalDate();
                 LocalDate ngaysinh = rs.getTimestamp("ngaysinh").toLocalDateTime().toLocalDate();
                 LocalDate ngayCap = rs.getTimestamp("ngayCap").toLocalDateTime().toLocalDate();
-                String lyDo = rs.getString("liDo");
+                String lyDo = rs.getString("lyDo");
+                String noiDangKyTamTru = rs.getString("noiDangKyTamTru");
 
-                TamTru tamTru = new TamTru(idTamTru, soCCCD, cccdChuHo, hoTen, biDanh,gioiTinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, quanHe, lyDo, ngaysinh, ngayCap,ngayBatDau, ngayKetThuc, trangThai, soDienthoai);
-
+                TamTru tamTru = new TamTru(soCCCD, cccdChuHo, hoTen, biDanh,gioiTinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, quanHe, lyDo, ngaysinh, ngayCap,ngayBatDau, ngayKetThuc, trangThai, soDienthoai);
+                getName(tamTru);
+                tamTru.setNoiDangKyTamTru(noiDangKyTamTru);
                 // Set other properties if necessary
 
                 list.add(tamTru);
@@ -77,7 +77,7 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public void save(@NotNull TamTru t) {
         try {
-            String sql = "INSERT INTO tamtru (soCCCD, cccdChuHo, hoTen, biDanh, gioiTinh, soDienThoai, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, quanHe, lyDo, trangThai, ngaysinh, ngayCap,ngayBatDau, ngayKetThuc) VALUES (?, ?, ?, ?,? ,?,?,?,?,?,?,?,?,?,?,?,?,?, ?)";
+            String sql = "INSERT INTO dangkytamtru (soCCCD, cccdChuHo, hoTen, biDanh, gioiTinh, soDienThoai, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, quanHe, lyDo, trangThai, ngaysinh, ngayCap,ngayBatDau, ngayKetThuc) VALUES (?, ?, ?, ?,? ,?,?,?,?,?,?,?,?,?,?,?,?,?, ?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, t.getSoCCCD());
             st.setString(2, t.getCccdChuHo());
@@ -116,10 +116,10 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public void update(@NotNull TamTru t) {
         try {
-            String sql = "UPDATE tamvang SET trangThai = 'Đã phê duyệt' WHERE idTamTru = ?";
+            String sql = "UPDATE dangkytamtru SET trangThai = 'Đã phê duyệt' WHERE idTamTru = ?";
             PreparedStatement st = connection.prepareStatement(sql);
 
-            st.setInt(1, t.getIdTamTru());
+            st.setString(1, t.getSoCCCD());
             // Thực hiện lệnh
             st.executeUpdate();
         } catch (SQLException e) {
@@ -134,10 +134,10 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public void delete(@NotNull TamTru t) {
         try {
-            String sql = "DELETE FROM tamvang WHERE idTamTru = ?";
+            String sql = "DELETE FROM dangkytamtru WHERE idTamTru = ?";
             PreparedStatement st = connection.prepareStatement(sql);
 
-            st.setInt(1, t.getIdTamTru());
+            st.setString(1, t.getSoCCCD());
 
             st.executeUpdate();
         } catch (SQLException e) {
@@ -152,7 +152,7 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public Optional<TamTru> get(Integer id) {
         try {
-            String sql = "SELECT * FROM tamvang WHERE idTamTru = ?";
+            String sql = "SELECT * FROM dangkytamtru WHERE idTamTru = ?";
             PreparedStatement st = connection.prepareStatement(sql);
 
             st.setInt(1, id);
@@ -160,7 +160,6 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 TamTru tamtru = new TamTru();
-                tamtru.setIdTamTru(rs.getInt("idTamTru"));
                 tamtru.setSoCCCD(rs.getString("soCccd"));
                 tamtru.setNgayBatDau(rs.getTimestamp("ngayBatDau").toLocalDateTime().toLocalDate());
                 tamtru.setNgayKetThuc(rs.getTimestamp("ngayKetThuc").toLocalDateTime().toLocalDate());
@@ -181,7 +180,8 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
                 tamtru.setGioiTinh(rs.getString("gioiTinh"));
                 tamtru.setNoiCap(rs.getString("noiCap"));
                 tamtru.setTrangThai(rs.getString("trangThai"));
-
+                getName(tamtru);
+                tamtru.setNoiDangKyTamTru(rs.getString("noiDangKyTamTru"));
                 return Optional.of(tamtru);
             }
         } catch (SQLException e) {
@@ -190,5 +190,20 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
         }
 
         return Optional.empty();
+    }
+
+    public void getName(TamTru tamVang) throws SQLException {
+        String sql = "SELECT hoten FROM nhankhau WHERE nhankhau.soCccd = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, tamVang.getCccdChuHo());
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    tamVang.setHoTenChuHo(rs.getString("hoTen"));
+                } else {
+                    // Handle the case when no rows are returned
+                    tamVang.setHoTenChuHo("N/A");
+                }
+            }
+        }
     }
 }

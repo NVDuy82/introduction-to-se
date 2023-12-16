@@ -106,7 +106,7 @@ public class YeuCauNhanKhauController implements Initializable {
             if(tv.getTrangThai().equals("chờ xác nhận")) {
                 String idHBox = "TV" + tv.getIdTamVang();
                 String kieuYeuCau = "Yêu cầu: tạm vắng";
-                String nguoiGuiYeuCau = "Số CCCD yêu cầu: " + tv.getSoCccd();
+                String nguoiGuiYeuCau = "Người yêu cầu: " + tv.getTen();
                 String ghiChu ="Lý do: " + tv.getLyDo();
 
                 HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
@@ -120,23 +120,23 @@ public class YeuCauNhanKhauController implements Initializable {
         ///////////////////////////////////////////////////
 
 
-//        TamTruDAO tamtruDAO = new TamTruDAO(connection);
-//        this.tamtruList = tamtruDAO.getAll();
-//
-//        for(TamTru tt : tamtruList) {
-//            if(tt.getTrangThai().equals("chờ xác nhận")) {
-//                String idHBox = "TT" + tt.getIdTamTru();
-//                String kieuYeuCau = "Yêu cầu tạm vắng";
-//                String nguoiGuiYeuCau = tt.getCccdChuHo();
-//                String ghiChu = tt.getLyDo();
-//
-//                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
-//                Insets hboxMargin = new Insets(10, 10, 0, 10);
-//                VBoxList.getChildren().add(hbox);
-//                VBoxList.setMargin(hbox, hboxMargin);
-//                danhsachHBox.add(hbox);
-//            }
-//        }
+        TamTruDAO tamtruDAO = new TamTruDAO(connection);
+        this.tamtruList = tamtruDAO.getAll();
+
+        for(TamTru tt : tamtruList) {
+            if(tt.getTrangThai().equals("chờ xác nhận")) {
+                String idHBox = "TT" + tt.getSoCCCD();
+                String kieuYeuCau = "Yêu cầu: tạm trú";
+                String nguoiGuiYeuCau = "Người yêu cầu: " + tt.getHoTen();
+                String ghiChu ="Lý do: " + tt.getLyDo();
+
+                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
+                Insets hboxMargin = new Insets(10, 10, 0, 10);
+                VBoxList.getChildren().add(hbox);
+                VBoxList.setMargin(hbox, hboxMargin);
+                danhsachHBox.add(hbox);
+            }
+        }
 
     }
     public Button initButtonDongY() {
@@ -274,10 +274,43 @@ public class YeuCauNhanKhauController implements Initializable {
                 }
             }
             String chitiet = "Yêu cầu: xin tạm vắng" + "\n\n"
+                    + "Người yêu cầu: " + tmp.getTen() + "\n"
                     + "Số CCCD: " + tmp.getSoCccd() + "\n\n"
                     + "Ngày bắt đầu: " + tmp.getNgayBatDau() +"\n"
                     + "Ngày kết thúc: " + tmp.getNgayKetThuc() + "\n\n"
-                    + "Nơi đăng ký tạm trú: " + tmp.getNoiDangKyTamTru() + "\n"
+                    + "Nơi đăng ký tạm trú: " + tmp.getNoiDangKyTamTru() + "\n\n"
+                    + "Lý do: " + tmp.getLyDo() +"\n";
+
+            hienThiChiTiet.setText(chitiet);
+        }
+
+        if(idHBox.substring(0,2).equals("TT")){
+            TamTru tmp = null;
+            String idTamTru = idHBox.substring(2);
+            for(TamTru tv : tamtruList){
+                if(tv.getSoCCCD().equals(idTamTru)){
+                    tmp = tv;
+                    break;
+                }
+            }
+
+            String chitiet = "Yêu cầu: xin tạm trú" + "\n\n"
+                    + "Chi tiết người đăng kí tạm trú: " +"\n\n"
+                    + "\tHọ tên: " + tmp.getHoTen() + "\n"
+                    + "\tBí danh: " + tmp.getBiDanh() + "\n"
+                    + "\tSố CCCD: " + tmp.getSoCCCD() +"\n"
+                    + "\tNơi cấp: " + tmp.getNoiCap() + "\n"
+                    + "\tQuê quán: " + tmp.getNguyenQuan() + "\n"
+                    + "\tNgày sinh: " + tmp.getNgaysinh() + "\n"
+                    + "\tGiới tính: " + tmp.getGioiTinh() + "\n"
+                    + "\tDân tộc: " + tmp.getDanToc() + "\n"
+                    + "\tSố điện thoại: " + tmp.getSoDienThoai() + "\n"
+                    + "\tNghề nghiệp: " +tmp.getNgheNghiep() + "\n"
+                    + "\tNơi làm việc: " +tmp.getNoiLamViec() + "\n"
+                    + "\tNgày bắt đầu: " + tmp.getNgayBatDau() +"\n"
+                    + "\tNgày kết thúc: " + tmp.getNgayKetThuc() + "\n\n"
+                    + "Chủ hộ: " + tmp.getHoTenChuHo() + "\n"
+                    + "Quan hệ với chủ hộ: " + tmp.getQuanHe() + "\n\n"
                     + "Lý do: " + tmp.getLyDo() +"\n";
 
             hienThiChiTiet.setText(chitiet);

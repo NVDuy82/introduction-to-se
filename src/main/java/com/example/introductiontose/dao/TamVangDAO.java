@@ -43,6 +43,7 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
             String noiDangKy = rs.getString("noiDangKyTamTru");
 
             TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, lyDo,noiDangKy, trangthai);
+            getName(tamvang);
             list.add(tamvang);
         }
 
@@ -118,11 +119,27 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
             String lyDo = rs.getString("lyDo");
             String trangthai = rs.getString("trangThai");
             String noiDangKy = rs.getString("noiDangKyTamTru");
-            TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, lyDo,noiDangKy, trangthai);
-
+            TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, lyDo, noiDangKy, trangthai);
+            getName(tamvang);
             return Optional.of(tamvang);
         }
 
         return Optional.empty();
     }
+
+    public void getName(TamVang tamVang) throws SQLException {
+        String sql = "SELECT hoten FROM nhankhau WHERE nhankhau.soCccd = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, tamVang.getSoCccd());
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    tamVang.setTen(rs.getString("hoTen"));
+                } else {
+                    // Handle the case when no rows are returned
+                    tamVang.setTen("N/A");
+                }
+            }
+        }
+    }
+
 }
