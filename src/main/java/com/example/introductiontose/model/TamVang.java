@@ -1,6 +1,6 @@
 package com.example.introductiontose.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Lớp TamVang đại diện cho thông tin về việc tạm vắng của một cư dân trong hệ thống.
@@ -8,32 +8,43 @@ import java.time.LocalDateTime;
 public class TamVang {
     private int idTamVang;
     private String soCccd;
-    private LocalDateTime ngayBatDau, ngayKetThuc;
+    private LocalDate ngayBatDau, ngayKetThuc;
     private String liDo;
-    
+    private String noiDangKyTamTru;
+    private String trangThai;
+
     /**
      * Khởi tạo một đối tượng TamVang mới với thông tin mặc định.
      */
     public TamVang() {
     }
-    
-    /**
-     * Khởi tạo một đối tượng TamVang mới với thông tin được cung cấp.
-     *
-     * @param idTamVang    ID của thông tin tạm vắng.
-     * @param soCccd       Số chứng minh nhân dân của cư dân.
-     * @param ngayBatDau   Ngày bắt đầu của thời gian tạm vắng.
-     * @param ngayKetThuc  Ngày kết thúc của thời gian tạm vắng.
-     * @param liDo         Lý do của việc tạm vắng.
-     */
-    public TamVang(int idTamVang, String soCccd, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc, String liDo) {
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public TamVang(int idTamVang, String soCccd, LocalDate ngayBatDau, LocalDate ngayKetThuc, String liDo, String noiDangKyTamTru, String trangThai) {
         this.idTamVang = idTamVang;
         this.soCccd = soCccd;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
         this.liDo = liDo;
+        this.noiDangKyTamTru = noiDangKyTamTru;
+        this.trangThai = trangThai;
     }
-    
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public String getNoiDangKyTamTru() {
+        return noiDangKyTamTru;
+    }
+
+    public void setNoiDangKyTamTru(String noiDangKyTamTru) {
+        this.noiDangKyTamTru = noiDangKyTamTru;
+    }
+
     /**
      * Lấy ID của thông tin tạm vắng.
      *
@@ -42,7 +53,7 @@ public class TamVang {
     public int getIdTamVang() {
         return idTamVang;
     }
-    
+
     /**
      * Đặt ID mới cho thông tin tạm vắng.
      *
@@ -51,7 +62,7 @@ public class TamVang {
     public void setIdTamVang(int idTamVang) {
         this.idTamVang = idTamVang;
     }
-    
+
     /**
      * Lấy số chứng minh nhân dân của cư dân.
      *
@@ -60,7 +71,7 @@ public class TamVang {
     public String getSoCccd() {
         return soCccd;
     }
-    
+
     /**
      * Đặt số chứng minh nhân dân mới cho thông tin tạm vắng.
      *
@@ -69,43 +80,43 @@ public class TamVang {
     public void setSoCccd(String soCccd) {
         this.soCccd = soCccd;
     }
-    
+
     /**
      * Lấy ngày bắt đầu của thời gian tạm vắng.
      *
      * @return Ngày bắt đầu của thời gian tạm vắng.
      */
-    public LocalDateTime getNgayBatDau() {
+    public LocalDate getNgayBatDau() {
         return ngayBatDau;
     }
-    
+
     /**
      * Đặt ngày bắt đầu mới cho thông tin tạm vắng.
      *
      * @param ngayBatDau Ngày bắt đầu mới cho thông tin tạm vắng.
      */
-    public void setNgayBatDau(LocalDateTime ngayBatDau) {
+    public void setNgayBatDau(LocalDate ngayBatDau) {
         this.ngayBatDau = ngayBatDau;
     }
-    
+
     /**
      * Lấy ngày kết thúc của thời gian tạm vắng.
      *
      * @return Ngày kết thúc của thời gian tạm vắng.
      */
-    public LocalDateTime getNgayKetThuc() {
+    public LocalDate getNgayKetThuc() {
         return ngayKetThuc;
     }
-    
+
     /**
      * Đặt ngày kết thúc mới cho thông tin tạm vắng.
      *
      * @param ngayKetThuc Ngày kết thúc mới cho thông tin tạm vắng.
      */
-    public void setNgayKetThuc(LocalDateTime ngayKetThuc) {
+    public void setNgayKetThuc(LocalDate ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }
-    
+
     /**
      * Lấy lý do của việc tạm vắng.
      *
@@ -114,7 +125,7 @@ public class TamVang {
     public String getLiDo() {
         return liDo;
     }
-    
+
     /**
      * Đặt lý do mới cho thông tin tạm vắng.
      *

@@ -1,14 +1,8 @@
 package com.example.introductiontose.controller.admin;
 
-import com.example.introductiontose.dao.HoKhauDAO;
-import com.example.introductiontose.dao.NhanKhauDAO;
-import com.example.introductiontose.dao.ThayDoiHoKhauDAO;
-import com.example.introductiontose.dao.ThayDoiNhanKhauDao;
+import com.example.introductiontose.dao.*;
 import com.example.introductiontose.database.SqlConnection;
-import com.example.introductiontose.model.HoKhau;
-import com.example.introductiontose.model.NhanKhau;
-import com.example.introductiontose.model.ThayDoiHoKhau;
-import com.example.introductiontose.model.ThayDoiNhanKhau;
+import com.example.introductiontose.model.*;
 import com.example.introductiontose.model.key.HoKhauKey;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,6 +35,8 @@ public class YeuCauNhanKhauController implements Initializable {
     private TextField noidungtimkiem;
     @FXML
     private HBox hBoxTimKiem;
+
+    List<TamVang> tamvangList;
     public static List<HBox> danhsachHBox = new ArrayList<>();
 
     Connection connection = SqlConnection.connect();
@@ -95,6 +91,32 @@ public class YeuCauNhanKhauController implements Initializable {
                 danhsachHBox.add(hbox);
             }
         }
+
+        ///////////////////////////////////////////////////////
+
+        TamVangDAO tamVangDAO = new TamVangDAO(connection);
+        try {
+            this.tamvangList = tamVangDAO.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(TamVang tv : tamvangList) {
+            if(tv.getTrangThai().equals("choxacnhan")) {
+                String idHBox = "TV" + tv.getIdTamVang();
+                String kieuYeuCau = "Yêu cầu tạm vắng";
+                String nguoiGuiYeuCau = tv.getSoCccd();
+                String ghiChu = tv.getLiDo();
+
+                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
+                Insets hboxMargin = new Insets(10, 10, 0, 10);
+                VBoxList.getChildren().add(hbox);
+                VBoxList.setMargin(hbox, hboxMargin);
+                danhsachHBox.add(hbox);
+            }
+        }
+
+
     }
     public Button initButtonDongY() {
         Button buttonDongY = new Button("Đồng ý");
