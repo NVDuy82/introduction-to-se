@@ -15,6 +15,10 @@ module com.example.introductiontose {
     exports com.example.introductiontose.controller.guithongbao;
     exports com.example.introductiontose.controller.taoKhoanPhi;
     exports com.example.introductiontose.controller.admin;
+    exports com.example.introductiontose.controller.admin.naptien;
+    exports com.example.introductiontose.controller.node;
+    exports com.example.introductiontose.controller.admin.hokhau;
+    exports com.example.introductiontose.controller.user.hokhau;
     exports com.example.introductiontose.view.icon;
     
     opens com.example.introductiontose to javafx.fxml;
@@ -26,11 +30,9 @@ module com.example.introductiontose {
     opens com.example.introductiontose.controller.hokhau to javafx.fxml;
     opens com.example.introductiontose.controller.taoKhoanPhi to javafx.fxml;
     opens com.example.introductiontose.controller.admin to javafx.fxml;
-    opens com.example.introductiontose.view.icon to javafx.fxml;
-    exports com.example.introductiontose.controller.admin.naptien;
     opens com.example.introductiontose.controller.admin.naptien to javafx.fxml;
-    exports com.example.introductiontose.controller.node;
     opens com.example.introductiontose.controller.node to javafx.fxml;
-    exports com.example.introductiontose.controller.admin.hokhau;
     opens com.example.introductiontose.controller.admin.hokhau to javafx.fxml;
+    opens com.example.introductiontose.controller.user.hokhau to javafx.fxml;
+    opens com.example.introductiontose.view.icon to javafx.fxml;
 }

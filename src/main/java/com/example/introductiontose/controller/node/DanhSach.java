@@ -3,6 +3,7 @@ package com.example.introductiontose.controller.node;
 import com.example.introductiontose.Application;
 import com.example.introductiontose.controller.admin.hokhau.DanhSachNhanKhauController;
 import com.example.introductiontose.controller.admin.hokhau.ThongTinNhanKhauController;
+import com.example.introductiontose.controller.user.hokhau.TTNhanKhauController;
 import com.example.introductiontose.dao.DataAccessObject;
 import com.example.introductiontose.dao.HoKhauDAO;
 import com.example.introductiontose.database.SqlConnection;
@@ -115,21 +116,37 @@ public class DanhSach extends Pane {
     
     private void eventClickIcon(NhanKhau nhanKhau) {
         try {
-            String name = (prevScene != null) ? "/com/example/introductiontose/view/thong-tin-nhan-khau.fxml" :
-                    "/com/example/introductiontose/view/user/hokhau/thong-tin-nhan-khau.fxml";
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(name));
-            Scene scene = mainVBox.getScene();
-            Stage stage = (Stage) scene.getWindow();
-            
-            Scene nextScene = new Scene(fxmlLoader.load());
-            ThongTinNhanKhauController controller = fxmlLoader.getController();
-            controller.setTitle(nhanKhau);
-            controller.setPrevStage(stage);
-            controller.setPrevScene(scene);
-            controller.setPrevPrevScene(prevScene);
-            controller.setData(nhanKhau);
-            
-            stage.setScene(nextScene);
+            if (prevScene != null) {
+                String name = "/com/example/introductiontose/view/admin/hokhau/thong-tin-nhan-khau.fxml";
+                FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(name));
+                Scene scene = mainVBox.getScene();
+                Stage stage = (Stage) scene.getWindow();
+                
+                Scene nextScene = new Scene(fxmlLoader.load());
+                ThongTinNhanKhauController controller = fxmlLoader.getController();
+                
+                controller.setTitle(nhanKhau);
+                controller.setPrevStage(stage);
+                controller.setPrevScene(scene);
+                controller.setPrevPrevScene(prevScene);
+                controller.setData(nhanKhau);
+                stage.setScene(nextScene);
+            } else {
+                String name = "/com/example/introductiontose/view/user/hokhau/thong-tin-nhan-khau.fxml";
+                FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(name));
+                Scene scene = mainVBox.getScene();
+                Stage stage = (Stage) scene.getWindow();
+                
+                Scene nextScene = new Scene(fxmlLoader.load());
+                TTNhanKhauController controller = fxmlLoader.getController();
+                
+                controller.setTitle(nhanKhau);
+                controller.setPrevStage(stage);
+                controller.setPrevScene(scene);
+                controller.setPrevPrevScene(prevScene);
+                controller.setData(nhanKhau);
+                stage.setScene(nextScene);
+            }
         } catch (IOException e) {
             // lỗi phần mềm
         }
@@ -137,7 +154,7 @@ public class DanhSach extends Pane {
     
     private void eventClickIcon(IconHoKhauController iconHoKhauController) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/danh-sach-nhan-khau.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/hokhau/danh-sach-nhan-khau.fxml"));
             Scene scene = mainVBox.getScene();
             Stage stage = (Stage) scene.getWindow();
             
