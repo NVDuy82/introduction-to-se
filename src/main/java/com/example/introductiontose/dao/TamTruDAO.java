@@ -116,7 +116,7 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public void update(@NotNull TamTru t) {
         try {
-            String sql = "UPDATE dangkytamtru SET trangThai = 'Đã phê duyệt' WHERE idTamTru = ?";
+            String sql = "UPDATE dangkytamtru SET trangThai = 'đã xác nhận' WHERE soCccd = ?";
             PreparedStatement st = connection.prepareStatement(sql);
 
             st.setString(1, t.getSoCCCD());
@@ -134,7 +134,7 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public void delete(@NotNull TamTru t) {
         try {
-            String sql = "DELETE FROM dangkytamtru WHERE idTamTru = ?";
+            String sql = "DELETE FROM dangkytamtru WHERE soCccd = ?";
             PreparedStatement st = connection.prepareStatement(sql);
 
             st.setString(1, t.getSoCCCD());
@@ -150,9 +150,9 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<TamTru> get(Integer id) throws SQLException{
-            String sql = "SELECT * FROM dangkytamtru WHERE idTamTru = ?";
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM dangkytamtru WHERE idTamTru = ?");
+    public Optional<TamTru> get(Integer id) throws SQLException {
+            String sql = "SELECT * FROM dangkytamtru WHERE soCccd = ?";
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM dangkytamtru WHERE soCccd = ?");
 
             st.setInt(1, id);
 
