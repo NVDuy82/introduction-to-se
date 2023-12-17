@@ -25,12 +25,12 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/dangkydangnhap/dangNhap.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+//        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/dangkydangnhap/dangNhap.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load());
 //        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/taokhoanphi/taoKhoanPhi.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load());
-//        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/YeuCauNhanKhau.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/hokhau/DanhSachNhanKhau.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
 
         
 
