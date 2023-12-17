@@ -1,14 +1,8 @@
 package com.example.introductiontose.util;
 
-import com.example.introductiontose.dao.NhanKhauDAO;
-import com.example.introductiontose.dao.TaiKhoanNhanKhauDAO;
-import com.example.introductiontose.dao.ThayDoiHoKhauDAO;
-import com.example.introductiontose.dao.ThayDoiNhanKhauDao;
+import com.example.introductiontose.dao.*;
 import com.example.introductiontose.database.SqlConnection;
-import com.example.introductiontose.model.NhanKhau;
-import com.example.introductiontose.model.TaiKhoanNhanKhau;
-import com.example.introductiontose.model.ThayDoiHoKhau;
-import com.example.introductiontose.model.ThayDoiNhanKhau;
+import com.example.introductiontose.model.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -26,7 +20,9 @@ public class AlertDuyetYeuCau {
     public static Connection connection = SqlConnection.connect();
     public enum TableTypeThayDoi {
         THAYDOINHANKHAU,
-        THAYDOIHOKHAU
+        THAYDOIHOKHAU,
+        DANGKYTAMTRU,
+        TAMVANG
     }
 
     public static void showAlertHuyBo(String idHbox, String soCccd1, String soCccd2,  Button buttonHuyBo) {
@@ -76,6 +72,7 @@ public class AlertDuyetYeuCau {
                         throw new RuntimeException(e);
                     }
                 }
+
                 if(idHbox.substring(0,2).equals("HK")) {
                     tieude = "Yêu cầu thay đổi hộ khẩu không được xác nhận";
                     Integer idTDHK = Integer.parseInt(idHbox.substring(2));
@@ -83,6 +80,29 @@ public class AlertDuyetYeuCau {
                         guiThongBao(soCccd1, tieude, noidung);
                         guiThongBao(soCccd2, tieude, noidung);
                         updateTrangThai(idTDHK, "không được xác nhận", TableTypeThayDoi.THAYDOIHOKHAU);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                if(idHbox.substring(0,2).equals("TT")) {
+                    tieude = "Yêu cầu tạm trú không được xác nhận";
+                    Integer soCccdDKTT = Integer.parseInt(idHbox.substring(2));
+                    try {
+                        guiThongBao(soCccd1, tieude, noidung);
+                        guiThongBao(soCccd2, tieude, noidung);
+                        updateTrangThai(soCccdDKTT, "không được xác nhận", TableTypeThayDoi.DANGKYTAMTRU);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                if(idHbox.substring(0,2).equals("TV")) {
+                    tieude = "Yêu cầu tạm vắng không được xác nhận";
+                    Integer idTamVang = Integer.parseInt(idHbox.substring(2));
+                    try {
+                        guiThongBao(soCccd1, tieude, noidung);
+                        updateTrangThai(idTamVang, "không được xác nhận", TableTypeThayDoi.TAMVANG);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -150,6 +170,7 @@ public class AlertDuyetYeuCau {
                         throw new RuntimeException(e);
                     }
                 }
+
                 if(idHbox.substring(0,2).equals("HK")) {
                     tieude = "Yêu cầu về thay đổi hộ khẩu đã được xác nhận";
                     Integer idTDHK = Integer.parseInt(idHbox.substring(2));
@@ -182,6 +203,46 @@ public class AlertDuyetYeuCau {
                         throw new RuntimeException(e);
                     }
                 }
+
+                if(idHbox.substring(0,2).equals("TT")) {
+                    tieude = "Yêu cầu tạm trú đã được xác nhận";
+                    Integer soCccdTamTru = Integer.parseInt(idHbox.substring(2));
+                    try {
+                        updateTrangThai(soCccdTamTru, "đã xác nhận", TableTypeThayDoi.DANGKYTAMTRU);
+
+                        TamTruDAO tamTruDAO = new TamTruDAO(connection);
+                        Optional<TamTru> resultTDNK = tamTruDAO.get(soCccdTamTru);
+                        if (resultTDNK.isPresent()) {
+                            TamTru tamtru = resultTDNK.get();
+                            noidung = "Yêu cầu tạm trú của " + tamtru.getHoTen() + " đã được xác nhận";
+                            guiThongBao(soCccd1, tieude, noidung);
+                            guiThongBao(soCccd2, tieude, noidung);
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                if(idHbox.substring(0,2).equals("TV")) {
+                    tieude = "Yêu cầu tạm vắng đã được xác nhận";
+                    Integer idTamVang = Integer.parseInt(idHbox.substring(2));
+                    try {
+                        updateTrangThai(idTamVang, "đã xác nhận", TableTypeThayDoi.TAMVANG);
+
+                        TamVangDAO tamVangDAO = new TamVangDAO(connection);
+                        Optional<TamVang> resultTDNK = tamVangDAO.get(idTamVang);
+                        if (resultTDNK.isPresent()) {
+                            TamVang tamVang = resultTDNK.get();
+                            noidung = "Yêu cầu tạm vắng trong khoảng thời gian từ ngày "
+                                    + tamVang.getNgayBatDau() + " đến ngày " + tamVang.getNgayKetThuc() + " đã được xác nhận";
+                            guiThongBao(soCccd1, tieude, noidung);
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+
                 hiddenHbox(buttonDongY);
             }
         });
@@ -208,6 +269,14 @@ public class AlertDuyetYeuCau {
         if(table == TableTypeThayDoi.THAYDOIHOKHAU) {
             tablename = "thaydoihokhau";
             typeId = "idThayDoiHoKhau";
+        }
+        if(table == TableTypeThayDoi.DANGKYTAMTRU) {
+            tablename = "dangkytamtru";
+            typeId = "soCccd";
+        }
+        if(table == TableTypeThayDoi.TAMVANG) {
+            tablename = "tamvang";
+            typeId = "idTamVang";
         }
         PreparedStatement statement = connection.prepareStatement("UPDATE " + tablename + " SET " +
                 "trangThai = ? " +

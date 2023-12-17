@@ -193,13 +193,21 @@ public class YeuCauNhanKhauController implements Initializable {
         buttonNo.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                clickButton(buttonNo);
+                try {
+                    clickButton(buttonNo);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         buttonYes.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                clickButton(buttonYes);
+                try {
+                    clickButton(buttonYes);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         return hbox;
@@ -450,7 +458,7 @@ public class YeuCauNhanKhauController implements Initializable {
         return thongtinhokhau;
     }
 
-    public void clickButton(Button button) {
+    public void clickButton(Button button) throws SQLException {
         HBox parentHBox = (HBox) button.getParent();
         String idHBox = parentHBox.getId();
 
@@ -468,7 +476,7 @@ public class YeuCauNhanKhauController implements Initializable {
                 ThayDoiNhanKhau tdnk = resultTDNK.get();
                 String soCccd = tdnk.getSoCccd();
                 if(button.getText().equals("Hủy bỏ")) {
-//                    showAlertHuyBo(idHBox, soCccd, null, button);
+                    showAlertHuyBo(idHBox, soCccd, null, button);
                 }
                 if(button.getText().equals("Đồng ý")) {
                     showAlertDongY(idHBox, soCccd, null, button);
@@ -500,10 +508,41 @@ public class YeuCauNhanKhauController implements Initializable {
             }
         }
 
-        if(idHBox.substring(0,2).equals("TV")){
-            if(button.getText().equals("Hủy bỏ")){
-                TamVangDAO tamvangDAO = new TamVangDAO(connection);
+        if(idHBox.substring(0,2).equals("TT")) {
+            String soCccdTamTruString = idHBox.substring(2);
+            Integer soCccdTamTru = Integer.parseInt(soCccdTamTruString);
+            TamTruDAO tamTruDAO = new TamTruDAO(connection);
+            Optional<TamTru> resultTDHK;
+            resultTDHK = tamTruDAO.get(soCccdTamTru);
+            if(resultTDHK.isPresent()) {
+                TamTru tamtru = resultTDHK.get();
+                String soCccd1 = tamtru.getSoCCCD();
+                String soCccd2 = tamtru.getCccdChuHo();
+                if(button.getText().equals("Hủy bỏ")) {
+                    showAlertHuyBo(idHBox, soCccd1, soCccd2, button);
+                }
+                if(button.getText().equals("Đồng ý")) {
+                    showAlertDongY(idHBox, soCccd1, soCccd2, button);
+                }
+            }
+        }
 
+        if(idHBox.substring(0,2).equals("TV")) {
+            String idTamVangString = idHBox.substring(2);
+            Integer idTamVang = Integer.parseInt(idTamVangString);
+            TamVangDAO tamVangDAO = new TamVangDAO(connection);
+            Optional<TamVang> resultTDHK;
+            resultTDHK = tamVangDAO.get(idTamVang);
+            if(resultTDHK.isPresent()) {
+                TamVang tamVang = resultTDHK.get();
+                String soCccd1 = tamVang.getSoCccd();
+                String soCccd2 = null;
+                if(button.getText().equals("Hủy bỏ")) {
+                    showAlertHuyBo(idHBox, soCccd1, soCccd2, button);
+                }
+                if(button.getText().equals("Đồng ý")) {
+                    showAlertDongY(idHBox, soCccd1, soCccd2, button);
+                }
             }
         }
 

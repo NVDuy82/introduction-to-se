@@ -150,10 +150,9 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
      * {@inheritDoc}
      */
     @Override
-    public Optional<TamTru> get(Integer id) {
-        try {
+    public Optional<TamTru> get(Integer id) throws SQLException{
             String sql = "SELECT * FROM dangkytamtru WHERE idTamTru = ?";
-            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM dangkytamtru WHERE idTamTru = ?");
 
             st.setInt(1, id);
 
@@ -184,10 +183,6 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
                 tamtru.setNoiDangKyTamTru(rs.getString("noiDangKyTamTru"));
                 return Optional.of(tamtru);
             }
-        } catch (SQLException e) {
-            System.out.println("Lỗi ở hàm Optional trong file TamTruDAO");
-            throw new UnsupportedOperationException("Error while retrieving data from the database.");
-        }
 
         return Optional.empty();
     }
