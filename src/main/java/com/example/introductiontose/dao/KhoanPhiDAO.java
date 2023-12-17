@@ -4,9 +4,7 @@ import com.example.introductiontose.model.KhoanPhi;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Class KhoanPhiDAO triển khai interface DataAccessObject để thao tác với đối tượng KhoanPhi trong cơ sở dữ liệu.
@@ -130,5 +128,34 @@ public class KhoanPhiDAO implements DataAccessObject<KhoanPhi, Integer> {
         statement.setTimestamp(index + 5, Timestamp.valueOf(khoanphi.getNgayketthuc()));
         statement.setString(index + 6, khoanphi.getTieudephi());
         return index + 7;
+    }
+
+
+    /**
+     * Lấy danh sách các khoản phí từ cơ sở dữ liệu và trả về dưới dạng Map.
+     * <p>
+     * Phương thức này thực hiện truy vấn SQL để lấy tất cả các bản ghi từ bảng 'khoanphi',
+     * sau đó lưu trữ id và loại phí của mỗi khoản phí vào một Map. Trong Map này, id của
+     * mỗi khoản phí được sử dụng làm key, và loại phí tương ứng được sử dụng làm value.
+     * </p>
+     *
+     * @return Map<Integer, String> với key là id của khoản phí và value là loại phí.
+     *         Trả về Map rỗng nếu không có bản ghi nào hoặc có lỗi xảy ra.
+     * @throws SQLException Nếu có lỗi xảy ra trong quá trình truy vấn cơ sở dữ liệu.
+     */
+    public Map<Integer, String> getDanhSachKhoanPhi() {
+        Map<Integer, String> danhSachKP = new HashMap<>();
+        String sql = "SELECT idPhi, kieuPhi FROM khoanphi";
+        try (PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("idPhi");
+                String loaiPhi = resultSet.getString("kieuPhi");
+                danhSachKP.put(id, loaiPhi);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Hoặc xử lý lỗi theo nhu cầu
+        }
+        return danhSachKP;
     }
 }
