@@ -16,12 +16,28 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller quản lý hiển thị danh sách yêu cầu nạp tiền trong giao diện admin.
+ *
+ * <p>Controller này kết nối với cơ sở dữ liệu để lấy danh sách yêu cầu nạp tiền và hiển thị chúng trong VBox.</p>
+ *
+ * <p>Controller này sử dụng các đối tượng DataAccessObject để truy cập cơ sở dữ liệu liên quan đến yêu cầu nạp tiền và thông tin nhân khẩu.</p>
+ *
+ * @author Duy
+ * @version 1.0
+ */
 public class YeuCauNapTienController implements Initializable {
-    
     
     @FXML
     private VBox yeuCauList;
     
+    /**
+     * Phương thức khởi tạo của controller, được gọi khi controller được tạo ra.
+     * Lấy danh sách yêu cầu nạp tiền từ cơ sở dữ liệu và hiển thị chúng trong VBox.
+     *
+     * @param url Địa chỉ URL của tài nguyên được tải.
+     * @param resourceBundle Đối tượng ResourceBundle chứa các tài nguyên cần thiết.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

@@ -11,6 +11,15 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller quản lý danh sách hộ khẩu trong giao diện admin.
+ *
+ * <p>Controller này điều khiển hiển thị danh sách hộ khẩu thông qua JavaFX.
+ * Cung cấp khả năng hiển thị danh sách hộ khẩu trong một AnchorPane.</p>
+ *
+ * @author Duy
+ * @version 1.0
+ */
 public class DanhSachHoKhauController implements Initializable {
     @FXML
     private AnchorPane centerAnchorPane;
@@ -21,11 +30,21 @@ public class DanhSachHoKhauController implements Initializable {
     @FXML
     private VBox mainVBox;
     
+    /**
+     * Phương thức được gọi khi controller được khởi tạo.
+     *
+     * @param url            Đối tượng URL đại diện cho đường dẫn tới controller.
+     * @param resourceBundle Đối tượng ResourceBundle đại diện cho tài nguyên của controller.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         launch();
     }
     
+    /**
+     * Phương thức khởi chạy hiển thị danh sách hộ khẩu.
+     * Tạo một đối tượng DanhSach và thêm nó vào paneContent để hiển thị.
+     */
     public void launch() {
         DanhSach danhSach = new DanhSach();
         danhSach.launch();

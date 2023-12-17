@@ -20,6 +20,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * Controller cho giao diện quản lý hộ khẩu, chứa các chức năng như đổi chủ hộ, thêm nhân khẩu, xóa nhân khẩu,
+ * tách khẩu, hiển thị danh sách hộ.
+ *
+ * @author Duy
+ * @version 1.0
+ */
 public class HoKhauController implements Initializable {
     @FXML
     private Button buttonMenuDoiChuHo;
@@ -35,41 +42,74 @@ public class HoKhauController implements Initializable {
     private int idHoKhau;
     private Button selectedButton;
     
+    /**
+     * Phương thức khởi tạo giao diện quản lý hộ khẩu, thiết lập sự kiện cho các nút chức năng.
+     *
+     * @param url            Đối tượng URL của giao diện FXML.
+     * @param resourceBundle Đối tượng ResourceBundle chứa các tài nguyên local.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idHoKhau = 1;
         initButton();
     }
     
-    
+    /**
+     * Phương thức để thiết lập đối tượng HoKhau cho controller.
+     *
+     * @param hoKhau Đối tượng HoKhau cần thiết lập.
+     */
     public void setHoKhau(HoKhau hoKhau) {
         this.hoKhau = hoKhau;
         this.idHoKhau = hoKhau.getIdHoKhau();
     }
     
+    /**
+     * Phương thức hiển thị giao diện đổi chủ hộ.
+     *
+     * @param event Sự kiện nhấn nút "Đổi Chủ Hộ".
+     */
     @FXML
     private void showDoiChuHo(ActionEvent event) {
         DanhSachHoController controller = new DoiChuHoController();
         loadDanhSachHo(controller);
     }
     
+    /**
+     * Phương thức hiển thị giao diện thêm nhân khẩu.
+     *
+     * @param event Sự kiện nhấn nút "Thêm Nhân Khẩu".
+     */
     @FXML
     private void showThemNhanKhau(ActionEvent event) {
         loadThemNhanKhau();
     }
     
+    /**
+     * Phương thức hiển thị giao diện xóa nhân khẩu.
+     *
+     * @param event Sự kiện nhấn nút "Xóa Nhân Khẩu".
+     */
     @FXML
     private void showXoaNhanKhau(ActionEvent event) {
         DanhSachHoController controller = new XoaNhanKhauController();
         loadDanhSachHo(controller);
     }
     
+    /**
+     * Phương thức hiển thị giao diện tách khẩu.
+     *
+     * @param event Sự kiện nhấn nút "Tách Khẩu".
+     */
     @FXML
     private void showTachKhau(ActionEvent event) {
         DanhSachHoController controller = new TachKhauController();
         loadDanhSachHo(controller);
     }
     
+    /**
+     * Phương thức thiết lập sự kiện cho các nút chức năng và hiệu ứng khi chọn.
+     */
     private void initButton() {
         List<Button> buttonMenu = Arrays.asList(buttonMenuDoiChuHo, buttonMenuThemNhanKhau,
                 buttonMenuXoaNhanKhau, buttonMenuTachKhau);
@@ -87,9 +127,13 @@ public class HoKhauController implements Initializable {
         }
     }
     
+    /**
+     * Phương thức hiển thị giao diện danh sách hộ và chạy controller tương ứng.
+     *
+     * @param controller Controller của danh sách hộ cần chạy.
+     */
     private void loadDanhSachHo(DanhSachHoController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/hokhau/ho-khau-danh-sach-ho.fxml"));
-        
         
         paneContent.getChildren().clear();
         fxmlLoader.setController(controller);
@@ -106,6 +150,9 @@ public class HoKhauController implements Initializable {
         }
     }
     
+    /**
+     * Phương thức hiển thị giao diện thêm nhân khẩu.
+     */
     private void loadThemNhanKhau() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/hokhau/ho-khau-them-nhan-khau.fxml"));
         
@@ -117,6 +164,11 @@ public class HoKhauController implements Initializable {
         }
     }
     
+    /**
+     * Phương thức lấy danh sách nhân khẩu của hộ từ cơ sở dữ liệu.
+     *
+     * @return Danh sách nhân khẩu hoặc null nếu có lỗi.
+     */
     private List<NhanKhau> getNhanKhauList() {
         try {
             return SQLUtils.getNhanKhauFromHoKhau(idHoKhau);

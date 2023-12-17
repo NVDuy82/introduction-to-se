@@ -9,28 +9,37 @@ import com.example.introductiontose.util.ActionButton;
 import com.example.introductiontose.util.AlertUtils;
 import com.example.introductiontose.view.icon.IconNhanKhauController;
 import com.example.introductiontose.view.icon.IconType;
-import javafx.scene.image.Image;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+/**
+ * Controller để quản lý việc tách khẩu cho hộ khẩu.
+ *
+ * @author Duy
+ * @version 1.0
+ */
 public class TachKhauController extends DanhSachHoController {
     private final List<IconNhanKhauController> selectedList = new ArrayList<>();
     
+    /**
+     * Khởi tạo một đối tượng của lớp TachKhauController.
+     */
     public TachKhauController() {
         this.originalIconType = IconType.CHUHO;
     }
     
+    /**
+     * Thực hiện xử lý khi người dùng nhấn nút "Submit".
+     * Hiển thị cảnh báo nếu chưa chọn đối tượng, ngược lại, hiển thị xác nhận và gửi yêu cầu tách khẩu.
+     */
     @Override
     void submit() {
         if (selectedList.isEmpty()) {
-            // create alert
             AlertUtils.showAlert("Chưa chọn đối tượng", "Hãy chọn ít nhất 1 nhân khẩu.");
         } else {
-            // create alert
             AlertUtils.showAlert("Xác nhận", "Bạn có chắc chắn tách " +
                     selectedList.get(0).getData().getThongTinNhanKhau().getHoTen() +
                     " và " +
@@ -39,6 +48,13 @@ public class TachKhauController extends DanhSachHoController {
         }
     }
     
+    /**
+     * Xử lý sự kiện khi người dùng nhấn vào biểu tượng nhân khẩu.
+     * Nếu biểu tượng được chọn, thêm vào danh sách chọn, ngược lại, loại bỏ khỏi danh sách chọn.
+     * Hiển thị nút "Submit" và "Clear" nếu có ít nhất một đối tượng được chọn.
+     *
+     * @param iconNhanKhauController Biểu tượng nhân khẩu được nhấn.
+     */
     @Override
     void eventClickIcon(IconNhanKhauController iconNhanKhauController) {
         if (iconNhanKhauController.isSelected()) {
@@ -64,12 +80,20 @@ public class TachKhauController extends DanhSachHoController {
         reload(iconNhanKhauControllerList);
     }
     
+    /**
+     * Xóa danh sách các đối tượng đã chọn.
+     */
     @Override
     void clearSelected() {
         selectedList.clear();
         isAnyObjectSelected = false;
     }
     
+    /**
+     * Tải lại biểu tượng cho danh sách nhân khẩu.
+     *
+     * @param iconNhanKhauControllerList Danh sách các biểu tượng nhân khẩu.
+     */
     private void reload(List<IconNhanKhauController> iconNhanKhauControllerList) {
         if (selectedList.isEmpty()) {
             changeIconType(iconNhanKhauControllerList, IconType.CHUHO);
@@ -81,6 +105,12 @@ public class TachKhauController extends DanhSachHoController {
         }
     }
     
+    /**
+     * Thay đổi loại biểu tượng cho danh sách nhân khẩu.
+     *
+     * @param iconNhanKhauControllerList Danh sách các biểu tượng nhân khẩu.
+     * @param iconType                  Loại biểu tượng mới.
+     */
     private void changeIconType(List<IconNhanKhauController> iconNhanKhauControllerList, IconType iconType) {
         for (IconNhanKhauController iconNhanKhauController : iconNhanKhauControllerList) {
             if (!iconNhanKhauController.isSelected()) {
@@ -89,6 +119,9 @@ public class TachKhauController extends DanhSachHoController {
         }
     }
     
+    /**
+     * Gửi yêu cầu tách khẩu đến cơ sở dữ liệu.
+     */
     private void sendRequire() {
         Connection connection = SqlConnection.connect();
         DataAccessObject<TachKhau, TachKhauKey> accessObject = new TachKhauDAO(connection);

@@ -29,8 +29,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Pane hiển thị danh sách hộ khẩu hoặc danh sách nhân khẩu trong giao diện admin hoặc user.
+ *
+ * <p>Pane này có thể hiển thị danh sách hộ khẩu hoặc danh sách nhân khẩu dựa vào dữ liệu đầu vào.</p>
+ *
+ * <p>Nếu được sử dụng để hiển thị danh sách hộ khẩu, sẽ hiển thị các biểu tượng hộ khẩu.</p>
+ *
+ * <p>Nếu được sử dụng để hiển thị danh sách nhân khẩu, sẽ hiển thị các biểu tượng nhân khẩu.</p>
+ *
+ * <p>Pane này cũng có khả năng chuyển đến thông tin chi tiết của hộ khẩu hoặc nhân khẩu khi được nhấp vào biểu tượng tương ứng.</p>
+ *
+ * @author Duy
+ * @version 1.0
+ */
 public class DanhSach extends Pane {
-    private Scene prevScene;
+    private final Scene prevScene;
     
     @FXML
     private VBox mainVBox;
@@ -41,10 +55,18 @@ public class DanhSach extends Pane {
     @FXML
     private ScrollPane scrollPane;
     
+    /**
+     * Constructor mặc định của DanhSach.
+     */
     public DanhSach() {
         this(null);
     }
     
+    /**
+     * Constructor của DanhSach với scene trước đó.
+     *
+     * @param prevScene Scene trước đó để quay lại khi cần.
+     */
     public DanhSach(Scene prevScene) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/danh-sach-Pane.fxml"));
@@ -59,6 +81,11 @@ public class DanhSach extends Pane {
         mainVBox.getChildren().clear();
     }
     
+    /**
+     * Phương thức hiển thị danh sách nhân khẩu.
+     *
+     * @param nhanKhauList Danh sách nhân khẩu cần hiển thị.
+     */
     public void launch(List<NhanKhau> nhanKhauList) {
         mainVBox.getChildren().clear();
         try {
@@ -76,10 +103,13 @@ public class DanhSach extends Pane {
                 mainVBox.getChildren().add(currentHBox);
             }
         } catch (IOException e) {
-            // lỗi phần mềm
+            // Xử lý lỗi phần mềm nếu cần thiết.
         }
     }
     
+    /**
+     * Phương thức hiển thị danh sách hộ khẩu.
+     */
     public void launch() {
         mainVBox.getChildren().clear();
         Connection connection = SqlConnection.connect();
@@ -90,7 +120,7 @@ public class DanhSach extends Pane {
             danhSachHo = accessObject.getAll();
             SqlConnection.close(connection);
         } catch (SQLException e) {
-        
+            // Xử lý lỗi kết nối nếu cần thiết.
         }
         
         try {
@@ -110,10 +140,15 @@ public class DanhSach extends Pane {
                 mainVBox.getChildren().add(currentHBox);
             }
         } catch (IOException e) {
-        
+            // Xử lý lỗi phần mềm nếu cần thiết.
         }
     }
     
+    /**
+     * Xử lý sự kiện khi nhấp vào biểu tượng nhân khẩu hoặc hộ khẩu.
+     *
+     * @param nhanKhau Thông tin nhân khẩu khi nhấp vào biểu tượng nhân khẩu.
+     */
     private void eventClickIcon(NhanKhau nhanKhau) {
         try {
             if (prevScene != null) {
@@ -148,10 +183,15 @@ public class DanhSach extends Pane {
                 stage.setScene(nextScene);
             }
         } catch (IOException e) {
-            // lỗi phần mềm
+            // Xử lý lỗi phần mềm nếu cần thiết.
         }
     }
     
+    /**
+     * Xử lý sự kiện khi nhấp vào biểu tượng hộ khẩu.
+     *
+     * @param iconHoKhauController Controller của biểu tượng hộ khẩu.
+     */
     private void eventClickIcon(IconHoKhauController iconHoKhauController) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/hokhau/danh-sach-nhan-khau.fxml"));
@@ -161,7 +201,7 @@ public class DanhSach extends Pane {
             Scene nextScene = new Scene(fxmlLoader.load());
             DanhSachNhanKhauController controller = fxmlLoader.getController();
             controller.setTitle("Hộ khẩu " + iconHoKhauController.getData().getIdHoKhau());
-            controller.setPrevStage(stage);
+            controller.setStage(stage);
             controller.setPrevScene(scene);
             
             List<NhanKhau> nhanKhauList = getNhanKhauList(iconHoKhauController);
@@ -170,15 +210,21 @@ public class DanhSach extends Pane {
             controller.launch(nhanKhauList);
             stage.setScene(nextScene);
         } catch (IOException e) {
-            // lỗi phần mềm
+            // Xử lý lỗi phần mềm nếu cần thiết.
         }
     }
     
+    /**
+     * Lấy danh sách nhân khẩu từ hộ khẩu.
+     *
+     * @param iconHoKhauController Controller của biểu tượng hộ khẩu.
+     * @return Danh sách nhân khẩu thuộc hộ khẩu hoặc {@code null} nếu có lỗi.
+     */
     private List<NhanKhau> getNhanKhauList(IconHoKhauController iconHoKhauController) {
         try {
             return SQLUtils.getNhanKhauFromHoKhau(iconHoKhauController.getData().getIdHoKhau());
         } catch (SQLException e) {
-            // lỗi kết nối
+            // Xử lý lỗi kết nối nếu cần thiết.
         }
         return null;
     }

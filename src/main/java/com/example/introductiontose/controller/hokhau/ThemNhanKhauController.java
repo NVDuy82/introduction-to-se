@@ -23,6 +23,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controller để thêm mới thông tin nhân khẩu.
+ *
+ * @author Duy
+ * @version 1.0
+ */
 public class ThemNhanKhauController implements Initializable {
     @FXML
     private TextField hoTenText;
@@ -56,11 +62,21 @@ public class ThemNhanKhauController implements Initializable {
     private DatePicker ngayDKTTDatePicker;
     private int idHoKhau;
     
+    /**
+     * Xử lý sự kiện khi người dùng nhấn nút "Thêm".
+     */
     @FXML
     private void addClick(ActionEvent event) {
         submit();
     }
     
+    /**
+     * Xử lý sự kiện khi người dùng nhấn nút "Điền thông tin".
+     * Nếu căn cước tồn tại, điền thông tin vào các trường tương ứng.
+     *
+     * @param event Sự kiện nhấn nút.
+     * @throws SQLException Nếu có lỗi khi truy xuất cơ sở dữ liệu.
+     */
     @FXML
     private void fill(ActionEvent event) throws SQLException {
         Connection connection = SqlConnection.connect();
@@ -73,6 +89,9 @@ public class ThemNhanKhauController implements Initializable {
         }
     }
     
+    /**
+     * Khởi tạo các giá trị mặc định cho DatePicker.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ngaySinhDatePicker.setConverter(new StringConverterLocalDate());
@@ -80,10 +99,20 @@ public class ThemNhanKhauController implements Initializable {
         ngayDKTTDatePicker.setConverter(new StringConverterLocalDate());
     }
     
+    /**
+     * Đặt ID hộ khẩu cho controller.
+     *
+     * @param idHoKhau ID của hộ khẩu.
+     */
     public void setIdHoKhau(int idHoKhau) {
         this.idHoKhau = idHoKhau;
     }
     
+    /**
+     * Kiểm tra xem các trường bắt buộc đã được điền đầy đủ hay chưa.
+     *
+     * @return True nếu các trường bắt buộc đã được điền đầy đủ, ngược lại là False.
+     */
     private boolean areRequiredFieldsFilled() {
         TextField[] textFields = {hoTenText, noiSinhText, quanHeText};
         DatePicker[] datePickers = {ngaySinhDatePicker, ngayCapDatePicker};
@@ -98,18 +127,25 @@ public class ThemNhanKhauController implements Initializable {
         return true;
     }
     
+    /**
+     * Xử lý sự kiện khi người dùng nhấn nút "Thêm".
+     * Hiển thị cảnh báo nếu thông tin không đầy đủ, ngược lại hiển thị xác nhận và gửi yêu cầu thêm nhân khẩu.
+     */
     private void submit() {
         if (areRequiredFieldsFilled()) {
-            // create alert
             AlertUtils.showAlert("Xác nhận", "Bạn có chắc chắn muốn thêm nhân khẩu " +
                     hoTenText.getText() +
                     " không?", this::sendRequire);
         } else {
-            // create alert
             AlertUtils.showAlertError("Thiếu thông tin", "Các thông tin có đánh dấu (*) là bắt buộc.");
         }
     }
     
+    /**
+     * Lấy thông tin từ các trường nhập liệu để tạo đối tượng ThongTinNhanKhau.
+     *
+     * @return Đối tượng ThongTinNhanKhau được tạo từ các trường nhập liệu.
+     */
     private ThongTinNhanKhau getInfo() {
         return new ThongTinNhanKhau(new CCCD(soCccdText.getText(),
                 (ngayCapDatePicker.getValue() == null) ? LocalDateTime.now() : ngayCapDatePicker.getValue().atStartOfDay(),
@@ -129,6 +165,9 @@ public class ThemNhanKhauController implements Initializable {
                 quanHeText.getText());
     }
     
+    /**
+     * Gửi yêu cầu thêm mới nhân khẩu đến cơ sở dữ liệu.
+     */
     private void sendRequire() {
         Connection connection = SqlConnection.connect();
         DataAccessObject<NhanKhau, String> accessObject = new NhanKhauDAO(connection, NhanKhauDAO.TableType.NHANKHAUCHUATHEM);
@@ -141,6 +180,11 @@ public class ThemNhanKhauController implements Initializable {
         }
     }
     
+    /**
+     * Điền thông tin từ đối tượng NhanKhau vào các trường nhập liệu.
+     *
+     * @param nhanKhau Đối tượng NhanKhau chứa thông tin cần điền.
+     */
     private void _fill(NhanKhau nhanKhau) {
         hoTenText.setText(nhanKhau.getThongTinNhanKhau().getHoTen());
         biDanhText.setText(nhanKhau.getThongTinNhanKhau().getBiDanh());
