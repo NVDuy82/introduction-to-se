@@ -1,5 +1,12 @@
 package com.example.introductiontose.controller.admin.naptien;
 
+import com.example.introductiontose.dao.DataAccessObject;
+import com.example.introductiontose.dao.NapTienDao;
+import com.example.introductiontose.dao.TaiKhoanNhanKhauDAO;
+import com.example.introductiontose.database.SqlConnection;
+import com.example.introductiontose.model.NapTien;
+import com.example.introductiontose.model.TaiKhoanNhanKhau;
+import com.example.introductiontose.util.AlertUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Node hiển thị thông tin nạp tiền trong giao diện admin.
@@ -21,6 +30,8 @@ import java.io.IOException;
  * @version 1.0
  */
 public class NapTienNode extends HBox {
+    private NapTien napTien;
+    
     @FXML
     private Label cccd;
     
@@ -43,7 +54,7 @@ public class NapTienNode extends HBox {
      */
     public NapTienNode(String soCccd, String name, int money, String ghiChu) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/NapTienNode.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/naptien/NapTienNode.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
@@ -58,13 +69,40 @@ public class NapTienNode extends HBox {
     }
     
     /**
+     * Trả về đối tượng NapTien liên kết với Node này.
+     *
+     * @return Đối tượng NapTien.
+     */
+    public NapTien getNapTien() {
+        return napTien;
+    }
+    
+    /**
+     * Thiết lập đối tượng NapTien liên kết với Node này.
+     *
+     * @param napTien Đối tượng NapTien.
+     */
+    public void setNapTien(NapTien napTien) {
+        this.napTien = napTien;
+    }
+    
+    /**
      * Xử lý sự kiện khi nút "Hủy" được nhấn.
      *
      * @param event Sự kiện nhấn nút "Hủy".
      */
     @FXML
     void cancel(ActionEvent event) {
-        // Xử lý logic khi hủy nạp tiền (có thể thêm code theo yêu cầu cụ thể).
+        Connection connection = SqlConnection.connect();
+        DataAccessObject<NapTien, Integer> accessNapTien = new NapTienDao(connection);
+        
+        try {
+            accessNapTien.delete(napTien);
+        } catch (SQLException e) {
+            AlertUtils.showAlertError("Lỗi", "Xử lí yêu cầu thất bại!");
+        }
+        
+        SqlConnection.close(connection);
     }
     
     /**
@@ -74,6 +112,24 @@ public class NapTienNode extends HBox {
      */
     @FXML
     void submit(ActionEvent event) {
-        // Xử lý logic khi xác nhận nạp tiền (có thể thêm code theo yêu cầu cụ thể).
+        Connection connection = SqlConnection.connect();
+        DataAccessObject<NapTien, Integer> accessNapTien = new NapTienDao(connection);
+        DataAccessObject<TaiKhoanNhanKhau, String> accessTaiKhoan = new TaiKhoanNhanKhauDAO(connection);
+        
+        try {
+            accessNapTien.delete(napTien);
+            accessTaiKhoan.get(napTien.getSoCccd()).ifPresent(taiKhoanNhanKhau -> {
+                taiKhoanNhanKhau.setSoDuTaiKhoan(taiKhoanNhanKhau.getSoDuTaiKhoan() + napTien.getSoTienNap());
+                try {
+                    accessTaiKhoan.update(taiKhoanNhanKhau);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (SQLException e) {
+            AlertUtils.showAlertError("Lỗi", "Xử lí yêu cầu thất bại!");
+        }
+        
+        SqlConnection.close(connection);
     }
 }

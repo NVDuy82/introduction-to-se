@@ -50,6 +50,7 @@ public class YeuCauNapTienController implements Initializable {
             for (NapTien napTien : danhSachNapTien) {
                 accessNhanKhau.get(napTien.getSoCccd()).ifPresent(nhanKhau -> {
                     NapTienNode node = new NapTienNode(napTien.getSoCccd(), nhanKhau.getThongTinNhanKhau().getHoTen(), napTien.getSoTienNap(), napTien.getGhiChu());
+                    node.setNapTien(napTien);
                     yeuCauList.getChildren().add(node);
                 });
             }
