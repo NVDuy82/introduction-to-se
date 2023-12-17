@@ -1,10 +1,14 @@
 package com.example.introductiontose;
 
+import com.example.introductiontose.controller.user.hokhau.DSNhanKhauController;
+import com.example.introductiontose.dao.DataAccessObject;
+import com.example.introductiontose.util.SQLUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Lớp Application là lớp chính của ứng dụng, thừa kế từ javafx.application.Application.
@@ -21,15 +25,14 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-//        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/dangkydangnhap/dangNhap.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/dangkydangnhap/dangNhap.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
 //        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/taokhoanphi/taoKhoanPhi.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 925, 670);
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/YeuCauNhanKhau.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 925, 670);
-
-//        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/YeuCauNapTien.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load());
+//        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/YeuCauNhanKhau.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load());
+
+        
 
         stage.setTitle("Hello!");
         stage.setScene(scene);

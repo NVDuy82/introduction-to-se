@@ -90,13 +90,19 @@ public class dangNhapController implements Initializable {
         if(selectNK.isEmpty()) {
             return;
         }
+        FXMLLoader loader = new FXMLLoader();
 
-        String tenTaiKhoan = selectNK.get().getThongTinNhanKhau().getHoTen();
+        if(soCccdDangNhap.getText().equals("admin")) {
+            loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+        } else {
+            String tenTaiKhoan = selectNK.get().getThongTinNhanKhau().getHoTen();
 
-        CCCD = soCccdDangNhap.getText();
-        tenTK = tenTaiKhoan;
+            CCCD = soCccdDangNhap.getText();
+            tenTK = tenTaiKhoan;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/dangkydangnhap/trangChu.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/dangkydangnhap/trangChu.fxml"));
+        }
+
         Parent home = loader.load();
 
         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
