@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" style="-fx-background-color: #f6f6f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.trangchu.TrangChuUserController">
+   <children>
+      <VBox prefHeight="690.0" prefWidth="800.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="487.5">
+                     <children>
+                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="487.5">
+                           <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="215.0">
+                                 <children>
+                                    <Label fx:id="tenUser" prefHeight="100.0" text="Tên User" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="27.5" right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <HBox fx:id="hoKhau" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                                 <children>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../iconImg/icons8-search-50.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
+                                       <children>
+                                          <Label prefHeight="100.0" text="Hộ khẩu" />
+                                          <Label fx:id="tenHoKhau" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tên hộ khẩu" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="487.5">
+                           <children>
+                              <HBox fx:id="duTK" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                                 <children>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../iconImg/icons8-search-50.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
+                                       <children>
+                                          <Label prefHeight="100.0" text="Số dư TK" />
+                                          <Label fx:id="tienDu" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tiền dư" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="27.5" right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox fx:id="chuaDong" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                                 <children>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../iconImg/icons8-search-50.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
+                                       <children>
+                                          <Label prefHeight="100.0" text="Chưa đóng" />
+                                          <Label fx:id="tienChuaDong" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tiền chưa đóng" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="15.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="274.5" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                     <children>
+                        <Label text="thông tin hộ khẩu">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="soNhanKhau" layoutX="10.0" layoutY="10.0" text="Số nhân khẩu">
+                           <VBox.margin>
+                              <Insets left="15.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: f9f9f9; -fx-background-radius: 10;">
+                           <children>
+                              <Label text="Nguyễn Văn A">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="19/02/1999">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox layoutX="25.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: f9f9f9; -fx-background-radius: 10;">
+                           <children>
+                              <Label text="Nguyễn Văn A">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="19/02/1999">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="15.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Xem tất cả" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="10.0" right="27.5" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="440.0" prefWidth="800.0">
+               <children>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.5" prefWidth="450.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                     <children>
+                        <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="25.0" prefWidth="450.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="25.0" top="15.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label fx:id="tkThuPhi" alignment="CENTER" minWidth="-Infinity" prefHeight="18.0" prefWidth="120.0" text="Thu phí đóng góp">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="tkNhanKhau" alignment="CENTER" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" prefWidth="120.0" text="Nhân khẩu hộ khẩu">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <BarChart maxHeight="-Infinity" minHeight="-Infinity" prefHeight="345.0" prefWidth="450.0" style="-fx-background-color: #ffffff;">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" style="-fx-background-color: #ffffff; -fx-blend-mode: transparent;" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" style="-fx-background-color: #ffffff; -fx-blend-mode: transparent;" />
+                           </yAxis>
+                           <VBox.margin>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
+                           </VBox.margin>
+                        </BarChart>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="27.5" left="27.5" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.5" prefWidth="275.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                     <HBox.margin>
+                        <Insets bottom="27.5" left="10.0" right="27.5" top="15.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="270.0" text="Danh sách yêu cầu">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                        </Label>
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #BBF7D0;">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label text="Tên yêu cầu">
+                                 <VBox.margin>
+                                    <Insets left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin></Label>
+                              <Label text="Tạm vắng">
+                                 <VBox.margin>
+                                    <Insets left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin></Label>
+                              <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
+                                 <VBox.margin>
+                                    <Insets left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="25.0" layoutY="25.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #CFE8FF;">
+                           <children>
+                              <Label text="Tên yêu cầu">
+                                 <padding>
+                                    <Insets left="15.0" top="5.0" />
+                                 </padding></Label>
+                              <Label text="Nạp tiền">
+                                 <padding>
+                                    <Insets left="15.0" top="5.0" />
+                                 </padding></Label>
+                              <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
+                                 <padding>
+                                    <Insets left="15.0" top="5.0" />
+                                 </padding></Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="130.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #FECDD3;">
+                           <children>
+                              <Label text="Tên yêu cầu">
+                                 <VBox.margin>
+                                    <Insets left="15.0" top="5.0" />
+                                 </VBox.margin></Label>
+                              <Label text="Tách khẩu">
+                                 <VBox.margin>
+                                    <Insets left="15.0" top="5.0" />
+                                 </VBox.margin></Label>
+                              <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
+                                 <VBox.margin>
+                                    <Insets left="15.0" top="5.0" />
+                                 </VBox.margin></Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="25.0" layoutY="195.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Xem tất cả" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
