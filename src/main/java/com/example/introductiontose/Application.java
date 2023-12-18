@@ -29,7 +29,7 @@ public class Application extends javafx.application.Application {
 //        Scene scene = new Scene(fxmlLoader.load());
 //        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/taokhoanphi/taoKhoanPhi.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load());
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/admin/hokhau/DanhSachNhanKhau.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/com/example/introductiontose/view/user/YeuCauNhanKhau.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         
