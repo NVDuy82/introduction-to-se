@@ -47,6 +47,8 @@ public class TrangChuAdminController implements Initializable {
     private BarChart bangTK;
     @FXML
     private VBox xemTatCa;
+    @FXML
+    private VBox danhSachYeuCau;
 
     Connection connection;
 
@@ -117,7 +119,6 @@ public class TrangChuAdminController implements Initializable {
         });
     }
 
-    /*
     private List<TamTru> danhSachTamTru;
     private List<TamVang> danhSachTamVang;
     private List<TachKhau> danhSachTachKhau;
@@ -125,61 +126,113 @@ public class TrangChuAdminController implements Initializable {
     private List<ThayDoiNhanKhau> danhSachTDNhanKhau;
     public void setDanhSachYeuCau () {
         TamTruDAO ttDAO = new TamTruDAO(connection);
-        TamVangDAO tvDAO = new TamVangDAO(connection);
-        TachKhauDAO tkDAO = new TachKhauDAO(connection);
-        ThayDoiHoKhauDAO tdhkDAO = new ThayDoiHoKhauDAO(connection);
-        ThayDoiNhanKhauDao tdnkDAO = new ThayDoiNhanKhauDao(connection);
+
         try {
             danhSachTamTru = ttDAO.getAll();
-            danhSachTamVang = tvDAO.getAll();
-            danhSachTachKhau = tkDAO.getAll();
-            danhSachTDHoKhau = tdhkDAO.getAll();
-            danhSachTDNhanKhau = tdnkDAO.getAll();
         }
         catch (Exception e) {
             //
         }
 
         int index = 0;
-        while (index < 3) {
-            for (TamTru tamTru : danhSachTamTru) {
+        for (TamTru tamTru : danhSachTamTru) {
+            if (tamTru.getTrangThai().equals("chờ xác nhận")) {
+                if (index >= 3) break;
                 YeuCau tt = new YeuCau();
-                tt.setYeuCauTT(tamTru.getHoTen(), tamTru.getLiDo());
-                index ++;
+                tt.setYeuCauTT(tamTru.getHoTen(), tamTru.getLyDo());
+                index++;
+                System.out.println(index);
+                danhSachYeuCau.getChildren().add(tt);
             }
         }
-        while (index < 3) {
-            for (TamVang tamVang : danhSachTamVang) {
+
+
+        ////////////////////////////////////////////////
+
+        TamVangDAO tvDAO = new TamVangDAO(connection);
+
+        try {
+            danhSachTamVang = tvDAO.getAll();
+        }
+        catch (Exception e) {
+            //
+        }
+
+        for (TamVang tamVang : danhSachTamVang) {
+            if (tamVang.getTrangThai().equals("chờ xác nhận")) {
+                if (index >= 3) break;
                 YeuCau tv = new YeuCau();
-                tv.setYeuCauTT(tamVang.getHoTen(), tamVang.getLiDo());
-                index ++;
-            }
-        }
-        while (index < 3) {
-            for (TamTru tamTru : danhSachTamTru) {
-                YeuCau tt = new YeuCau();
-                tt.setYeuCauTT(tamTru.getHoTen(), tamTru.getLiDo());
-                index ++;
-            }
-        }
-        while (index < 3) {
-            for (TamTru tamTru : danhSachTamTru) {
-                YeuCau tt = new YeuCau();
-                tt.setYeuCauTT(tamTru.getHoTen(), tamTru.getLiDo());
-                index ++;
-            }
-        }
-        while (index < 3) {
-            for (TamTru tamTru : danhSachTamTru) {
-                YeuCau tt = new YeuCau();
-                tt.setYeuCauTT(tamTru.getHoTen(), tamTru.getLiDo());
-                index ++;
+                tv.setYeuCauTV(tamVang.getSoCccd(), tamVang.getLyDo());
+                index++;
+                System.out.println(index);
+                danhSachYeuCau.getChildren().add(tv);
             }
         }
 
+        /////////////////////////////////////////////////////
 
+        TachKhauDAO tkDAO = new TachKhauDAO(connection);
+        try {
+            danhSachTachKhau = tkDAO.getAll();
+        }
+        catch (Exception e) {
+            //
+        }
+
+        for (TachKhau tachKhau : danhSachTachKhau) {
+            if (tachKhau.getTrangThai().equals("chờ xác nhận")) {
+                if (index >= 3) break;
+                YeuCau tk = new YeuCau();
+                tk.setYeuCauTK(tachKhau.getSoCccdChuHoMoi(), String.valueOf(tachKhau.getIdHoKhau()));
+                index ++;
+                System.out.println(index);
+                danhSachYeuCau.getChildren().add(tk);
+            }
+        }
+        ////////////////////////////////////////////////////////////////
+
+        ThayDoiHoKhauDAO tdhkDAO = new ThayDoiHoKhauDAO(connection);
+
+        try {
+            danhSachTDHoKhau = tdhkDAO.getAll();
+        }
+        catch (Exception e) {
+            //
+        }
+
+        for (ThayDoiHoKhau thayDoiHoKhau : danhSachTDHoKhau) {
+            if (thayDoiHoKhau.getTrangThai().equals("chờ xác nhận")) {
+                if (index >= 3) break;
+                YeuCau tdhk = new YeuCau();
+                tdhk.setYeuCauTDHK(String.valueOf(thayDoiHoKhau.getIdHoKhau()), thayDoiHoKhau.getNoiDung());
+                index++;
+                System.out.println(index);
+                danhSachYeuCau.getChildren().add(tdhk);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////
+
+        ThayDoiNhanKhauDao tdnkDAO = new ThayDoiNhanKhauDao(connection);
+
+        try {
+            danhSachTDNhanKhau = tdnkDAO.getAll();
+        }
+        catch (Exception e) {
+            //
+        }
+
+        for (ThayDoiNhanKhau thayDoiNhanKhau : danhSachTDNhanKhau) {
+            if (thayDoiNhanKhau.getTrangthaithaidoi().equals("chờ xác nhận")) {
+                if (index >= 3) break;
+                YeuCau tdnk = new YeuCau();
+                tdnk.setYeuCauTDNK(thayDoiNhanKhau.getSoCccd(), thayDoiNhanKhau.getGhichu());
+                index++;
+                System.out.println(index);
+                danhSachYeuCau.getChildren().add(tdnk);
+            }
+        }
     }
-    */
 
     public void setBangTK(boolean check) {
         if(check) {
@@ -218,6 +271,7 @@ public class TrangChuAdminController implements Initializable {
         getDanhSachDongPhi();
         thongKeThuPhi();
         setBangTK(true);
+        setDanhSachYeuCau();
 
         SqlConnection.close(connection);
     }
