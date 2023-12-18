@@ -22,7 +22,7 @@ import java.util.*;
  * @author Duy
  * @version 1.0
  */
-public class HoKhauController implements Initializable {
+public class YeuCauNhanKhauController implements Initializable {
     @FXML
     private Pane paneContent;
     private HoKhau hoKhau;
