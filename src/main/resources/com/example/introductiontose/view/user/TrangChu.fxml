@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" style="-fx-background-color: #f6f6f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" style="-fx-background-color: #f6f6f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.trangchu.TrangChuUserController">
    <children>
       <VBox prefHeight="690.0" prefWidth="800.0">
          <children>
@@ -23,13 +23,13 @@
                            <children>
                               <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="215.0">
                                  <children>
-                                    <Label prefHeight="100.0" text="Tên User" />
+                                    <Label fx:id="tenUser" prefHeight="100.0" text="Tên User" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="27.5" right="10.0" />
                                  </HBox.margin>
                               </VBox>
-                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                              <HBox fx:id="hoKhau" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                                  <children>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -42,7 +42,7 @@
                                     <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                                        <children>
                                           <Label prefHeight="100.0" text="Hộ khẩu" />
-                                          <Label layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tên hộ khẩu" />
+                                          <Label fx:id="tenHoKhau" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tên hộ khẩu" />
                                        </children>
                                        <HBox.margin>
                                           <Insets />
@@ -60,7 +60,7 @@
                         </HBox>
                         <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="487.5">
                            <children>
-                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                              <HBox fx:id="duTK" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                                  <children>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -73,7 +73,7 @@
                                     <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                                        <children>
                                           <Label prefHeight="100.0" text="Số dư TK" />
-                                          <Label layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tiền dư" />
+                                          <Label fx:id="tienDu" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tiền dư" />
                                        </children>
                                        <HBox.margin>
                                           <Insets />
@@ -84,7 +84,7 @@
                                     <Insets left="27.5" right="10.0" />
                                  </HBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                              <HBox fx:id="chuaDong" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="215.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                                  <children>
                                     <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -97,7 +97,7 @@
                                     <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                                        <children>
                                           <Label prefHeight="100.0" text="Chưa đóng" />
-                                          <Label layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tiền chưa đóng" />
+                                          <Label fx:id="tienChuaDong" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tiền chưa đóng" />
                                        </children>
                                        <HBox.margin>
                                           <Insets />
@@ -122,7 +122,7 @@
                               <Insets left="15.0" top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <Label layoutX="10.0" layoutY="10.0" text="Số nhân khẩu">
+                        <Label fx:id="soNhanKhau" layoutX="10.0" layoutY="10.0" text="Số nhân khẩu">
                            <VBox.margin>
                               <Insets left="15.0" top="5.0" />
                            </VBox.margin>
@@ -182,12 +182,12 @@
                               <Insets bottom="5.0" left="15.0" right="25.0" top="15.0" />
                            </VBox.margin>
                            <children>
-                              <Label alignment="CENTER" minWidth="-Infinity" prefHeight="18.0" prefWidth="120.0" text="Thu phí đóng góp">
+                              <Label fx:id="tkThuPhi" alignment="CENTER" minWidth="-Infinity" prefHeight="18.0" prefWidth="120.0" text="Thu phí đóng góp">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" prefWidth="120.0" text="Nhân khẩu hộ khẩu">
+                              <Label fx:id="tkNhanKhau" alignment="CENTER" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" prefWidth="120.0" text="Nhân khẩu hộ khẩu">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
