@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -22,36 +24,207 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DashboardAdminController implements Initializable, CenterContent {
-
     @FXML
     private BorderPane Dashboard;
     //Các Pane hoặc FXML loader cho từng chức năng
 
-    private Pane thongKeNKPane, thongKeTPPane, danhSachNKPane, danhSachTPPane, trangChuPane, caiDatPane, thongTinPane;
+    private Pane trangChuPane, caiDatPane, thongTinPane;
+    private Pane thongKeNKPane, danhSachNKPane, yeuCauNKPane;
+    private Pane thongKeTPPane, danhSachTPPane, yeuCauTPPane, taoKhoanPhiPane;
 
     @FXML
-    private HBox trangChu, caiDat, thongTin;
-
+    private Button thoat;
     @FXML
-    private VBox thongTinNguoiDung;
-
-    @FXML
-    private Button chiTiet, nutThongBao, thoat, thuNho;
-
+    private Button thuNho;
     @FXML
     private ImageView anhDaiDien;
+    @FXML
+    private VBox thongTinNguoiDung;
+    @FXML
+    private Button chiTiet;
+    @FXML
+    private Button nutThongBao;
 
     @FXML
-    private TreeView<HBox> QLNhanKhau;
+    private Button TrangChu;
+    @FXML
+    private TitledPane QuanLyNhanKhau;
+    @FXML
+    private Button thongKeNK, danhSachNK, yeuCauNK;
+    @FXML
+    private Button thongKeTP, danhSachTP, yeuCauTP, taoKhoanPhi;
+    @FXML
+    private TitledPane QuanLyThuPhi;
+    @FXML
+    private Button CaiDat;
 
     @FXML
-    private TreeView<HBox> QLThuPhi;
+    private HBox thongTin;
+
     private Popup popup;
 
-    // Biến để theo dõi trạng thái mở rộng
-    private boolean isExpandedNK = false;
-    private boolean isExpandedTP = false;
+    // Event handlers
+    @FXML
+    void onTrangChuClicked() {
+        // Xử lý sự kiện khi "Trang chủ" được nhấn
+        if (trangChuPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+                trangChuPane = loader.load();
+                System.out.println("load trang chu thanh cong");
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(trangChuPane);
+        }
+        else updateCenterContent(trangChuPane);
+    }
 
+    @FXML
+    void onThongKeNKClicked() {
+        // Xử lý sự kiện khi "Thống kê" trong "Quản lý nhân khẩu" được nhấn
+        if (thongKeNKPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/ThongKeNhanKhau.fxml"));
+                thongKeNKPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(thongKeNKPane);
+        }
+        else updateCenterContent(thongKeNKPane);
+    }
+
+    @FXML
+    void onDanhSachNKClicked() {
+        // Xử lý sự kiện khi "Danh sách" trong "Quản lý nhân khẩu" được nhấn
+        if (danhSachNKPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/DanhSachNhanKhau.fxml"));
+                danhSachNKPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(danhSachNKPane);
+        }
+        else updateCenterContent(danhSachNKPane);
+    }
+
+    @FXML
+    void onYeuCauNKClicked() {
+        // Xử lý sự kiện khi "Duyệt yêu cầu" trong "Quản lý nhân khẩu" được nhấn
+        if (yeuCauNKPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/YeuCauNhanKhau.fxml"));
+                yeuCauNKPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(yeuCauNKPane);
+        }
+        else updateCenterContent(yeuCauNKPane);
+    }
+
+    @FXML
+    void onThongKeTPClicked() {
+        // Xử lý sự kiện khi "Thống kê" trong "Quản lý thu phí" được nhấn
+        if (thongKeTPPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/ThongKeThuPhi.fxml"));
+                thongKeTPPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(thongKeTPPane);
+        }
+        else updateCenterContent(thongKeTPPane);
+    }
+
+    @FXML
+    void onDanhSachTPClicked() {
+        // Xử lý sự kiện khi "Danh sách" trong "Quản lý thu phí" được nhấn
+        if (danhSachTPPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/DanhSachThuPhi.fxml"));
+                danhSachTPPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(danhSachTPPane);
+        }
+        else updateCenterContent(danhSachTPPane);
+    }
+
+    @FXML
+    void onYeuCauTPClicked() {
+        // Xử lý sự kiện khi "Duyệt yêu cầu" trong "Quản lý thu phí" được nhấn
+        if (yeuCauTPPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+                yeuCauTPPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(yeuCauTPPane);
+        }
+        else updateCenterContent(yeuCauTPPane);
+
+    }
+
+    @FXML
+    void onTaoKhoanPhiClicked() {
+        // Xử lý sự kiện khi "Tạo khoản phí" trong "Quản lý thu phí" được nhấn
+        if (taoKhoanPhiPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+                taoKhoanPhiPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(taoKhoanPhiPane);
+        }
+        else updateCenterContent(taoKhoanPhiPane);
+    }
+
+    @FXML
+    void onCaiDatClicked() {
+        // Xử lý sự kiện khi "Cài đặt" được nhấn
+        if (caiDatPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+                caiDatPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(caiDatPane);
+        }
+        else updateCenterContent(caiDatPane);
+    }
+
+    @FXML
+    void onThongTinClicked() {
+        // Xử lý sự kiện khi "Thông tin" được nhấn
+        if (thongTinPane == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+                thongTinPane = loader.load();
+            }
+            catch (Exception e) {
+                //
+            }
+            updateCenterContent(thongTinPane);
+        }
+        else updateCenterContent(thongTinPane);
+    }
 
     private void createPopup() {
         popup = new Popup();
@@ -60,69 +233,21 @@ public class DashboardAdminController implements Initializable, CenterContent {
         popup.getContent().add(label);
     }
 
-    @FXML
-    private void onTrangChuClicked(MouseEvent event) {
-        if (trangChuPane == null) {
-            trangChuPane = loadNewFXML("trangChu.fxml");
-        }
-        if (trangChuPane != null) {
-            Dashboard.setCenter(trangChuPane);
-        }
-    }
-    @FXML
-    private void onQLNhanKhauClicked(MouseEvent event) {
-        isExpandedNK = !isExpandedNK; // Đảo trạng thái
-        toggleTreeItems(QLNhanKhau.getRoot(), isExpandedNK);
-    }
-
-    @FXML
-    private void onCaiDatClicked(MouseEvent event) {
-        if (caiDatPane == null) {
-            caiDatPane = loadNewFXML("caiDat.fxml");
-        }
-        if (caiDatPane != null) {
-            Dashboard.setCenter(caiDatPane);
-        }
-    }
-
-    @FXML
-    private void onQLThuPhiClicked(MouseEvent event) {
-        isExpandedTP = !isExpandedTP; // Đảo trạng thái
-        toggleTreeItems(QLThuPhi.getRoot(), isExpandedTP);
-    }
-
-    @FXML
-    private void onThongTinClicked(MouseEvent event) {
-        if (thongTinPane == null) {
-            thongTinPane = loadNewFXML("thongTin.fxml");
-        }
-        if (thongTinPane != null) {
-            Dashboard.setCenter(thongTinPane);
-        }
-    }
-
     @Override
-    public void updateCenterContent(String fxmlPath) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        try {
-            Pane newPane = loader.load();
-            Dashboard.setCenter(newPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Xử lý lỗi tại đây
-        }
+    public void updateCenterContent(Pane pane) {
+        Dashboard.setCenter(pane);
     }
 
 
     // Di chuyển HBox sang phải 15px khi di chuột vào
-    @FXML
+
     private void onMouseEnteredHBox(MouseEvent event) {
         HBox source = (HBox) event.getSource();
         source.setTranslateX(15);
     }
 
     // Quay lại vị trí ban đầu khi di chuột ra
-    @FXML
+
     private void onMouseExitedHBox(MouseEvent event) {
         HBox source = (HBox) event.getSource();
         source.setTranslateX(0);
@@ -160,16 +285,6 @@ public class DashboardAdminController implements Initializable, CenterContent {
         // Thu nhỏ cửa sổ
         stage.setIconified(true);
     }
-
-    private void toggleTreeItems(TreeItem<?> item, boolean expand) {
-        if (item != null && !item.isLeaf()) {
-            item.setExpanded(expand);
-            for (TreeItem<?> child : item.getChildren()) {
-                toggleTreeItems(child, expand);
-            }
-        }
-    }
-
     private Pane loadNewFXML(String fxmlFileName) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
         try {
@@ -183,17 +298,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        // Đăng ký sự kiện cho các HBox
-        trangChu.setOnMouseEntered(this::onMouseEnteredHBox);
-        trangChu.setOnMouseExited(this::onMouseExitedHBox);
-        QLNhanKhau.setOnMouseEntered(this::onMouseEnteredHBox);
-        QLNhanKhau.setOnMouseExited(this::onMouseExitedHBox);
-        QLThuPhi.setOnMouseEntered(this::onMouseEnteredHBox);
-        QLThuPhi.setOnMouseExited(this::onMouseExitedHBox);
-        caiDat.setOnMouseEntered(this::onMouseEnteredHBox);
-        caiDat.setOnMouseExited(this::onMouseExitedHBox);
-        thongTin.setOnMouseEntered(this::onMouseEnteredHBox);
-        thongTin.setOnMouseExited(this::onMouseExitedHBox);
+
 
         // Đăng ký sự kiện cho VBox
         thongTinNguoiDung.setOnMouseEntered(this::onMouseEnteredVBox);
@@ -206,71 +311,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
         thuNho.setOnAction((e -> onMinimizeClicked()));
 
         // Tải pane
-        trangChu.setOnMouseClicked(this::onTrangChuClicked);
-        QLNhanKhau.setOnMouseClicked(this::onQLNhanKhauClicked);
-        QLThuPhi.setOnMouseClicked(this::onQLThuPhiClicked);
-        caiDat.setOnMouseClicked(this::onCaiDatClicked);
-        thongTin.setOnMouseClicked(this::onThongTinClicked);
         // Tạo popup
         createPopup();
-
-        // Khởi tạo gốc của cây
-        TreeItem<HBox> rootItemNK = createTreeItem("QL Nhân khẩu", "path/to/root/icon.png");
-
-        // Thêm các TreeItem con
-        rootItemNK.getChildren().add(createTreeItem("Thống kê", "path/to/statistics/icon.png"));
-        rootItemNK.getChildren().add(createTreeItem("Danh sách", "path/to/list/icon.png"));
-        rootItemNK.getChildren().add(createTreeItem("Duyệt yêu cầu", "path/to/request/icon.png"));
-
-        // Cài đặt gốc và mở rộng nó
-        QLNhanKhau.setRoot(rootItemNK);
-        QLNhanKhau.setShowRoot(true);
-        rootItemNK.setExpanded(false);
-
-        // Sử dụng CellFactory để tùy chỉnh hiển thị của TreeItem
-        setupCellFactory(QLNhanKhau);
-
-        // Khởi tạo gốc của cây
-        TreeItem<HBox> rootItemTP = createTreeItem("QL Thu phí", "path/to/root/icon.png");
-
-        // Thêm các TreeItem con
-        rootItemTP.getChildren().add(createTreeItem("Thống kê", "path/to/statistics/icon.png"));
-        rootItemTP.getChildren().add(createTreeItem("Danh sách", "path/to/list/icon.png"));
-        rootItemTP.getChildren().add(createTreeItem("Duyệt yêu cầu", "path/to/request/icon.png"));
-
-        // Cài đặt gốc và mở rộng nó
-        QLThuPhi.setRoot(rootItemTP);
-        QLThuPhi.setShowRoot(true);
-        rootItemTP.setExpanded(false);
-
-        // Sử dụng CellFactory để tùy chỉnh hiển thị của TreeItem
-        setupCellFactory(QLThuPhi);
-    }
-
-    private void setupCellFactory(TreeView<HBox> treeView) {
-        treeView.setCellFactory(tv -> new TreeCell<HBox>() {
-            @Override
-            protected void updateItem(HBox item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    setGraphic(item);
-                }
-            }
-        });
-    }
-
-    // Phương thức tạo TreeItem với HBox chứa ImageView và Label
-    private TreeItem<HBox> createTreeItem(String text, String imagePath) {
-        ImageView imageView = new ImageView(new Image(imagePath));
-        imageView.setFitHeight(24); // Đặt kích thước cho hình ảnh
-        imageView.setFitWidth(24);
-
-        Label label = new Label(text);
-        HBox hbox = new HBox(20, imageView, label); // 20 là khoảng cách giữa ImageView và Label
-
-        return new TreeItem<>(hbox);
     }
 }
