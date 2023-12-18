@@ -1,0 +1,18 @@
+.parent {
+    -fx-background-color: linear-gradient(to bottom right, #F5F8F9, #e9eaef);
+    -fx-background-radius: 30px;
+}
+
+.sidebar {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px 15px 15px 0px;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.icon {
+    -fx-background-color: transparent;
+}
