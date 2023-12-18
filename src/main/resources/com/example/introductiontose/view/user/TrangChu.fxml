@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" style="-fx-background-color: #f6f6f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" style="-fx-background-color: #f6f6f9;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="690.0" prefWidth="800.0">
          <children>
@@ -21,9 +21,9 @@
                      <children>
                         <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="487.5">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="215.0">
+                              <VBox fx:id="personal_information" alignment="CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="215.0">
                                  <children>
-                                    <Label prefHeight="100.0" text="Tên User" />
+                                    <Label fx:id="personal_information_label" prefHeight="100.0" text="Tên User" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="27.5" right="10.0" />

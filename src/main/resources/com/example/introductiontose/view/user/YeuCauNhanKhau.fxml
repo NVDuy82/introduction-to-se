@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.User_YeuCauNhanKhauController">
    <children>
       <HBox prefHeight="690.0" prefWidth="800.0">
          <children>
@@ -19,26 +19,6 @@
                   <Insets left="15.0" right="15.0" />
                </HBox.margin>
                <children>
-                  <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../iconImg/icons8-search-50.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label minWidth="-Infinity" prefWidth="80.0" text="Đăng ký tạm vắng" wrapText="true">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="15.0" left="10.0" top="15.0" />
-                     </VBox.margin>
-                  </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="25.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -49,7 +29,7 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label minWidth="-Infinity" prefWidth="80.0" text="Thay đổi chủ hộ" wrapText="true">
+                        <Label minWidth="-Infinity" prefHeight="34.0" prefWidth="65.0" text="Thay đổi chủ hộ" wrapText="true">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
@@ -99,7 +79,7 @@
                         <Insets bottom="15.0" left="10.0" top="15.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="325.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox fx:id="TamVangHBox" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#setTamVangAction" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -109,7 +89,27 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label minWidth="-Infinity" prefWidth="80.0" text="Còn 1 cái nữa mà quên..." wrapText="true">
+                        <Label minWidth="-Infinity" prefHeight="34.0" prefWidth="58.0" text="Đăng ký tạm vắng" wrapText="true">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="10.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox fx:id="TamTruHBox" onMouseClicked="#setTamTruAction" alignment="CENTER_LEFT" layoutX="10.0" layoutY="325.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../iconImg/icons8-search-50.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label minWidth="-Infinity" prefHeight="34.0" prefWidth="61.0" text="Đăng ký tạm trú" wrapText="true">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
@@ -126,7 +126,7 @@
                   <Insets top="75.0" />
                </HBox.margin>
             </Line>
-            <AnchorPane prefHeight="690.0" prefWidth="600.0">
+            <AnchorPane fx:id="anchorPane" prefHeight="690.0" prefWidth="600.0">
                <HBox.margin>
                   <Insets bottom="15.0" left="15.0" right="27.5" top="15.0" />
                </HBox.margin>
