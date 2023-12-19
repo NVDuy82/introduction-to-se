@@ -1,14 +1,8 @@
 package com.example.introductiontose.controller.admin;
 
-import com.example.introductiontose.dao.HoKhauDAO;
-import com.example.introductiontose.dao.NhanKhauDAO;
-import com.example.introductiontose.dao.ThayDoiHoKhauDAO;
-import com.example.introductiontose.dao.ThayDoiNhanKhauDao;
+import com.example.introductiontose.dao.*;
 import com.example.introductiontose.database.SqlConnection;
-import com.example.introductiontose.model.HoKhau;
-import com.example.introductiontose.model.NhanKhau;
-import com.example.introductiontose.model.ThayDoiHoKhau;
-import com.example.introductiontose.model.ThayDoiNhanKhau;
+import com.example.introductiontose.model.*;
 import com.example.introductiontose.model.key.HoKhauKey;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,6 +35,9 @@ public class YeuCauNhanKhauController implements Initializable {
     private TextField noidungtimkiem;
     @FXML
     private HBox hBoxTimKiem;
+
+    List<TamVang> tamvangList;
+    List<TamTru> tamtruList;
     public static List<HBox> danhsachHBox = new ArrayList<>();
 
     Connection connection = SqlConnection.connect();
@@ -95,6 +92,52 @@ public class YeuCauNhanKhauController implements Initializable {
                 danhsachHBox.add(hbox);
             }
         }
+
+        ///////////////////////////////////////////////////////
+
+        TamVangDAO tamVangDAO = new TamVangDAO(connection);
+        try {
+            this.tamvangList = tamVangDAO.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(TamVang tv : tamvangList) {
+            if(tv.getTrangThai().equals("chờ xác nhận")) {
+                String idHBox = "TV" + tv.getIdTamVang();
+                String kieuYeuCau = "Yêu cầu: tạm vắng";
+                String nguoiGuiYeuCau = "Người yêu cầu: " + tv.getTen();
+                String ghiChu ="Lý do: " + tv.getLyDo();
+
+                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
+                Insets hboxMargin = new Insets(10, 10, 0, 10);
+                VBoxList.getChildren().add(hbox);
+                VBoxList.setMargin(hbox, hboxMargin);
+                danhsachHBox.add(hbox);
+            }
+        }
+
+        ///////////////////////////////////////////////////
+
+
+        TamTruDAO tamtruDAO = new TamTruDAO(connection);
+        this.tamtruList = tamtruDAO.getAll();
+
+        for(TamTru tt : tamtruList) {
+            if(tt.getTrangThai().equals("chờ xác nhận")) {
+                String idHBox = "TT" + tt.getSoCCCD();
+                String kieuYeuCau = "Yêu cầu: tạm trú";
+                String nguoiGuiYeuCau = "Người yêu cầu: " + tt.getHoTen();
+                String ghiChu ="Lý do: " + tt.getLyDo();
+
+                HBox hbox = initHBox(idHBox, kieuYeuCau, nguoiGuiYeuCau, ghiChu);
+                Insets hboxMargin = new Insets(10, 10, 0, 10);
+                VBoxList.getChildren().add(hbox);
+                VBoxList.setMargin(hbox, hboxMargin);
+                danhsachHBox.add(hbox);
+            }
+        }
+
     }
     public Button initButtonDongY() {
         Button buttonDongY = new Button("Đồng ý");
@@ -150,13 +193,21 @@ public class YeuCauNhanKhauController implements Initializable {
         buttonNo.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                clickButton(buttonNo);
+                try {
+                    clickButton(buttonNo);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         buttonYes.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                clickButton(buttonYes);
+                try {
+                    clickButton(buttonYes);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         return hbox;
@@ -219,6 +270,58 @@ public class YeuCauNhanKhauController implements Initializable {
                         + thongtinhokhauthaydoi.get(4) + "\n\n";
                 hienThiChiTiet.setText(chitiet);
             }
+        }
+
+        if(idHBox.substring(0,2).equals("TV")){
+            TamVang tmp = null;
+            int idTamVang = Integer.parseInt(idHBox.substring(2));
+            for(TamVang tv : tamvangList){
+                if(tv.getIdTamVang() == idTamVang){
+                    tmp = tv;
+                    break;
+                }
+            }
+            String chitiet = "Yêu cầu: xin tạm vắng" + "\n\n"
+                    + "Người yêu cầu: " + tmp.getTen() + "\n"
+                    + "Số CCCD: " + tmp.getSoCccd() + "\n\n"
+                    + "Ngày bắt đầu: " + tmp.getNgayBatDau() +"\n"
+                    + "Ngày kết thúc: " + tmp.getNgayKetThuc() + "\n\n"
+                    + "Nơi đăng ký tạm trú: " + tmp.getNoiDangKyTamTru() + "\n\n"
+                    + "Lý do: " + tmp.getLyDo() +"\n";
+
+            hienThiChiTiet.setText(chitiet);
+        }
+
+        if(idHBox.substring(0,2).equals("TT")){
+            TamTru tmp = null;
+            String idTamTru = idHBox.substring(2);
+            for(TamTru tv : tamtruList){
+                if(tv.getSoCCCD().equals(idTamTru)){
+                    tmp = tv;
+                    break;
+                }
+            }
+
+            String chitiet = "Yêu cầu: xin tạm trú" + "\n\n"
+                    + "Chi tiết người đăng kí tạm trú: " +"\n\n"
+                    + "\tHọ tên: " + tmp.getHoTen() + "\n"
+                    + "\tBí danh: " + tmp.getBiDanh() + "\n"
+                    + "\tSố CCCD: " + tmp.getSoCCCD() +"\n"
+                    + "\tNơi cấp: " + tmp.getNoiCap() + "\n"
+                    + "\tQuê quán: " + tmp.getNguyenQuan() + "\n"
+                    + "\tNgày sinh: " + tmp.getNgaysinh() + "\n"
+                    + "\tGiới tính: " + tmp.getGioiTinh() + "\n"
+                    + "\tDân tộc: " + tmp.getDanToc() + "\n"
+                    + "\tSố điện thoại: " + tmp.getSoDienThoai() + "\n"
+                    + "\tNghề nghiệp: " +tmp.getNgheNghiep() + "\n"
+                    + "\tNơi làm việc: " +tmp.getNoiLamViec() + "\n"
+                    + "\tNgày bắt đầu: " + tmp.getNgayBatDau() +"\n"
+                    + "\tNgày kết thúc: " + tmp.getNgayKetThuc() + "\n\n"
+                    + "Chủ hộ: " + tmp.getHoTenChuHo() + "\n"
+                    + "Quan hệ với chủ hộ: " + tmp.getQuanHe() + "\n\n"
+                    + "Lý do: " + tmp.getLyDo() +"\n";
+
+            hienThiChiTiet.setText(chitiet);
         }
     }
 
@@ -355,7 +458,7 @@ public class YeuCauNhanKhauController implements Initializable {
         return thongtinhokhau;
     }
 
-    public void clickButton(Button button) {
+    public void clickButton(Button button) throws SQLException {
         HBox parentHBox = (HBox) button.getParent();
         String idHBox = parentHBox.getId();
 
@@ -396,6 +499,44 @@ public class YeuCauNhanKhauController implements Initializable {
                 List<String> thongtinhokhauthaydoi = LayThongTinHoKhauThayDoi(tdhk);
                 String soCccd1 = thongtinhokhauthaydoi.get(6);
                 String soCccd2 = thongtinhokhauthaydoi.get(7);
+                if(button.getText().equals("Hủy bỏ")) {
+                    showAlertHuyBo(idHBox, soCccd1, soCccd2, button);
+                }
+                if(button.getText().equals("Đồng ý")) {
+                    showAlertDongY(idHBox, soCccd1, soCccd2, button);
+                }
+            }
+        }
+
+        if(idHBox.substring(0,2).equals("TT")) {
+            String soCccdTamTruString = idHBox.substring(2);
+            Integer soCccdTamTru = Integer.parseInt(soCccdTamTruString);
+            TamTruDAO tamTruDAO = new TamTruDAO(connection);
+            Optional<TamTru> resultTDHK;
+            resultTDHK = tamTruDAO.get(soCccdTamTru);
+            if(resultTDHK.isPresent()) {
+                TamTru tamtru = resultTDHK.get();
+                String soCccd1 = tamtru.getSoCCCD();
+                String soCccd2 = tamtru.getCccdChuHo();
+                if(button.getText().equals("Hủy bỏ")) {
+                    showAlertHuyBo(idHBox, soCccd1, soCccd2, button);
+                }
+                if(button.getText().equals("Đồng ý")) {
+                    showAlertDongY(idHBox, soCccd1, soCccd2, button);
+                }
+            }
+        }
+
+        if(idHBox.substring(0,2).equals("TV")) {
+            String idTamVangString = idHBox.substring(2);
+            Integer idTamVang = Integer.parseInt(idTamVangString);
+            TamVangDAO tamVangDAO = new TamVangDAO(connection);
+            Optional<TamVang> resultTDHK;
+            resultTDHK = tamVangDAO.get(idTamVang);
+            if(resultTDHK.isPresent()) {
+                TamVang tamVang = resultTDHK.get();
+                String soCccd1 = tamVang.getSoCccd();
+                String soCccd2 = null;
                 if(button.getText().equals("Hủy bỏ")) {
                     showAlertHuyBo(idHBox, soCccd1, soCccd2, button);
                 }
