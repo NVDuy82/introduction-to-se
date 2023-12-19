@@ -77,7 +77,7 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
     @Override
     public void save(@NotNull TamTru t) {
         try {
-            String sql = "INSERT INTO dangkytamtru (soCCCD, cccdChuHo, hoTen, biDanh, gioiTinh, soDienThoai, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, quanHe, lyDo, trangThai, ngaysinh, ngayCap,ngayBatDau, ngayKetThuc) VALUES (?, ?, ?, ?,? ,?,?,?,?,?,?,?,?,?,?,?,?,?, ?)";
+            String sql = "INSERT INTO dangkytamtru (soCCCD, soCccdChuHo, hoTen, biDanh, gioiTinh, soDienThoai, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, quanHe, lyDo, trangThai, ngaysinh, ngayCap,ngayBatDau, ngayKetThuc, noiDangKyTamTru) VALUES (?, ?, ?, ?,? ,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, t.getSoCCCD());
             st.setString(2, t.getCccdChuHo());
@@ -102,9 +102,10 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
             st.setDate(17, ngaycap);
             st.setDate(18, ngaybatdau);
             st.setDate(19, ngayketthuc);
+            st.setString(20, t.getNoiDangKyTamTru());
             st.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Lỗi ở phương thức Save trong TamTruDAO");
+            System.out.println("Lỗi ở phương thức Save trong TamTruDAO" + e.getMessage());
             throw new UnsupportedOperationException("Error while saving data to the database.");
         }
     }
@@ -123,7 +124,7 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
             // Thực hiện lệnh
             st.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Lỗi ở phương thức update trong lớp TamTruDAO");
+            System.out.println("Lỗi ở phương thức Save trong TamTruDAO: " + e.getMessage());
             throw new UnsupportedOperationException("Error while updating data in the database.");
         }
     }

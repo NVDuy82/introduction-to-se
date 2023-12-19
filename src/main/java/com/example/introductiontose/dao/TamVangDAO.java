@@ -55,7 +55,7 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
      */
     @Override
     public void save(@NotNull TamVang t) throws SQLException {
-        String sql = "INSERT INTO tamvang (soCccd, ngayBatDau, ngayKetThuc, lyDo, noiDangLyTamTru, TrangThai) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tamvang (soCccd, ngayBatDau, ngayKetThuc, lyDo, noiDangKyTamTru, TrangThai) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement st = connection.prepareStatement(sql);
 
         st.setString(1, t.getSoCccd());
