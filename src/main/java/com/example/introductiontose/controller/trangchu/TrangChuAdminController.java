@@ -280,8 +280,6 @@ public class TrangChuAdminController implements Initializable {
         }
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.connection = SqlConnection.connect();
