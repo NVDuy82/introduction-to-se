@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.YeuCauNapTien.YeuCauNapTienUserController">
    <children>
       <VBox prefHeight="690.0" prefWidth="800.0">
          <children>
@@ -19,12 +19,18 @@
                   <Label layoutX="364.0" layoutY="269.0" text="Cái ở đây để t làm nhé :v, làm mỗi cái button dưới thôi" />
                </children>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="690.0" prefWidth="800.0">
+            <VBox alignment="CENTER" prefHeight="690.0" prefWidth="800.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="425.0" />
-                  <Button mnemonicParsing="false" text="Nạp tiền" />
+                  <HBox alignment="CENTER" prefHeight="89.0" prefWidth="800.0">
+                     <children>
+                        <TextField fx:id="onNhapTien" prefHeight="26.0" prefWidth="163.0" promptText="Nhập số tiền bạn muốn nạp" />
+                        <TextField fx:id="ghiChu" prefHeight="25.0" prefWidth="157.0" promptText="Ghi Chú" />
+                        <Button mnemonicParsing="false" onAction="#naptien" text="Nạp tiền" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="ktra" prefHeight="19.0" prefWidth="223.0" text="Label" textFill="RED" />
                </children>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </children>
