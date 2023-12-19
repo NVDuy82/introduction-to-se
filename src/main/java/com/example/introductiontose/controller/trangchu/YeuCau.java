@@ -4,9 +4,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class YeuCau extends VBox {
 
     private Label loaiYeuCau;
@@ -31,4 +28,36 @@ public class YeuCau extends VBox {
 
         this.getChildren().addAll(yeuCau, ten, lido);
     }
+    public void setYeuCauTV(String cccd, String liDo) {
+        Label ten =  new Label(cccd);
+        Label yeuCau = new Label("Tạm vắng");
+        Label lido = new Label(liDo);
+        lido.setWrapText(true);
+
+        this.getChildren().addAll(yeuCau, ten, lido);
+    }
+    public void setYeuCauTDHK(String idHoKhau, String noidung) {
+        Label ten =  new Label(idHoKhau);
+        Label yeuCau = new Label("Thay đổi hộ khẩu");
+        Label lido = new Label(noidung);
+        lido.setWrapText(true);
+
+        this.getChildren().addAll(yeuCau, ten, lido);
+    }
+    public void setYeuCauTDNK(String idHoKhau, String noiDung) {
+        Label ten =  new Label(idHoKhau);
+        Label yeuCau = new Label("Thay đổi nhân khẩu");
+        Label lido = new Label(noiDung);
+        lido.setWrapText(true);
+
+        this.getChildren().addAll(yeuCau, ten, lido);
+    }public void setYeuCauTK(String cccdChuHoMoi, String idHoKhau) {
+        Label ten =  new Label(cccdChuHoMoi);
+        Label yeuCau = new Label("Tách khẩu");
+        Label lido = new Label(idHoKhau);
+        lido.setWrapText(true);
+
+        this.getChildren().addAll(yeuCau, ten, lido);
+    }
+
 }
