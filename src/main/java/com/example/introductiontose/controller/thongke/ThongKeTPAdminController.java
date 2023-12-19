@@ -6,6 +6,7 @@
 //import javafx.fxml.Initializable;
 //import javafx.scene.chart.XYChart;
 //
+//import java.sql.Connection;
 //import java.sql.SQLException;
 //import java.time.YearMonth;
 //import java.util.ArrayList;
@@ -13,9 +14,11 @@
 //import java.util.List;
 //import java.util.Map;
 //
-//public class ThongKeAdminController implements Initializable {
+//public class ThongKeTPAdminController implements Initializable {
 //    private DongPhiDAO dongPhiDAO;
 //    private List<DongPhi> danhSachDongPhi;
+//
+//    Connection connection;
 //
 //    private void getDanhSachDongPhi() {
 //        try {
@@ -69,4 +72,6 @@
 //            dongGopData.add(new XYChart.Data<>(month.toString(), tongTien));
 //        });
 //    }
+//
+//
 //}
