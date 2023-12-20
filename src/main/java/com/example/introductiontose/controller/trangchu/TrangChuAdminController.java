@@ -6,6 +6,7 @@ import com.example.introductiontose.model.*;
 import com.example.introductiontose.util.AlertUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -119,12 +120,35 @@ public class TrangChuAdminController implements Initializable {
         });
     }
 
+    public VBox createYeuCau(String loai, String label1, String label2) {
+        VBox yeuCau = new VBox();
+
+        // Cài đặt các thuộc tính cho VBox
+        yeuCau.setMaxHeight(Double.NEGATIVE_INFINITY);
+        yeuCau.setMinHeight(50);
+        yeuCau.setPrefHeight(100.0);
+        yeuCau.setPrefWidth(300.0);
+        yeuCau.setSpacing(5);
+        yeuCau.setStyle("-fx-background-radius: 10; -fx-background-color: #BBF7D0;");
+        yeuCau.setPadding(new Insets(10, 10, 10, 10));
+
+        Label loaiYeuCau = new Label(loai);
+        Label tieuDe = new Label(label1);
+        Label noiDung = new Label(label2);
+
+        yeuCau.getChildren().addAll(loaiYeuCau, tieuDe, noiDung);
+
+        return yeuCau;
+    }
+
     private List<TamTru> danhSachTamTru;
     private List<TamVang> danhSachTamVang;
     private List<TachKhau> danhSachTachKhau;
     private List<ThayDoiHoKhau> danhSachTDHoKhau;
     private List<ThayDoiNhanKhau> danhSachTDNhanKhau;
     public void setDanhSachYeuCau () {
+        //danhSachYeuCau = new VBox(10);
+
         TamTruDAO ttDAO = new TamTruDAO(connection);
 
         try {
@@ -136,17 +160,16 @@ public class TrangChuAdminController implements Initializable {
 
         int index = 0;
         for (TamTru tamTru : danhSachTamTru) {
+            System.out.println(tamTru.getTrangThai());
             if (tamTru.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                YeuCau tt = new YeuCau();
-                tt.setYeuCauTT(tamTru.getHoTen(), tamTru.getLyDo());
+                VBox tt = createYeuCau("Tạm trú", tamTru.getHoTen(), tamTru.getLyDo());
                 index++;
-                System.out.println(index);
                 danhSachYeuCau.getChildren().add(tt);
             }
         }
 
-
+        System.out.println("Xong tam tru");
         ////////////////////////////////////////////////
 
         TamVangDAO tvDAO = new TamVangDAO(connection);
@@ -159,16 +182,16 @@ public class TrangChuAdminController implements Initializable {
         }
 
         for (TamVang tamVang : danhSachTamVang) {
+            System.out.println(tamVang.getTrangThai());
             if (tamVang.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                YeuCau tv = new YeuCau();
-                tv.setYeuCauTV(tamVang.getSoCccd(), tamVang.getLyDo());
+                VBox tv = createYeuCau("Tạm vắng", tamVang.getSoCccd(), tamVang.getLyDo());
                 index++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tv);
             }
         }
-
+        System.out.println("Xong tam vang");
         /////////////////////////////////////////////////////
 
         TachKhauDAO tkDAO = new TachKhauDAO(connection);
@@ -176,19 +199,21 @@ public class TrangChuAdminController implements Initializable {
             danhSachTachKhau = tkDAO.getAll();
         }
         catch (Exception e) {
-            //
+            e.printStackTrace();
         }
 
+        System.out.println(danhSachTachKhau.size());
         for (TachKhau tachKhau : danhSachTachKhau) {
             if (tachKhau.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                YeuCau tk = new YeuCau();
-                tk.setYeuCauTK(tachKhau.getSoCccdChuHoMoi(), String.valueOf(tachKhau.getIdHoKhau()));
+                VBox tk = createYeuCau("Tách khẩu", tachKhau.getSoCccdChuHoMoi(), String.valueOf(tachKhau.getIdHoKhau()));
                 index ++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tk);
             }
         }
+
+        System.out.println("Xong tach khau");
         ////////////////////////////////////////////////////////////////
 
         ThayDoiHoKhauDAO tdhkDAO = new ThayDoiHoKhauDAO(connection);
@@ -203,14 +228,14 @@ public class TrangChuAdminController implements Initializable {
         for (ThayDoiHoKhau thayDoiHoKhau : danhSachTDHoKhau) {
             if (thayDoiHoKhau.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                YeuCau tdhk = new YeuCau();
-                tdhk.setYeuCauTDHK(String.valueOf(thayDoiHoKhau.getIdHoKhau()), thayDoiHoKhau.getNoiDung());
+                VBox tdhk = createYeuCau("Thay đổi hộ khẩu", String.valueOf(thayDoiHoKhau.getIdHoKhau()), thayDoiHoKhau.getNoiDung());
                 index++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tdhk);
             }
         }
 
+        System.out.println("Xong tdhk");
         //////////////////////////////////////////////////////////////////////
 
         ThayDoiNhanKhauDao tdnkDAO = new ThayDoiNhanKhauDao(connection);
@@ -225,13 +250,15 @@ public class TrangChuAdminController implements Initializable {
         for (ThayDoiNhanKhau thayDoiNhanKhau : danhSachTDNhanKhau) {
             if (thayDoiNhanKhau.getTrangthaithaidoi().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                YeuCau tdnk = new YeuCau();
-                tdnk.setYeuCauTDNK(thayDoiNhanKhau.getSoCccd(), thayDoiNhanKhau.getGhichu());
+                VBox tdnk = createYeuCau("Thay đổi nhân khẩu", thayDoiNhanKhau.getSoCccd(), thayDoiNhanKhau.getGhichu());
                 index++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tdnk);
             }
         }
+        System.out.println("Xong tdnk");
+
+        System.out.println(danhSachYeuCau.getChildren().size());
     }
 
     public void setBangTK(boolean check) {
@@ -252,8 +279,6 @@ public class TrangChuAdminController implements Initializable {
 
         }
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -34,7 +34,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
     @Override
     public List<TachKhau> getAll() throws SQLException {
         List<TachKhau> danhSachTachKhau = new ArrayList<>();
-        String sql = "SELECT * FROM tachkhau";
+        String sql = "SELECT * FROM tachhokhau";
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
@@ -55,7 +55,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
      */
     @Override
     public Optional<TachKhau> get(TachKhauKey key) throws SQLException {
-        String sql = "SELECT * FROM tachkhau WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
+        String sql = "SELECT * FROM tachhokhau WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, key.getSoCccdChuHoMoi());
         statement.setInt(2, key.getIdHoKhau());
@@ -78,7 +78,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
      */
     @Override
     public void save(@NotNull TachKhau tachKhau) throws SQLException {
-        String sql = "INSERT INTO tachkhau (soCccdChuHoMoi, idHoKhau, danhSachNhanKhau, trangThai) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO tachhokhau (soCccdChuHoMoi, idHoKhau, danhSachNhanKhau, trangThai) VALUES (?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, tachKhau.getSoCccdChuHoMoi());
         statement.setInt(2, tachKhau.getIdHoKhau());
@@ -92,7 +92,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
      */
     @Override
     public void update(@NotNull TachKhau tachKhau) throws SQLException {
-        String sql = "UPDATE tachkhau SET danhSachNhanKhau = ?, trangThai = ? WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
+        String sql = "UPDATE tachhokhau SET danhSachNhanKhau = ?, trangThai = ? WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, String.join(",", tachKhau.getDanhSachNhanKhau()));
         statement.setString(2, tachKhau.getTrangThai());
@@ -106,7 +106,7 @@ public class TachKhauDAO implements DataAccessObject<TachKhau, TachKhauKey> {
      */
     @Override
     public void delete(@NotNull TachKhau tachKhau) throws SQLException {
-        String sql = "DELETE FROM tachkhau WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
+        String sql = "DELETE FROM tachhokhau WHERE soCccdChuHoMoi = ? AND idHoKhau = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, tachKhau.getSoCccdChuHoMoi());
         statement.setInt(2, tachKhau.getIdHoKhau());
