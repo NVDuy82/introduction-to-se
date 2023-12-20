@@ -143,50 +143,6 @@
                            <children>
                               <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
                                  <children>
-                                    <Label text="Ông a">
-                                       <VBox.margin>
-                                          <Insets left="15.0" right="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label text="bla">
-                                       <VBox.margin>
-                                          <Insets left="15.0" right="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
-                                       <VBox.margin>
-                                          <Insets left="15.0" right="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
-                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="74.5" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
-                                 <children>
-                                    <Label text="Bà b">
-                                       <padding>
-                                          <Insets left="15.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="Nạp tiền">
-                                       <padding>
-                                          <Insets left="15.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
-                                       <padding>
-                                          <Insets left="15.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
-                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
-                                 <children>
                                     <Label text="anh C">
                                        <VBox.margin>
                                           <Insets left="15.0" top="5.0" />
@@ -233,50 +189,6 @@
                         </Label>
                         <VBox fx:id="lichSu" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
-                                 <children>
-                                    <Label text="Tên yêu cầu">
-                                       <VBox.margin>
-                                          <Insets left="15.0" right="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label text="Tạm vắng">
-                                       <VBox.margin>
-                                          <Insets left="15.0" right="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
-                                       <VBox.margin>
-                                          <Insets left="15.0" right="15.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
-                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="74.5" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
-                                 <children>
-                                    <Label text="Tên yêu cầu">
-                                       <padding>
-                                          <Insets left="15.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label text="thêm nhân khẩu">
-                                       <padding>
-                                          <Insets left="15.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
-                                       <padding>
-                                          <Insets left="15.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </VBox>
                               <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
                                  <children>
                                     <Label text="Tên yêu cầu">

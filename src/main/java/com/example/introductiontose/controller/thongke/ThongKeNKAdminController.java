@@ -6,7 +6,6 @@ import com.example.introductiontose.model.*;
 import com.example.introductiontose.util.AlertUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
@@ -15,12 +14,10 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.util.Pair;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.YearMonth;
 import java.util.*;
@@ -37,7 +34,8 @@ public class ThongKeNKAdminController implements Initializable {
     @FXML
     private Label soNhanKhau;
 
-    private BarChart soLuongChart;
+    private BarChart soLuongNKChart;
+    private BarChart soLuongHKChart;
     private PieChart gioiTinhChart;
     private PieChart doTuoiChart;
 
@@ -70,11 +68,11 @@ public class ThongKeNKAdminController implements Initializable {
 
     @FXML
     public void onNhanKhauClicked() {
-        System.out.println("nhan khau");
+        setBangTK(1);
     }
     @FXML
     public void onHoKhauClicked() {
-        System.out.println("ho Khau");
+        setBangTK(4);
     }
 
     @FXML
@@ -307,37 +305,29 @@ public class ThongKeNKAdminController implements Initializable {
         }
     }
     public void setBangTK(int check) {
-        System.out.println("Dữ liệu nhân khẩu: " + nhanKhauData);
-        System.out.println("Dữ liệu hộ khẩu: " + hoKhauData);
-
         if(check == 1) {
-            if (soLuongChart == null) {
+            if (soLuongNKChart == null) {
                 CategoryAxis xAxis = new CategoryAxis();
                 NumberAxis yAxis = new NumberAxis();
                 xAxis.setLabel("Tháng");
                 yAxis.setLabel("Số Lượng");
 
-                this.soLuongChart = new BarChart<>(xAxis, yAxis);
-                this.soLuongChart.setMaxHeight(Region.USE_COMPUTED_SIZE);
-                this.soLuongChart.setMinHeight(Region.USE_COMPUTED_SIZE);
-                this.soLuongChart.setPrefHeight(345);
-                this.soLuongChart.setPrefWidth(435);
+                this.soLuongNKChart = new BarChart<>(xAxis, yAxis);
+                this.soLuongNKChart.setMaxHeight(Region.USE_COMPUTED_SIZE);
+                this.soLuongNKChart.setMinHeight(Region.USE_COMPUTED_SIZE);
+                this.soLuongNKChart.setPrefHeight(345);
+                this.soLuongNKChart.setPrefWidth(435);
 
                 XYChart.Series<String, Number> nhanKhau = new XYChart.Series<>();
                 nhanKhau.setName("Nhân khẩu");
                 // Thêm dữ liệu vào series
                 nhanKhau.getData().addAll(nhanKhauData);
 
-                XYChart.Series<String, Number> hoKhau = new XYChart.Series<>();
-                hoKhau.setName("Hộ khẩu");
-                // Thêm dữ liệu vào series
-                hoKhau.getData().addAll(hoKhauData);
-
-                soLuongChart.getData().addAll(nhanKhau, hoKhau);
+                soLuongNKChart.getData().addAll(nhanKhau);
             }
 
             thongKeChart.getChildren().clear();
-            thongKeChart.getChildren().add(soLuongChart);
+            thongKeChart.getChildren().add(soLuongNKChart);
         }
         else if (check == 2){
             if (gioiTinhChart == null) {
@@ -377,6 +367,29 @@ public class ThongKeNKAdminController implements Initializable {
 
             thongKeChart.getChildren().clear();
             thongKeChart.getChildren().add(doTuoiChart);
+        } else if (check == 4) {
+            if (soLuongHKChart == null) {
+                CategoryAxis xAxis = new CategoryAxis();
+                NumberAxis yAxis = new NumberAxis();
+                xAxis.setLabel("Tháng");
+                yAxis.setLabel("Số Lượng");
+
+                this.soLuongHKChart = new BarChart<>(xAxis, yAxis);
+                this.soLuongHKChart.setMaxHeight(Region.USE_COMPUTED_SIZE);
+                this.soLuongHKChart.setMinHeight(Region.USE_COMPUTED_SIZE);
+                this.soLuongHKChart.setPrefHeight(345);
+                this.soLuongHKChart.setPrefWidth(435);
+
+                XYChart.Series<String, Number> hoKhau = new XYChart.Series<>();
+                hoKhau.setName("Hộ khẩu");
+                // Thêm dữ liệu vào series
+                hoKhau.getData().addAll(hoKhauData);
+
+                soLuongHKChart.getData().addAll(hoKhau);
+            }
+
+            thongKeChart.getChildren().clear();
+            thongKeChart.getChildren().add(soLuongHKChart);
         }
     }
 
