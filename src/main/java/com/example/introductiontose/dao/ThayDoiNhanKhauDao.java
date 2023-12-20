@@ -91,4 +91,17 @@ public class ThayDoiNhanKhauDao implements DataAccessObject<ThayDoiNhanKhau,Inte
         statement.setString(index + 5, thayDoiNhanKhau.getGhichu());
         return index + 6;
     }
+
+    public List<ThayDoiNhanKhau> getDaThayDoi() throws SQLException {
+        List<ThayDoiNhanKhau> danhSachThayDoiNhanKhau = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM thaydoinhankhau WHERE trangThai = ?");
+        statement.setString(1, "đã xác nhận");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            ThayDoiNhanKhau thayDoiNhanKhau = _get(resultSet);
+            danhSachThayDoiNhanKhau.add(thayDoiNhanKhau);
+        }
+        return danhSachThayDoiNhanKhau;
+    }
 }

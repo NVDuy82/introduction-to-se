@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" style="-fx-background-color: #f6f6f9;" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.thongke.ThongKeNKAdminController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" style="-fx-background-color: #f6f6f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.thongke.ThongKeNKAdminController">
    <children>
       <HBox alignment="TOP_CENTER" prefHeight="690.0" prefWidth="800.0">
          <children>
@@ -101,30 +100,24 @@
                               <Insets bottom="5.0" left="15.0" right="25.0" top="15.0" />
                            </VBox.margin>
                            <children>
-                              <Label fx:id="tkSoLuong" alignment="CENTER" minWidth="-Infinity" prefHeight="18.0" prefWidth="120.0" text="Số lượng">
+                              <MenuButton fx:id="tkSoLuong" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="120.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" text="Số lượng" textAlignment="CENTER" wrapText="true">
+                                <items>
+                                  <MenuItem fx:id="nhanKhau" mnemonicParsing="false" onAction="#onNhanKhauClicked" style="-fx-pref-width: 120.0" text="Nhân Khẩu" />
+                                  <MenuItem fx:id="hoKhau" mnemonicParsing="false" onAction="#onHoKhauClicked" style="-fx-pref-width: 120.0" text="Hộ Khẩu" />
+                                </items>
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
-                              </Label>
-                              <Label fx:id="tkDoTuoi" alignment="CENTER" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" prefWidth="120.0" text="Độ tuổi">
+                              </MenuButton>
+                              <Label fx:id="tkDoTuoi" alignment="CENTER" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" onMouseClicked="#onTKDoTuoiClicked" prefWidth="120.0" text="Độ tuổi">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="tkGioiTinh" alignment="CENTER" layoutX="220.0" layoutY="14.0" minWidth="-Infinity" prefWidth="120.0" text="Giới tính" />
+                              <Label fx:id="tkGioiTinh" alignment="CENTER" layoutX="220.0" layoutY="14.0" minWidth="-Infinity" onMouseClicked="#onTKGioiTinhClicked" prefWidth="120.0" text="Giới tính" />
                            </children>
                         </HBox>
-                        <BarChart fx:id="thongKeChart" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="345.0" prefWidth="450.0" style="-fx-background-color: #ffffff;">
-                           <xAxis>
-                              <CategoryAxis side="BOTTOM" style="-fx-background-color: #ffffff; -fx-blend-mode: transparent;" />
-                           </xAxis>
-                           <yAxis>
-                              <NumberAxis side="LEFT" style="-fx-background-color: #ffffff; -fx-blend-mode: transparent;" />
-                           </yAxis>
-                           <VBox.margin>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="5.0" />
-                           </VBox.margin>
-                        </BarChart>
+                        <Pane fx:id="thongKeChart" prefHeight="345.0" prefWidth="450.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="27.5" left="27.5" right="10.0" top="10.0" />
