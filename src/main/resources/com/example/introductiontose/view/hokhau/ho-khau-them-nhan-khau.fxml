@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="675.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.hokhau.ThemNhanKhauController">
+<AnchorPane minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.hokhau.ThemNhanKhauController">
    <children>
       <Text layoutX="23.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thêm nhân khẩu">
          <font>
@@ -27,9 +27,9 @@
          </font>
       </Text>
       <Line endX="261.0" fill="BLACK" layoutX="124.0" layoutY="83.0" opacity="0.41" startX="-100.0" stroke="#acacac" />
-      <HBox alignment="CENTER" layoutY="116.0" prefHeight="428.0" prefWidth="675.0">
+      <HBox alignment="CENTER" layoutY="116.0" prefHeight="428.0" prefWidth="600.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="250.0">
+            <VBox prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="hoTenText" prefHeight="36.0" prefWidth="250.0" promptText="Họ tên (*)" style="-fx-background-color: inherit; -fx-border-color: #acacac; -fx-border-radius: 4;">
                      <font>
@@ -94,13 +94,13 @@
                   </TextField>
                </children>
                <HBox.margin>
-                  <Insets left="40.0" right="40.0" />
+                  <Insets left="10.0" right="40.0" />
                </HBox.margin>
             </VBox>
             <Line endX="-100.0" endY="428.0" startX="-100.0" stroke="#acacac" />
-            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="250.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0">
                <HBox.margin>
-                  <Insets left="40.0" right="40.0" />
+                  <Insets left="40.0" right="10.0" />
                </HBox.margin>
                <children>
                   <HBox prefHeight="36.0" prefWidth="250.0">

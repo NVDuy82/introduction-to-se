@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -65,11 +66,21 @@ public class TaoKhoanPhi implements Initializable {
     @FXML
     private Text loiMucPhi;
 
+    @FXML
+    private ToggleGroup kieuPhiBatBuoc;
+    @FXML
+    private VBox vboxKieuPhiBatBuoc;
+    @FXML
+    private RadioButton theoDauNguoi;
+
+    @FXML
+    private RadioButton theoHoGiaDinh;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dateStart.setEditable(false);
         dateEnd.setEditable(false);
+        vboxKieuPhiBatBuoc.setVisible(false);
         // Cài đặt khoảng giá trọ cho các spinner giờ và phút
         setPropertyForTime();
 
@@ -126,8 +137,10 @@ public class TaoKhoanPhi implements Initializable {
                     mucPhi.setText("");
                     loiMucPhi.setText("");
                     mucPhi.setEditable(false);
+                    vboxKieuPhiBatBuoc.setVisible(false);
                 }else {
                     mucPhi.setEditable(true);
+                    vboxKieuPhiBatBuoc.setVisible(true);
                 }
             }
         });
@@ -173,7 +186,12 @@ public class TaoKhoanPhi implements Initializable {
                 }
             }
             Integer mucphiKP = Integer.parseInt(mucPhi.getText());
-            luuKhoanPhi("bắt buộc", noidungKP, mucphiKP, timeStart, timeEnd, tieudeKP);
+            if(theoDauNguoi.isSelected()) {
+                luuKhoanPhi("bắt buộc/người", noidungKP, mucphiKP, timeStart, timeEnd, tieudeKP);
+            } else {
+                luuKhoanPhi("bắt buộc", noidungKP, mucphiKP, timeStart, timeEnd, tieudeKP);
+            }
+
         }
 
         // Hiển thị thông báo
@@ -190,6 +208,9 @@ public class TaoKhoanPhi implements Initializable {
     public String datLoiKhoanPhi() {
         if((!tuNguyen.isSelected()) && (!batBuoc.isSelected())) {
             return("Chưa chọn kiểu của khoản phí!");
+        }
+        if(batBuoc.isSelected() && ((!theoDauNguoi.isSelected()) && (!theoHoGiaDinh.isSelected()))) {
+            return("Chưa chọn kiểu phí của khoản phí bắt buộc!");
         }
         if(tieude.getText().isEmpty()) {
             return("Tiêu đề khoản phí chưa được nhập!");

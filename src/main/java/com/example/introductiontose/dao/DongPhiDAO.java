@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
     private final Connection connection;
-    
+
     /**
      * Khởi tạo một đối tượng DongPhiDAO với kết nối cơ sở dữ liệu được cung cấp.
      *
@@ -23,7 +23,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
     public DongPhiDAO(Connection connection) {
         this.connection = connection;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -38,7 +38,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
         }
         return danhSachDongPhi;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -52,9 +52,9 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
             return Optional.of(dongphi);
         }
         return Optional.empty();
-        
+
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -66,7 +66,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
         _setValuesForStatement(dongphi, statement, 1);
         statement.executeUpdate();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -81,7 +81,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
         statement.setInt(parameterIndex, dongphi.getIdPhi());
         statement.executeUpdate();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -91,7 +91,7 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
         statement.setInt(1, dongphi.getIdPhi());
         statement.executeUpdate();
     }
-    
+
     /**
      * Phương thức private để chuyển đổi dữ liệu từ ResultSet thành đối tượng DongPhi.
      *
@@ -104,10 +104,10 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
         int idHoKhau = resultSet.getInt("idHoKhau");
         int soTien = resultSet.getInt("soTien");
         LocalDateTime ngayDong = resultSet.getTimestamp("ngayDong").toLocalDateTime();
-        
+
         return new DongPhi(idPhi, idHoKhau, soTien, ngayDong);
     }
-    
+
     /**
      * Phương thức private để thiết lập giá trị cho PreparedStatement khi thêm hoặc cập nhật DongPhi.
      *
@@ -121,7 +121,36 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
         statement.setInt(index++, dongphi.getIdHoKhau());
         statement.setInt(index++, dongphi.getSoTien());
         statement.setTimestamp(index++, Timestamp.valueOf(dongphi.getNgayDong()));
-        
+
         return index;
+    }
+
+    public void save(int idPhi, int idHoKhau, LocalDateTime ngayDong, int soTien) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO dongphi" +
+                    "(idPhi, idHoKhau,soTien, ngayDong) " +
+                    "VALUES (?, ?, ?,?)");
+            statement.setInt(1,idPhi);
+            statement.setInt(2,idHoKhau);
+            statement.setTimestamp(4, Timestamp.valueOf(ngayDong));
+            statement.setInt(3,soTien);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+
+        }
+    }
+    public void save1(int idPhi, int idHoKhau, LocalDateTime ngayDong, String soTien) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO dongphi" +
+                    "(idPhi, idHoKhau,soTien, ngayDong) " +
+                    "VALUES (?, ?, ?,?)");
+            statement.setInt(1,idPhi);
+            statement.setInt(2,idHoKhau);
+            statement.setTimestamp(4, Timestamp.valueOf(ngayDong));
+            statement.setString(3,soTien);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+
+        }
     }
 }

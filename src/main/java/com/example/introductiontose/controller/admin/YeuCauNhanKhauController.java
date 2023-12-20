@@ -40,6 +40,10 @@ public class YeuCauNhanKhauController implements Initializable {
     List<TamTru> tamtruList;
     public static List<HBox> danhsachHBox = new ArrayList<>();
 
+
+    public void trangchuContructor(String HBoxID){
+
+    }
     Connection connection = SqlConnection.connect();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -171,7 +175,7 @@ public class YeuCauNhanKhauController implements Initializable {
         hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.setPrefHeight(80.0);
         hbox.setPrefWidth(355.5);
-        hbox.setStyle("-fx-background-color: #ccc; -fx-background-radius: 10;");
+        hbox.setStyle("-fx-background-color: #f9f9f9; -fx-background-radius: 10;");
         Insets hboxPadding = new Insets(18);
         hbox.setPadding(hboxPadding);
         Button buttonYes = initButtonDongY();

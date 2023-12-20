@@ -1,22 +1,17 @@
 package com.example.introductiontose.controller.hokhau;
 
-import com.example.introductiontose.dao.DataAccessObject;
-import com.example.introductiontose.dao.NhanKhauDAO;
-import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.HoKhau;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.util.AlertUtils;
 import com.example.introductiontose.util.SQLUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -27,20 +22,11 @@ import java.util.*;
  * @author Duy
  * @version 1.0
  */
-public class HoKhauController implements Initializable {
-    @FXML
-    private Button buttonMenuDoiChuHo;
-    @FXML
-    private Button buttonMenuThemNhanKhau;
-    @FXML
-    private Button buttonMenuXoaNhanKhau;
-    @FXML
-    private Button buttonMenuTachKhau;
+public class YeuCauNhanKhauController implements Initializable {
     @FXML
     private Pane paneContent;
     private HoKhau hoKhau;
     private int idHoKhau;
-    private Button selectedButton;
     
     /**
      * Phương thức khởi tạo giao diện quản lý hộ khẩu, thiết lập sự kiện cho các nút chức năng.
@@ -51,7 +37,6 @@ public class HoKhauController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idHoKhau = 1;
-        initButton();
     }
     
     /**
@@ -70,7 +55,7 @@ public class HoKhauController implements Initializable {
      * @param event Sự kiện nhấn nút "Đổi Chủ Hộ".
      */
     @FXML
-    private void showDoiChuHo(ActionEvent event) {
+    private void showDoiChuHo(MouseEvent event) {
         DanhSachHoController controller = new DoiChuHoController();
         loadDanhSachHo(controller);
     }
@@ -81,7 +66,7 @@ public class HoKhauController implements Initializable {
      * @param event Sự kiện nhấn nút "Thêm Nhân Khẩu".
      */
     @FXML
-    private void showThemNhanKhau(ActionEvent event) {
+    private void showThemNhanKhau(MouseEvent event) {
         loadThemNhanKhau();
     }
     
@@ -91,7 +76,7 @@ public class HoKhauController implements Initializable {
      * @param event Sự kiện nhấn nút "Xóa Nhân Khẩu".
      */
     @FXML
-    private void showXoaNhanKhau(ActionEvent event) {
+    private void showXoaNhanKhau(MouseEvent event) {
         DanhSachHoController controller = new XoaNhanKhauController();
         loadDanhSachHo(controller);
     }
@@ -102,30 +87,11 @@ public class HoKhauController implements Initializable {
      * @param event Sự kiện nhấn nút "Tách Khẩu".
      */
     @FXML
-    private void showTachKhau(ActionEvent event) {
+    private void showTachKhau(MouseEvent event) {
         DanhSachHoController controller = new TachKhauController();
         loadDanhSachHo(controller);
     }
     
-    /**
-     * Phương thức thiết lập sự kiện cho các nút chức năng và hiệu ứng khi chọn.
-     */
-    private void initButton() {
-        List<Button> buttonMenu = Arrays.asList(buttonMenuDoiChuHo, buttonMenuThemNhanKhau,
-                buttonMenuXoaNhanKhau, buttonMenuTachKhau);
-        
-        for (Button button : buttonMenu) {
-            button.setOnMouseClicked(event -> {
-                if (button != selectedButton) {
-                    if (selectedButton != null) {
-                        selectedButton.getStyleClass().remove("btn-menu-on-select");
-                    }
-                    button.getStyleClass().add("btn-menu-on-select");
-                    selectedButton = button;
-                }
-            });
-        }
-    }
     
     /**
      * Phương thức hiển thị giao diện danh sách hộ và chạy controller tương ứng.
