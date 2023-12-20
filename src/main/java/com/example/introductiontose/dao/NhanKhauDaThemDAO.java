@@ -99,8 +99,8 @@ public class NhanKhauDaThemDAO implements DataAccessObject<NhanKhauDaThem, Integ
      * @throws SQLException Nếu có lỗi khi truy cập dữ liệu từ ResultSet.
      */
     private NhanKhauDaThem _get(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
-        String soCccd = resultSet.getString("soCcccd");
+        int id = resultSet.getInt("idDaThem");
+        String soCccd = resultSet.getString("soCccd");
         int idHoKhau = resultSet.getInt("idHoKhau");
         LocalDateTime ngayThem = resultSet.getTimestamp("ngayThem").toLocalDateTime();
         

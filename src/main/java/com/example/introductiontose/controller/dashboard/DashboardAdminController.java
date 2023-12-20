@@ -313,5 +313,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
         // Tải pane
         // Tạo popup
         createPopup();
+
+        onTrangChuClicked();
     }
 }
