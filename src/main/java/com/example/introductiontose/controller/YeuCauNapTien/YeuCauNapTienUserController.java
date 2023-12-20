@@ -39,9 +39,6 @@ public class YeuCauNapTienUserController implements Initializable{
         NapTienDao naptiendao = new NapTienDao(connection);
         naptiendao.save(CCCD, Integer.parseInt(onNhapTien.getText()), ghiChu.getText());
 
-
-
-
     }
 
 

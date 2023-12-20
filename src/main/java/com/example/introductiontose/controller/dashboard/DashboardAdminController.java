@@ -102,7 +102,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
         // Xử lý sự kiện khi "Danh sách" trong "Quản lý nhân khẩu" được nhấn
         if (danhSachNKPane == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/DanhSachNhanKhau.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/hokhau/DanhSachNhanKhau.fxml"));
                 danhSachNKPane = loader.load();
             }
             catch (Exception e) {
@@ -150,7 +150,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
         // Xử lý sự kiện khi "Danh sách" trong "Quản lý thu phí" được nhấn
         if (danhSachTPPane == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/DanhSachThuPhi.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/DanhSachKhoanPhi.fxml"));
                 danhSachTPPane = loader.load();
             }
             catch (Exception e) {
