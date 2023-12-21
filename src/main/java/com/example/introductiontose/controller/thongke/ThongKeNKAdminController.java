@@ -1,5 +1,6 @@
 package com.example.introductiontose.controller.thongke;
 
+import com.example.introductiontose.controller.admin.hokhau.NodeNK;
 import com.example.introductiontose.controller.dashboard.DashboardAdminController;
 import com.example.introductiontose.dao.*;
 import com.example.introductiontose.database.SqlConnection;
@@ -76,6 +77,7 @@ public class ThongKeNKAdminController implements Initializable {
 
     @FXML
     private VBox lichSu;
+    private Button buttonXemTatCaHoKhau;
 
 
     @FXML
@@ -409,22 +411,14 @@ public class ThongKeNKAdminController implements Initializable {
         }
     }
 
-    private Pane findNearestBorderPane(VBox vbox) {
-        // Lặp qua các cha của Label để tìm BorderPane gần nhất
-        Parent parent = vbox.getParent();
-        while (parent != null) {
-            if (parent instanceof Pane) {
-                return (Pane) parent;
-            }
-            parent = parent.getParent();
-        }
-        return null;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        danhSachNKPane = findNearestBorderPane(danhSachNKHK);
-
+        buttonXemTatCaHoKhau.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hienThiThongTinCacNK(new ActionEvent(), "HK1");
+            }
+        });
         this.connection = SqlConnection.connect();
 
         // Khởi tạo dữ liệu và cài đặt ban đầu cho các thành phần
@@ -464,7 +458,8 @@ public class ThongKeNKAdminController implements Initializable {
             }
 
             for(ThayDoiNhanKhau thayDoiNhanKhau : danhsachthaydoinhankhau) {
-                danhsachVboxThayDoi.add(initVBox("TDNK"+thayDoiNhanKhau.getIdThaydoi(), "Yêu cầu: Thay đổi nhân khẩu", "Người yêu cầu: "  , "Ghi chú: ......."));
+                NhanKhau nhankhau = selectNK(thayDoiNhanKhau.getSoCccd());
+                danhsachVboxThayDoi.add(initVBox("TDNK"+thayDoiNhanKhau.getIdThaydoi(), "Yêu cầu: Thay đổi nhân khẩu", "Người yêu cầu: " + nhankhau.getThongTinNhanKhau().getHoTen()  , "Ghi chú: ..........."));
             }
             for(ThayDoiHoKhau thayDoiHoKhau : danhsachthaydoihokhau) {
                 danhsachVboxThayDoi.add(initVBox("TDHK"+thayDoiHoKhau.getIdThayDoiHoKhau(), "Yêu cầu: Thay đổi hộ khẩu",
@@ -472,10 +467,12 @@ public class ThongKeNKAdminController implements Initializable {
                         "Ghi chú: ......."));
             }
             for(TamTru tamTru : danhsachtamtru) {
-                danhsachVboxThayDoi.add(initVBox("TT"+tamTru.getSoCCCD(), "Yêu cầu: Đăng ký tạm trú", "Người yêu cầu: "  , "Ghi chú: ......."));
+                NhanKhau nhankhau = selectNK(tamTru.getSoCCCD());
+                danhsachVboxThayDoi.add(initVBox("TT"+tamTru.getSoCCCD(), "Yêu cầu: Đăng ký tạm trú", "Người yêu cầu: " + nhankhau.getThongTinNhanKhau().getHoTen() , "Ghi chú: .........."));
             }
             for(TamVang tamVang : danhsachtamvang) {
-                danhsachVboxThayDoi.add(initVBox("TV"+tamVang.getSoCccd(),"Yêu cầu: Đăng ký tạm vắng", "Người yêu cầu: "  , "Ghi chú: ......."));
+                NhanKhau nhankhau = selectNK(tamVang.getSoCccd());
+                danhsachVboxThayDoi.add(initVBox("TV"+tamVang.getSoCccd(),"Yêu cầu: Đăng ký tạm vắng", "Người yêu cầu: " +nhankhau.getThongTinNhanKhau().getHoTen() , "Ghi chú: ......."));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -489,6 +486,16 @@ public class ThongKeNKAdminController implements Initializable {
         }
 
         SqlConnection.close(connection);
+    }
+
+    public NhanKhau selectNK(String soCccd) throws SQLException {
+        NhanKhauDAO nhanKhauDAO = new NhanKhauDAO(connection, NhanKhauDAO.TableType.NHANKHAU);
+        Optional<NhanKhau> resultNK = nhanKhauDAO.get(soCccd);
+        if(resultNK.isPresent()) {
+            NhanKhau nhanKhau = resultNK.get();
+            return nhanKhau;
+        }
+        return  new NhanKhau();
     }
 
     public VBox initVBox(String idVbox, String label1, String label2, String label3) {
@@ -512,13 +519,13 @@ public class ThongKeNKAdminController implements Initializable {
         vbox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hienThiThongTinCacNK(new ActionEvent());
+                hienThiThongTinCacNK(new ActionEvent(), idVbox);
             }
         });
         return vbox;
     }
 
-    public void hienThiThongTinCacNK(ActionEvent event) {
+    public void hienThiThongTinCacNK(ActionEvent event, String idVbox) {
         // Xử lý sự kiện khi "Danh sách" trong "Quản lý nhân khẩu" được nhấn
         try {
             Stage stage = new Stage();
@@ -528,17 +535,10 @@ public class ThongKeNKAdminController implements Initializable {
             Scene scene = new Scene(dangky);
             stage.setScene(scene);
             stage.show();
+
         }
         catch (Exception e) {
             //
         }
-
-//            int idHK = Integer.parseInt(idVbox.substring(2));
-//            try {
-//                List<NhanKhau> danhsachNK = SQLUtils.getNhanKhauFromHoKhau(idHK);
-//                createNhanKhauList(danhsachNK);
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
     }
 }

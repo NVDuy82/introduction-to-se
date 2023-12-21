@@ -144,7 +144,7 @@
                         <VBox fx:id="danhSachNKHK" />
                         <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="250.0" fx:id="xemTatCaDS">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#hienThiThongTinCacNK" style="-fx-background-color: white;" text="Xem tất cả" />
+                              <Button fx:id="buttonXemTatCaHoKhau" mnemonicParsing="false" style="-fx-background-color: white;" text="Xem tất cả" />
                            </children>
                            <VBox.margin>
                               <Insets top="5.0" />
