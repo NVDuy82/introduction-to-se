@@ -20,11 +20,16 @@ import com.example.introductiontose.model.KhoanPhi;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static com.example.introductiontose.controller.YeuCauNapTien.YeuCauNapTienUserController.CCCD;
+import static com.example.introductiontose.controller.YeuCauNapTien.YeuCauNapTienUserController.countHoKhau;
 
 public class DanhSachKhoanPhiAdminController implements  Initializable{
     @FXML
@@ -41,11 +46,17 @@ public class DanhSachKhoanPhiAdminController implements  Initializable{
     private HBox hBoxtiemkiemnoptien;
     @FXML
     private HBox hBoxTimKiem;
+    public static int idHK;
+    public static int sotien;
+//    @FXML
+//    private Text thongke;
+
     public static List<HBox> danhsachHBox = new ArrayList<>();
     public  static  List<HBox> danhsachHoxdongphi = new ArrayList<>();
-    Connection connection = SqlConnection.connect();
+        static  Connection connection = SqlConnection.connect();
     @Override
     public void  initialize(URL url, ResourceBundle resourceBundle){
+
         KhoanPhiDAO khoanPhiDAO = new KhoanPhiDAO(connection);
         List<KhoanPhi> danhsachKhoanPhi = new ArrayList<>();
         DongPhiDAO dongPhiDAO = new DongPhiDAO(connection);
@@ -57,7 +68,12 @@ public class DanhSachKhoanPhiAdminController implements  Initializable{
             throw new RuntimeException();
         }
         for(KhoanPhi khoanPhi : danhsachKhoanPhi){
-            List<String> thongtinKhoanPhi = LayThongTinKhoanPhi(khoanPhi);
+            List<String> thongtinKhoanPhi = null;
+            try {
+                thongtinKhoanPhi = LayThongTinKhoanPhi(khoanPhi);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             String idHBox = thongtinKhoanPhi.get(0);
             String idPhi = String.valueOf(thongtinKhoanPhi.get(1));
             String mucPhi = String.valueOf(thongtinKhoanPhi.get(2));
@@ -157,14 +173,75 @@ public class DanhSachKhoanPhiAdminController implements  Initializable{
             @Override
             public void handle(MouseEvent event) {
                 // Gọi hàm ChiTietThongTin khi click vào VBox
-                ChiTietThongTin(vbox);
+                try {
+                    ChiTietThongTin(vbox);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 
 
             }
         });
         return hbox;
     }
-    public void ChiTietThongTin(VBox vbox){
+
+    public List<String> LayThongTinKhoanPhi(KhoanPhi khoanPhi) throws SQLException {
+    List<String> thongtinKhoanPhi = new ArrayList<>();
+
+
+    int idKhoanPhi = khoanPhi.getIdPhi();
+    int numberHKDaDong = numberHoDaDong(idKhoanPhi);
+    int mucphi = khoanPhi.getMucphi();
+
+    String idHBox = String.valueOf(khoanPhi.getIdPhi());
+    String thongtinDaDong = "Số hộ đã đóng: " + numberHKDaDong;
+    String idPhi = "Id phí: "+ khoanPhi.getIdPhi();
+    String mucPhi = "Mức phí: "+khoanPhi.getMucphi();
+    int sotienchua ;
+    if(khoanPhi.getKieuphi().equals("bắt buộc/người")){
+        mucphi = mucphi * tongnhankhau(idHK);
+        sotienchua = mucphi - countsotiendaxdong(idKhoanPhi);
+
+    } else if(khoanPhi.getKieuphi().equals("bắt buộc")) {
+        sotienchua = mucphi*counttongHoKhau(idHK) - countsotiendaxdong(idKhoanPhi);
+    }else{
+        sotienchua = 0;
+    }
+    String phimotho = "Phí/hộ: " ;
+        if(khoanPhi.getKieuphi().equals("bắt buộc/người")){
+            phimotho = phimotho+ mucphi * countHoKhau(CCCD);
+
+        } else if(khoanPhi.getKieuphi().equals("bắt buộc")) {
+            phimotho = "Phí/hộ: "+ khoanPhi.getMucphi();
+        }else{
+            phimotho = "Phí đóng góp tùy tâm mà ?!!!";
+        }
+    String sotienchuadong = "Số tiền chưa đóng: "+ sotienchua;
+    String noiDUng= "Nội dung: "+"\n"+ khoanPhi.getNoidungphi();
+    int ketqua = counttongHoKhau(idHK) -numberHKDaDong;
+    int sotiendaxdong = countsotiendaxdong(idKhoanPhi);
+    String sohodadong = "Số hộ chưa đóng: "+ ketqua;
+    String tongsaotiendadong = "Số tiền đã đóng: "+ sotiendaxdong;
+
+    String tieudePhi= "Tiêu đề phí: " + khoanPhi.getTieudephi();
+    String kieuPhi = "Kiểu phí: "+ khoanPhi.getKieuphi();
+    thongtinKhoanPhi.add(idHBox);
+    thongtinKhoanPhi.add(idPhi);
+    thongtinKhoanPhi.add(mucPhi);
+    thongtinKhoanPhi.add(tieudePhi);
+    thongtinKhoanPhi.add(kieuPhi);
+    thongtinKhoanPhi.add(noiDUng);
+    thongtinKhoanPhi.add(phimotho);
+    thongtinKhoanPhi.add(thongtinDaDong);
+    thongtinKhoanPhi.add(sohodadong);
+    thongtinKhoanPhi.add(tongsaotiendadong);
+    thongtinKhoanPhi.add(sotienchuadong);
+
+    return thongtinKhoanPhi;
+    }
+
+    public void ChiTietThongTin(VBox vbox) throws SQLException {
+
         HBox parentHBox = (HBox) vbox.getParent();
         String idHBox = parentHBox.getId();
 
@@ -186,36 +263,36 @@ public class DanhSachKhoanPhiAdminController implements  Initializable{
                         +thongtinKhoanPhi.get(2)+ "\n\n"
                         +thongtinKhoanPhi.get(3)+ "\n\n"
                         +thongtinKhoanPhi.get(4)+ "\n\n"
-                        +thongtinKhoanPhi.get(5)+ "\n\n";
+                        +thongtinKhoanPhi.get(5)+ "\n\n"
+                        +thongtinKhoanPhi.get(6)+"\n\n"
+                        +thongtinKhoanPhi.get(7) +"\n\n"
+                        +thongtinKhoanPhi.get(8)+"\n\n"
+                        +thongtinKhoanPhi.get(9)+"\n\n"
+                        +thongtinKhoanPhi.get(10);
+            String noidungchitiet="" ;
+            noidungchitiet = thongtinKhoanPhi.get(1)+"\n\n"
+                    +thongtinKhoanPhi.get(7)+ "\n\n"
+                    +thongtinKhoanPhi.get(8)+ "\n\n"
+                    +thongtinKhoanPhi.get(9)+ "\n\n"
+                    +thongtinKhoanPhi.get(10)+"\n\n"
+                    +thongtinKhoanPhi.get(5);
 
-            hienThiChiTiet.setText(chitiet);
+
+
+            hienThiChiTiet.setText(noidungchitiet);
         }
-
-    }
-
-
-
-
-    public List<String> LayThongTinKhoanPhi(KhoanPhi khoanPhi){
-        List<String> thongtinKhoanPhi = new ArrayList<>();
-        String idHBox = String.valueOf(khoanPhi.getIdPhi());
-        String idPhi = "Id phí: "+ khoanPhi.getIdPhi();
-        String mucPhi = "Mức phí: "+khoanPhi.getMucphi();
-        String tieudePhi= "Tiêu dề phí: " + khoanPhi.getTieudephi();
-        String kieuPhi = "Kiểu phí: "+ khoanPhi.getKieuphi();
-        String noiDUng= "Nội dung: "+"\n"+ khoanPhi.getNoidungphi();
-        thongtinKhoanPhi.add(idHBox);
-        thongtinKhoanPhi.add(idPhi);
-        thongtinKhoanPhi.add(mucPhi);
-        thongtinKhoanPhi.add(tieudePhi);
-        thongtinKhoanPhi.add(kieuPhi);
-        thongtinKhoanPhi.add(noiDUng);
-        return thongtinKhoanPhi;
+//
 
 
     }
+
+
+
+
+
     public  List<String> LayThongTinDongPhi(DongPhi dongPhi){
         List<String> thongtinDongPhi = new ArrayList<>();
+
         String idHBox = String.valueOf(dongPhi.getIdPhi());
         String idPhi = "ID Phí: "+dongPhi.getIdPhi();
         String idHoKhau ="ID Hộ Khẩu: " +dongPhi.getIdHoKhau();
@@ -291,6 +368,52 @@ public class DanhSachKhoanPhiAdminController implements  Initializable{
             }
         }
 
+    }
+    //Từ hàm này chở xuống là hàm phụ trowj kết nối file DAO
+    public  static  int tongnhankhau(int idHk) throws SQLException {
+        int number = 0;
+
+        PreparedStatement statement = connection.prepareStatement("select count(*) as numbertongNK FROM nhankhau ");
+//        statement.setInt(1, idHk);
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next()) {
+            number = resultSet.getInt("numbertongNK");
+        }
+        return  number;
+    }
+
+    public static int numberHoDaDong(int idPhi) throws SQLException {
+        int number = 0;
+
+        PreparedStatement statement = connection.prepareStatement("select count(*) as numberHK FROM dongphi WHERE idPhi = ?");
+        statement.setInt(1, idPhi);
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next()) {
+            number = resultSet.getInt("numberHK");
+        }
+        return  number;
+    }
+    public static int counttongHoKhau(int idHK) throws SQLException {
+        int number = 0 ;
+//        Connection connection1 = SqlConnection.connect();
+        PreparedStatement statement = connection.prepareStatement("select count(*) as numberHK from hokhau ");
+//        statement.setInt(1, idHK);
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next()) {
+            number = resultSet.getInt("numberHK");
+        }
+        return number;
+    }
+    public static int countsotiendaxdong(int idPhi) throws SQLException {
+        int number = 0 ;
+//        Connection connection1 = SqlConnection.connect();
+        PreparedStatement statement = connection.prepareStatement("SELECT SUM(soTien) as tongsotiendadong FROM dongphi where idPhi = ? ");
+        statement.setInt(1, idPhi);
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next()) {
+            number = resultSet.getInt("tongsotiendadong");
+        }
+        return number;
     }
 
 
