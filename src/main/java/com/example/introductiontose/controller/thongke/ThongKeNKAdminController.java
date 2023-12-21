@@ -1,30 +1,44 @@
 package com.example.introductiontose.controller.thongke;
 
+import com.example.introductiontose.controller.dashboard.DashboardAdminController;
 import com.example.introductiontose.dao.*;
 import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.*;
 import com.example.introductiontose.util.AlertUtils;
+import com.example.introductiontose.util.SQLUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.YearMonth;
 import java.util.*;
 
-import static java.lang.Math.min;
-
 public class ThongKeNKAdminController implements Initializable {
+    public Pane danhSachNKPane;
     @FXML
     private Label tenTDP;
 
@@ -63,8 +77,6 @@ public class ThongKeNKAdminController implements Initializable {
     @FXML
     private VBox lichSu;
 
-    @FXML
-    private VBox xemTatCaLS;
 
     @FXML
     public void onNhanKhauClicked() {
@@ -85,8 +97,12 @@ public class ThongKeNKAdminController implements Initializable {
         setBangTK(2);
     }
 
+
     Connection connection;
     private ThongTinTDP thongTin;
+
+    public static List<VBox> danhsachVboxHK = new ArrayList<>();
+    public static List<VBox> danhsachVboxThayDoi = new ArrayList<>();
 
     public void getThongTinTDP () {
         ThongTinTDPDAO ketNoi = new ThongTinTDPDAO(connection);
@@ -393,8 +409,22 @@ public class ThongKeNKAdminController implements Initializable {
         }
     }
 
+    private Pane findNearestBorderPane(VBox vbox) {
+        // Lặp qua các cha của Label để tìm BorderPane gần nhất
+        Parent parent = vbox.getParent();
+        while (parent != null) {
+            if (parent instanceof Pane) {
+                return (Pane) parent;
+            }
+            parent = parent.getParent();
+        }
+        return null;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        danhSachNKPane = findNearestBorderPane(danhSachNKHK);
+
         this.connection = SqlConnection.connect();
 
         // Khởi tạo dữ liệu và cài đặt ban đầu cho các thành phần
@@ -407,6 +437,108 @@ public class ThongKeNKAdminController implements Initializable {
 
         setBangTK(1);
 
+        // Set hien thi thanh phan danh sach ho khau trong bang thong ke
+        HoKhauDAO hoKhauDAO = new HoKhauDAO(connection);
+        ThayDoiNhanKhauDao thayDoiNhanKhauDao = new ThayDoiNhanKhauDao(connection);
+        TamVangDAO tamVangDAO = new TamVangDAO(connection);
+        TamTruDAO tamTruDAO = new TamTruDAO(connection);
+        ThayDoiHoKhauDAO thayDoiHoKhauDAO = new ThayDoiHoKhauDAO(connection);
+
+        List<HoKhau> danhsachhokhau = new ArrayList<>();
+        List<ThayDoiNhanKhau> danhsachthaydoinhankhau = new ArrayList<>();
+        List<ThayDoiHoKhau> danhsachthaydoihokhau = new ArrayList<>();
+        List<TamTru> danhsachtamtru = new ArrayList<>();
+        List<TamVang> danhsachtamvang = new ArrayList<>();
+        NhanKhau nhanKhau = new NhanKhau();
+        try {
+            danhsachhokhau = hoKhauDAO.getAll();
+            danhsachthaydoinhankhau = thayDoiNhanKhauDao.getAll();
+            danhsachthaydoihokhau = thayDoiHoKhauDAO.getAll();
+            danhsachtamtru = tamTruDAO.getAll();
+            danhsachtamvang = tamVangDAO.getAll();
+
+            for (HoKhau hokhau : danhsachhokhau) {
+                VBox vboxHK = initVBox("HK"+hokhau.getIdHoKhau(), "ID hộ khẩu: " + hokhau.getIdHoKhau(), "Tên chủ hộ: " + hokhau.getTenChuHo(),
+                        "Địa chỉ nhà: " + hokhau.getDiaChiNha());
+                danhsachVboxHK.add(vboxHK);
+            }
+
+            for(ThayDoiNhanKhau thayDoiNhanKhau : danhsachthaydoinhankhau) {
+                danhsachVboxThayDoi.add(initVBox("TDNK"+thayDoiNhanKhau.getIdThaydoi(), "Yêu cầu: Thay đổi nhân khẩu", "Người yêu cầu: "  , "Ghi chú: ......."));
+            }
+            for(ThayDoiHoKhau thayDoiHoKhau : danhsachthaydoihokhau) {
+                danhsachVboxThayDoi.add(initVBox("TDHK"+thayDoiHoKhau.getIdThayDoiHoKhau(), "Yêu cầu: Thay đổi hộ khẩu",
+                        "ID hộ khẩu yêu cầu: " + thayDoiHoKhau.getIdHoKhau(),
+                        "Ghi chú: ......."));
+            }
+            for(TamTru tamTru : danhsachtamtru) {
+                danhsachVboxThayDoi.add(initVBox("TT"+tamTru.getSoCCCD(), "Yêu cầu: Đăng ký tạm trú", "Người yêu cầu: "  , "Ghi chú: ......."));
+            }
+            for(TamVang tamVang : danhsachtamvang) {
+                danhsachVboxThayDoi.add(initVBox("TV"+tamVang.getSoCccd(),"Yêu cầu: Đăng ký tạm vắng", "Người yêu cầu: "  , "Ghi chú: ......."));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for(int i = 0; i < 3; i++) {
+            danhSachNKHK.getChildren().add(danhsachVboxHK.get(i));
+        }
+        for(VBox vBox : danhsachVboxThayDoi) {
+            lichSu.getChildren().add(vBox);
+        }
+
         SqlConnection.close(connection);
+    }
+
+    public VBox initVBox(String idVbox, String label1, String label2, String label3) {
+        VBox vbox = new VBox();
+        vbox.setPrefHeight(74.5);
+        vbox.setPrefWidth(250.0);
+        vbox.setSpacing(3);
+        Insets buttonMargin = new Insets(8, 10, 0, 10); // Margin bên phải của buttonDongY là 10px
+        vbox.setStyle("-fx-background-color: #fafafa; -fx-background-radius: 10;");
+        Insets hboxPadding = new Insets(8, 16, 8, 16);
+        vbox.setPadding(hboxPadding);
+        // Thêm 3 Label vào VBox
+        Label labelVbox1 = new Label(label1);
+        Label labelVbox2 = new Label(label2);
+        Label labelVbox3 = new Label(label3);
+
+        vbox.getChildren().addAll(labelVbox1, labelVbox2, labelVbox3);
+        VBox.setMargin(vbox, buttonMargin);
+        vbox.setId(idVbox);
+        vbox.setAlignment(Pos.CENTER_LEFT);
+        vbox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hienThiThongTinCacNK(new ActionEvent());
+            }
+        });
+        return vbox;
+    }
+
+    public void hienThiThongTinCacNK(ActionEvent event) {
+        // Xử lý sự kiện khi "Danh sách" trong "Quản lý nhân khẩu" được nhấn
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/com/example/introductiontose/view/admin/hokhau/DanhSachNhanKhau.fxml"));
+            Parent dangky = loader.load();
+            Scene scene = new Scene(dangky);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e) {
+            //
+        }
+
+//            int idHK = Integer.parseInt(idVbox.substring(2));
+//            try {
+//                List<NhanKhau> danhsachNK = SQLUtils.getNhanKhauFromHoKhau(idHK);
+//                createNhanKhauList(danhsachNK);
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
     }
 }
