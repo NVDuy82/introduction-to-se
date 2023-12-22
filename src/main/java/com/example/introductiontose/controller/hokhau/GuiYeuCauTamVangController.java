@@ -1,4 +1,4 @@
-package com.example.introductiontose.controller;
+package com.example.introductiontose.controller.hokhau;
 
 
 import com.example.introductiontose.dao.TamVangDAO;
@@ -34,6 +34,10 @@ public class GuiYeuCauTamVangController {
     private CheckBox check;
     @FXML
     private Label Hhhh;
+
+    public GuiYeuCauTamVangController() {
+
+    }
 
 
     @FXML

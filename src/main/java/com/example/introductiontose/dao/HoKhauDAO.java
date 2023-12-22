@@ -108,4 +108,17 @@ public class HoKhauDAO implements DataAccessObject<HoKhau, HoKhauKey> {
         statement.setInt(1, hoKhau.getIdHoKhau());
         statement.executeUpdate();
     }
+
+    public int getSoHoKhau() throws SQLException {
+        String sql = "SELECT COUNT(idHoKhau) AS soHoKhau FROM hokhau";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        if (resultSet.next()) {
+            return resultSet.getInt("soHoKhau");
+        } else {
+            // Xử lý trường hợp không có kết quả
+            return 0;
+        }
+    }
 }

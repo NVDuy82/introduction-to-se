@@ -1,4 +1,4 @@
-package com.example.introductiontose.controller;
+package com.example.introductiontose.controller.hokhau;
 
 import com.example.introductiontose.dao.TamTruDAO;
 import com.example.introductiontose.database.SqlConnection;

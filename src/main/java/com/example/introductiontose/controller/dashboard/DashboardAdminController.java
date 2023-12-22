@@ -1,5 +1,6 @@
 package com.example.introductiontose.controller.dashboard;
 
+import com.example.introductiontose.view.icon.IconUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -154,11 +155,13 @@ public class DashboardAdminController implements Initializable, CenterContent {
                 danhSachTPPane = loader.load();
             }
             catch (Exception e) {
-                //
+                e.printStackTrace();
             }
             updateCenterContent(danhSachTPPane);
         }
         else updateCenterContent(danhSachTPPane);
+
+        System.out.println(danhSachTPPane);
     }
 
     @FXML

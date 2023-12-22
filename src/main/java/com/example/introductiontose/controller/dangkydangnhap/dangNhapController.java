@@ -1,5 +1,7 @@
 package com.example.introductiontose.controller.dangkydangnhap;
 
+import com.example.introductiontose.controller.dashboard.DashboardAdminController;
+import com.example.introductiontose.controller.dashboard.DashboardUserController;
 import com.example.introductiontose.dao.TaiKhoanNhanKhauDAO;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.TaiKhoanNhanKhau;
@@ -85,25 +87,31 @@ public class dangNhapController implements Initializable {
      * @throws Exception xảy ra lỗi
      */
     public void loginSuccess(ActionEvent e) throws Exception {
-        Optional<NhanKhau> selectNK = functionHelp.getNhanKhau(soCccdDangNhap.getText());
-
-        if(selectNK.isEmpty()) {
-            return;
-        }
-        FXMLLoader loader = new FXMLLoader();
-
+        FXMLLoader loader;
+        Parent home;
         if(soCccdDangNhap.getText().equals("admin")) {
-            loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+            System.out.println("admin ok");
+            loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/home.fxml"));
+            home = loader.load();
         } else {
+            Optional<NhanKhau> selectNK = functionHelp.getNhanKhau(soCccdDangNhap.getText());
+
+            if(selectNK.isEmpty()) {
+                return;
+            }
+
             String tenTaiKhoan = selectNK.get().getThongTinNhanKhau().getHoTen();
+            NhanKhau nhanKhauDangNhap = selectNK.get();
 
             CCCD = soCccdDangNhap.getText();
+            System.out.println("CCCD dang nhap la" + CCCD);
             tenTK = tenTaiKhoan;
 
-            loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/dangkydangnhap/trangChu.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/home.fxml"));
+            home = loader.load();
+            DashboardUserController controller = loader.getController();
+            controller.setNhanKhau(nhanKhauDangNhap);
         }
-
-        Parent home = loader.load();
 
         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(home);
@@ -132,7 +140,7 @@ public class dangNhapController implements Initializable {
 
         System.out.println(cccd + " " + matkhau);
         System.out.println(selectTK);
-
+        System.out.println(soCccdDangNhap.getText() + " " + soCccdDangNhap.getText().equals("admin"));
         if(selectTK.isPresent()) {
             TaiKhoanNhanKhau tknk = selectTK.get();
             System.out.println(tknk.getSoCCCD()+ " " + tknk.getPass());

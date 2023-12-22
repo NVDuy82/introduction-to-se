@@ -91,6 +91,10 @@ public class YeuCauNhanKhauController implements Initializable {
         DanhSachHoController controller = new TachKhauController();
         loadDanhSachHo(controller);
     }
+    @FXML
+    private void showTamVang(MouseEvent event) {
+        loadDangKyTamVang();
+    }
     
     
     /**
@@ -142,6 +146,27 @@ public class YeuCauNhanKhauController implements Initializable {
             // lỗi kết nối
             
             return null;
+        }
+    }
+
+    private void loadDangKyTamVang() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/YeuCauTamVang.fxml"));
+
+        try {
+            paneContent.getChildren().clear();
+            paneContent.getChildren().add(fxmlLoader.load());
+        } catch (IOException e) {
+            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
+        }
+    }
+    private void loadDangKyTamTru() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/Tamtru.fxml"));
+
+        try {
+            paneContent.getChildren().clear();
+            paneContent.getChildren().add(fxmlLoader.load());
+        } catch (IOException e) {
+            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
         }
     }
 }

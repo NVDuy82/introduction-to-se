@@ -183,9 +183,18 @@ public class ThongKeNKAdminController implements Initializable {
 //
 //                thongKeNhanKhauTheoThang.put(tenThangTruoc, Math.min(soLuongThangTruoc, soLuongThangIndex));
 //            }
-            // Cập nhật dữ liệu biểu đồ
+            // Tạo và thêm dữ liệu vào nhanKhauData
             nhanKhauData.clear();
-            thongKeNhanKhauTheoThang.forEach((tenThang, soLuong) -> nhanKhauData.add(new XYChart.Data<>(tenThang, soLuong)));
+            for (Map.Entry<String, Integer> entry : thongKeNhanKhauTheoThang.entrySet()) {
+                String tenThang = entry.getKey();
+                Integer soLuong = entry.getValue();
+
+                XYChart.Data<String, Number> data = new XYChart.Data<>(tenThang, soLuong);
+                Label label = new Label(soLuong.toString());
+                data.setNode(label);
+
+                nhanKhauData.add(data);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             // Xử lý lỗi hoặc thông báo lỗi
@@ -234,9 +243,19 @@ public class ThongKeNKAdminController implements Initializable {
 
                 thongKeHoKhauTheoThang.put(tenThangTruoc, Math.min(soLuongThangTruoc, soLuongThangIndex));
             }
-            // Cập nhật dữ liệu biểu đồ
+            // Tạo và thêm dữ liệu vào hoKhauData
             hoKhauData.clear();
-            thongKeHoKhauTheoThang.forEach((tenThang, soLuong) -> hoKhauData.add(new XYChart.Data<>(tenThang, soLuong)));
+            for (Map.Entry<String, Integer> entry : thongKeHoKhauTheoThang.entrySet()) {
+                String tenThang = entry.getKey();
+                Integer soLuong = entry.getValue();
+
+                XYChart.Data<String, Number> data = new XYChart.Data<>(tenThang, soLuong);
+                Label label = new Label(soLuong.toString());
+                data.setNode(label);
+
+                hoKhauData.add(data);
+            }
+
         }
 
         catch (Exception e) {
@@ -321,7 +340,11 @@ public class ThongKeNKAdminController implements Initializable {
                 XYChart.Series<String, Number> nhanKhau = new XYChart.Series<>();
                 nhanKhau.setName("Nhân khẩu");
                 // Thêm dữ liệu vào series
-                nhanKhau.getData().addAll(nhanKhauData);
+                for (XYChart.Data<String, Number> data : nhanKhauData) {
+                    Label label = new Label(data.getYValue().toString());
+                    data.setNode(label);
+                    nhanKhau.getData().add(data);
+                }
 
                 soLuongNKChart.getData().addAll(nhanKhau);
             }

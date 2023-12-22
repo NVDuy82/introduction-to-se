@@ -22,6 +22,7 @@ module com.example.introductiontose {
     exports com.example.introductiontose.controller.dashboard;
     exports com.example.introductiontose.controller.trangchu;
     exports com.example.introductiontose.controller.thongke;
+    exports com.example.introductiontose.controller.danhsachkhoanphi;
     exports com.example.introductiontose.view.icon;
     
     opens com.example.introductiontose to javafx.fxml;
@@ -39,6 +40,7 @@ module com.example.introductiontose {
     opens com.example.introductiontose.controller.user.hokhau to javafx.fxml;
     opens com.example.introductiontose.controller.dashboard to javafx.fxml;
     opens com.example.introductiontose.controller.trangchu to javafx.fxml;
+    opens com.example.introductiontose.controller.danhsachkhoanphi to javafx.fxml;
     opens com.example.introductiontose.view.icon to javafx.fxml;
     opens com.example.introductiontose.controller.thongke to javafx.fxml;
 }

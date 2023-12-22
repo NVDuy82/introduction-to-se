@@ -5,10 +5,7 @@ import com.example.introductiontose.model.ThongTinNhanKhau;
 import com.example.introductiontose.util.SQLUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -144,5 +141,18 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
      */
     private int _setValuesForStatement(NhanKhau nhanKhau, PreparedStatement statement, int index) throws SQLException {
         return SQLUtils.setValuesForStatement(nhanKhau.getThongTinNhanKhau(), statement, index);
+    }
+
+    public int getSoNhanKhau() throws SQLException {
+        String sql = "SELECT COUNT(soCccd) AS soNhanKhau FROM nhankhau";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        if (resultSet.next()) {
+            return resultSet.getInt("soNhanKhau");
+        } else {
+            // Xử lý trường hợp không có kết quả
+            return 0;
+        }
     }
 }

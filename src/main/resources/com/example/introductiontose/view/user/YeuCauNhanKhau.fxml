@@ -19,7 +19,7 @@
                   <Insets left="15.0" right="15.0" />
                </HBox.margin>
                <children>
-                  <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTamVang" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -36,10 +36,30 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="15.0" left="10.0" top="15.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="25.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showDoiChuHo" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="566.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTamTru" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../iconImg/icons8-search-50.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label minWidth="-Infinity" prefWidth="80.0" text="Đăng ký tạm trú" wrapText="true">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="25.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showDoiChuHo" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -56,10 +76,10 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="15.0" left="10.0" top="15.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="125.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTachKhau" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="125.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTachKhau" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -76,10 +96,10 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="15.0" left="10.0" top="15.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="225.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showThemNhanKhau" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="225.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showThemNhanKhau" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -96,10 +116,10 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="15.0" left="10.0" top="15.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="325.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showXoaNhanKhau" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="325.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showXoaNhanKhau" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -116,7 +136,7 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="15.0" left="10.0" top="15.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
                </children>
@@ -128,7 +148,7 @@
             </Line>
             <AnchorPane prefHeight="670.0" prefWidth="650.0">
                <children>
-                  <Pane fx:id="paneContent" layoutY="45.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" />
+                  <Pane fx:id="paneContent" layoutX="14.0" layoutY="34.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="27.5" AnchorPane.topAnchor="20.0" />
                </children>
             </AnchorPane>
          </children>

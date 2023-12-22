@@ -1,4 +1,4 @@
-package com.example.introductiontose.controller;
+package com.example.introductiontose.controller.hokhau;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

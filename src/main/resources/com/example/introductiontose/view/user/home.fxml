@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="Dashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.dashboard.DashboardAdminController">
+<BorderPane fx:id="Dashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.dashboard.DashboardUserController">
     <top>
         <AnchorPane prefHeight="75.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -53,7 +52,7 @@
                                 <Insets left="10.0" />
                             </HBox.margin>
                             <children>
-                                <Label text="Tạ Quang Phổ">
+                                <Label fx:id="userName" text="Tạ Quang Phổ">
                                     <VBox.margin>
                                         <Insets bottom="5.0" top="5.0" />
                                     </VBox.margin>
@@ -64,7 +63,7 @@
                                         <Tooltip text="Empty Tooltip" />
                                     </tooltip>
                                 </Label>
-                                <Label text="Admin" textFill="#286b9e">
+                                <Label fx:id="ngaySinh" text="Admin" textFill="#286b9e">
                                     <font>
                                         <Font name="Arial Italic" size="14.0" />
                                     </font>
@@ -90,29 +89,12 @@
             <children>
                 <ImageView fitHeight="50.0" fitWidth="175.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0" />
                 <VBox layoutX="35.0" layoutY="75.0" prefHeight="200.0" prefWidth="155.0" spacing="10" style="-fx-padding: 10;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.20000000000002">
-                    <Button maxWidth="Infinity" styleClass="menu-item" text="Trang chủ" />
-                    <TitledPane fx:id="programmingStudentPane" animated="false" collapsible="true" expanded="false" maxWidth="Infinity" styleClass="menu-item" text="Quản lý nhân khẩu">
-                        <content>
-                            <VBox>
-                                <Button maxWidth="Infinity" styleClass="menu-sub-item" text="Thống kê" />
-                                <Button maxWidth="Infinity" styleClass="menu-sub-item" text="Danh sách" />
-                                <Button layoutX="20.0" layoutY="45.0" maxWidth="Infinity" styleClass="menu-sub-item" text="Duyệt yêu cầu" />
-                            </VBox>
-                        </content>
-                    </TitledPane>
-                    <TitledPane fx:id="programmingStudentPane1" animated="false" collapsible="true" expanded="false" layoutX="20.0" layoutY="56.0" maxWidth="Infinity" styleClass="menu-item" text="Quản lý thu phí">
-                        <content>
-                            <VBox>
-                                <children>
-                                    <Button maxWidth="Infinity" styleClass="menu-sub-item" text="Thống kê" />
-                                    <Button maxWidth="Infinity" styleClass="menu-sub-item" text="Danh sách" />
-                                    <Button layoutX="20.0" layoutY="45.0" maxWidth="Infinity" styleClass="menu-sub-item" text="Duyệt yêu cầu" />
-                                    <Button layoutX="20.0" layoutY="71.0" maxWidth="Infinity" styleClass="menu-sub-item" text="Tạo khoản phí" />
-                                </children>
-                            </VBox>
-                        </content>
-                    </TitledPane>
-                    <Button layoutX="20.0" layoutY="136.0" maxWidth="Infinity" styleClass="menu-item" text="Learning" />
+                    <Button fx:id="trangChu" maxWidth="Infinity" onMouseClicked="#onTrangChuClicked" onMouseEntered="#onButtonEntered" styleClass="menu-item" text="Trang chủ" />
+               <Button fx:id="hoKhauButton" layoutX="20.0" layoutY="56.0" maxWidth="Infinity" onMouseClicked="#onHoKhauClicked" onMouseEntered="#onButtonEntered" styleClass="menu-item" text="Hộ khẩu" />
+               <Button fx:id="thuTucButton" layoutX="20.0" layoutY="56.0" maxWidth="Infinity" onMouseClicked="#conThuTucClicked" onMouseEntered="#onButtonEntered" styleClass="menu-item" text="Thủ tục hành chính" />
+               <Button fx:id="tkDongPhiButton" layoutX="20.0" layoutY="92.0" maxWidth="Infinity" onMouseClicked="#onThongKeClicked" onMouseEntered="#onButtonEntered" styleClass="menu-item" text="Thống kê đóng phí" />
+               <Button fx:id="dongPhiButton" layoutX="20.0" layoutY="128.0" maxWidth="Infinity" onMouseClicked="#onDongPhiClicked" onMouseEntered="#onButtonEntered" styleClass="menu-item" text="Đóng phí" />
+               <Button fx:id="napTienButton" layoutX="20.0" layoutY="128.0" maxWidth="Infinity" onMouseClicked="#onNapTienClicked" onMouseEntered="#onButtonEntered" styleClass="menu-item" text="Nạp tiền" />
                 </VBox>
                 <HBox fx:id="thongTin" alignment="CENTER_LEFT" layoutX="36.0" layoutY="631.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="24.0" prefWidth="200.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
                     <children>
