@@ -76,7 +76,7 @@
                <children>
                   <VBox prefHeight="284.0" prefWidth="312.0" style="-fx-background-color: #FFF2C6; -fx-background-radius: 10;">
                      <children>
-                        <Label alignment="CENTER" text="Thông tin khoản phí">
+                        <Label alignment="CENTER" text="    Thông tin chi tiết">
                            <font>
                               <Font size="27.0" />
                            </font>
@@ -85,45 +85,29 @@
                            </VBox.margin>
                         </Label>
                         <HBox prefHeight="20.0" prefWidth="200.0">
-                           <children>
-                              <Label text="phí / hộ : " />
-                              <Label layoutX="10.0" layoutY="10.0" text="12121" />
-                           </children>
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
+                        <Text fx:id="hienThiChiTiet" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="308.13671875" />
                         <HBox layoutX="10.0" layoutY="28.0" prefHeight="20.0" prefWidth="200.0">
-                           <children>
-                              <Label text="số hộ đã đóng" />
-                              <Label layoutX="10.0" layoutY="10.0" text="12121" />
-                           </children>
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="48.0" prefHeight="20.0" prefWidth="200.0">
-                           <children>
-                              <Label text="tiền đã đóng" />
-                              <Label layoutX="10.0" layoutY="10.0" text="12121" />
-                           </children>
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="68.0" prefHeight="20.0" prefWidth="200.0">
-                           <children>
-                              <Label text="số hộ chưa đóng" />
-                              <Label layoutX="10.0" layoutY="10.0" text="12121" />
-                           </children>
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="88.0" prefHeight="20.0" prefWidth="200.0">
                            <children>
-                              <Label text="chưa đóng" />
-                              <Label layoutX="10.0" layoutY="10.0" text="12121" />
+                              <Label layoutX="10.0" layoutY="10.0" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -133,9 +117,6 @@
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
-                           <children>
-                              <Text fx:id="hienThiChiTiet" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="291.13671875" />
-                           </children>
                         </HBox>
                      </children>
                      <VBox.margin>
