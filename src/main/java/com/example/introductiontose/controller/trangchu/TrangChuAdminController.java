@@ -1,20 +1,26 @@
 package com.example.introductiontose.controller.trangchu;
 
+import com.example.introductiontose.controller.admin.YeuCauNhanKhauController;
+import com.example.introductiontose.controller.dashboard.DashboardAdminController;
 import com.example.introductiontose.dao.*;
 import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.*;
 import com.example.introductiontose.util.AlertUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -107,7 +113,7 @@ public class TrangChuAdminController implements Initializable {
                 }
             }
             catch (Exception e) {
-                //
+                System.out.println(e.toString());
             }
         }
 
@@ -120,7 +126,7 @@ public class TrangChuAdminController implements Initializable {
         });
     }
 
-    public VBox createYeuCau(String loai, String label1, String label2) {
+    public VBox createYeuCau(String loai, String label1, String label2, String id, String type) {
         VBox yeuCau = new VBox();
 
         // Cài đặt các thuộc tính cho VBox
@@ -137,7 +143,38 @@ public class TrangChuAdminController implements Initializable {
         Label noiDung = new Label(label2);
 
         yeuCau.getChildren().addAll(loaiYeuCau, tieuDe, noiDung);
+        yeuCau.setId(type + id);
+        yeuCau.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                // Gọi hàm ChiTietThongTin khi click vào VBox
+                if(DashboardAdminController.yeuCauNKPane == null){
+                    Scene main = danhSachYeuCau.getScene();
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/YeuCauNhanKhau.fxml"));
+                    try {
+                        DashboardAdminController.yeuCauNKPane = loader1.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    BorderPane brp = (BorderPane) main.getRoot();
+                    brp.setCenter(DashboardAdminController.yeuCauNKPane);
+                    YeuCauNhanKhauController controller = loader1.getController();
+                    DashboardAdminController.yeuCauNKPane.getProperties().put("controllerKey", controller);
+                    controller.setIdDetail(yeuCau.getId());
 
+                    System.out.print("Clicked!\n");
+                }
+                else{
+                    YeuCauNhanKhauController controller = (YeuCauNhanKhauController) DashboardAdminController.yeuCauNKPane.getProperties().get("controllerKey");
+                    controller.setIdDetail(yeuCau.getId());
+                    Scene main = danhSachYeuCau.getScene();
+                    BorderPane brp = (BorderPane) main.getRoot();
+                    brp.setCenter(DashboardAdminController.yeuCauNKPane);
+                    controller.setIdDetail(yeuCau.getId());
+                }
+
+            }
+        });
         return yeuCau;
     }
 
@@ -163,7 +200,7 @@ public class TrangChuAdminController implements Initializable {
             System.out.println(tamTru.getTrangThai());
             if (tamTru.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                VBox tt = createYeuCau("Tạm trú", tamTru.getHoTen(), tamTru.getLyDo());
+                VBox tt = createYeuCau("Tạm trú", tamTru.getHoTen(), tamTru.getLyDo(), tamTru.getSoCCCD(), "TT");
                 index++;
                 danhSachYeuCau.getChildren().add(tt);
             }
@@ -185,7 +222,7 @@ public class TrangChuAdminController implements Initializable {
             System.out.println(tamVang.getTrangThai());
             if (tamVang.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                VBox tv = createYeuCau("Tạm vắng", tamVang.getSoCccd(), tamVang.getLyDo());
+                VBox tv = createYeuCau("Tạm vắng", tamVang.getTen(), tamVang.getLyDo(), tamVang.getSoCccd(), "TV");
                 index++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tv);
@@ -206,7 +243,7 @@ public class TrangChuAdminController implements Initializable {
         for (TachKhau tachKhau : danhSachTachKhau) {
             if (tachKhau.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                VBox tk = createYeuCau("Tách khẩu", tachKhau.getSoCccdChuHoMoi(), String.valueOf(tachKhau.getIdHoKhau()));
+                VBox tk = createYeuCau("Tách khẩu", tachKhau.getSoCccdChuHoMoi(), String.valueOf(tachKhau.getIdHoKhau()), String.valueOf(tachKhau.getIdHoKhau()), "TK");
                 index ++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tk);
@@ -228,7 +265,7 @@ public class TrangChuAdminController implements Initializable {
         for (ThayDoiHoKhau thayDoiHoKhau : danhSachTDHoKhau) {
             if (thayDoiHoKhau.getTrangThai().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                VBox tdhk = createYeuCau("Thay đổi hộ khẩu", String.valueOf(thayDoiHoKhau.getIdHoKhau()), thayDoiHoKhau.getNoiDung());
+                VBox tdhk = createYeuCau("Thay đổi hộ khẩu", String.valueOf(thayDoiHoKhau.getIdHoKhau()), thayDoiHoKhau.getNoiDung(), String.valueOf(thayDoiHoKhau.getIdThayDoiHoKhau()), "HK");
                 index++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tdhk);
@@ -250,7 +287,7 @@ public class TrangChuAdminController implements Initializable {
         for (ThayDoiNhanKhau thayDoiNhanKhau : danhSachTDNhanKhau) {
             if (thayDoiNhanKhau.getTrangthaithaidoi().equals("chờ xác nhận")) {
                 if (index >= 3) break;
-                VBox tdnk = createYeuCau("Thay đổi nhân khẩu", thayDoiNhanKhau.getSoCccd(), thayDoiNhanKhau.getGhichu());
+                VBox tdnk = createYeuCau("Thay đổi nhân khẩu", thayDoiNhanKhau.getSoCccd(), thayDoiNhanKhau.getGhichu(), thayDoiNhanKhau.getSoCccd(), "TD");
                 index++;
                 System.out.println(index);
                 danhSachYeuCau.getChildren().add(tdnk);
@@ -275,9 +312,7 @@ public class TrangChuAdminController implements Initializable {
 
             bangTK.getData().addAll(thuPhi, dongGop);
         }
-        else {
 
-        }
     }
 
     @Override
@@ -300,4 +335,5 @@ public class TrangChuAdminController implements Initializable {
 
         SqlConnection.close(connection);
     }
+
 }

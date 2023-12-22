@@ -17,11 +17,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static com.example.introductiontose.util.AlertDuyetYeuCau.showAlertDongY;
 import static com.example.introductiontose.util.AlertDuyetYeuCau.showAlertHuyBo;
@@ -35,20 +39,23 @@ public class YeuCauNhanKhauController implements Initializable {
     private TextField noidungtimkiem;
     @FXML
     private HBox hBoxTimKiem;
-
+    List<ThayDoiNhanKhau> danhsachThayDoiNK;
+    List<ThayDoiHoKhau> danhsachThayDoiHK;
     List<TamVang> tamvangList;
     List<TamTru> tamtruList;
+    String idDetail;
+
+    public void setIdDetail(String idDetail){
+        this.idDetail = idDetail;
+        HienThiChiTiet(idDetail);
+    }
     public static List<HBox> danhsachHBox = new ArrayList<>();
 
-
-    public void trangchuContructor(String HBoxID){
-
-    }
     Connection connection = SqlConnection.connect();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ThayDoiNhanKhauDao tdnkDao = new ThayDoiNhanKhauDao(connection);
-        List<ThayDoiNhanKhau> danhsachThayDoiNK = new ArrayList<>();
+        this.danhsachThayDoiNK = new ArrayList<>();
         try {
             danhsachThayDoiNK = tdnkDao.getAll();
         } catch (SQLException e) {
@@ -74,7 +81,7 @@ public class YeuCauNhanKhauController implements Initializable {
         ///////////////////////////////////////////////////
 
         ThayDoiHoKhauDAO tdhokhauDao = new ThayDoiHoKhauDAO(connection);
-        List<ThayDoiHoKhau> danhsachThayDoiHK = new ArrayList<>();
+        this.danhsachThayDoiHK = new ArrayList<>();
         try {
             danhsachThayDoiHK = tdhokhauDao.getAll();
         } catch (SQLException e) {
@@ -217,9 +224,7 @@ public class YeuCauNhanKhauController implements Initializable {
         return hbox;
     }
 
-    public void ChiTietThongTin(VBox vbox) {
-        HBox parentHBox = (HBox) vbox.getParent();
-        String idHBox = parentHBox.getId();
+    public  void HienThiChiTiet(@NotNull String idHBox){
         if(idHBox.substring(0,2).equals("NK")) {
             String idThayDoiString = idHBox.substring(2);
             Integer idThayDoi = Integer.parseInt(idThayDoiString);
@@ -329,7 +334,13 @@ public class YeuCauNhanKhauController implements Initializable {
         }
     }
 
-    public List<String> LayThongTinNhanKhauThayDoi(ThayDoiNhanKhau tdnk) {
+    public void ChiTietThongTin(@NotNull VBox vbox) {
+        HBox parentHBox = (HBox) vbox.getParent();
+        String idHBox = parentHBox.getId();
+        HienThiChiTiet(idHBox);
+    }
+
+    public List<String> LayThongTinNhanKhauThayDoi(@NotNull ThayDoiNhanKhau tdnk) {
         List<String> thongtinnhankhau = new ArrayList<>();
         String idHBox = "NK" + String.valueOf(tdnk.getIdThaydoi());
         String YeuCau = "Yêu cầu: Thay đổi nhân khẩu";

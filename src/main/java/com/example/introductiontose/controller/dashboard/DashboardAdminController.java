@@ -1,5 +1,6 @@
 package com.example.introductiontose.controller.dashboard;
 
+import com.example.introductiontose.controller.admin.YeuCauNhanKhauController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -27,10 +27,13 @@ public class DashboardAdminController implements Initializable, CenterContent {
     @FXML
     private BorderPane Dashboard;
     //Các Pane hoặc FXML loader cho từng chức năng
-
-    private Pane trangChuPane, caiDatPane, thongTinPane;
-    private Pane thongKeNKPane, danhSachNKPane, yeuCauNKPane;
-    private Pane thongKeTPPane, danhSachTPPane, yeuCauTPPane, taoKhoanPhiPane;
+    public BorderPane getDashboard(){
+        return Dashboard;
+    }
+    public Pane trangChuPane, caiDatPane, thongTinPane;
+    public Pane thongKeNKPane, danhSachNKPane;
+    public static Pane yeuCauNKPane;
+    public Pane thongKeTPPane, danhSachTPPane, yeuCauTPPane, taoKhoanPhiPane;
 
     @FXML
     private Button thoat;
@@ -217,6 +220,10 @@ public class DashboardAdminController implements Initializable, CenterContent {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
                 thongTinPane = loader.load();
+                // Assume 'yourPane' is the reference to your Pane
+                YeuCauNhanKhauController controller = new YeuCauNhanKhauController();
+                thongTinPane.getProperties().put("controllerKey", controller);
+
             }
             catch (Exception e) {
                 //
@@ -298,7 +305,6 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-
 
         // Đăng ký sự kiện cho VBox
         thongTinNguoiDung.setOnMouseEntered(this::onMouseEnteredVBox);
