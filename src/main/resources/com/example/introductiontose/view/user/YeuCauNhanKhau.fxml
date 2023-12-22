@@ -19,7 +19,7 @@
                   <Insets left="15.0" right="15.0" />
                </HBox.margin>
                <children>
-                  <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTamVang" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#setTamVangAction" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -39,7 +39,7 @@
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="566.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showTamTru" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+                  <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="566.0" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#setTamTruAction" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>

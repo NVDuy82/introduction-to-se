@@ -95,7 +95,7 @@ public class DashboardUserController implements Initializable, CenterContent {
                 thuTucHanhChinhhPane = loader.load();
             }
             catch (Exception e) {
-                //
+                e.printStackTrace();
             }
             updateCenterContent(thuTucHanhChinhhPane);
         }

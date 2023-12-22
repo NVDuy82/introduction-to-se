@@ -5,6 +5,7 @@ module com.example.introductiontose {
     requires annotations;
     requires com.microsoft.sqlserver.jdbc;
     requires com.zaxxer.hikari;
+    requires org.kordamp.ikonli.javafx;
 
     exports com.example.introductiontose;
     exports com.example.introductiontose.dao;

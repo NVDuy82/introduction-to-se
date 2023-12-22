@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -91,10 +93,6 @@ public class YeuCauNhanKhauController implements Initializable {
         DanhSachHoController controller = new TachKhauController();
         loadDanhSachHo(controller);
     }
-    @FXML
-    private void showTamVang(MouseEvent event) {
-        loadDangKyTamVang();
-    }
     
     
     /**
@@ -149,24 +147,27 @@ public class YeuCauNhanKhauController implements Initializable {
         }
     }
 
-    private void loadDangKyTamVang() {
+    @FXML
+    HBox TamVangHBox, TamTruHBox;
+
+    @FXML
+    public void setTamVangAction() throws IOException {
+        // Load the FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/YeuCauTamVang.fxml"));
+        AnchorPane loadedPane = fxmlLoader.load();
 
-        try {
-            paneContent.getChildren().clear();
-            paneContent.getChildren().add(fxmlLoader.load());
-        } catch (IOException e) {
-            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
-        }
+        // Clear existing children and add the loaded FXML content
+        paneContent.getChildren().clear();
+        paneContent.getChildren().setAll(loadedPane);
     }
-    private void loadDangKyTamTru() {
+    @FXML
+    public void setTamTruAction() throws IOException {
+        // Load the FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/Tamtru.fxml"));
+        AnchorPane loadedPane = fxmlLoader.load();
 
-        try {
-            paneContent.getChildren().clear();
-            paneContent.getChildren().add(fxmlLoader.load());
-        } catch (IOException e) {
-            AlertUtils.showAlertError("Lỗi", "Xảy ra lỗi trong phần mềm.");
-        }
+        // Clear existing children and add the loaded FXML content
+        paneContent.getChildren().clear();
+        paneContent.getChildren().setAll(loadedPane);
     }
 }

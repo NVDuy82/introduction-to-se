@@ -13,7 +13,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="Dashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.dashboard.DashboardAdminController">
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="Dashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.dashboard.DashboardAdminController">
     <top>
         <AnchorPane prefHeight="75.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -86,47 +88,86 @@
         </AnchorPane>
     </top>
     <left>
-        <AnchorPane minWidth="-Infinity" prefHeight="200.0" prefWidth="225.0" BorderPane.alignment="CENTER">
+        <AnchorPane minWidth="-Infinity" prefHeight="200.0" prefWidth="225.0" styleClass="sidebar" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="50.0" fitWidth="175.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0" />
-                <VBox layoutX="35.0" layoutY="75.0" prefHeight="200.0" prefWidth="155.0" spacing="10" style="-fx-padding: 10;" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.20000000000002">
-                    <Button fx:id="TrangChu" maxWidth="Infinity" onMouseClicked="#onTrangChuClicked" text="Trang chủ" />
-                    <TitledPane fx:id="QuanLyNhanKhau" animated="false" collapsible="true" expanded="false" maxWidth="Infinity" text="Quản lý nhân khẩu">
-                        <content>
-                            <VBox>
-                                <Button fx:id="thongKeNK" maxWidth="Infinity" onMouseClicked="#onThongKeNKClicked" text="Thống kê" />
-                                <Button fx:id="danhSachNK" maxWidth="Infinity" onMouseClicked="#onDanhSachNKClicked" text="Danh sách" />
-                                <Button fx:id="yeuCauNK" layoutX="20.0" layoutY="45.0" maxWidth="Infinity" onMouseClicked="#onYeuCauNKClicked" text="Duyệt yêu cầu" />
-                            </VBox>
-                        </content>
-                    </TitledPane>
-                    <TitledPane fx:id="QuanLyThuPhi" animated="false" collapsible="true" expanded="false" layoutX="20.0" layoutY="56.0" maxWidth="Infinity" text="Quản lý thu phí">
-                        <content>
-                            <VBox>
-                                <children>
-                                    <Button fx:id="thongKeTP" maxWidth="Infinity" onMouseClicked="#onThongKeTPClicked" text="Thống kê" />
-                                    <Button fx:id="danhSachTP" maxWidth="Infinity" onMouseClicked="#onDanhSachTPClicked" text="Danh sách" />
-                                    <Button fx:id="yeuCauTP" layoutX="20.0" layoutY="45.0" maxWidth="Infinity" onMouseClicked="#onYeuCauTPClicked" text="Duyệt yêu cầu" />
-                                    <Button fx:id="taoKhoanPhi" layoutX="20.0" layoutY="71.0" maxWidth="Infinity" onMouseClicked="#onTaoKhoanPhiClicked" text="Tạo khoản phí" />
-                                </children>
-                            </VBox>
-                        </content>
-                    </TitledPane>
-                    <Button fx:id="CaiDat" layoutX="20.0" layoutY="136.0" maxWidth="Infinity" onMouseClicked="#onCaiDatClicked" text="Cài đặt" />
+                <VBox layoutX="35.0" layoutY="75.0" prefHeight="600.0" prefWidth="155.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                    <Button fx:id="TrangChu" maxWidth="Infinity" onMouseClicked="#onTrangChuClicked" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" styleClass="button" text="Trang chủ" >
+                            <graphic>
+                                <FontIcon fx:id="trangChuIcon" iconLiteral="bi-grid-1x2-fill" iconSize="18" iconColor="#FFFFFF" />
+                            </graphic>
+                    </Button>
+                    <VBox fx:id="quanLyNhanKhauContainer" maxWidth="Infinity" onMouseClicked="#handleQuanLyNhanKhauContainerClick">
+                        <Button fx:id="quanLyNhanKhauHeader" text="Quản lý nhân khẩu" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#toggleQuanLyNhanKhauContent">
+                            <graphic>
+                                <FontIcon iconLiteral="bi-person-lines-fill" iconSize="18" iconColor="#FFFFFF"/>
+                            </graphic>
+                        </Button>
+                        <VBox fx:id="quanLyNhanKhauContent" visible="false" managed="false">
+                            <padding>
+                                <Insets top="0.0" right="0.0" bottom="0.0" left="15.0"/>
+                            </padding>
+                            <Button fx:id="thongKeNK" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onThongKeNKClicked" text="Thống kê">
+                                <graphic>
+                                    <FontIcon fx:id="tkNKIcon" iconLiteral="bi-bar-chart-fill" iconSize="18" iconColor="#FFFFFF" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="danhSachNK" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onDanhSachNKClicked" text="Danh sách">
+                                <graphic>
+                                    <FontIcon fx:id="dsNKIcon" iconLiteral="bi-list-task" iconSize="18" iconColor="#FFFFFF" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="yeuCauNK" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onYeuCauNKClicked" text="Duyệt yêu cầu">
+                                <graphic>
+                                    <FontIcon fx:id="ycNKIcon" iconLiteral="bi-person-bounding-box" iconSize="18" iconColor="#FFFFFF" />
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </VBox>
+
+                    <VBox fx:id="quanLyThuPhiContainer" maxWidth="Infinity">
+                        <Button fx:id="quanLyThuPhiHeader" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" text="Quản lý thu phí" onMouseClicked="#toggleQuanLyThuPhiContent">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-money-check-alt" iconSize="18" iconColor="#FFFFFF"/>
+                            </graphic>
+                        </Button>
+                        <VBox fx:id="quanLyThuPhiContent" visible="false" managed="false">
+                            <padding>
+                                <Insets top="0.0" right="0.0" bottom="0.0" left="15.0"/>
+                            </padding>
+                            <Button fx:id="thongKeTP" maxWidth="Infinity"  styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onThongKeTPClicked" text="Thống kê">
+                                <graphic>
+                                    <FontIcon fx:id="tkTPIcon" iconLiteral="bi-bar-chart-fill" iconSize="18" iconColor="#FFFFFF" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="danhSachTP" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onDanhSachTPClicked" text="Danh sách">
+                                <graphic>
+                                    <FontIcon fx:id="dsTPIcon" iconLiteral="bi-list-task" iconSize="18" iconColor="#FFFFFF" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="yeuCauTP" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onYeuCauTPClicked" text="Duyệt yêu cầu">
+                                <graphic>
+                                    <FontIcon fx:id="ycTPIcon" iconLiteral="fas-check" iconSize="18" iconColor="#FFFFFF" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="taoKhoanPhi" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onTaoKhoanPhiClicked" text="Tạo khoản phí">
+                                <graphic>
+                                    <FontIcon fx:id="taoKPIcon" iconLiteral="fas-plus-square" iconSize="18" iconColor="#FFFFFF" />
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </VBox>
+                    <Button fx:id="CaiDat" layoutX="20.0" layoutY="136.0" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onCaiDatClicked" text="Cài đặt" >
+                        <graphic>
+                            <FontIcon fx:id="caiDatIcon" iconLiteral="di-aptana" iconSize="18" iconColor="#FFFFFF" />
+                        </graphic>
+                    </Button>
+               <Button fx:id="thongTin" layoutX="20.0" layoutY="128.0" maxWidth="Infinity" styleClass="button" onMouseEntered="#onMouseEnteredButton" onMouseExited="#onMouseExitedButton" onMouseClicked="#onThongTinClicked" text="Thông tin" >
+                   <graphic>
+                       <FontIcon fx:id="thongTinIcon" iconLiteral="mdrmz-perm_device_information" iconSize="18" iconColor="#FFFFFF" />
+                   </graphic>
+               </Button>
                 </VBox>
-                <HBox fx:id="thongTin" alignment="CENTER_LEFT" layoutX="36.0" layoutY="631.0" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#onThongTinClicked" prefHeight="24.0" prefWidth="200.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
-                    <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label text="Thông tin">
-                            <HBox.margin>
-                                <Insets left="20.0" />
-                            </HBox.margin>
-                            <font>
-                                <Font name="Arial" size="20.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </HBox>
                 <Line endX="224.5" startX="224.5" startY="500.0" stroke="#00000099" strokeLineCap="ROUND" strokeWidth="0.5" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="224.5" AnchorPane.topAnchor="50.0" />
             </children>
         </AnchorPane>

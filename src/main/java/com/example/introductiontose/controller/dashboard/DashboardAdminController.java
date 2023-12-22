@@ -16,9 +16,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,9 +31,9 @@ public class DashboardAdminController implements Initializable, CenterContent {
     private BorderPane Dashboard;
     //Các Pane hoặc FXML loader cho từng chức năng
 
-    private Pane trangChuPane, caiDatPane, thongTinPane;
-    private Pane thongKeNKPane, danhSachNKPane, yeuCauNKPane;
-    private Pane thongKeTPPane, danhSachTPPane, yeuCauTPPane, taoKhoanPhiPane;
+    public Pane trangChuPane, caiDatPane, thongTinPane;
+    public Pane thongKeNKPane, danhSachNKPane, yeuCauNKPane;
+    public Pane thongKeTPPane, danhSachTPPane, yeuCauTPPane, taoKhoanPhiPane;
 
     @FXML
     private Button thoat;
@@ -48,8 +50,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     private Button TrangChu;
-    @FXML
-    private TitledPane QuanLyNhanKhau;
+
     @FXML
     private Button thongKeNK, danhSachNK, yeuCauNK;
     @FXML
@@ -57,16 +58,80 @@ public class DashboardAdminController implements Initializable, CenterContent {
     @FXML
     private TitledPane QuanLyThuPhi;
     @FXML
-    private Button CaiDat;
+    private Button CaiDat, thongTin;
+    @FXML
+    private FontIcon trangChuIcon, qlNKIcon, qlTPIcon, tkNKIcon, dsNKIcon, ycNKIcon, tkTPIcon, dsTPIcon, ycTPIcon, taoKPIcon, caiDatIcon, thongTinIcon;
 
     @FXML
-    private HBox thongTin;
-
+    private VBox quanLyNhanKhauContainer, quanLyNhanKhauContent;
+    @FXML
+    private Button quanLyNhanKhauHeader;
     private Popup popup;
+    private Button buttonHienTai = new Button();
+    private FontIcon iconHienTai = new FontIcon();
+
+    private String clickedStyle = "-fx-background-radius: 10px; "
+            + "-fx-background-color: #E1ECEB; " // Thay thế màu này với màu khi nút được nhấn
+            + "-fx-text-fill: #425C5A;"; // Thay thế màu này với màu chữ khi nút được nhấn
+
+    private String normalStyle = "-fx-background-radius: 10px; "
+            + "-fx-background-color: #425C5A; "
+            + "-fx-text-fill: #FFFFFF;";
+
+    private Color clickedColor = Color.web("#425C5A");
+    private Color normalColor = Color.web("#FFFFFF");
+
+    @FXML
+    public void toggleQuanLyNhanKhauContent() {
+        quanLyNhanKhauContent.setVisible(!quanLyNhanKhauContent.isVisible());
+        quanLyNhanKhauContent.setManaged(!quanLyNhanKhauContent.isManaged());
+    }
+
+    @FXML
+    private VBox quanLyThuPhiContent;
+
+    @FXML
+    private void toggleQuanLyThuPhiContent() {
+        quanLyThuPhiContent.setVisible(!quanLyThuPhiContent.isVisible());
+        quanLyThuPhiContent.setManaged(!quanLyThuPhiContent.isManaged());
+    }
+
+    @FXML
+    private void handleQuanLyThuPhiHeaderClick(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        if (source.getId().equals("quanLyThuPhiContainer")) {
+            // Xử lý khi nhấn vào container (ngoại trừ tiêu đề)
+        } else if (source.getId().equals("quanLyThuPhiHeader")) {
+            // Xử lý khi nhấn vào tiêu đề
+            toggleQuanLyThuPhiContent();
+        }
+    }
+
+
+    @FXML
+    private void handleQuanLyNhanKhauContainerClick(MouseEvent event) {
+
+        Node source = (Node) event.getSource();
+        if (source.getId().equals("quanLyNhanKhauContainer")) {
+            // Xử lý khi nhấn vào container (ngoại trừ tiêu đề)
+        } else if (source.getId().equals("quanLyNhanKhauHeader")) {
+            // Xử lý khi nhấn vào tiêu đề
+            toggleQuanLyNhanKhauContent();
+        }
+    }
 
     // Event handlers
     @FXML
     void onTrangChuClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        iconHienTai.setIconColor(normalColor);
+
+        trangChuIcon.setIconColor(clickedColor);
+        iconHienTai = trangChuIcon;
+        TrangChu.setStyle(clickedStyle);
+
+
+        buttonHienTai = TrangChu;
         // Xử lý sự kiện khi "Trang chủ" được nhấn
         if (trangChuPane == null) {
             try {
@@ -84,6 +149,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onThongKeNKClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        thongKeNK.setStyle(clickedStyle);
+        buttonHienTai = thongKeNK;
+
+        iconHienTai.setIconColor(normalColor);
+
+        tkNKIcon.setIconColor(clickedColor);
+        iconHienTai = tkNKIcon;
         // Xử lý sự kiện khi "Thống kê" trong "Quản lý nhân khẩu" được nhấn
         if (thongKeNKPane == null) {
             try {
@@ -101,6 +174,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
     @FXML
     void onDanhSachNKClicked() {
         // Xử lý sự kiện khi "Danh sách" trong "Quản lý nhân khẩu" được nhấn
+        buttonHienTai.setStyle(normalStyle);
+        danhSachNK.setStyle(clickedStyle);
+        buttonHienTai = danhSachNK;
+
+        iconHienTai.setIconColor(normalColor);
+
+        dsNKIcon.setIconColor(clickedColor);
+        iconHienTai = dsNKIcon;
         if (danhSachNKPane == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/hokhau/DanhSachNhanKhau.fxml"));
@@ -116,6 +197,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onYeuCauNKClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        yeuCauNK.setStyle(clickedStyle);
+        buttonHienTai = yeuCauNK;
+
+        iconHienTai.setIconColor(normalColor);
+
+        ycNKIcon.setIconColor(clickedColor);
+        iconHienTai = ycNKIcon;
         // Xử lý sự kiện khi "Duyệt yêu cầu" trong "Quản lý nhân khẩu" được nhấn
         if (yeuCauNKPane == null) {
             try {
@@ -132,6 +221,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onThongKeTPClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        thongKeTP.setStyle(clickedStyle);
+        buttonHienTai = thongKeTP;
+
+        iconHienTai.setIconColor(normalColor);
+
+        tkTPIcon.setIconColor(clickedColor);
+        iconHienTai = tkTPIcon;
         // Xử lý sự kiện khi "Thống kê" trong "Quản lý thu phí" được nhấn
         if (thongKeTPPane == null) {
             try {
@@ -148,6 +245,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onDanhSachTPClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        danhSachTP.setStyle(clickedStyle);
+        buttonHienTai = danhSachTP;
+
+        iconHienTai.setIconColor(normalColor);
+
+        dsTPIcon.setIconColor(clickedColor);
+        iconHienTai = dsTPIcon;
         // Xử lý sự kiện khi "Danh sách" trong "Quản lý thu phí" được nhấn
         if (danhSachTPPane == null) {
             try {
@@ -166,6 +271,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onYeuCauTPClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        yeuCauTP.setStyle(clickedStyle);
+        buttonHienTai = yeuCauTP;
+
+        iconHienTai.setIconColor(normalColor);
+
+        ycTPIcon.setIconColor(clickedColor);
+        iconHienTai = ycTPIcon;
         // Xử lý sự kiện khi "Duyệt yêu cầu" trong "Quản lý thu phí" được nhấn
         if (yeuCauTPPane == null) {
             try {
@@ -183,6 +296,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onTaoKhoanPhiClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        taoKhoanPhi.setStyle(clickedStyle);
+        buttonHienTai = taoKhoanPhi;
+
+        iconHienTai.setIconColor(normalColor);
+
+        taoKPIcon.setIconColor(clickedColor);
+        iconHienTai = taoKPIcon;
         // Xử lý sự kiện khi "Tạo khoản phí" trong "Quản lý thu phí" được nhấn
         if (taoKhoanPhiPane == null) {
             try {
@@ -199,6 +320,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onCaiDatClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        CaiDat.setStyle(clickedStyle);
+        buttonHienTai = CaiDat;
+
+        iconHienTai.setIconColor(normalColor);
+
+        caiDatIcon.setIconColor(clickedColor);
+        iconHienTai = caiDatIcon;
         // Xử lý sự kiện khi "Cài đặt" được nhấn
         if (caiDatPane == null) {
             try {
@@ -215,6 +344,14 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     @FXML
     void onThongTinClicked() {
+        buttonHienTai.setStyle(normalStyle);
+        thongTin.setStyle(clickedStyle);
+        buttonHienTai = thongTin;
+
+        iconHienTai.setIconColor(normalColor);
+
+        thongTinIcon.setIconColor(clickedColor);
+        iconHienTai = thongTinIcon;
         // Xử lý sự kiện khi "Thông tin" được nhấn
         if (thongTinPane == null) {
             try {
@@ -243,17 +380,17 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
 
     // Di chuyển HBox sang phải 15px khi di chuột vào
-
-    private void onMouseEnteredHBox(MouseEvent event) {
-        HBox source = (HBox) event.getSource();
-        source.setTranslateX(15);
+    @FXML
+    private void onMouseEnteredButton(MouseEvent event) {
+        Button source = (Button) event.getSource();
+        source.setStyle("-fx-background-color: #84B1AD");
     }
 
     // Quay lại vị trí ban đầu khi di chuột ra
-
-    private void onMouseExitedHBox(MouseEvent event) {
-        HBox source = (HBox) event.getSource();
-        source.setTranslateX(0);
+    @FXML
+    private void onMouseExitedButton(MouseEvent event) {
+        Button source = (Button) event.getSource();
+        source.setStyle("-fx-background-color: #425C5A");
     }
 
     // Hiển thị popup thông tin người dùng
