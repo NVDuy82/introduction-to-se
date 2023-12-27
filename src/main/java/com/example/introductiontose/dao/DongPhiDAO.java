@@ -1,6 +1,7 @@
 package com.example.introductiontose.dao;
 
 import com.example.introductiontose.model.DongPhi;
+import com.example.introductiontose.model.NhanKhau;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
@@ -152,5 +153,17 @@ public class DongPhiDAO implements DataAccessObject<DongPhi, Integer> {
         } catch (SQLException e) {
 
         }
+    }
+
+    public List<DongPhi> getDongPhiUser (NhanKhau user) throws SQLException{
+        List<DongPhi> danhSachDongPhi = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM dongphi WHERE idHoKhau = ?");
+        statement.setInt(1, user.getThongTinNhanKhau().getIdHoKhau());
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            DongPhi dongphi = _get(resultSet);
+            danhSachDongPhi.add(dongphi);
+        }
+        return danhSachDongPhi;
     }
 }

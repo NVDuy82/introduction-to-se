@@ -142,4 +142,28 @@ public class TamVangDAO implements DataAccessObject<TamVang, Integer> {
         }
     }
 
+    public List<TamVang> getByCCCD(String cccd) throws SQLException {
+        List<TamVang> tmp = new ArrayList<>();
+
+        String sql = "SELECT * FROM tamvang WHERE soCccd = ?";
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setString(1, cccd);
+
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            int idTamVang = rs.getInt("idTamVang");
+            String soCccd = rs.getString("soCccd");
+            LocalDate ngayBatDau = rs.getTimestamp("ngayBatDau").toLocalDateTime().toLocalDate();
+            LocalDate ngayKetThuc = rs.getTimestamp("ngayKetThuc").toLocalDateTime().toLocalDate();
+            String lyDo = rs.getString("lyDo");
+            String trangthai = rs.getString("trangThai");
+            String noiDangKy = rs.getString("noiDangKyTamTru");
+
+            TamVang tamvang = new TamVang(idTamVang, soCccd, ngayBatDau, ngayKetThuc, lyDo,noiDangKy, trangthai);
+            tmp.add(tamvang);
+        }
+
+        return tmp;
+    }
+
 }

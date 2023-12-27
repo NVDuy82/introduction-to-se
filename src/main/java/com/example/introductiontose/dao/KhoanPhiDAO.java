@@ -158,4 +158,20 @@ public class KhoanPhiDAO implements DataAccessObject<KhoanPhi, Integer> {
         }
         return danhSachKP;
     }
+
+    public Map<Integer, String> getDanhSachTenKhoanPhi() {
+        Map<Integer, String> danhSachKP = new HashMap<>();
+        String sql = "SELECT idPhi, tieuDeKhoanPhi FROM khoanphi";
+        try (PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("idPhi");
+                String tenPhi = resultSet.getString("tieuDeKhoanPhi");
+                danhSachKP.put(id, tenPhi);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Hoặc xử lý lỗi theo nhu cầu
+        }
+        return danhSachKP;
+    }
 }

@@ -155,4 +155,32 @@ public class NhanKhauDAO implements DataAccessObject<NhanKhau, String> {
             return 0;
         }
     }
+
+    public List<NhanKhau> getThanhVienGD(int idHoKhau) throws SQLException {
+        List<NhanKhau> danhSachThanhVien = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table_name + " WHERE idHoKhau = ?");
+        statement.setInt(1, idHoKhau);
+
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            NhanKhau nhanKhau = _get(resultSet);
+            danhSachThanhVien.add(nhanKhau);
+        }
+        return danhSachThanhVien;
+    }
+
+    public List<NhanKhau> getThanhVienChuaThem(int idHoKhau) throws SQLException {
+        List<NhanKhau> danhSachThanhVien = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table_name + " WHERE idHoKhau = ?");
+        statement.setInt(1, idHoKhau);
+
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            NhanKhau nhanKhau = _get(resultSet);
+            danhSachThanhVien.add(nhanKhau);
+        }
+        return danhSachThanhVien;
+    }
 }

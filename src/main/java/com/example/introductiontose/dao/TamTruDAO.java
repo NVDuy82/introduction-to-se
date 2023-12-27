@@ -201,4 +201,47 @@ public class TamTruDAO implements DataAccessObject<TamTru, Integer> {
             }
         }
     }
+
+    public List<TamTru> getByHoKhau(String CccdChuHo) {
+        List<TamTru> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM dangkytamtru WHERE soCccdChuHo = ?");
+            st.setString(1, CccdChuHo);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String soCCCD = rs.getString("soCccd");
+                String cccdChuHo = rs.getString("soCccdChuHo");
+                String hoTen = rs.getString("hoTen");
+                String biDanh = rs.getString("biDanh");
+                String gioiTinh = rs.getString("gioiTinh");
+                String soDienthoai = rs.getString("soDienThoai");
+                String trangThai = rs.getString("trangThai");
+                String nguyenQuan = rs.getString("nguyenQuan");
+                String noiLamViec = rs.getString("noiLamViec");
+                String noiCap = rs.getString("noiCap");
+                String quanHe = rs.getString("quanHe");
+                String danToc = rs.getString("danToc");
+                String tonGiao = rs.getString("tonGiao");
+                String ngheNghiep = rs.getString("ngheNghiep");
+                LocalDate ngayBatDau = rs.getTimestamp("ngayBatDau").toLocalDateTime().toLocalDate();
+                LocalDate ngayKetThuc = rs.getTimestamp("ngayKetThuc").toLocalDateTime().toLocalDate();
+                LocalDate ngaysinh = rs.getTimestamp("ngaysinh").toLocalDateTime().toLocalDate();
+                LocalDate ngayCap = rs.getTimestamp("ngayCap").toLocalDateTime().toLocalDate();
+                String lyDo = rs.getString("lyDo");
+                String noiDangKyTamTru = rs.getString("noiDangKyTamTru");
+
+                TamTru tamTru = new TamTru(soCCCD, cccdChuHo, hoTen, biDanh,gioiTinh, nguyenQuan, danToc, tonGiao, ngheNghiep, noiLamViec, noiCap, quanHe, lyDo, ngaysinh, ngayCap,ngayBatDau, ngayKetThuc, trangThai, soDienthoai);
+                getName(tamTru);
+                tamTru.setNoiDangKyTamTru(noiDangKyTamTru);
+                // Set other properties if necessary
+
+                list.add(tamTru);
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi ở phương thức getAll trong TamTruDAO");
+            throw new UnsupportedOperationException("Error while retrieving data from the database.");
+        }
+
+        return list;
+    }
 }

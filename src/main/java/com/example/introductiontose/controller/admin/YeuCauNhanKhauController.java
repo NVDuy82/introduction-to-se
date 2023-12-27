@@ -144,13 +144,13 @@ public class YeuCauNhanKhauController implements Initializable {
 
     }
     public Button initButtonDongY() {
-        Button buttonDongY = new Button("Đồng ý");
-        buttonDongY.setStyle("-fx-background-color: #BBF7D0; -fx-background-radius: 5;");
+        Button buttonDongY = new Button(" V ");
+        buttonDongY.setStyle("-fx-background-color: #18B3A7; -fx-background-radius: 5; -fx-text-fill: #3D5654");
         return buttonDongY;
     }
     public Button initButtonHuyBo() {
-        Button buttonHuyBo = new Button("Hủy bỏ");
-        buttonHuyBo.setStyle("-fx-background-color: #FFF2C6; -fx-background-radius: 5;");
+        Button buttonHuyBo = new Button(" X ");
+        buttonHuyBo.setStyle("-fx-background-color: #ED6A5AFF; -fx-background-radius: 5; -fx-text-fill: #3D5654");
         return buttonHuyBo;
     }
     public VBox initVBox(String kieuYeuCau, String nguoiGuiYeuCau, String ghiChu) {

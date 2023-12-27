@@ -2,10 +2,13 @@ package com.example.introductiontose.controller.dashboard;
 
 import com.example.introductiontose.view.icon.IconUtils;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -282,7 +285,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
         // Xử lý sự kiện khi "Duyệt yêu cầu" trong "Quản lý thu phí" được nhấn
         if (yeuCauTPPane == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/naptien/YeuCauNapTien.fxml"));
                 yeuCauTPPane = loader.load();
             }
             catch (Exception e) {
@@ -292,6 +295,15 @@ public class DashboardAdminController implements Initializable, CenterContent {
         }
         else updateCenterContent(yeuCauTPPane);
 
+    }
+    @FXML
+    void signOut (MouseEvent e) throws IOException {
+        Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/example/introductiontose/view/dangkydangnhap/dangNhap.fxml"));
+        Parent dangxuat = loader.load();
+        Scene scene = new Scene(dangxuat);
+        stage.setScene(scene);
     }
 
     @FXML
@@ -307,7 +319,7 @@ public class DashboardAdminController implements Initializable, CenterContent {
         // Xử lý sự kiện khi "Tạo khoản phí" trong "Quản lý thu phí" được nhấn
         if (taoKhoanPhiPane == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/TrangChu.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/taokhoanphi/taoKhoanPhi.fxml"));
                 taoKhoanPhiPane = loader.load();
             }
             catch (Exception e) {
@@ -368,9 +380,15 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
     private void createPopup() {
         popup = new Popup();
-        Label label = new Label("Thông tin chi tiết người dùng");
+        VBox user = new VBox();
+        user.setStyle("-fx-background-color: #E1ECEB; -fx-background-radius: 0 0 10 10; -fx-spacing: 10");
+        Label label = new Label("Tổ trưởng tổ dân phố");
+        label.setStyle("-fx-text-fill: #3D5654");
+        Label label1 = new Label("SĐT: 0972120123");
+        label1.setStyle("-fx-text-fill: #3D5654;");
+        user.getChildren().addAll(label, label1);
         // Cấu hình thêm cho label nếu cần
-        popup.getContent().add(label);
+        popup.getContent().add(user);
     }
 
     @Override
@@ -380,18 +398,18 @@ public class DashboardAdminController implements Initializable, CenterContent {
 
 
     // Di chuyển HBox sang phải 15px khi di chuột vào
-    @FXML
-    private void onMouseEnteredButton(MouseEvent event) {
-        Button source = (Button) event.getSource();
-        source.setStyle("-fx-background-color: #84B1AD");
-    }
-
-    // Quay lại vị trí ban đầu khi di chuột ra
-    @FXML
-    private void onMouseExitedButton(MouseEvent event) {
-        Button source = (Button) event.getSource();
-        source.setStyle("-fx-background-color: #425C5A");
-    }
+//    @FXML
+//    private void onMouseEnteredButton(MouseEvent event) {
+//        Button source = (Button) event.getSource();
+//        source.setStyle("-fx-background-color: #84B1AD");
+//    }
+//
+//    // Quay lại vị trí ban đầu khi di chuột ra
+//    @FXML
+//    private void onMouseExitedButton(MouseEvent event) {
+//        Button source = (Button) event.getSource();
+//        source.setStyle("-fx-background-color: #425C5A");
+//    }
 
     // Hiển thị popup thông tin người dùng
     @FXML

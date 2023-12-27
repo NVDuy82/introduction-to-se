@@ -2,6 +2,7 @@ package com.example.introductiontose.dao;
 
 import java.sql.SQLException;
 
+import com.example.introductiontose.model.CCCD;
 import com.example.introductiontose.model.ThayDoiNhanKhau;
 import org.jetbrains.annotations.NotNull;
 
@@ -103,5 +104,18 @@ public class ThayDoiNhanKhauDao implements DataAccessObject<ThayDoiNhanKhau,Inte
             danhSachThayDoiNhanKhau.add(thayDoiNhanKhau);
         }
         return danhSachThayDoiNhanKhau;
+    }
+
+    public List<ThayDoiNhanKhau> getCCCD(CCCD cccd) throws SQLException {
+        List<ThayDoiNhanKhau> tmp = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM thaydoinhankhau WHERE soCccd = ?");
+        statement.setString(1, cccd.getSoCccd());
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            ThayDoiNhanKhau thayDoiNhanKhau = _get(resultSet);
+            tmp.add(thayDoiNhanKhau);
+        }
+        return tmp;
     }
 }

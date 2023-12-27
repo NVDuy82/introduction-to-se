@@ -151,17 +151,17 @@
                            <children>
                               <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
                                  <children>
-                                    <Label text="anh C">
+                                    <Label text="Phí Trung thu">
                                        <VBox.margin>
                                           <Insets left="15.0" top="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label text="Tách khẩu">
+                                    <Label text="Đóng góp">
                                        <VBox.margin>
                                           <Insets left="15.0" top="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
+                                    <Label layoutX="10.0" layoutY="28.0" prefHeight="18.0" prefWidth="217.0" text="Nội dung:  Nhân dịp Tết Trung thu sắp...">
                                        <VBox.margin>
                                           <Insets left="15.0" top="5.0" />
                                        </VBox.margin>
@@ -169,6 +169,50 @@
                                  </children>
                                  <VBox.margin>
                                     <Insets left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </VBox>
+                              <VBox layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
+                                 <children>
+                                    <Label text="Phí làm đường">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Bắt buộc">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Nội dung: Xây dựng đường đi trước thôn...">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </VBox>
+                              <VBox layoutX="10.0" layoutY="96.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
+                                 <children>
+                                    <Label text="Phí dịch vụ tháng 12">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Bắt buộc/người">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="28.0" text="Nội dung: Đóng phí dịch vụ tháng 12">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" top="5.0" />
                                  </VBox.margin>
                               </VBox>
                               <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="250.0" fx:id="xemTatCaDS">
@@ -198,24 +242,90 @@
                                  <children>
                                     <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
                                        <children>
-                                          <Label text="anh C">
+                                          <Label text="Tạ Quang Phổ">
                                              <VBox.margin>
                                                 <Insets left="15.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Label text="Tách khẩu">
+                                          <Label text="Đóng góp">
                                              <VBox.margin>
                                                 <Insets left="15.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Label layoutX="10.0" layoutY="28.0" text="Nội dung">
+                                          <Label layoutX="10.0" layoutY="28.0" text="Phí Trung thu">
                                              <VBox.margin>
                                                 <Insets left="15.0" top="5.0" />
                                              </VBox.margin>
                                           </Label>
                                        </children>
                                        <VBox.margin>
-                                          <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                          <Insets left="10.0" right="10.0" top="5.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="20.0" layoutY="15.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
+                                       <children>
+                                          <Label text="Phạm Việt Hùng">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Đóng phí">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="28.0" text="Phí làm đường">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="95.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
+                                       <children>
+                                          <Label text="Trịnh Văn Hậu">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Đóng phí">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="28.0" text="Phí làm đường">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="170.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="74.5" prefWidth="250.0" style="-fx-background-color: fafafa; -fx-background-radius: 10;">
+                                       <children>
+                                          <Label text="Phạm Việt Hùng">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Đóng phí">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="28.0" text="Phí làm đường">
+                                             <VBox.margin>
+                                                <Insets left="15.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
                                        </VBox.margin>
                                     </VBox>
                                  </children>

@@ -2,13 +2,17 @@ package com.example.introductiontose.controller.dangkydangnhap;
 
 import com.example.introductiontose.controller.dashboard.DashboardAdminController;
 import com.example.introductiontose.controller.dashboard.DashboardUserController;
+import com.example.introductiontose.dao.HoKhauDAO;
 import com.example.introductiontose.dao.TaiKhoanNhanKhauDAO;
+import com.example.introductiontose.model.HoKhau;
 import com.example.introductiontose.model.NhanKhau;
 import com.example.introductiontose.model.TaiKhoanNhanKhau;
+import com.example.introductiontose.model.key.HoKhauKey;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +20,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -107,15 +113,30 @@ public class dangNhapController implements Initializable {
             System.out.println("CCCD dang nhap la" + CCCD);
             tenTK = tenTaiKhoan;
 
+            TaiKhoanNhanKhauDAO  taiKhoanNhanKhauDAO = new TaiKhoanNhanKhauDAO(connection);
+            TaiKhoanNhanKhau taikhoan = taiKhoanNhanKhauDAO.get(CCCD).orElse(null);
+
+            HoKhauDAO hoKhauDAO = new HoKhauDAO(connection);
+            HoKhauKey key = new HoKhauKey(nhanKhauDangNhap.getThongTinNhanKhau().getIdHoKhau());
+            HoKhau hoKhau = hoKhauDAO.get(key).orElse(null);
+
             loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/home.fxml"));
             home = loader.load();
             DashboardUserController controller = loader.getController();
-            controller.setNhanKhau(nhanKhauDangNhap);
+            controller.setNhanKhau(nhanKhauDangNhap, taikhoan, hoKhau);
         }
 
-        Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        Stage oldStage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        oldStage.close();
+        Stage stage = new Stage();
         Scene scene = new Scene(home);
+
+//        stage.setX((screenBounds.getWidth() - scene.getWidth()) / 2);
+//        stage.setY((screenBounds.getHeight() - scene.getHeight()) / 2);
+
         stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
     }
 
     /**

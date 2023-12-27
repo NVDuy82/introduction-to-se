@@ -38,7 +38,7 @@ public class YeuCauNhanKhauController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        idHoKhau = 1;
+        idHoKhau = 6;
     }
     
     /**

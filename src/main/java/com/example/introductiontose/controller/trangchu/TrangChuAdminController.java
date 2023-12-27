@@ -14,6 +14,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -129,7 +130,7 @@ public class TrangChuAdminController implements Initializable {
         yeuCau.setPrefHeight(100.0);
         yeuCau.setPrefWidth(300.0);
         yeuCau.setSpacing(5);
-        yeuCau.setStyle("-fx-background-radius: 10; -fx-background-color: #BBF7D0;");
+        yeuCau.setStyle("-fx-background-radius: 10; -fx-background-color: #EFF8F7FF;");
         yeuCau.setPadding(new Insets(10, 10, 10, 10));
 
         Label loaiYeuCau = new Label(loai);

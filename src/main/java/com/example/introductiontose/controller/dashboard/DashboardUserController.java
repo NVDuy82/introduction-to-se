@@ -1,12 +1,23 @@
 package com.example.introductiontose.controller.dashboard;
 
+import com.example.introductiontose.controller.YeuCauNapTien.YeuCauNapTienUserController;
+import com.example.introductiontose.controller.hokhau.YeuCauNhanKhauController;
+import com.example.introductiontose.controller.thongke.ThongKeUserController;
+import com.example.introductiontose.controller.trangchu.TrangChuUserController;
+import com.example.introductiontose.dao.HoKhauDAO;
 import com.example.introductiontose.database.SqlConnection;
+import com.example.introductiontose.model.HoKhau;
 import com.example.introductiontose.model.NhanKhau;
+import com.example.introductiontose.model.TaiKhoanNhanKhau;
+import com.example.introductiontose.model.key.HoKhauKey;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -17,8 +28,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
@@ -74,16 +87,24 @@ public class DashboardUserController implements Initializable, CenterContent {
     private Pane hoKhauPane, thuTucHanhChinhhPane;
     private Pane thongKeTPPane, dongPhiPane, napTienPane;
 
+    private TaiKhoanNhanKhau taikhoan;
+
     private Popup popup;
     
     Connection connection;
     NhanKhau nhanKhau;
+    HoKhau hoKhau;
 
-    public void setNhanKhau(NhanKhau nhanKhauInp) {
+    public void setNhanKhau(NhanKhau nhanKhauInp, TaiKhoanNhanKhau taikhoan, HoKhau hoKhau) {
         this.nhanKhau = nhanKhauInp;
+        this.taikhoan = taikhoan;
         userName.setText(nhanKhau.getThongTinNhanKhau().getHoTen());
         ngaySinh.setText(nhanKhau.getThongTinNhanKhau().getNgaySinh().toLocalDate().toString());
+
+        this.hoKhau = hoKhau;
     }
+
+
 
     // Event handlers
     @FXML
@@ -93,6 +114,9 @@ public class DashboardUserController implements Initializable, CenterContent {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/YeuCauNhanKhau.fxml"));
                 thuTucHanhChinhhPane = loader.load();
+                YeuCauNhanKhauController controller = loader.getController();
+                controller.setHoKhau(hoKhau);
+
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -157,8 +181,10 @@ public class DashboardUserController implements Initializable, CenterContent {
         // Xử lý sự kiện khi "Thống kê" trong "Quản lý thu phí" được nhấn
         if (thongKeTPPane == null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/admin/ThongKeThuPhi.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/introductiontose/view/user/ThongKeThuPhi.fxml"));
                 thongKeTPPane = loader.load();
+                ThongKeUserController controller = loader.getController();
+                controller.setTaiKhoan(taikhoan);
             }
             catch (Exception e) {
                 //
@@ -168,6 +194,20 @@ public class DashboardUserController implements Initializable, CenterContent {
         else updateCenterContent(thongKeTPPane);
     }
 
+    @FXML
+    void signOut (MouseEvent e) throws IOException {
+        System.out.println("hnhbg");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/example/introductiontose/view/dangkydangnhap/dangNhap.fxml"));
+        Parent dangxuat = loader.load();
+        Stage oldStage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        oldStage.close();
+        Stage stage = new Stage();
+        Scene scene = new Scene(dangxuat);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+    }
     @FXML
     void onTrangChuClicked() {
         if (trangChuPane == null) {

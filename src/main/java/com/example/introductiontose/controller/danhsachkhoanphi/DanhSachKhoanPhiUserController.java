@@ -164,7 +164,7 @@ public class DanhSachKhoanPhiUserController implements Initializable {
         hboxDongPhi.setAlignment(Pos.CENTER_LEFT);
         hboxDongPhi.setPrefHeight(80.0);
         hboxDongPhi.setPrefWidth(355.5);
-        hboxDongPhi.setStyle("-fx-background-color: #ccc; -fx-background-radius: 10;");
+        hboxDongPhi.setStyle("-fx-background-color: #E1ECEB; -fx-background-radius: 10;");
         Insets hboxPadding = new Insets(18);
         hboxDongPhi.setPadding(hboxPadding);
         VBox vboxDongPhi = initVBox1(idPhiDongPhi,idHoKhau,soTien,ngaydong);
@@ -213,7 +213,7 @@ public class DanhSachKhoanPhiUserController implements Initializable {
         hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.setPrefHeight(80.0);
         hbox.setPrefWidth(355.5);
-        hbox.setStyle("-fx-background-color: #ccc; -fx-background-radius: 10;");
+        hbox.setStyle("-fx-background-color: #E1ECEB; -fx-background-radius: 10;");
         Insets hboxPadding = new Insets(18);
         hbox.setPadding(hboxPadding);
         VBox vbox = initVBox(kieuPhi,mucPhi, tieudePhi);

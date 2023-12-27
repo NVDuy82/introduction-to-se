@@ -3,8 +3,10 @@ package com.example.introductiontose.controller.thongke;
 import com.example.introductiontose.dao.*;
 import com.example.introductiontose.database.SqlConnection;
 import com.example.introductiontose.model.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
 
 import java.net.URL;
 import java.sql.Connection;
@@ -254,6 +257,45 @@ public class ThongKeTPAdminController implements Initializable {
         stackedBarChart.setMinHeight(Region.USE_COMPUTED_SIZE);
         stackedBarChart.setPrefHeight(345);
         stackedBarChart.setPrefWidth(435);
+
+        for (XYChart.Series<String, Number> series : stackedBarChart.getData()) {
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                // Tùy chỉnh màu sắc dựa trên tên của series
+                String style = "";
+                switch (series.getName()) {
+                    case "Thu Phí":
+                        style = "-fx-bar-fill: #425C5A";
+                        break;
+                    case "Đóng Góp":
+                        style = "-fx-bar-fill: #1890B3;";
+                        break;
+                    case "Chưa Đóng":
+                        style = "-fx-bar-fill: #ED6A5AFF;";
+                        break;
+                }
+                data.getNode().setStyle(style);
+            }
+        }
+
+        Platform.runLater(() -> {
+            for (XYChart.Series<String, Number> series : stackedBarChart.getData()) {
+                for (Node node : stackedBarChart.lookupAll(".chart-legend-item")) {
+                    if (node instanceof Label && ((Label) node).getText().equals(series.getName())) {
+                        switch (series.getName()) {
+                            case "Thu Phí":
+                                node.getStyleClass().add("-fx-background-color: #425C5A");
+                                break;
+                            case "Đóng Góp":
+                                node.getStyleClass().add("-fx-background-color: #1890B3");
+                                break;
+                            case "Chưa Đóng":
+                                node.getStyleClass().add("-fx-background-color: #ED6A5AFF");
+                                break;
+                        }
+                    }
+                }
+            }
+        });
 
         return stackedBarChart;
     }

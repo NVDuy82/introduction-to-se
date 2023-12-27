@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.trangchu.TrangChuAdminController">
    <children>
@@ -17,13 +18,19 @@
          <children>
             <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="800.0">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="235.0">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="235.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                      <children>
-                        <Label fx:id="tenToDanPho" prefHeight="100.0" text="Tổ dân phố [Tên tổ dân phố]" />
+                        <Label fx:id="tenToDanPho" prefHeight="100.0" text="Tổ dân phố [Tên tổ dân phố]">
+                           <font>
+                              <Font name="System Bold Italic" size="28.0" />
+                           </font></Label>
                      </children>
                      <HBox.margin>
                         <Insets left="27.5" right="10.0" />
                      </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </VBox>
                   <HBox fx:id="hoKhau" alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="235.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                      <children>
@@ -37,8 +44,14 @@
                         </ImageView>
                         <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                            <children>
-                              <Label prefHeight="100.0" text="Hộ khẩu" />
-                              <Label fx:id="soHoKhau" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Số hộ khẩu" />
+                              <Label prefHeight="24.0" text="Hộ khẩu">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="soHoKhau" layoutX="59.0" layoutY="10.0" prefHeight="32.0" style="-fx-text-fill: #425C5A" text="Số hộ khẩu">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font></Label>
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -61,8 +74,14 @@
                         </ImageView>
                         <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                            <children>
-                              <Label prefHeight="100.0" text="Nhân khẩu" />
-                              <Label fx:id="soNhanKhau" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="số nhân khẩu" />
+                              <Label prefHeight="24.0" text="Nhân khẩu">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="soNhanKhau" layoutX="59.0" layoutY="10.0" prefHeight="32.0" style="-fx-text-fill: #396386" text="số nhân khẩu">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font></Label>
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -92,8 +111,14 @@
                         </ImageView>
                         <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                            <children>
-                              <Label prefHeight="100.0" text="thu phí" />
-                              <Label fx:id="tienThuPhi" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="tiền thu phí" />
+                              <Label prefHeight="24.0" text="Thu phí">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="tienThuPhi" layoutX="59.0" layoutY="10.0" prefHeight="32.0" style="-fx-text-fill: #1890b3" text="tiền thu phí">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font></Label>
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -116,8 +141,14 @@
                         </ImageView>
                         <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                            <children>
-                              <Label prefHeight="100.0" text="Chưa đóng" />
-                              <Label fx:id="tienChuaDong" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="Tiền chưa đóng" />
+                              <Label prefHeight="24.0" text="Chưa đóng">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="tienChuaDong" layoutX="59.0" layoutY="10.0" prefHeight="32.0" style="-fx-text-fill: #cf6949" text="Tiền chưa đóng">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font></Label>
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -140,8 +171,14 @@
                         </ImageView>
                         <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="150.0">
                            <children>
-                              <Label prefHeight="100.0" text="Đóng góp" />
-                              <Label fx:id="tienDongGop" layoutX="59.0" layoutY="10.0" prefHeight="100.0" text="tiền đóng góp" />
+                              <Label prefHeight="24.0" text="Đóng góp">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="tienDongGop" layoutX="59.0" layoutY="10.0" prefHeight="32.0" style="-fx-text-fill: #19b268" text="tiền đóng góp">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font></Label>
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -166,15 +203,21 @@
                               <Insets bottom="5.0" left="15.0" right="25.0" top="15.0" />
                            </VBox.margin>
                            <children>
-                              <Label fx:id="thuPhiTK" alignment="CENTER" minWidth="-Infinity" prefHeight="18.0" prefWidth="120.0" text="Thu phí đóng góp">
+                              <Label fx:id="thuPhiTK" alignment="CENTER" minWidth="-Infinity" prefHeight="18.0" prefWidth="150.0" style="-fx-background-color: #E1ECEB; -fx-background-radius: 10;" text="Thu phí đóng góp">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
+                                 <font>
+                                    <Font name="Calibri" size="14.0" />
+                                 </font>
                               </Label>
-                              <Label fx:id="nhanKhauTK" alignment="CENTER" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" prefWidth="120.0" text="Nhân khẩu hộ khẩu">
+                              <Label fx:id="nhanKhauTK" alignment="CENTER" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" prefWidth="150.0" style="-fx-background-color: #E1ECEB; -fx-background-radius: 10;" text="Nhân khẩu hộ khẩu">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
+                                 <font>
+                                    <Font name="Calibri" size="14.0" />
+                                 </font>
                               </Label>
                            </children>
                         </HBox>
@@ -203,6 +246,9 @@
                            <VBox.margin>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
                         </Label>
                         <VBox fx:id="danhSachYeuCau" spacing="10.0">
                            <padding>

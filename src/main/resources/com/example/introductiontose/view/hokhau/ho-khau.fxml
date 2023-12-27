@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="670.0" prefWidth="925.0" stylesheets="@../../stylesheet/hokhau/ho-khau.css" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.hokhau.YeuCauNhanKhauController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0" stylesheets="@../../stylesheet/hokhau/ho-khau.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.introductiontose.controller.hokhau.YeuCauNhanKhauController">
    <children>
-      <BorderPane prefHeight="670.0" prefWidth="925.0">
+      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="800.0">
          <left>
-            <VBox alignment="CENTER" prefHeight="670.0" prefWidth="200.0" styleClass="vbox" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="690.0" prefWidth="200.0" styleClass="vbox" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="buttonMenuDoiChuHo" contentDisplay="TOP" mnemonicParsing="false" onAction="#showDoiChuHo" prefHeight="100.0" prefWidth="100.0" styleClass="btn-menu">
                      <VBox.margin>
@@ -79,9 +79,9 @@
                </children></VBox>
          </left>
          <center>
-            <AnchorPane prefHeight="670.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="670.0" prefWidth="525.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane fx:id="paneContent" layoutX="25.0" layoutY="35.0" prefHeight="600.0" prefWidth="675.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" />
+                  <Pane fx:id="paneContent" layoutX="25.0" layoutY="35.0" minWidth="-Infinity" prefHeight="600.0" prefWidth="550.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" />
                </children></AnchorPane>
          </center>
       </BorderPane>
