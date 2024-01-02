@@ -116,6 +116,6 @@ public class InputDialogController {
         accessObject.save(new ThayDoiNhanKhau(0, soCccd, "chờ xác nhận",
                 LocalDateTime.now(),
                 noiChuyenDen.getText(),
-                ghiChu.getText()));
+                daChet.isSelected() ? "Đã chết" : ghiChu.getText()));
     }
 }
